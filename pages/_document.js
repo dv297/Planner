@@ -7,7 +7,10 @@ export default class MyDocument extends Document {
   render() {
     return (
       <Html lang="en">
-        <Head>{this.props.emotionStyleTags}</Head>
+        <Head>
+          {/* Inject MUI styles first to match with the prepend: true configuration. */}
+          {this.props.emotionStyleTags}
+        </Head>
         <body>
           <Main />
           <NextScript />

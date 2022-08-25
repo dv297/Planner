@@ -1,4 +1,3 @@
-import { getSession } from 'next-auth/react';
 import prisma from '../../../lib/prisma';
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
 
