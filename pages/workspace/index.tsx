@@ -8,8 +8,17 @@ const Workspace = () => {
     <Layout>
       <h1 className="mb-4">Add Workspace</h1>
       <Form
-        onSubmit={(data) => {
-          console.log(data);
+        onSubmit={async (data) => {
+          try {
+            const body = { name: data.name, tag: data.tag };
+            await fetch('/api/workspace', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(body),
+            });
+          } catch (error) {
+            console.error(error);
+          }
         }}
         defaultValues={{
           name: '',
