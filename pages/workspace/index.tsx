@@ -27,16 +27,13 @@ const Workspace = () => {
       >
         {({ keys }) => (
           <div className="flex flex-col">
-            <FormTextInput
-              label="Name"
-              name={keys.name}
-              textFieldProps={{
-                size: 'small',
-              }}
-              className="mb-8"
-            />
-            <FormTextInput label="Tag" name={keys.tag} />
-            <FormSubmitButton />
+            <div className="mb-8">
+              <FormTextInput label="Name" name={keys.name} />
+            </div>
+            <div className="mb-8">
+              <FormTextInput label="Tag" name={keys.tag} />
+            </div>
+            <FormSubmitButton label="Submit" />
           </div>
         )}
       </Form>

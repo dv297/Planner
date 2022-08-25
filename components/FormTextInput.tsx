@@ -12,6 +12,11 @@ const FormTextInput = (props: FormTextInputProps) => {
   const { label, name, textFieldProps, className } = props;
   const { control } = useFormContext(); // retrieve all hook methods
 
+  const applicationCustomizations: TextFieldProps = {
+    size: 'small',
+    ...textFieldProps,
+  };
+
   return (
     <>
       <Controller
@@ -23,7 +28,7 @@ const FormTextInput = (props: FormTextInputProps) => {
             value={value}
             label={label}
             className={className}
-            {...textFieldProps}
+            {...applicationCustomizations}
           />
         )}
       />
