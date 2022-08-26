@@ -1,5 +1,5 @@
 import { NextApiHandler } from 'next';
-import NextAuth from 'next-auth';
+import NextAuth, { SessionStrategy } from 'next-auth';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import GitHubProvider from 'next-auth/providers/github';
 
@@ -7,6 +7,7 @@ import prisma from '../../../lib/prisma';
 
 const authHandler: NextApiHandler = (req, res) =>
   NextAuth(req, res, authOptions);
+
 export default authHandler;
 
 export const authOptions = {
@@ -17,5 +18,8 @@ export const authOptions = {
     }),
   ],
   adapter: PrismaAdapter(prisma),
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: 'jwt' as SessionStrategy, // See https://next-auth.js.org/configuration/nextjs#caveats, middleware (currently) doesn't support the "database" strategy which is used by default when using an adapter (https://next-auth.js.org/configuration/options#session)
+  },
 };
