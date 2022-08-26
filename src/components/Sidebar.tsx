@@ -9,14 +9,7 @@ import {
   XIcon,
 } from '@heroicons/react/outline';
 import Link from 'next/link';
-
-const navigation = [
-  { name: 'Dashboard', href: '/app/workspace', icon: HomeIcon, current: true },
-  { name: 'Team', href: '/app/team', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
-];
+import { useRouter } from 'next/router';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -29,6 +22,40 @@ interface SidebarProps {
 
 const Sidebar = (props: SidebarProps) => {
   const { sidebarOpen, setSidebarOpen } = props;
+  const { asPath } = useRouter();
+
+  const navigation = [
+    {
+      name: 'Dashboard',
+      href: '/app/workspace',
+      icon: HomeIcon,
+      current: asPath.includes('/app/workspace'),
+    },
+    {
+      name: 'Team',
+      href: '/app/team',
+      icon: UsersIcon,
+      current: asPath.includes('/app/team'),
+    },
+    {
+      name: 'Projects',
+      href: '#',
+      icon: FolderIcon,
+      current: asPath.includes('/app/projects'),
+    },
+    {
+      name: 'Calendar',
+      href: '#',
+      icon: CalendarIcon,
+      current: asPath.includes('/app/calendar'),
+    },
+    {
+      name: 'Reports',
+      href: '#',
+      icon: ChartBarIcon,
+      current: asPath.includes('/app/reports'),
+    },
+  ];
 
   return (
     <>
