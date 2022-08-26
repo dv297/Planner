@@ -8,7 +8,6 @@ import {
   UsersIcon,
   XIcon,
 } from '@heroicons/react/outline';
-import Link from 'next/link';
 
 const navigation = [
   { name: 'Dashboard', href: '/app/workspace', icon: HomeIcon, current: true },
@@ -94,7 +93,7 @@ const Sidebar = (props: SidebarProps) => {
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <Link
+                      <a
                         key={item.name}
                         href={item.href}
                         className={classNames(
@@ -104,17 +103,19 @@ const Sidebar = (props: SidebarProps) => {
                           'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                         )}
                       >
-                        <item.icon
-                          className={classNames(
-                            item.current
-                              ? 'text-gray-300'
-                              : 'text-gray-400 group-hover:text-gray-300',
-                            'mr-4 flex-shrink-0 h-6 w-6'
-                          )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </Link>
+                        <>
+                          <item.icon
+                            className={classNames(
+                              item.current
+                                ? 'text-gray-300'
+                                : 'text-gray-400 group-hover:text-gray-300',
+                              'mr-4 flex-shrink-0 h-6 w-6'
+                            )}
+                            aria-hidden="true"
+                          />
+                          {item.name}
+                        </>
+                      </a>
                     ))}
                   </nav>
                 </div>

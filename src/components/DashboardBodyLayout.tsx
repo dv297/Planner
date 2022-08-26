@@ -20,6 +20,7 @@ interface DashboardBodyLayoutProps {
 
 const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
   const { setSidebarOpen } = props;
+
   return (
     <div className="md:pl-64 flex flex-col">
       <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">

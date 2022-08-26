@@ -2,11 +2,11 @@ import { ReactNode, useState } from 'react';
 import DashboardBodyLayout from './DashboardBodyLayout';
 import Sidebar from './Sidebar';
 
-interface LayoutProps {
+interface AppDefaultLayoutProps {
   children: ReactNode;
 }
 
-const Layout = (props: LayoutProps) => {
+const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -21,4 +21,4 @@ const Layout = (props: LayoutProps) => {
   );
 };
 
-export default Layout;
+export default AppDefaultLayout;

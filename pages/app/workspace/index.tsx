@@ -1,11 +1,11 @@
-import Layout from '../../../src/components/Layout';
+import AppDefaultLayout from '../../../src/components/AppDefaultLayout';
 import FormTextInput from '../../../src/components/FormTextInput';
 import Form from '../../../src/components/Form';
 import FormSubmitButton from '../../../src/components/FormSubmitButton';
 
 const Workspace = () => {
   return (
-    <Layout>
+    <>
       <h1 className="mb-4">Add Workspace</h1>
       <Form
         onSubmit={async (data) => {
@@ -37,8 +37,12 @@ const Workspace = () => {
           </div>
         )}
       </Form>
-    </Layout>
+    </>
   );
+};
+
+Workspace.getLayout = function getLayout(page) {
+  return <AppDefaultLayout>{page}</AppDefaultLayout>;
 };
 
 export default Workspace;
