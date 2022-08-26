@@ -3,6 +3,7 @@ import { SearchIcon } from '@heroicons/react/solid';
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment, ReactNode } from 'react';
 import { signOut } from 'next-auth/react';
+import Link from 'next/link';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -90,22 +91,23 @@ const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
                   {userNavigation.map((item) => (
                     <Menu.Item key={item.name}>
                       {({ active }) => (
-                        <a
-                          href={item.href}
-                          className={classNames(
-                            active ? 'bg-gray-100' : '',
-                            'block px-4 py-2 text-sm text-gray-700'
-                          )}
-                          onClick={() => {
-                            if (item.name === 'Sign out') {
-                              signOut({
-                                callbackUrl: '/logout',
-                              });
-                            }
-                          }}
-                        >
-                          {item.name}
-                        </a>
+                        <Link href={item.href}>
+                          <a
+                            className={classNames(
+                              active ? 'bg-gray-100' : '',
+                              'block px-4 py-2 text-sm text-gray-700'
+                            )}
+                            onClick={() => {
+                              if (item.name === 'Sign out') {
+                                signOut({
+                                  callbackUrl: '/logout',
+                                });
+                              }
+                            }}
+                          >
+                            {item.name}
+                          </a>
+                        </Link>
                       )}
                     </Menu.Item>
                   ))}
