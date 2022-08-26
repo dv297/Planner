@@ -1,5 +1,5 @@
-import prisma from '../../../lib/prisma';
-import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
+import prisma from '../../../src/lib/prisma';
+import { withAuthMiddleware } from '../../../src/lib/withAuthMiddleware';
 
 async function handle(req, res) {
   const { tag, name } = req.body;

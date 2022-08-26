@@ -1,7 +1,7 @@
-import Layout from '../../../components/Layout';
-import FormTextInput from '../../../components/FormTextInput';
-import Form from '../../../components/Form';
-import FormSubmitButton from '../../../components/FormSubmitButton';
+import Layout from '../../../src/components/Layout';
+import FormTextInput from '../../../src/components/FormTextInput';
+import Form from '../../../src/components/Form';
+import FormSubmitButton from '../../../src/components/FormSubmitButton';
 
 const Workspace = () => {
   return (
