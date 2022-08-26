@@ -8,7 +8,7 @@ const FormSubmitButton = (props: FormSubmitButtonProps) => {
   const { label } = props;
 
   return (
-    <Button type="submit" title={label}>
+    <Button type="submit" title={label} variant="contained" fullWidth={false}>
       {label}
     </Button>
   );
