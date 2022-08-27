@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 

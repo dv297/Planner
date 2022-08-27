@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import createEmotionCache from '../src/lib/createEmotionCache';
 import { theme } from '../src/lib/createTheme';
 import '../src/styles/global.css';
+import { ReactNode } from 'react';
 
 const queryClient = new QueryClient();
 const clientSideEmotionCache = createEmotionCache();
@@ -25,7 +26,8 @@ const App = (props: CustomAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   const componentWithLayout = Component as ComponentWithLayout;
-  const getLayout = componentWithLayout.getLayout || ((page) => page);
+  const getLayout =
+    componentWithLayout.getLayout || ((page: ReactNode) => page);
 
   return (
     <QueryClientProvider client={queryClient}>

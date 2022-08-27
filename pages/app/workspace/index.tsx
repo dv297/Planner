@@ -3,6 +3,7 @@ import FormTextInput from '../../../src/components/FormTextInput';
 import Form from '../../../src/components/Form';
 import FormSubmitButton from '../../../src/components/FormSubmitButton';
 import WorkspaceService from '../../../src/services/WorkspaceService';
+import { ReactNode } from 'react';
 
 const Workspace = () => {
   return (
@@ -35,7 +36,7 @@ const Workspace = () => {
   );
 };
 
-Workspace.getLayout = function getLayout(page) {
+Workspace.getLayout = function getLayout(page: ReactNode) {
   return <AppDefaultLayout>{page}</AppDefaultLayout>;
 };
 

@@ -148,9 +148,11 @@ const Header: React.FC = () => {
     );
     right = (
       <div className="right">
-        <p>
-          {session.user.name} ({session.user.email})
-        </p>
+        {session?.user ? (
+          <p>
+            {session.user.name} ({session.user.email})
+          </p>
+        ) : null}
         <Link href="/create">
           <button>
             <a>New post</a>

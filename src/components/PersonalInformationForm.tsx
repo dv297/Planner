@@ -1,7 +1,7 @@
-import Form from '../../../src/components/Form';
-import FormTextInput from '../../../src/components/FormTextInput';
+import Form from './Form';
+import FormTextInput from './FormTextInput';
 import { ReactNode } from 'react';
-import FormSubmitButton from '../../../src/components/FormSubmitButton';
+import FormSubmitButton from './FormSubmitButton';
 
 interface FormRowProps {
   label: string;

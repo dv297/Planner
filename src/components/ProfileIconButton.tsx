@@ -18,7 +18,7 @@ const ProfileIconButton = (props: ProfileIconButtonProps) => {
           <span className="sr-only">Open user menu</span>
           <img
             className="h-8 w-8 rounded-full"
-            src={session?.data?.user?.image}
+            src={session?.data?.user?.image ?? ''}
             alt="Profile picture"
           />
         </Menu.Button>

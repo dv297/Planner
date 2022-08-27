@@ -8,7 +8,7 @@ class UnauthorizedException extends Error {
   }
 }
 
-const checkAuth = async (req, res) => {
+const checkAuth = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session) {

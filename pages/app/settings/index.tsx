@@ -1,7 +1,8 @@
 import AppDefaultLayout from '../../../src/components/AppDefaultLayout';
-import PersonalInformationForm from './PersonalInformationForm';
+import PersonalInformationForm from '../../../src/components/PersonalInformationForm';
 import SettingsService from '../../../src/services/SettingsService';
 import { useQuery, useMutation } from '@tanstack/react-query';
+import { ReactNode } from 'react';
 
 interface SettingsProps {}
 
@@ -27,6 +28,10 @@ const Settings = (props: SettingsProps) => {
     return <div>Loading...</div>;
   }
 
+  if (!data) {
+    return null;
+  }
+
   return (
     <>
       <PersonalInformationForm
@@ -42,7 +47,7 @@ const Settings = (props: SettingsProps) => {
   );
 };
 
-Settings.getLayout = function getLayout(page) {
+Settings.getLayout = function getLayout(page: ReactNode) {
   return <AppDefaultLayout>{page}</AppDefaultLayout>;
 };
 

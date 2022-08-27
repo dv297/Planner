@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { getSession, signIn } from 'next-auth/react';
@@ -24,6 +24,6 @@ export default function HomePage() {
   );
 }
 
-HomePage.getLayout = (page) => {
+HomePage.getLayout = (page: ReactNode) => {
   return <LandingPageLayout>{page}</LandingPageLayout>;
 };

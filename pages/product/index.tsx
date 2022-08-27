@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import LandingPageLayout from '../../src/components/LandingPageLayout';
+import { ReactNode } from 'react';
 
 export default function HomePage() {
   const router = useRouter();
@@ -13,6 +14,6 @@ export default function HomePage() {
   );
 }
 
-HomePage.getLayout = (page) => {
+HomePage.getLayout = (page: ReactNode) => {
   return <LandingPageLayout>{page}</LandingPageLayout>;
 };
