@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -112,6 +113,7 @@ const Sidebar = (props: SidebarProps) => {
                   </div>
                 </Transition.Child>
                 <div className="flex-shrink-0 flex items-center px-4">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     className="h-8 w-auto"
                     src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
@@ -120,8 +122,8 @@ const Sidebar = (props: SidebarProps) => {
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
-                    {navigation.map((item) => (
-                      <Link href={item.href}>
+                    {navigation.map((item, index) => (
+                      <Link href={item.href} key={index}>
                         <a
                           key={item.name}
                           onClick={() => {
@@ -165,6 +167,7 @@ const Sidebar = (props: SidebarProps) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
           <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="h-8 w-auto"
               src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
@@ -173,8 +176,8 @@ const Sidebar = (props: SidebarProps) => {
           </div>
           <div className="flex-1 flex flex-col overflow-y-auto">
             <nav className="flex-1 px-2 py-4 space-y-1">
-              {navigation.map((item) => (
-                <Link href={item.href}>
+              {navigation.map((item, index) => (
+                <Link href={item.href} key={index}>
                   <a
                     key={item.name}
                     className={classNames(

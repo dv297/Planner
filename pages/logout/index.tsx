@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 interface LogoutProps {}
 
 const Logout = (props: LogoutProps) => {
@@ -9,7 +11,7 @@ const Logout = (props: LogoutProps) => {
         Use the link below to go back to the home page or feel free to close
         your browser or tab.
       </p>
-      <a href="/">Home</a>
+      <Link href="/">Home</Link>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Page() {
   return (
@@ -7,14 +8,14 @@ export default function Page() {
       <div className="min-h-full pt-16 pb-12 flex flex-col bg-white">
         <main className="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex-shrink-0 flex justify-center">
-            <a href="/" className="inline-flex">
+            <Link href="/" className="inline-flex">
               <span className="sr-only">Workflow</span>
-              <img
+              <Image
                 className="h-12 w-auto"
                 src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
                 alt=""
               />
-            </a>
+            </Link>
           </div>
           <div className="py-16">
             <div className="text-center">

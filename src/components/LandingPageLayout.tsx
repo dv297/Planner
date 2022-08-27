@@ -4,6 +4,7 @@ import { getSession, signIn } from 'next-auth/react';
 import { Fragment, ReactNode } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -101,10 +102,11 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
                   <div className="flex items-center justify-between w-full md:w-auto">
                     <a href="#">
                       <span className="sr-only">Workflow</span>
-                      <img
+                      <Image
                         className="h-8 w-auto sm:h-10"
                         src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
                         alt=""
+                        layout="fill"
                       />
                     </a>
                     <div className="-mr-2 flex items-center md:hidden">
@@ -165,10 +167,11 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
                 <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
                   <div className="px-5 pt-4 flex items-center justify-between">
                     <div>
-                      <img
+                      <Image
                         className="h-8 w-auto"
                         src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
                         alt=""
+                        layout="fill"
                       />
                     </div>
                     <div className="-mr-2">
@@ -208,10 +211,11 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
             <div className="flex-1 w-full bg-gray-800" />
           </div>
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <img
+            <Image
               className="relative rounded-lg shadow-lg"
               src="https://tailwindui.com/img/component-images/top-nav-with-multi-column-layout-screenshot.jpg"
               alt="App screenshot"
+              layout="fill"
             />
           </div>
         </div>
@@ -223,38 +227,42 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
           </h2>
           <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
             <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-              <img
+              <Image
                 className="h-12"
                 src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg"
                 alt="Tuple"
+                layout="fill"
               />
             </div>
             <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-              <img
+              <Image
                 className="h-12"
                 src="https://tailwindui.com/img/logos/mirage-logo-gray-400.svg"
                 alt="Mirage"
+                layout="fill"
               />
             </div>
             <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-              <img
+              <Image
                 className="h-12"
                 src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg"
                 alt="StaticKit"
+                layout="fill"
               />
             </div>
             <div className="col-span-1 flex justify-center md:col-span-3 lg:col-span-1">
-              <img
+              <Image
                 className="h-12"
                 src="https://tailwindui.com/img/logos/transistor-logo-gray-400.svg"
                 alt="Transistor"
               />
             </div>
             <div className="col-span-2 flex justify-center md:col-span-3 lg:col-span-1">
-              <img
+              <Image
                 className="h-12"
                 src="https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"
                 alt="Workcation"
+                layout="fill"
               />
             </div>
           </div>
