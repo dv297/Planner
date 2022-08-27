@@ -1,0 +1,72 @@
+import Form from '../../../src/components/Form';
+import FormTextInput from '../../../src/components/FormTextInput';
+import { ReactNode } from 'react';
+import FormSubmitButton from '../../../src/components/FormSubmitButton';
+
+interface FormRowProps {
+  label: string;
+  htmlFor: string;
+  children: ReactNode;
+}
+
+const FormRow = (props: FormRowProps) => {
+  const { label, htmlFor, children } = props;
+
+  return (
+    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
+      <label
+        htmlFor={htmlFor}
+        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+      >
+        {label}
+      </label>
+      <div className="mt-1 sm:mt-0 sm:col-span-2">{children}</div>
+    </div>
+  );
+};
+
+export interface PersonalInformationFormData {
+  name: string;
+  email: string;
+}
+
+interface PersonalInformationFormProps {
+  initialData: PersonalInformationFormData;
+  onSubmit: (data: PersonalInformationFormData) => void;
+}
+
+const PersonalInformationForm = (props: PersonalInformationFormProps) => {
+  const { initialData, onSubmit } = props;
+
+  return (
+    <Form
+      defaultValues={{
+        name: initialData.name,
+        email: initialData.email,
+      }}
+      onSubmit={onSubmit}
+    >
+      {({ keys }) => (
+        <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+          <div>
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Personal Information
+            </h3>
+          </div>
+          <div className="space-y-6 sm:space-y-5">
+            <FormRow label="First Name" htmlFor="first-name">
+              <FormTextInput name={keys.name} id="name" className="w-80" />
+            </FormRow>
+
+            <FormRow label="Email" htmlFor="email">
+              <FormTextInput name={keys.email} id="email" className="w-80" />
+            </FormRow>
+          </div>
+          <FormSubmitButton label="Submit" />
+        </div>
+      )}
+    </Form>
+  );
+};
+
+export default PersonalInformationForm;

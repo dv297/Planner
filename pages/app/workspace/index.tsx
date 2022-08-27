@@ -2,6 +2,7 @@ import AppDefaultLayout from '../../../src/components/AppDefaultLayout';
 import FormTextInput from '../../../src/components/FormTextInput';
 import Form from '../../../src/components/Form';
 import FormSubmitButton from '../../../src/components/FormSubmitButton';
+import WorkspaceService from '../../../src/services/WorkspaceService';
 
 const Workspace = () => {
   return (
@@ -9,16 +10,9 @@ const Workspace = () => {
       <h1 className="mb-4">Add Workspace</h1>
       <Form
         onSubmit={async (data) => {
-          try {
-            const body = { name: data.name, tag: data.tag };
-            await fetch('/api/workspace', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(body),
-            });
-          } catch (error) {
-            console.error(error);
-          }
+          WorkspaceService.createWorkspace(data).catch((err) => {
+            console.log(err);
+          });
         }}
         defaultValues={{
           name: '',

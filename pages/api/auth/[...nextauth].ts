@@ -22,4 +22,18 @@ export const authOptions = {
   session: {
     strategy: 'jwt' as SessionStrategy, // See https://next-auth.js.org/configuration/nextjs#caveats, middleware (currently) doesn't support the "database" strategy which is used by default when using an adapter (https://next-auth.js.org/configuration/options#session)
   },
+  callbacks: {
+    async session({ session, token, user }) {
+      const userFromDatabase = await prisma.user.findUnique({
+        where: {
+          id: token.sub,
+        },
+      });
+
+      return {
+        userId: userFromDatabase.id,
+        ...session,
+      };
+    },
+  },
 };
