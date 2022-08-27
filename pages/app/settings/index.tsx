@@ -1,14 +1,22 @@
 import AppDefaultLayout from '../../../src/components/AppDefaultLayout';
 import PersonalInformationForm from './PersonalInformationForm';
 import SettingsService from '../../../src/services/SettingsService';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 
 interface SettingsProps {}
 
 const Settings = (props: SettingsProps) => {
   const { data, isLoading, error } = useQuery(
     ['personal-information'],
-    SettingsService.getPersonalInformation
+    SettingsService.getPersonalInformation,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const mutation = useMutation(
+    ['personal-information'],
+    SettingsService.updatePersonalInformation
   );
 
   if (error) {
@@ -27,7 +35,7 @@ const Settings = (props: SettingsProps) => {
           email: data.email,
         }}
         onSubmit={(data) => {
-          SettingsService.updatePersonalInformation(data).catch(console.log);
+          mutation.mutate(data);
         }}
       />
     </>
