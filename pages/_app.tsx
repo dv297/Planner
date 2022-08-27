@@ -29,7 +29,10 @@ const App = (props: CustomAppProps) => {
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        {getLayout(<Component {...pageProps} />)}
+        <SessionProvider session={pageProps.session}>
+          <CssBaseline />
+          {getLayout(<Component {...pageProps} />)}
+        </SessionProvider>
       </ThemeProvider>
     </CacheProvider>
   );
