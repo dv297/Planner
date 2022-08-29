@@ -2,6 +2,7 @@ import { NextApiHandler } from 'next';
 import NextAuth, { NextAuthOptions, SessionStrategy } from 'next-auth';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import GitHubProvider from 'next-auth/providers/github';
+import GoogleProvider from 'next-auth/providers/google';
 
 import prisma from '../../../src/lib/prisma';
 
@@ -13,6 +14,8 @@ declare var process: {
     NEXTAUTH_URL: string;
     NEXTAUTH_SECRET: string;
     NEXTAUTH_BYPASS: string;
+    GOOGLE_AUTH_CLIENT_ID: string;
+    GOOGLE_AUTH_CLIENT_SECRET: string;
   };
 };
 
@@ -26,6 +29,10 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
     }),
   ],
   adapter: PrismaAdapter(prisma),
