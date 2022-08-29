@@ -11,6 +11,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import WorkspaceSelector from './WorkspaceSelector';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -166,15 +167,10 @@ const Sidebar = (props: SidebarProps) => {
       <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
-          <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
-              alt="Workflow"
-            />
-          </div>
           <div className="flex-1 flex flex-col overflow-y-auto">
+            <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
+              <WorkspaceSelector />
+            </div>
             <nav className="flex-1 px-2 py-4 space-y-1">
               {navigation.map((item, index) => (
                 <Link href={item.href} key={index}>

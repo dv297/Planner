@@ -2,6 +2,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -13,6 +14,8 @@ const userNavigation = [
 ];
 
 const ProfileApplicationMenu = () => {
+  const router = useRouter();
+
   return (
     <Transition
       as={Fragment}
@@ -27,23 +30,23 @@ const ProfileApplicationMenu = () => {
         {userNavigation.map((item) => (
           <Menu.Item key={item.name}>
             {({ active }) => (
-              <Link href={item.href}>
-                <a
-                  className={classNames(
-                    active ? 'bg-gray-100' : '',
-                    'block px-4 py-2 text-sm text-gray-700'
-                  )}
-                  onClick={() => {
-                    if (item.name === 'Sign out') {
-                      signOut({
-                        callbackUrl: '/logout',
-                      });
-                    }
-                  }}
-                >
-                  {item.name}
-                </a>
-              </Link>
+              <button
+                className={classNames(
+                  active ? 'bg-gray-100' : '',
+                  'block px-4 py-2 text-sm text-gray-700 w-full text-left'
+                )}
+                onClick={() => {
+                  if (item.name === 'Sign out') {
+                    signOut({
+                      callbackUrl: '/logout',
+                    });
+                  } else {
+                    router.push(item.href);
+                  }
+                }}
+              >
+                {item.name}
+              </button>
             )}
           </Menu.Item>
         ))}
