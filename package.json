@@ -7,7 +7,9 @@
     "build": "next build",
     "build:db": "prisma generate",
     "push:db": "prisma db push",
-    "format": "prettier --write .",
+    "format": "npm run format:code && npm run format:prisma",
+    "format:code": "prettier --write .",
+    "format:prisma": "prisma format",
     "lint": "eslint .",
     "start": "next start"
   },
