@@ -10,7 +10,6 @@ import {
 } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import WorkspaceSelector from './WorkspaceSelector';
 
 function classNames(...classes: string[]) {
@@ -29,7 +28,7 @@ const Sidebar = (props: SidebarProps) => {
   const navigation = [
     {
       name: 'Dashboard',
-      href: '/app/workspace',
+      href: '/app/dashboard',
       icon: HomeIcon,
       current: asPath.includes('/app/workspace'),
     },
