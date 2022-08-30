@@ -26,9 +26,10 @@ model User {
 }
 
 model Team {
-  id        String      @id @unique @default(cuid())
-  name      String
-  TeamUsers TeamUsers[]
+  id            String          @id @unique @default(cuid())
+  name          String
+  TeamUsers     TeamUsers[]
+  TeamWorkspace TeamWorkspace[]
 }
 
 model TeamUsers {
@@ -47,6 +48,15 @@ model Workspace {
   Project        Project[]
   Issue          Issue[]
   UserPreference UserPreference[]
+  TeamWorkspace  TeamWorkspace[]
+}
+
+model TeamWorkspace {
+  id          String    @id @unique @default(cuid())
+  team        Team      @relation(fields: [teamId], references: [id])
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  teamId      String
+  workspaceId String
 }
 
 model Project {

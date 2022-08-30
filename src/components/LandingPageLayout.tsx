@@ -136,10 +136,10 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
                         const hasSession = await getSession();
 
                         if (hasSession) {
-                          await router.push('/app/workspace');
+                          await router.push('/app/dashboard');
                         } else {
                           await signIn(undefined, {
-                            callbackUrl: '/app/workspace',
+                            callbackUrl: '/app/dashboard',
                           });
                         }
                       }}
