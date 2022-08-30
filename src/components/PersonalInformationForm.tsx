@@ -54,7 +54,7 @@ const PersonalInformationForm = (props: PersonalInformationFormProps) => {
             </h3>
           </div>
           <div className="space-y-6 sm:space-y-5">
-            <FormRow label="First Name" htmlFor="first-name">
+            <FormRow label="Name" htmlFor="name">
               <FormTextInput name={keys.name} id="name" className="w-80" />
             </FormRow>
 

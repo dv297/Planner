@@ -1,14 +1,19 @@
+import { ReactNode } from 'react';
+import { Transition } from 'react-transition-group';
+
 import {
   OnboardingMachineProvider,
   useOnboardingMachine,
 } from '../../../src/machines/onboarding/useOnboardingMachine';
 import InitialSetupPathSelectorPage from '../../../src/components/pages/onboarding/InitialSetupPathSelectorPage';
+import InitialSetupSelfUserAcknowledgement from '../../../src/components/pages/onboarding/InitialSetupSelfUserAcknowledgement';
+import InitialSetupEstablishIndividualSettings from '../../../src/components/pages/onboarding/InitialSetupEstablishIndividualSettings';
+import InitialSetupSuccess from '../../../src/components/pages/onboarding/InitialSetupSuccess';
 
 interface InitialSetupProps {}
 
 const InitialSetup = (props: InitialSetupProps) => {
   const { machineState } = useOnboardingMachine();
-  console.log(machineState);
 
   return (
     <div className="h-screen bg-gray-200">
@@ -30,6 +35,13 @@ const InitialSetup = (props: InitialSetupProps) => {
 
       <main className="py-8 px-9">
         {machineState.matches('initial') && <InitialSetupPathSelectorPage />}
+        {machineState.matches('selfUser') && (
+          <InitialSetupSelfUserAcknowledgement />
+        )}
+        {machineState.matches('establishIndividualSettings') && (
+          <InitialSetupEstablishIndividualSettings />
+        )}
+        {machineState.matches('success') && <InitialSetupSuccess />}
       </main>
     </div>
   );
