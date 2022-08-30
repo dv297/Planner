@@ -13,6 +13,8 @@ const UserService = {
     req: NextApiRequest;
     res: NextApiResponse;
   }): Promise<User | null> => {
+    let user;
+
     if (
       req.headers.nextauth_bypass === process.env.NEXTAUTH_BYPASS &&
       req.headers.override_email
@@ -22,21 +24,29 @@ const UserService = {
         ? overrideHeader[0]
         : overrideHeader;
 
-      return prisma.user.findUnique({
+      user = prisma.user.findUnique({
         where: {
           email,
         },
       });
+    } else {
+      const session = await unstable_getServerSession(req, res, authOptions);
+      const castedSession = session as Session & { userId: string };
+
+      user = prisma.user.findUnique({
+        where: {
+          id: castedSession.userId,
+        },
+      });
     }
 
-    const session = await unstable_getServerSession(req, res, authOptions);
-    const castedSession = session as Session & { userId: string };
+    if (!user) {
+      res.end(401);
 
-    return prisma.user.findUnique({
-      where: {
-        id: castedSession.userId,
-      },
-    });
+      return null;
+    }
+
+    return user;
   },
 };
 
