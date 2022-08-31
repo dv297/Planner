@@ -1,4 +1,4 @@
-import '../src/styles/global.css';
+import '../styles/global.css';
 
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider } from '@mui/material';
@@ -9,8 +9,8 @@ import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import { ReactNode } from 'react';
 
-import createEmotionCache from '../src/lib/createEmotionCache';
-import { theme } from '../src/lib/createTheme';
+import createEmotionCache from '../lib/createEmotionCache';
+import { theme } from '../lib/createTheme';
 
 const queryClient = new QueryClient();
 const clientSideEmotionCache = createEmotionCache();

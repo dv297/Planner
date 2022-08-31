@@ -3,8 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { Session } from 'next-auth';
 import { unstable_getServerSession } from 'next-auth/next';
 
-import { authOptions } from '../../pages/api/auth/[...nextauth]';
 import prisma from '../lib/prisma';
+import { authOptions } from '../pages/api/auth/[...nextauth]';
 
 const UserRepo = {
   getCurrentUser: async ({

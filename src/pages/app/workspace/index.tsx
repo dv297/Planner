@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
-import AppDefaultLayout from '../../../src/components/AppDefaultLayout';
-import Form from '../../../src/components/Form';
-import FormSubmitButton from '../../../src/components/FormSubmitButton';
-import FormTextInput from '../../../src/components/FormTextInput';
-import WorkspaceService from '../../../src/services/WorkspaceService';
+import AppDefaultLayout from '../../../components/AppDefaultLayout';
+import Form from '../../../components/Form';
+import FormSubmitButton from '../../../components/FormSubmitButton';
+import FormTextInput from '../../../components/FormTextInput';
+import WorkspaceService from '../../../services/WorkspaceService';
 
 const Workspace = () => {
   return (

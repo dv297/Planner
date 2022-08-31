@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import prisma from '../../../src/lib/prisma';
-import { withAuthMiddleware } from '../../../src/lib/withAuthMiddleware';
-import UserRepo from '../../../src/repos/UserRepo';
+import prisma from '../../../lib/prisma';
+import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
+import UserRepo from '../../../repos/UserRepo';
 
 const getWorkspacesForUser = async (
   req: NextApiRequest,

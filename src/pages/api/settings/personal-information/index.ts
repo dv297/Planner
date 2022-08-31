@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { Session } from 'next-auth';
 import { unstable_getServerSession } from 'next-auth/next';
 
-import prisma from '../../../../src/lib/prisma';
-import { withAuthMiddleware } from '../../../../src/lib/withAuthMiddleware';
+import prisma from '../../../../lib/prisma';
+import { withAuthMiddleware } from '../../../../lib/withAuthMiddleware';
 import { authOptions } from '../../auth/[...nextauth]';
 
 class SettingsService {

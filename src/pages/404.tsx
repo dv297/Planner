@@ -8,7 +8,7 @@ export default function Page() {
       <div className="min-h-full pt-16 pb-12 flex flex-col bg-white">
         <main className="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex-shrink-0 flex justify-center">
-            <Link href="/" className="inline-flex">
+            <Link href="/src/pages" className="inline-flex">
               <span className="sr-only">Workflow</span>
               <Image
                 className="h-12 w-auto"
@@ -27,7 +27,7 @@ export default function Page() {
                 Sorry, we couldn’t find the page you’re looking for.
               </p>
               <div className="mt-6">
-                <Link href="/">
+                <Link href="/src/pages">
                   <a className="text-base font-medium text-indigo-600 hover:text-indigo-500">
                     Go back home<span aria-hidden="true"> &rarr;</span>
                   </a>

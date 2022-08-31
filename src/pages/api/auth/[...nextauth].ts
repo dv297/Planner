@@ -4,7 +4,7 @@ import NextAuth, { NextAuthOptions, SessionStrategy } from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
-import prisma from '../../../src/lib/prisma';
+import prisma from '../../../lib/prisma';
 
 declare let process: {
   env: {
