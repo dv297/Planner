@@ -1,13 +1,13 @@
 import prisma from '../../../src/lib/prisma';
 import { withAuthMiddleware } from '../../../src/lib/withAuthMiddleware';
 import { NextApiRequest, NextApiResponse } from 'next';
-import UserService from '../../../src/api/UserService';
+import UserRepo from '../../../src/repos/UserRepo';
 
 const getWorkspacesForUser = async (
   req: NextApiRequest,
   res: NextApiResponse
 ) => {
-  const currentUser = await UserService.getCurrentUser({ req, res });
+  const currentUser = await UserRepo.getCurrentUser({ req, res });
 
   if (!currentUser) {
     return;

@@ -5,7 +5,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '../../pages/api/auth/[...nextauth]';
 import { Session } from 'next-auth';
 
-const UserService = {
+const UserRepo = {
   getCurrentUser: async ({
     req,
     res,
@@ -50,4 +50,4 @@ const UserService = {
   },
 };
 
-export default UserService;
+export default UserRepo;
