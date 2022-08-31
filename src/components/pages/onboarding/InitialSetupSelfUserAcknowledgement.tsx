@@ -1,12 +1,8 @@
 import Button from '../../common/Button';
 import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
 
-interface InitialSetupSelfUserAcknowledgementProps {}
-
-const InitialSetupSelfUserAcknowledgement = (
-  props: InitialSetupSelfUserAcknowledgementProps
-) => {
-  const { machineState, machineSend } = useOnboardingMachine();
+const InitialSetupSelfUserAcknowledgement = () => {
+  const { machineSend } = useOnboardingMachine();
 
   return (
     <>

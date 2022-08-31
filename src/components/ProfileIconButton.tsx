@@ -1,11 +1,8 @@
 import { Menu } from '@headlessui/react';
 import ProfileApplicationMenu from './ProfileApplicationMenu';
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 
-interface ProfileIconButtonProps {}
-
-const ProfileIconButton = (props: ProfileIconButtonProps) => {
+const ProfileIconButton = () => {
   const session = useSession();
 
   if (!session || !session?.data) {

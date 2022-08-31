@@ -1,6 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
-import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 

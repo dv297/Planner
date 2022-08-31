@@ -1,5 +1,4 @@
 import { withAuth } from 'next-auth/middleware';
-import { authOptions } from './pages/api/auth/[...nextauth]';
 
 export default withAuth({
   secret: process.env.NEXTAUTH_SECRET,

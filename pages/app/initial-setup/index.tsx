@@ -1,6 +1,3 @@
-import { ReactNode } from 'react';
-import { Transition } from 'react-transition-group';
-
 import {
   OnboardingMachineProvider,
   useOnboardingMachine,
@@ -10,9 +7,7 @@ import InitialSetupSelfUserAcknowledgement from '../../../src/components/pages/o
 import InitialSetupEstablishIndividualSettings from '../../../src/components/pages/onboarding/InitialSetupEstablishIndividualSettings';
 import InitialSetupSuccess from '../../../src/components/pages/onboarding/InitialSetupSuccess';
 
-interface InitialSetupProps {}
-
-const InitialSetup = (props: InitialSetupProps) => {
+const InitialSetup = () => {
   const { machineState } = useOnboardingMachine();
 
   return (

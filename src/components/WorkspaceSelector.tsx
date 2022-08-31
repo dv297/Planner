@@ -27,9 +27,7 @@ const WorkspaceMenuItem = (props: WorkspaceMenuItemProps) => {
   );
 };
 
-interface WorkspaceSelectorProps {}
-
-const WorkspaceSelector = (props: WorkspaceSelectorProps) => {
+const WorkspaceSelector = () => {
   const router = useRouter();
 
   const onAddWorkSpaceClick = () => {

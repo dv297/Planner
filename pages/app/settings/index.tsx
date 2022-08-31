@@ -4,9 +4,7 @@ import SettingsService from '../../../src/services/SettingsService';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
-interface SettingsProps {}
-
-const Settings = (props: SettingsProps) => {
+const Settings = () => {
   const { data, isLoading, error } = useQuery(
     ['personal-information'],
     SettingsService.getPersonalInformation,

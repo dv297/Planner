@@ -1,9 +1,7 @@
 import Button from '../../common/Button';
 import { useRouter } from 'next/router';
 
-interface InitialSetupSuccessProps {}
-
-const InitialSetupSuccess = (props: InitialSetupSuccessProps) => {
+const InitialSetupSuccess = () => {
   const router = useRouter();
 
   return (

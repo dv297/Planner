@@ -1,8 +1,6 @@
 import Link from 'next/link';
 
-interface LogoutProps {}
-
-const Logout = (props: LogoutProps) => {
+const Logout = () => {
   return (
     <div className="py-32 flex flex-col justify-center items-center">
       <h1 className="mb-6">Thanks for using Planner!</h1>

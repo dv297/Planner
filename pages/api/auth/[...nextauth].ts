@@ -6,7 +6,7 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import prisma from '../../../src/lib/prisma';
 
-declare var process: {
+declare let process: {
   env: {
     DATABASE_URL: string;
     GITHUB_ID: string;
@@ -44,7 +44,7 @@ export const authOptions: NextAuthOptions = {
     newUser: '/app/initial-setup',
   },
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       const userFromDatabase = await prisma.user.findUnique({
         where: {
           id: token.sub,

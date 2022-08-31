@@ -3,12 +3,8 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import SettingsService from '../../../services/SettingsService';
 import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
 
-interface InitialSetupEstablishIndividualSettingsProps {}
-
-const InitialSetupEstablishIndividualSettings = (
-  props: InitialSetupEstablishIndividualSettingsProps
-) => {
-  const { machineState, machineSend } = useOnboardingMachine();
+const InitialSetupEstablishIndividualSettings = () => {
+  const { machineSend } = useOnboardingMachine();
 
   const { data, isLoading, error } = useQuery(
     ['personal-information'],

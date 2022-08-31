@@ -1,11 +1,9 @@
 import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
 
-interface InitialSetupProps {}
-
 interface LargeSetupButtonProps {
   title: string;
   description: string;
-  onClick: () => {};
+  onClick: () => void;
 }
 
 const LargeSetupButton = ({
@@ -28,8 +26,8 @@ const LargeSetupButton = ({
   );
 };
 
-const InitialSetupPathSelectorPage = (props: InitialSetupProps) => {
-  const { machineState, machineSend } = useOnboardingMachine();
+const InitialSetupPathSelectorPage = () => {
+  const { machineSend } = useOnboardingMachine();
 
   return (
     <>
