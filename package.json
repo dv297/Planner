@@ -12,7 +12,8 @@
     "format:prisma": "prisma format",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "start": "next start"
+    "start": "next start",
+    "check": "npm run format && npm run lint && npm run build"
   },
   "keywords": [],
   "author": "",
