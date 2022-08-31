@@ -3,6 +3,8 @@ import { ChevronDownIcon, PlusIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import { Fragment, ReactNode } from 'react';
 
+import { useAppContext } from './AppContext';
+
 interface WorkspaceMenuItemProps {
   children: ReactNode;
   onClick: () => void;
@@ -29,10 +31,20 @@ const WorkspaceMenuItem = (props: WorkspaceMenuItemProps) => {
 
 const WorkspaceSelector = () => {
   const router = useRouter();
+  const { workspaces } = useAppContext();
+
+  console.log({ workspaces });
 
   const onAddWorkSpaceClick = () => {
     router.push('/app/workspace');
   };
+
+  if (!workspaces) {
+    return null;
+  }
+
+  const selectedWorkspace = workspaces[0];
+  console.log({ selectedWorkspace });
 
   return (
     <Menu as="div" className="relative inline-block text-left w-full">
@@ -44,8 +56,8 @@ const WorkspaceSelector = () => {
           alt="Workflow"
         />
         <div className="flex-grow text-left">
-          <p>Core Architecture</p>
-          <p>(CORE)</p>
+          <p>{selectedWorkspace.name}</p>
+          <p>({selectedWorkspace.tag})</p>
         </div>
         <ChevronDownIcon
           className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
@@ -62,6 +74,20 @@ const WorkspaceSelector = () => {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          {workspaces.map((workspace) => {
+            if (workspace.id === selectedWorkspace.id) {
+              return null;
+            }
+
+            return (
+              <WorkspaceMenuItem
+                onClick={onAddWorkSpaceClick}
+                key={workspace.id}
+              >
+                <span className="flex-grow text-left">{workspace.name}</span>
+              </WorkspaceMenuItem>
+            );
+          })}
           <WorkspaceMenuItem onClick={onAddWorkSpaceClick}>
             <PlusIcon className="h-5 w-5 mr-2" />
             <span className="flex-grow text-left">Add a workspace</span>

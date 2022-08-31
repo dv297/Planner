@@ -3,7 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
 import UserRepo from '../../../repos/UserRepo';
-import { CreateWorkspaceSchema } from '../../../schemas/WorkspaceSchemas';
+import {
+  CreateWorkspaceSchema,
+  GetWorkspacesResponseSchema,
+} from '../../../schemas/WorkspaceSchemas';
 import routeMatcher from '../../../utils/routeMatcher';
 
 const getWorkspacesForUser = async (
@@ -37,9 +40,11 @@ const getWorkspacesForUser = async (
     (teams) => teams.workspace
   );
 
-  return res.json({
-    workspaces: workspaces ?? [],
+  const result = GetWorkspacesResponseSchema.parse({
+    data: workspaces ?? [],
   });
+
+  return res.json(result);
 };
 
 const createWorkspace = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -52,25 +57,32 @@ const createWorkspace = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const result = await prisma.workspace.create({
+  const workspaceResult = await prisma.workspace.create({
     data: {
       tag,
       name,
     },
   });
 
-  // const connectWorkspaceResult = await prisma.teamWorkspace.create({
-  //   data: {
-  //     workspaceId: result.id,
-  //     team: {
-  //       connect: {
-  //         id: currentUser.TeamUsers
-  //       }
-  //     }
-  //   }
-  // })
+  const connectWorkspaceResult = await prisma.teamWorkspace.create({
+    data: {
+      workspace: {
+        connect: {
+          id: workspaceResult.id,
+        },
+      },
+      team: {
+        connect: {
+          id: currentUser.TeamUsers[0].team.id,
+        },
+      },
+    },
+  });
 
-  res.json(result);
+  res.json({
+    workspaceResult,
+    connectWorkspaceResult,
+  });
 };
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {

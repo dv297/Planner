@@ -4,6 +4,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 
 import prisma from '../../../../lib/prisma';
 import { withAuthMiddleware } from '../../../../lib/withAuthMiddleware';
+import UserRepo from '../../../../repos/UserRepo';
 import routeMatcher from '../../../../utils/routeMatcher';
 import { authOptions } from '../../auth/[...nextauth]';
 
@@ -18,17 +19,10 @@ class SettingsService {
 
   async getPersonalInformation() {
     const { req, res } = this;
-    const session = await unstable_getServerSession(req, res, authOptions);
 
-    const castedSession = session as Session & { userId: string };
+    const currentUser = await UserRepo.getCurrentUser({ req, res });
 
-    const result = await prisma.user.findUnique({
-      where: {
-        id: castedSession.userId,
-      },
-    });
-
-    res.json(result);
+    return res.json(currentUser);
   }
 
   async updatePersonalInformation() {
@@ -57,8 +51,12 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
   const service = new SettingsService(req, res);
 
   return routeMatcher(req, res, {
-    GET: service.getPersonalInformation,
-    POST: service.updatePersonalInformation,
+    GET: () => {
+      service.getPersonalInformation();
+    },
+    POST: () => {
+      service.updatePersonalInformation();
+    },
   });
 }
 

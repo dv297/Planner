@@ -1,9 +1,23 @@
+import { GetWorkspacesResponseSchema } from '../schemas/WorkspaceSchemas';
+
 interface CreateWorkspaceInput {
   name: string;
   tag: string;
 }
 
 const WorkspaceService = {
+  getWorkspaces: async () => {
+    const result = await fetch('/api/workspace', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const data = await result.json();
+
+    const workspaces = GetWorkspacesResponseSchema.parse(data);
+
+    return workspaces.data;
+  },
   createWorkspace: async (data: CreateWorkspaceInput) => {
     const body = { name: data.name, tag: data.tag };
     await fetch('/api/workspace', {

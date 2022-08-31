@@ -16,8 +16,8 @@ const UserRepo = {
     let user;
 
     if (
-      req.headers.nextauth_bypass === process.env.NEXTAUTH_BYPASS &&
-      req.headers.override_email
+      req?.headers?.nextauth_bypass === process.env.NEXTAUTH_BYPASS &&
+      req?.headers?.override_email
     ) {
       const overrideHeader = req.headers.override_email;
       const email = Array.isArray(overrideHeader)

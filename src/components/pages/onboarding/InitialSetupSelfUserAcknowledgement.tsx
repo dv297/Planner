@@ -1,8 +1,20 @@
+import { useMutation } from '@tanstack/react-query';
+
 import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
+import OnboardingService from '../../../services/OnboardingService';
 import Button from '../../common/Button';
 
 const InitialSetupSelfUserAcknowledgement = () => {
   const { machineSend } = useOnboardingMachine();
+  const mutation = useMutation(
+    ['create-default-workspace-and-team'],
+    OnboardingService.createDefaultWorkspaceAndTeam
+  );
+
+  const onNextClick = async () => {
+    await mutation.mutate();
+    machineSend('COMPLETE');
+  };
 
   return (
     <>
@@ -15,7 +27,7 @@ const InitialSetupSelfUserAcknowledgement = () => {
         Let us just gather some personal information and we will be done!
       </p>
       <div className="mt-6">
-        <Button onClick={() => machineSend('COMPLETE')}>Next</Button>
+        <Button onClick={onNextClick}>Next</Button>
       </div>
     </>
   );
