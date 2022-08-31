@@ -23,15 +23,23 @@ const FormTextInput = (props: FormTextInputProps) => {
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange, value } }) => (
-          <TextField
-            onChange={onChange}
-            value={value}
-            label={label}
-            className={className}
-            id={id}
-            {...applicationCustomizations}
-          />
+        render={({
+          field: { onChange, onBlur, value },
+          fieldState: { error },
+        }) => (
+          <>
+            <TextField
+              onBlur={onBlur}
+              onChange={onChange}
+              value={value}
+              label={label}
+              className={className}
+              id={id}
+              error={!!error}
+              helperText={error?.message}
+              {...applicationCustomizations}
+            />
+          </>
         )}
       />
     </>

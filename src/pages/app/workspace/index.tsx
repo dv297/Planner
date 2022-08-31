@@ -1,9 +1,11 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
 import Form from '../../../components/Form';
 import FormSubmitButton from '../../../components/FormSubmitButton';
 import FormTextInput from '../../../components/FormTextInput';
+import { CreateWorkspaceSchema } from '../../../schemas/WorkspaceSchemas';
 import WorkspaceService from '../../../services/WorkspaceService';
 
 const Workspace = () => {
@@ -20,8 +22,9 @@ const Workspace = () => {
           name: '',
           tag: '',
         }}
+        resolver={zodResolver(CreateWorkspaceSchema)}
       >
-        {({ keys }) => (
+        {({ keys, formState }) => (
           <div className="flex flex-col">
             <div className="mb-8">
               <FormTextInput label="Name" name={keys.name} />

@@ -1,4 +1,3 @@
-import { User } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Session } from 'next-auth';
 import { unstable_getServerSession } from 'next-auth/next';
@@ -13,7 +12,7 @@ const UserRepo = {
   }: {
     req: NextApiRequest;
     res: NextApiResponse;
-  }): Promise<User | null> => {
+  }) => {
     let user;
 
     if (
@@ -29,6 +28,13 @@ const UserRepo = {
         where: {
           email,
         },
+        include: {
+          TeamUsers: {
+            include: {
+              team: true,
+            },
+          },
+        },
       });
     } else {
       const session = await unstable_getServerSession(req, res, authOptions);
@@ -37,6 +43,13 @@ const UserRepo = {
       user = prisma.user.findUnique({
         where: {
           id: castedSession.userId,
+        },
+        include: {
+          TeamUsers: {
+            include: {
+              team: true,
+            },
+          },
         },
       });
     }
