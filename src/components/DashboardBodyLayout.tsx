@@ -1,9 +1,10 @@
 import { BellIcon, MenuAlt2Icon } from '@heroicons/react/outline';
 import { SearchIcon } from '@heroicons/react/solid';
-import { ReactNode } from 'react';
-import ProfileIconButton from './ProfileIconButton';
-import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import LinearProgress from '@mui/material/LinearProgress';
+import { useIsFetching, useIsMutating } from '@tanstack/react-query';
+import { ReactNode } from 'react';
+
+import ProfileIconButton from './ProfileIconButton';
 
 interface DashboardBodyLayoutProps {
   children: ReactNode;

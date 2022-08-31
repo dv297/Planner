@@ -1,8 +1,8 @@
+import { useActor, useInterpret } from '@xstate/react';
 import { createContext, ReactNode, useContext } from 'react';
 import { InterpreterFrom } from 'xstate';
 
 import onboardingMachine from './onboardingMachine';
-import { useActor, useInterpret } from '@xstate/react';
 
 const OnboardingMachineContext = createContext(
   {} as InterpreterFrom<typeof onboardingMachine>

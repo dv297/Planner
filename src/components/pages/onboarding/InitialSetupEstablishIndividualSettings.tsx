@@ -1,7 +1,8 @@
-import PersonalInformationForm from '../../PersonalInformationForm';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import SettingsService from '../../../services/SettingsService';
+
 import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
+import SettingsService from '../../../services/SettingsService';
+import PersonalInformationForm from '../../PersonalInformationForm';
 
 const InitialSetupEstablishIndividualSettings = () => {
   const { machineSend } = useOnboardingMachine();

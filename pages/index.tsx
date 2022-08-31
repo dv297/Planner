@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import LandingPageLayout from '../src/components/LandingPageLayout';
 
 export default function HomePage() {

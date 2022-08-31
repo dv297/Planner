@@ -1,5 +1,4 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
 import {
   CalendarIcon,
   ChartBarIcon,
@@ -10,6 +9,8 @@ import {
 } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { Fragment } from 'react';
+
 import WorkspaceSelector from './WorkspaceSelector';
 
 function classNames(...classes: string[]) {

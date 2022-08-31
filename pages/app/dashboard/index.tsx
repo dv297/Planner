@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+
 import AppDefaultLayout from '../../../src/components/AppDefaultLayout';
 
 const Dashboard = () => {

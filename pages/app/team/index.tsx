@@ -1,5 +1,6 @@
-import AppDefaultLayout from '../../../src/components/AppDefaultLayout';
 import { ReactNode } from 'react';
+
+import AppDefaultLayout from '../../../src/components/AppDefaultLayout';
 
 const Page = () => {
   return <h1>Team</h1>;

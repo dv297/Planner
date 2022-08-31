@@ -1,11 +1,11 @@
+import InitialSetupEstablishIndividualSettings from '../../../src/components/pages/onboarding/InitialSetupEstablishIndividualSettings';
+import InitialSetupPathSelectorPage from '../../../src/components/pages/onboarding/InitialSetupPathSelectorPage';
+import InitialSetupSelfUserAcknowledgement from '../../../src/components/pages/onboarding/InitialSetupSelfUserAcknowledgement';
+import InitialSetupSuccess from '../../../src/components/pages/onboarding/InitialSetupSuccess';
 import {
   OnboardingMachineProvider,
   useOnboardingMachine,
 } from '../../../src/machines/onboarding/useOnboardingMachine';
-import InitialSetupPathSelectorPage from '../../../src/components/pages/onboarding/InitialSetupPathSelectorPage';
-import InitialSetupSelfUserAcknowledgement from '../../../src/components/pages/onboarding/InitialSetupSelfUserAcknowledgement';
-import InitialSetupEstablishIndividualSettings from '../../../src/components/pages/onboarding/InitialSetupEstablishIndividualSettings';
-import InitialSetupSuccess from '../../../src/components/pages/onboarding/InitialSetupSuccess';
 
 const InitialSetup = () => {
   const { machineState } = useOnboardingMachine();

@@ -1,15 +1,16 @@
-import { AppProps } from 'next/app';
-import { SessionProvider } from 'next-auth/react';
+import '../src/styles/global.css';
+
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import { NextComponentType, NextPageContext } from 'next';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { NextComponentType, NextPageContext } from 'next';
+import { AppProps } from 'next/app';
+import { SessionProvider } from 'next-auth/react';
+import { ReactNode } from 'react';
 
 import createEmotionCache from '../src/lib/createEmotionCache';
 import { theme } from '../src/lib/createTheme';
-import '../src/styles/global.css';
-import { ReactNode } from 'react';
 
 const queryClient = new QueryClient();
 const clientSideEmotionCache = createEmotionCache();

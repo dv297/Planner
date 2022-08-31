@@ -1,7 +1,7 @@
-import { Fragment, ReactNode } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
+import { Fragment, ReactNode } from 'react';
 
 interface WorkspaceMenuItemProps {
   children: ReactNode;

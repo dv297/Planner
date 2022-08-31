@@ -3,10 +3,10 @@
 
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
 import { Fragment, ReactNode } from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 const navigation = [
   { name: 'Home', href: '/' },

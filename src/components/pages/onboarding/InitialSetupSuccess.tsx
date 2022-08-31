@@ -1,5 +1,6 @@
-import Button from '../../common/Button';
 import { useRouter } from 'next/router';
+
+import Button from '../../common/Button';
 
 const InitialSetupSuccess = () => {
   const router = useRouter();

@@ -1,5 +1,5 @@
-import Button from '../../common/Button';
 import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
+import Button from '../../common/Button';
 
 const InitialSetupSelfUserAcknowledgement = () => {
   const { machineSend } = useOnboardingMachine();

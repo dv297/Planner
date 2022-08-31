@@ -1,6 +1,7 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+
 import prisma from '../../../../src/lib/prisma';
 import { withAuthMiddleware } from '../../../../src/lib/withAuthMiddleware';
-import { NextApiRequest, NextApiResponse } from 'next';
 import UserRepo from '../../../../src/repos/UserRepo';
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {

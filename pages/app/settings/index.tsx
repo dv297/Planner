@@ -1,8 +1,9 @@
+import { useMutation,useQuery } from '@tanstack/react-query';
+import { ReactNode } from 'react';
+
 import AppDefaultLayout from '../../../src/components/AppDefaultLayout';
 import PersonalInformationForm from '../../../src/components/PersonalInformationForm';
 import SettingsService from '../../../src/services/SettingsService';
-import { useQuery, useMutation } from '@tanstack/react-query';
-import { ReactNode } from 'react';
 
 const Settings = () => {
   const { data, isLoading, error } = useQuery(
