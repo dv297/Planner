@@ -24,13 +24,13 @@ const Workspace = () => {
         }}
         resolver={zodResolver(CreateWorkspaceSchema)}
       >
-        {({ keys, formState }) => (
+        {({ keys }) => (
           <div className="flex flex-col">
             <div className="mb-8">
-              <FormTextInput label="Name" name={keys.name} />
+              <FormTextInput label="Name" name={keys.name} required />
             </div>
             <div className="mb-8">
-              <FormTextInput label="Tag" name={keys.tag} />
+              <FormTextInput label="Tag" name={keys.tag} required />
             </div>
             <FormSubmitButton label="Submit" />
           </div>
