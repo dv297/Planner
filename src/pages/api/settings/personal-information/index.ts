@@ -4,6 +4,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 
 import prisma from '../../../../lib/prisma';
 import { withAuthMiddleware } from '../../../../lib/withAuthMiddleware';
+import routeMatcher from '../../../../utils/routeMatcher';
 import { authOptions } from '../../auth/[...nextauth]';
 
 class SettingsService {
@@ -55,17 +56,10 @@ class SettingsService {
 async function handle(req: NextApiRequest, res: NextApiResponse) {
   const service = new SettingsService(req, res);
 
-  switch (req.method) {
-    case 'GET': {
-      return service.getPersonalInformation();
-    }
-    case 'POST': {
-      return service.updatePersonalInformation();
-    }
-    default: {
-      throw new Error('Unsupported method');
-    }
-  }
+  return routeMatcher(req, res, {
+    GET: service.getPersonalInformation,
+    POST: service.updatePersonalInformation,
+  });
 }
 
 export default withAuthMiddleware(handle);

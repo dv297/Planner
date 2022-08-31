@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
 import UserRepo from '../../../repos/UserRepo';
+import routeMatcher from '../../../utils/routeMatcher';
 
 const getWorkspacesForUser = async (
   req: NextApiRequest,
@@ -54,14 +55,10 @@ const createWorkspace = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {
-  switch (req.method) {
-    case 'GET': {
-      return getWorkspacesForUser(req, res);
-    }
-    case 'POST': {
-      return createWorkspace(req, res);
-    }
-  }
+  return routeMatcher(req, res, {
+    GET: getWorkspacesForUser,
+    POST: createWorkspace,
+  });
 }
 
 export default withAuthMiddleware(handle);
