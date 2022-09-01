@@ -3,6 +3,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
 import UserRepo from '../../../repos/UserRepo';
+import {
+  GetUserPreferencesResponseSchema,
+  UpdateUserPreferenceInputSchema,
+  UpdateUserPreferenceResponseSchema,
+} from '../../../schemas/UserPreferencesSchemas';
 import routeMatcher from '../../../utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -50,12 +55,33 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  return res.json({ data: result });
+  const response = GetUserPreferencesResponseSchema.parse({ data: result });
+  return res.json(response);
+};
+
+const update = async (req: NextApiRequest, res: NextApiResponse) => {
+  const input = UpdateUserPreferenceInputSchema.parse(req.body);
+  // const currentUser = await UserRepo.getCurrentUser({ req, res });
+
+  // TODO: Validate that user can update this specific entry
+
+  const result = await prisma.userPreference.update({
+    where: {
+      id: input.id,
+    },
+    data: {
+      workspaceId: input.workspaceId,
+    },
+  });
+
+  const response = UpdateUserPreferenceResponseSchema.parse({ data: result });
+  return res.json(response);
 };
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {
   return routeMatcher(req, res, {
     GET: get,
+    PUT: update,
   });
 }
 

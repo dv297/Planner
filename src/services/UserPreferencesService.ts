@@ -1,4 +1,9 @@
-import { GetUserPreferencesResponseSchema } from '../schemas/UserPreferencesSchemas';
+import { z } from 'zod';
+
+import {
+  GetUserPreferencesResponseSchema,
+  UpdateUserPreferenceInputSchema,
+} from '../schemas/UserPreferencesSchemas';
 
 const UserPreferencesService = {
   get: async () => {
@@ -12,6 +17,19 @@ const UserPreferencesService = {
     const response = GetUserPreferencesResponseSchema.parse(data);
 
     return response.data;
+  },
+  update: async (input: z.infer<typeof UpdateUserPreferenceInputSchema>) => {
+    const sanitizedInput = UpdateUserPreferenceInputSchema.parse(input);
+
+    const result = await fetch('/api/user-preferences', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(sanitizedInput),
+    });
+
+    const data = await result.json();
+
+    return data;
   },
 };
 

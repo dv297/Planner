@@ -10,3 +10,12 @@ export const UserPreferencesSchema = z.object({
 export const GetUserPreferencesResponseSchema = z.object({
   data: UserPreferencesSchema,
 });
+
+export const UpdateUserPreferenceInputSchema = z.object({
+  id: z.string(),
+  workspaceId: z.string(),
+});
+
+export const UpdateUserPreferenceResponseSchema = z.object({
+  data: UserPreferencesSchema,
+});

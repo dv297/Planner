@@ -1,8 +1,11 @@
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/solid';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { Fragment, ReactNode } from 'react';
 
+import QueryKeys from '../services/QueryKeys';
+import UserPreferencesService from '../services/UserPreferencesService';
 import { useAppContext } from './AppContext';
 
 interface WorkspaceMenuItemProps {
@@ -32,9 +35,22 @@ const WorkspaceMenuItem = (props: WorkspaceMenuItemProps) => {
 const WorkspaceSelector = () => {
   const router = useRouter();
   const { workspaces, userPreferences } = useAppContext();
+  const queryClient = useQueryClient();
+  const mutation = useMutation(
+    [QueryKeys.USER_PREFERENCES],
+    UserPreferencesService.update,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QueryKeys.USER_PREFERENCES]);
+      },
+    }
+  );
 
-  const onWorkspaceSelection = ({ id }: { id: string }) => {
-    console.log(id);
+  const onWorkspaceSelection = async ({ id }: { id: string }) => {
+    await mutation.mutate({
+      id: userPreferences.id,
+      workspaceId: id,
+    });
   };
 
   const onAddWorkSpaceClick = () => {
