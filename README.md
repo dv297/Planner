@@ -11,3 +11,9 @@
 ```bash
 npx prisma migrate dev --name added_job_title
 ```
+
+## Clearing Docker Configuration
+
+```bash
+docker system prune --volumes
+```
