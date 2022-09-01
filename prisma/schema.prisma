@@ -120,7 +120,7 @@ model VerificationToken {
 model UserPreference {
   id                 String     @id @unique @default(cuid())
   user               User       @relation(fields: [userId], references: [id])
-  has_finished_setup Boolean?   @default(false)
+  hasFinishedSetup   Boolean?   @default(false)
   selected_workspace Workspace? @relation(fields: [workspaceId], references: [id])
   userId             String
   workspaceId        String?

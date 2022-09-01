@@ -31,9 +31,11 @@ const WorkspaceMenuItem = (props: WorkspaceMenuItemProps) => {
 
 const WorkspaceSelector = () => {
   const router = useRouter();
-  const { workspaces } = useAppContext();
+  const { workspaces, userPreferences } = useAppContext();
 
-  console.log({ workspaces });
+  const onWorkspaceSelection = ({ id }: { id: string }) => {
+    console.log(id);
+  };
 
   const onAddWorkSpaceClick = () => {
     router.push('/app/workspace');
@@ -43,8 +45,9 @@ const WorkspaceSelector = () => {
     return null;
   }
 
-  const selectedWorkspace = workspaces[0];
-  console.log({ selectedWorkspace });
+  const selectedWorkspace =
+    workspaces.find((entry) => entry.id === userPreferences.workspaceId) ??
+    workspaces[0];
 
   return (
     <Menu as="div" className="relative inline-block text-left w-full">
@@ -81,7 +84,7 @@ const WorkspaceSelector = () => {
 
             return (
               <WorkspaceMenuItem
-                onClick={onAddWorkSpaceClick}
+                onClick={() => onWorkspaceSelection(workspace)}
                 key={workspace.id}
               >
                 <span className="flex-grow text-left">{workspace.name}</span>

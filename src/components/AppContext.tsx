@@ -2,7 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { createContext, ReactNode, useContext } from 'react';
 import { z } from 'zod';
 
+import { UserPreferencesSchema } from '../schemas/UserPreferencesSchemas';
 import { GetWorkspacesResponseDataSchema } from '../schemas/WorkspaceSchemas';
+import QueryKeys from '../services/QueryKeys';
+import UserPreferencesService from '../services/UserPreferencesService';
 import WorkspaceService from '../services/WorkspaceService';
 import FullScreenLoader from './FullScreenLoader';
 
@@ -12,26 +15,33 @@ interface AppContextProps {
 
 interface AppContextStructure {
   workspaces: z.infer<typeof GetWorkspacesResponseDataSchema>;
+  userPreferences: z.infer<typeof UserPreferencesSchema>;
 }
 
 const AppContext = createContext({} as AppContextStructure);
 
 const AppContextProvider = (props: AppContextProps) => {
-  const {
-    data: workspaces,
-    isLoading,
-    error,
-  } = useQuery(['workspaces'], WorkspaceService.getWorkspaces, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: workspaces, isLoading: isLoadingWorkspaces } = useQuery(
+    [QueryKeys.WORKSPACES],
+    WorkspaceService.getWorkspaces,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
-  console.log(error);
+  const { data: userPreferences, isLoading: isLoadingUserPreferences } =
+    useQuery([QueryKeys.USER_PREFERENCES], UserPreferencesService.get, {
+      refetchOnWindowFocus: false,
+    });
+
+  const isLoading = isLoadingWorkspaces || isLoadingUserPreferences;
+  const hasAllData = !!workspaces && !!userPreferences;
 
   if (isLoading) {
     return <FullScreenLoader />;
   }
 
-  if (!workspaces) {
+  if (!hasAllData) {
     return null;
   }
 
@@ -39,6 +49,7 @@ const AppContextProvider = (props: AppContextProps) => {
     <AppContext.Provider
       value={{
         workspaces,
+        userPreferences,
       }}
     >
       {props.children}

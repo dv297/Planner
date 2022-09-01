@@ -1,4 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
@@ -10,10 +11,12 @@ import Form from '../../../components/Form';
 import FormSubmitButton from '../../../components/FormSubmitButton';
 import FormTextInput from '../../../components/FormTextInput';
 import { CreateWorkspaceSchema } from '../../../schemas/WorkspaceSchemas';
+import QueryKeys from '../../../services/QueryKeys';
 import WorkspaceService from '../../../services/WorkspaceService';
 
 const Workspace = () => {
   const snackbar = useSnackbar();
+  const queryClient = useQueryClient();
 
   return (
     <>
@@ -26,6 +29,7 @@ const Workspace = () => {
                 message: 'Successfully added workspace!',
                 severity: SnackbarSeverity.SUCCESS,
               });
+              queryClient.invalidateQueries([QueryKeys.WORKSPACES]);
             })
             .catch((err) => {
               console.log(err);

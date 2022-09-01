@@ -9,10 +9,7 @@ import {
 } from '../../../schemas/WorkspaceSchemas';
 import routeMatcher from '../../../utils/routeMatcher';
 
-const getWorkspacesForUser = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const currentUser = await UserRepo.getCurrentUser({ req, res });
 
   if (!currentUser) {
@@ -47,7 +44,7 @@ const getWorkspacesForUser = async (
   return res.json(result);
 };
 
-const createWorkspace = async (req: NextApiRequest, res: NextApiResponse) => {
+const create = async (req: NextApiRequest, res: NextApiResponse) => {
   const createWorkspaceInput = CreateWorkspaceSchema.parse(req.body);
   const { tag, name } = createWorkspaceInput;
 
@@ -87,8 +84,8 @@ const createWorkspace = async (req: NextApiRequest, res: NextApiResponse) => {
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {
   return routeMatcher(req, res, {
-    GET: getWorkspacesForUser,
-    POST: createWorkspace,
+    GET: get,
+    POST: create,
   });
 }
 
