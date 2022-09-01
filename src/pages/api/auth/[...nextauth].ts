@@ -1,6 +1,8 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { NextApiHandler } from 'next';
 import NextAuth, { NextAuthOptions, SessionStrategy } from 'next-auth';
+import { Provider } from 'next-auth/providers';
+import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -16,6 +18,8 @@ declare let process: {
     NEXTAUTH_BYPASS: string;
     GOOGLE_AUTH_CLIENT_ID: string;
     GOOGLE_AUTH_CLIENT_SECRET: string;
+    NODE_ENV: string;
+    CYPRESS_BASE_URL: string;
   };
 };
 
@@ -24,17 +28,45 @@ const authHandler: NextApiHandler = (req, res) =>
 
 export default authHandler;
 
+const providers: Provider[] = [
+  GitHubProvider({
+    clientId: process.env.GITHUB_ID,
+    clientSecret: process.env.GITHUB_SECRET,
+  }),
+  GoogleProvider({
+    clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
+  }),
+];
+
+if (
+  process.env.NODE_ENV !== 'production' &&
+  process.env.CYPRESS_BASE_URL.includes('localhost')
+) {
+  providers.push(
+    CredentialsProvider({
+      name: 'Credentials',
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'email',
+          placeholder: 'email@email.com',
+        },
+      },
+      async authorize(credentials) {
+        const user = await prisma.user.findFirst({
+          where: {
+            email: credentials?.email,
+          },
+        });
+        return user;
+      },
+    })
+  );
+}
+
 export const authOptions: NextAuthOptions = {
-  providers: [
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
-    }),
-  ],
+  providers,
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
   session: {

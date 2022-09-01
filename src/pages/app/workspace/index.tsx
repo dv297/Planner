@@ -40,10 +40,10 @@ const Workspace = () => {
         {({ keys }) => (
           <div className="flex flex-col">
             <div className="mb-8">
-              <FormTextInput label="Name" name={keys.name} required />
+              <FormTextInput label="Name" name={keys.name} required id="name" />
             </div>
             <div className="mb-8">
-              <FormTextInput label="Tag" name={keys.tag} required />
+              <FormTextInput label="Tag" name={keys.tag} required id="tag" />
             </div>
             <FormSubmitButton label="Submit" />
           </div>

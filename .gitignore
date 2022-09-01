@@ -4,3 +4,4 @@ node_modules/
 .env
 .idea/
 tsconfig.tsbuildinfo
+cypress.env.json

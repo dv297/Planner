@@ -29,6 +29,12 @@ const FormTextInput = (props: FormTextInputProps) => {
           fieldState: { error },
         }) => (
           <>
+            {/* Hidden label because MUI doesn't actually add a label which can be used for testing */}
+            {id && label && (
+              <label className="hidden" htmlFor={id}>
+                {label}
+              </label>
+            )}
             <TextField
               onBlur={onBlur}
               onChange={onChange}
