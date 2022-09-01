@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     container_name: web
     restart: always
-    command: npm run dev
+    command: ["./wait-for-it.sh", "postgres:5432", "--", "npm", "run", "dev"]
     volumes:
       - ./:/app
       - /app/node_modules
@@ -34,7 +34,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: migration
-    command: npm run db:migrate
+    command: [ "./wait-for-it.sh", "postgres:5432", "--", "npm", "run", "db:migrate" ]
     volumes:
       - ./:/app
       - /app/node_modules
