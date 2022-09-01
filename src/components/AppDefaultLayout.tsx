@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import { ReactNode, useState } from 'react';
 
 import { AppContextProvider } from './AppContext';
+import { SnackbarProvider } from './common/Snackbar';
 import DashboardBodyLayout from './DashboardBodyLayout';
 import FullScreenLoader from './FullScreenLoader';
 import Sidebar from './Sidebar';
@@ -27,14 +28,16 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
   }
 
   return (
-    <AppContextProvider>
-      <div>
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <DashboardBodyLayout setSidebarOpen={setSidebarOpen}>
-          {props.children}
-        </DashboardBodyLayout>
-      </div>
-    </AppContextProvider>
+    <SnackbarProvider>
+      <AppContextProvider>
+        <div>
+          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          <DashboardBodyLayout setSidebarOpen={setSidebarOpen}>
+            {props.children}
+          </DashboardBodyLayout>
+        </div>
+      </AppContextProvider>
+    </SnackbarProvider>
   );
 };
 

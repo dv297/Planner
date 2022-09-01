@@ -2,6 +2,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
+import {
+  SnackbarSeverity,
+  useSnackbar,
+} from '../../../components/common/Snackbar';
 import Form from '../../../components/Form';
 import FormSubmitButton from '../../../components/FormSubmitButton';
 import FormTextInput from '../../../components/FormTextInput';
@@ -9,14 +13,23 @@ import { CreateWorkspaceSchema } from '../../../schemas/WorkspaceSchemas';
 import WorkspaceService from '../../../services/WorkspaceService';
 
 const Workspace = () => {
+  const snackbar = useSnackbar();
+
   return (
     <>
       <h1 className="mb-4">Add Workspace</h1>
       <Form
         onSubmit={async (data) => {
-          WorkspaceService.createWorkspace(data).catch((err) => {
-            console.log(err);
-          });
+          WorkspaceService.createWorkspace(data)
+            .then(() => {
+              snackbar.displaySnackbar({
+                message: 'Successfully added workspace!',
+                severity: SnackbarSeverity.SUCCESS,
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         }}
         defaultValues={{
           name: '',
