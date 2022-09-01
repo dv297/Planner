@@ -6,7 +6,12 @@
     "dev": "next",
     "build": "next build",
     "build:db": "prisma generate",
-    "push:db": "prisma db push",
+    "build:docker": "docker build -t nextjs-docker .",
+    "docker:up": "docker-compose up -d --build",
+    "docker:down": "docker-compose down",
+    "docker:wait-and-migrate": "wait-on http-get://localhost:5432 && npm run db:migrate",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
     "format": "npm run format:code && npm run format:prisma",
     "format:code": "prettier --write .",
     "format:prisma": "prisma format",
@@ -52,6 +57,7 @@
     "prettier": "^2.7.1",
     "prisma": "^4.2.1",
     "tailwindcss": "^3.1.8",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "wait-on": "^6.0.1"
   }
 }
