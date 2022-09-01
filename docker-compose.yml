@@ -2,23 +2,16 @@ version: "3.8"
 
 services:
   postgres:
-    container_name: next_postgres
+    container_name: postgres
     image: postgres
     restart: always
-    networks:
-      - app-tier
     environment:
       - DATABASE_HOST=127.0.0.1
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=root
-    healthcheck:
-          test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-          interval: 5s
-          timeout: 5s
-          retries: 5
+      - POSTGRES_DB=planner
     ports:
-      - 5432:5432
+      - "5432:5432"
   web:
     env_file: .env
     build:
@@ -32,12 +25,8 @@ services:
       - /app/node_modules
       - /app/.next
     ports:
-      - 3000:3000
-    networks:
-      - app-tier
+      - "3000:3000"
     depends_on:
-      - postgres
-    links:
       - postgres
   migration:
     env_file: .env
@@ -52,9 +41,3 @@ services:
       - /app/.next
     depends_on:
       - postgres
-    links:
-      - postgres
-
-networks:
-  app-tier:
-    driver: bridge
