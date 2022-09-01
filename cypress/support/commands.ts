@@ -37,21 +37,13 @@ Cypress.Commands.add('login', () => {
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
+
+/*  eslint-disable @typescript-eslint/no-namespace */
+
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
-      login(): Chainable<void>;
-      drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>;
-      dismiss(
-        subject: string,
-        options?: Partial<TypeOptions>
-      ): Chainable<Element>;
-      visit(
-        originalFn: CommandOriginalFn,
-        url: string,
-        options: Partial<VisitOptions>
-      ): Chainable<Element>;
+      login(): Chainable<Element>;
     }
   }
 }
