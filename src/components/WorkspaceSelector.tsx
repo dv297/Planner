@@ -48,7 +48,6 @@ const WorkspaceSelector = () => {
 
   const onWorkspaceSelection = async ({ id }: { id: string }) => {
     await mutation.mutate({
-      id: userPreferences.id,
       workspaceId: id,
     });
   };

@@ -122,7 +122,7 @@ model UserPreference {
   user               User       @relation(fields: [userId], references: [id])
   hasFinishedSetup   Boolean?   @default(false)
   selected_workspace Workspace? @relation(fields: [workspaceId], references: [id])
-  userId             String
+  userId             String     @unique
   workspaceId        String?
 }
 

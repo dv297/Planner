@@ -61,13 +61,15 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
   const input = UpdateUserPreferenceInputSchema.parse(req.body);
-  // const currentUser = await UserRepo.getCurrentUser({ req, res });
+  const currentUser = await UserRepo.getCurrentUser({ req, res });
 
-  // TODO: Validate that user can update this specific entry
+  if (!currentUser) {
+    return;
+  }
 
   const result = await prisma.userPreference.update({
     where: {
-      id: input.id,
+      userId: currentUser.id,
     },
     data: {
       workspaceId: input.workspaceId,

@@ -12,7 +12,6 @@ export const GetUserPreferencesResponseSchema = z.object({
 });
 
 export const UpdateUserPreferenceInputSchema = z.object({
-  id: z.string(),
   workspaceId: z.string(),
 });
 
