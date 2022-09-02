@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import prisma from '../../../lib/prisma';
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
+import UserPreferenceRepo from '../../../repos/UserPreferenceRepo';
 import UserRepo from '../../../repos/UserRepo';
 import {
   GetUserPreferencesResponseSchema,
@@ -17,42 +18,11 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  let result = await prisma.userPreference.findFirst({
-    where: {
-      userId: currentUser.id,
-    },
-  });
+  let result = UserPreferenceRepo.getUserPreference(currentUser.id);
 
   // Create initial user preference if one has not been created
   if (!result) {
-    const teamUsers = await prisma.teamUsers.findMany({
-      where: {
-        userId: currentUser.id,
-      },
-      select: {
-        team: {
-          select: {
-            TeamWorkspace: {
-              include: {
-                workspace: true,
-              },
-            },
-          },
-        },
-      },
-    });
-
-    const workspaces = teamUsers.flatMap((entry) =>
-      entry.team.TeamWorkspace.map((teamWorkspace) => teamWorkspace.workspace)
-    );
-
-    result = await prisma.userPreference.create({
-      data: {
-        userId: currentUser.id,
-        workspaceId: workspaces[0]?.id,
-        hasFinishedSetup: workspaces.length > 0,
-      },
-    });
+    result = UserPreferenceRepo.createDefaultUserPreference(currentUser.id);
   }
 
   const response = GetUserPreferencesResponseSchema.parse({ data: result });
