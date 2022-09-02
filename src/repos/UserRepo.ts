@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Session } from 'next-auth';
+import { Session, User } from 'next-auth';
 import { unstable_getServerSession } from 'next-auth/next';
 
 import prisma from '../lib/prisma';
@@ -24,7 +24,7 @@ const UserRepo = {
         ? overrideHeader[0]
         : overrideHeader;
 
-      user = prisma.user.findUnique({
+      user = await prisma.user.findUnique({
         where: {
           email,
         },
@@ -40,7 +40,7 @@ const UserRepo = {
       const session = await unstable_getServerSession(req, res, authOptions);
       const castedSession = session as Session & { userId: string };
 
-      user = prisma.user.findUnique({
+      user = await prisma.user.findUnique({
         where: {
           id: castedSession.userId,
         },
@@ -55,12 +55,37 @@ const UserRepo = {
     }
 
     if (!user) {
-      res.end(401);
+      res.status(401).send('Unauthorized');
 
       return null;
     }
 
     return user;
+  },
+
+  async getWorkspaceByTag(user: User, workspaceTag: string) {
+    const workspace = await prisma.workspace.findFirst({
+      where: {
+        AND: {
+          tag: workspaceTag,
+          TeamWorkspace: {
+            some: {
+              team: {
+                TeamUsers: {
+                  some: {
+                    userId: {
+                      equals: user.id,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return workspace;
   },
 };
 
