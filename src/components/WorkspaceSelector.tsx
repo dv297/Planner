@@ -34,7 +34,7 @@ const WorkspaceMenuItem = (props: WorkspaceMenuItemProps) => {
 
 const WorkspaceSelector = () => {
   const router = useRouter();
-  const { workspaces, userPreferences } = useAppContext();
+  const { workspaces, selectedWorkspace } = useAppContext();
   const queryClient = useQueryClient();
   const mutation = useMutation(
     [QueryKeys.USER_PREFERENCES],
@@ -59,10 +59,6 @@ const WorkspaceSelector = () => {
   if (!workspaces) {
     return null;
   }
-
-  const selectedWorkspace =
-    workspaces.find((entry) => entry.id === userPreferences.workspaceId) ??
-    workspaces[0];
 
   return (
     <Menu as="div" className="relative inline-block text-left w-full">

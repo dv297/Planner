@@ -11,11 +11,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
+import { useAppContext } from './AppContext';
 import WorkspaceSelector from './WorkspaceSelector';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
+
+const injectWorkspaceTag = (href: string, workspaceTag: string) => {
+  return href.replace('{WORKSPACE_TAG}', workspaceTag);
+};
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -23,25 +28,27 @@ interface SidebarProps {
 }
 
 const Sidebar = (props: SidebarProps) => {
+  const { selectedWorkspace } = useAppContext();
+
   const { sidebarOpen, setSidebarOpen } = props;
   const { asPath } = useRouter();
 
   const navigation = [
     {
       name: 'Dashboard',
-      href: '/app/dashboard',
+      href: '/app/dashboard/{WORKSPACE_TAG}',
       icon: HomeIcon,
       current: asPath.includes('/app/workspace'),
     },
     {
       name: 'Team',
-      href: '/app/team',
+      href: '/app/team/{WORKSPACE_TAG}',
       icon: UsersIcon,
       current: asPath.includes('/app/team'),
     },
     {
       name: 'Projects',
-      href: '/app/projects',
+      href: '/app/projects/{WORKSPACE_TAG}',
       icon: FolderIcon,
       current: asPath.includes('/app/projects'),
     },
@@ -124,7 +131,13 @@ const Sidebar = (props: SidebarProps) => {
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item, index) => (
-                      <Link href={item.href} key={index}>
+                      <Link
+                        href={injectWorkspaceTag(
+                          item.href,
+                          selectedWorkspace.tag
+                        )}
+                        key={index}
+                      >
                         <a
                           key={item.name}
                           onClick={() => {
@@ -173,7 +186,10 @@ const Sidebar = (props: SidebarProps) => {
             </div>
             <nav className="flex-1 px-2 py-4 space-y-1">
               {navigation.map((item, index) => (
-                <Link href={item.href} key={index}>
+                <Link
+                  href={injectWorkspaceTag(item.href, selectedWorkspace.tag)}
+                  key={index}
+                >
                   <a
                     key={item.name}
                     className={classNames(

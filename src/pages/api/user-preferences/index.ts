@@ -1,3 +1,4 @@
+import { UserPreference } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import prisma from '../../../lib/prisma';
@@ -18,11 +19,14 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  let result = UserPreferenceRepo.getUserPreference(currentUser.id);
+  let result: UserPreference | null =
+    await UserPreferenceRepo.getUserPreference(currentUser.id);
 
   // Create initial user preference if one has not been created
   if (!result) {
-    result = UserPreferenceRepo.createDefaultUserPreference(currentUser.id);
+    result = await UserPreferenceRepo.createDefaultUserPreference(
+      currentUser.id
+    );
   }
 
   const response = GetUserPreferencesResponseSchema.parse({ data: result });

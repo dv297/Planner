@@ -3,7 +3,10 @@ import { createContext, ReactNode, useContext } from 'react';
 import { z } from 'zod';
 
 import { UserPreferencesSchema } from '../schemas/UserPreferencesSchemas';
-import { GetWorkspacesResponseDataSchema } from '../schemas/WorkspaceSchemas';
+import {
+  GetWorkspacesResponseDataSchema,
+  WorkspaceSchema,
+} from '../schemas/WorkspaceSchemas';
 import QueryKeys from '../services/QueryKeys';
 import UserPreferencesService from '../services/UserPreferencesService';
 import WorkspaceService from '../services/WorkspaceService';
@@ -16,6 +19,7 @@ interface AppContextProps {
 interface AppContextStructure {
   workspaces: z.infer<typeof GetWorkspacesResponseDataSchema>;
   userPreferences: z.infer<typeof UserPreferencesSchema>;
+  selectedWorkspace: z.infer<typeof WorkspaceSchema>;
 }
 
 const AppContext = createContext({} as AppContextStructure);
@@ -45,11 +49,16 @@ const AppContextProvider = (props: AppContextProps) => {
     return null;
   }
 
+  const selectedWorkspace =
+    workspaces.find((entry) => entry.id === userPreferences.workspaceId) ??
+    workspaces[0];
+
   return (
     <AppContext.Provider
       value={{
         workspaces,
         userPreferences,
+        selectedWorkspace,
       }}
     >
       {props.children}
