@@ -41,7 +41,7 @@ const Sidebar = (props: SidebarProps) => {
     },
     {
       name: 'Projects',
-      href: '#',
+      href: '/app/projects',
       icon: FolderIcon,
       current: asPath.includes('/app/projects'),
     },

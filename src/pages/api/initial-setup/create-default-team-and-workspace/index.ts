@@ -54,11 +54,32 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
     },
   });
 
+  const projectResult = await prisma.project.create({
+    data: {
+      workspaceId: workspaceResult.id,
+      title: 'Initial Project',
+      description:
+        'Sample project to demonstrate how a project might be structured',
+    },
+  });
+
+  const issueResult = await prisma.issue.create({
+    data: {
+      workspaceId: workspaceResult.id,
+      projectId: projectResult.id,
+      title: 'Get Started',
+      description:
+        'This is a sample issue. In here, you can describe what needs to be done.',
+    },
+  });
+
   return res.json({
     teamResult,
     connectTeamResult,
     workspaceResult,
     connectWorkspaceResult,
+    projectResult,
+    issueResult,
   });
 }
 
