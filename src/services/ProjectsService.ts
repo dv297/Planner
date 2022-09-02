@@ -1,7 +1,26 @@
-import { GetProjectsResponseSchema } from '../schemas/ProjectSchemas';
+import {
+  GetProjectsResponseSchema,
+  GetSingleProjectResponseSchema,
+} from '../schemas/ProjectSchemas';
 
 const ProjectsService = {
-  get: async (workspaceTag: string | undefined) => {
+  getProject: async (issueTag: string | undefined) => {
+    if (!issueTag) {
+      return;
+    }
+
+    const result = await fetch(`/api/project/${issueTag}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const data = await result.json();
+
+    const response = GetSingleProjectResponseSchema.parse(data);
+
+    return response.data;
+  },
+  getProjectsForWorkspace: async (workspaceTag: string | undefined) => {
     if (!workspaceTag) {
       return;
     }

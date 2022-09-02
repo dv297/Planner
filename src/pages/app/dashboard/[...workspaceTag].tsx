@@ -13,7 +13,7 @@ const Page = () => {
   const tag = Array.isArray(workspaceTag) ? workspaceTag[0] : workspaceTag;
 
   const { data } = useQuery([QueryKeys.PROJECTS], () =>
-    ProjectsService.get(tag)
+    ProjectsService.getProjectsForWorkspace(tag)
   );
 
   if (!data) {
