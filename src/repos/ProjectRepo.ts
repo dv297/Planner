@@ -14,6 +14,9 @@ const ProjectRepo = {
           },
         },
       },
+      include: {
+        keyIssue: true,
+      },
     });
   },
 };

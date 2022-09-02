@@ -17,3 +17,11 @@ npx prisma migrate dev --name added_job_title
 ```bash
 docker system prune --volumes
 ```
+
+## Database Reset
+
+```sql
+truncate "User" cascade;
+truncate "Workspace" cascade;
+truncate "Team" cascade;
+```

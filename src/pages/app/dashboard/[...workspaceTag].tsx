@@ -27,7 +27,7 @@ const Page = () => {
         {data.map((entry) => {
           return (
             <a href="#" key={entry.id}>
-              {entry.title}
+              {entry.keyIssue.title}
             </a>
           );
         })}

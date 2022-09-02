@@ -57,9 +57,17 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
   const projectResult = await prisma.project.create({
     data: {
       workspaceId: workspaceResult.id,
-      title: 'Initial Project',
-      description:
-        'Sample project to demonstrate how a project might be structured',
+      keyIssue: {
+        create: {
+          workspace: {
+            connect: {
+              id: workspaceResult.id,
+            },
+          },
+          title: 'Sample title',
+          description: 'Sample description',
+        },
+      },
     },
   });
 
