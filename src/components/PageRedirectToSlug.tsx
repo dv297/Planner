@@ -12,7 +12,7 @@ const Redirecter = ({ url }: { url: string }) => {
     if (selectedWorkspace) {
       router.replace(url.replace('{WORKSPACE_TAG}', selectedWorkspace.tag));
     }
-  }, [selectedWorkspace, url]);
+  }, [selectedWorkspace, url, router]);
 
   return <>Loading</>;
 };
