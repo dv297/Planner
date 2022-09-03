@@ -16,9 +16,13 @@ const ProfileIconButton = () => {
         <span className="sr-only">Open user menu</span>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          className="h-8 w-8 rounded-full"
+          className="h-8 w-8 rounded-full bg-blue-400"
           src={session?.data?.user?.image ?? ''}
           alt="Profile picture"
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null;
+            currentTarget.src = '/images/user.png';
+          }}
         />
       </Menu.Button>
       <ProfileApplicationMenu />
