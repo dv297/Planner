@@ -69,25 +69,27 @@ model Project {
 }
 
 model KeyIssue {
-  id          String      @id @unique @default(cuid())
-  title       String?
-  description String?
-  project     Project     @relation(fields: [projectId], references: [id])
-  workspace   Workspace   @relation(fields: [workspaceId], references: [id])
-  issueStatus IssueStatus @default(PLANNING)
-  projectId   String      @unique
-  workspaceId String
+  id                  String      @id @unique @default(cuid())
+  title               String?
+  description         String?
+  project             Project     @relation(fields: [projectId], references: [id])
+  workspace           Workspace   @relation(fields: [workspaceId], references: [id])
+  issueStatus         IssueStatus @default(PLANNING)
+  projectId           String      @unique
+  workspaceId         String
+  workspaceIssueCount Int?        @default(-1)
 }
 
 model Issue {
-  id          String      @id @unique @default(cuid())
-  title       String?
-  description String?
-  project     Project     @relation(fields: [projectId], references: [id])
-  workspace   Workspace   @relation(fields: [workspaceId], references: [id])
-  issueStatus IssueStatus @default(PLANNING)
-  workspaceId String
-  projectId   String
+  id                  String      @id @unique @default(cuid())
+  title               String?
+  description         String?
+  project             Project     @relation(fields: [projectId], references: [id])
+  workspace           Workspace   @relation(fields: [workspaceId], references: [id])
+  issueStatus         IssueStatus @default(PLANNING)
+  workspaceId         String
+  projectId           String
+  workspaceIssueCount Int?        @default(-1)
 }
 
 model Account {

@@ -10,4 +10,5 @@ export const KeyIssueSchema = z.object({
   projectId: z.string(),
   workspaceId: z.string(),
   workspace: WorkspaceSchema,
+  workspaceIssueCount: z.number(),
 });

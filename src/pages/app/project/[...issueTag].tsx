@@ -13,10 +13,22 @@ const ProjectPage = () => {
 
   const tag = Array.isArray(issueTag) ? issueTag[0] : issueTag;
 
-  const { data } = useQuery([QueryKeys.PROJECT], () =>
+  const { data: keyIssue } = useQuery([QueryKeys.PROJECT], () =>
     ProjectsService.getProject(tag)
   );
-  return <h1>{JSON.stringify(data)}</h1>;
+
+  if (!keyIssue) {
+    return null;
+  }
+
+  return (
+    <div>
+      <h1 className="text-lg font-bold text-slate-800">{keyIssue.title}</h1>
+      <div className="mt-4">
+        <span>{keyIssue.description}</span>
+      </div>
+    </div>
+  );
 };
 
 ProjectPage.getLayout = function getLayout(page: ReactNode) {
