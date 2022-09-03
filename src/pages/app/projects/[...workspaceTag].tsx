@@ -1,13 +1,14 @@
+import AddIcon from '@mui/icons-material/Add';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
+import Button from '../../../components/common/Button';
 import ProjectsService from '../../../services/ProjectsService';
 import QueryKeys from '../../../services/QueryKeys';
 import { parseIssueTagFromIssue } from '../../../utils/parseIssueTagFromIssue';
-import issueTag from '../../api/project/[...issueTag]';
 
 const Page = () => {
   const router = useRouter();
@@ -25,7 +26,17 @@ const Page = () => {
 
   return (
     <>
-      <h1 className="text-lg font-bold text-slate-800">Projects</h1>
+      <div className="flex flex-row items-center">
+        <h1 className="text-lg font-bold text-slate-800 flex flex-grow">
+          Projects
+        </h1>
+        <Button onClick={() => {}} variant="text">
+          <div className="mr-2">
+            <AddIcon />
+          </div>
+          <span>Create a Project</span>
+        </Button>
+      </div>
       <div className="flex flex-col mt-4 border-solid border-gray-300 border rounded-lg">
         {data.map((entry) => {
           const issueTag = parseIssueTagFromIssue(entry.keyIssue);

@@ -36,6 +36,7 @@ const FormTextInput = (props: FormTextInputProps) => {
               </label>
             )}
             <TextField
+              fullWidth
               onBlur={onBlur}
               onChange={onChange}
               value={value}
