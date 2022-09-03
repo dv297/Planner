@@ -15,7 +15,11 @@ const ProjectRepo = {
         },
       },
       include: {
-        keyIssue: true,
+        keyIssue: {
+          include: {
+            workspace: true,
+          },
+        },
       },
     });
   },
