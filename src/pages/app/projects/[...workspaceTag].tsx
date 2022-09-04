@@ -30,7 +30,12 @@ const Page = () => {
         <h1 className="text-lg font-bold text-slate-800 flex flex-grow">
           Projects
         </h1>
-        <Button onClick={() => {}} variant="text">
+        <Button
+          onClick={() => {
+            router.push(`/app/project/create`);
+          }}
+          variant="text"
+        >
           <div className="mr-2">
             <AddIcon />
           </div>

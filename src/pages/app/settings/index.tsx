@@ -2,6 +2,10 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
+import {
+  SnackbarSeverity,
+  useSnackbar,
+} from '../../../components/common/Snackbar';
 import PersonalInformationForm from '../../../components/PersonalInformationForm';
 import SettingsService from '../../../services/SettingsService';
 
@@ -18,6 +22,8 @@ const Settings = () => {
     ['personal-information'],
     SettingsService.updatePersonalInformation
   );
+
+  const { displaySnackbar } = useSnackbar();
 
   if (error) {
     return <div>Error loading personal information</div>;
@@ -40,6 +46,10 @@ const Settings = () => {
         }}
         onSubmit={(data) => {
           mutation.mutate(data);
+          displaySnackbar({
+            severity: SnackbarSeverity.SUCCESS,
+            message: 'Saved settings!',
+          });
         }}
       />
     </>

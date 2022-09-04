@@ -2,10 +2,12 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
 import SettingsService from '../../../services/SettingsService';
+import { SnackbarSeverity, useSnackbar } from '../../common/Snackbar';
 import PersonalInformationForm from '../../PersonalInformationForm';
 
 const InitialSetupEstablishIndividualSettings = () => {
   const { machineSend } = useOnboardingMachine();
+  const { displaySnackbar } = useSnackbar();
 
   const { data, isLoading, error } = useQuery(
     ['personal-information'],
@@ -44,6 +46,10 @@ const InitialSetupEstablishIndividualSettings = () => {
         onSubmit={async (data) => {
           await mutation.mutate(data);
           machineSend('COMPLETE');
+          displaySnackbar({
+            severity: SnackbarSeverity.SUCCESS,
+            message: 'Saved settings!',
+          });
         }}
       />
     </>

@@ -7,7 +7,6 @@ import { CreateProjectInputSchema } from '../../../schemas/ProjectSchemas';
 import routeMatcher from '../../../utils/routeMatcher';
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(req.body);
   const input = CreateProjectInputSchema.parse(req.body);
 
   const currentUser = await UserRepo.getCurrentUser({ req, res });

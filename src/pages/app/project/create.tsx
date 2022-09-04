@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
+import Form from '../../../components/common/Form';
 import FormMarkdownEditor from '../../../components/common/FormMarkdownEditor';
-import Form from '../../../components/Form';
-import FormSubmitButton from '../../../components/FormSubmitButton';
-import FormTextInput from '../../../components/FormTextInput';
+import FormSubmitButton from '../../../components/common/FormSubmitButton';
+import FormTextInput from '../../../components/common/FormTextInput';
 
 const CreateProjectPage = () => {
   return (

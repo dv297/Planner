@@ -3,9 +3,9 @@ import { useSession } from 'next-auth/react';
 import { ReactNode, useState } from 'react';
 
 import { AppContextProvider } from './AppContext';
+import FullScreenLoader from './common/FullScreenLoader';
 import { SnackbarProvider } from './common/Snackbar';
 import DashboardBodyLayout from './DashboardBodyLayout';
-import FullScreenLoader from './FullScreenLoader';
 import Sidebar from './Sidebar';
 
 interface AppDefaultLayoutProps {

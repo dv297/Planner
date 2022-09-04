@@ -10,7 +10,7 @@ import {
 import QueryKeys from '../services/QueryKeys';
 import UserPreferencesService from '../services/UserPreferencesService';
 import WorkspaceService from '../services/WorkspaceService';
-import FullScreenLoader from './FullScreenLoader';
+import FullScreenLoader from './common/FullScreenLoader';
 
 interface AppContextProps {
   children: ReactNode;
