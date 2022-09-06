@@ -17,14 +17,15 @@ interface FormProps<TFieldValues extends FieldValues = FieldValues> {
     formState: FormState<TFieldValues>;
   }) => ReactNode;
   defaultValues: DefaultValues<TFieldValues>;
-  onSubmit: (data: TFieldValues) => void;
+  onSubmit?: (data: TFieldValues) => void;
   resolver?: Resolver<TFieldValues>;
+  onBlur?: (data: TFieldValues, event: SyntheticEvent) => void;
 }
 
 function Form<FormStructure extends Record<string, any>>(
   props: FormProps<FormStructure>
 ) {
-  const { children, defaultValues, onSubmit, resolver } = props;
+  const { children, defaultValues, onSubmit, resolver, onBlur } = props;
 
   const methods = useForm({
     mode: 'onBlur',
@@ -49,9 +50,17 @@ function Form<FormStructure extends Record<string, any>>(
     return submissionHandler();
   };
 
+  const handleBlur = (event: SyntheticEvent) => {
+    if (onBlur) {
+      event.preventDefault();
+
+      onBlur(methods.getValues() as FormStructure, event);
+    }
+  };
+
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onBlur={handleBlur}>
         {children({
           keys,
           formState: formState as FormState<FormStructure>,

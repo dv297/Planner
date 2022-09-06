@@ -1,4 +1,5 @@
 import { TextField, TextFieldProps } from '@mui/material';
+import * as React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 interface FormTextInputProps {
@@ -8,10 +9,12 @@ interface FormTextInputProps {
   className?: string;
   id?: string;
   required?: boolean;
+  inputRef?: React.Ref<any>;
 }
 
 const FormTextInput = (props: FormTextInputProps) => {
-  const { label, name, textFieldProps, className, id, required } = props;
+  const { label, name, textFieldProps, className, id, required, inputRef } =
+    props;
   const { control } = useFormContext(); // retrieve all hook methods
 
   const applicationCustomizations: TextFieldProps = {
@@ -46,6 +49,7 @@ const FormTextInput = (props: FormTextInputProps) => {
               error={!!error}
               helperText={error?.message}
               required={required}
+              inputRef={inputRef}
               {...applicationCustomizations}
             />
           </>

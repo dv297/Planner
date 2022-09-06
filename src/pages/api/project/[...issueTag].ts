@@ -3,15 +3,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
 import UserRepo from '../../../repos/UserRepo';
 import {
-  GetSingleProjectDataSchema,
   GetSingleProjectInputSchema,
   GetSingleProjectResponseSchema,
 } from '../../../schemas/ProjectSchemas';
 import routeMatcher from '../../../utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { issueTag } = GetSingleProjectInputSchema.parse(req.query);
-  const tag = issueTag[0];
+  GetSingleProjectInputSchema.parse(req.query);
 
   const currentUser = await UserRepo.getCurrentUser({ req, res });
 
