@@ -3,7 +3,7 @@ import React from 'react';
 
 import EditableTextDisplay, {
   EditableTextDisplayProps,
-} from '../components/common/EditableTextDisplay';
+} from '../components/common/EditableDisplays/EditableTextDisplay';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
-import EditableTextDisplay from '../../../components/common/EditableTextDisplay';
+import EditableTextDisplay from '../../../components/common/EditableDisplays/EditableTextDisplay';
 import ProjectsService from '../../../services/ProjectsService';
 import QueryKeys from '../../../services/QueryKeys';
 

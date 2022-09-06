@@ -1,4 +1,4 @@
-import { ReactNode, SyntheticEvent } from 'react';
+import { FocusEvent, ReactNode, SyntheticEvent } from 'react';
 import {
   DefaultValues,
   FieldValues,
@@ -19,7 +19,7 @@ interface FormProps<TFieldValues extends FieldValues = FieldValues> {
   defaultValues: DefaultValues<TFieldValues>;
   onSubmit?: (data: TFieldValues) => void;
   resolver?: Resolver<TFieldValues>;
-  onBlur?: (data: TFieldValues, event: SyntheticEvent) => void;
+  onBlur?: (data: TFieldValues, event: FocusEvent<HTMLFormElement>) => void;
 }
 
 function Form<FormStructure extends Record<string, any>>(
@@ -50,7 +50,7 @@ function Form<FormStructure extends Record<string, any>>(
     return submissionHandler();
   };
 
-  const handleBlur = (event: SyntheticEvent) => {
+  const handleBlur = (event: FocusEvent<HTMLFormElement>) => {
     if (onBlur) {
       event.preventDefault();
 
