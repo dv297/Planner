@@ -1,20 +1,17 @@
 import { CircularProgress } from '@mui/material';
-import { SyntheticEvent } from 'react';
 
 import Form from '../Form';
 import FormMarkdownEditor from '../FormMarkdownEditor';
-import FormTextInput from '../FormTextInput';
-import TextDisplay from './TextDisplay';
+import MarkdownPreview from './MarkdownPreview';
 import useEditableDisplay from './useEditableDisplay';
 
 export interface EditableMarkdownDisplayProps {
   onBlurSubmission: (data: string) => Promise<void>;
   initialValue: string;
-  textDisplayClassName?: string;
 }
 
 const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
-  const { onBlurSubmission, initialValue, textDisplayClassName } = props;
+  const { onBlurSubmission, initialValue } = props;
   const {
     textValue,
     handleBlurSubmission,
@@ -22,8 +19,6 @@ const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
     isLoading,
     hasError,
     openEditor,
-    handleCancelClick,
-    cancelButtonRef,
     containerRef,
   } = useEditableDisplay({
     initialValue,
@@ -32,7 +27,7 @@ const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
 
   return (
     <div ref={containerRef}>
-      <Form defaultValues={{ text: textValue }} onBlur={handleBlurSubmission}>
+      <Form defaultValues={{ text: textValue }}>
         {({ keys }) => (
           <>
             <div
@@ -40,10 +35,9 @@ const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
               className="w-full rounded-lg cursor-pointer border-2 border-white hover:border-solid hover:border-gray-100"
             >
               {!isEditing ? (
-                <TextDisplay
-                  value={textValue}
-                  textDisplayClassName={textDisplayClassName}
-                />
+                <div className="px-4 py-1">
+                  <MarkdownPreview value={textValue} />
+                </div>
               ) : (
                 <div className="flex flex-row relative">
                   <div className="flex flex-col w-full">
@@ -57,17 +51,7 @@ const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
                     <div className="absolute right-4 h-full flex items-center">
                       <CircularProgress size={20} />
                     </div>
-                  ) : (
-                    <div>
-                      <button
-                        className="absolute right-4 h-full"
-                        onClick={handleCancelClick}
-                        ref={cancelButtonRef}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  )}
+                  ) : null}
                 </div>
               )}
             </div>

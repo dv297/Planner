@@ -40,18 +40,12 @@ const useEditableDisplay = (input: UseEditableDisplayInput) => {
   const handleBlurSubmission = useCallback(
     async (
       formData: EditableTextDisplayDataStructure,
-      event: FocusEvent<HTMLFormElement> | null
+      event: FocusEvent<HTMLFormElement | HTMLDivElement> | null
     ) => {
-      // Wait until event propogates to element that actually emits a real synthetic event
-      if (!event) {
-        return;
-      }
-
       if (
         event?.relatedTarget &&
         (event.relatedTarget === cancelButtonRef.current ||
-          event.relatedTarget === inputRef.current ||
-          containerRef?.current?.contains(event.relatedTarget))
+          event.relatedTarget === inputRef.current)
       ) {
         return;
       }

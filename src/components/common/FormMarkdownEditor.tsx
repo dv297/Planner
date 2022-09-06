@@ -3,6 +3,7 @@ import '@uiw/react-markdown-preview/markdown.css';
 
 import dynamic from 'next/dynamic';
 import { FocusEvent } from 'react';
+import Foco from 'react-foco';
 import { Controller, useFormContext } from 'react-hook-form';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
@@ -15,7 +16,7 @@ interface FormMarkdownEditorProps {
   name: string;
   onBlur?: (
     data: FormDataStructure,
-    event: FocusEvent<HTMLFormElement> | null
+    event: FocusEvent<HTMLFormElement | HTMLDivElement> | null
   ) => void;
   shouldAutoFocus?: boolean;
 }
@@ -35,15 +36,17 @@ const FormMarkdownEditor = (props: FormMarkdownEditorProps) => {
         control={control}
         render={({ field: { onChange, value } }) => (
           <>
-            <MDEditor
-              value={value}
-              onChange={onChange}
-              onBlur={() => {
+            <Foco
+              onClickOutside={() => {
                 onBlur?.({ text: value }, null);
               }}
-              autoFocus={shouldAutoFocus}
-              preview="preview"
-            />
+            >
+              <MDEditor
+                value={value}
+                onChange={onChange}
+                autoFocus={shouldAutoFocus}
+              />
+            </Foco>
           </>
         )}
       />

@@ -37,10 +37,12 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
             className="w-full rounded-lg cursor-pointer border-2 border-white hover:border-solid hover:border-gray-100"
           >
             {!isEditing ? (
-              <TextDisplay
-                value={textValue}
-                textDisplayClassName={textDisplayClassName}
-              />
+              <div className="px-4 py-1">
+                <TextDisplay
+                  value={textValue}
+                  textDisplayClassName={textDisplayClassName}
+                />
+              </div>
             ) : (
               <div className="flex flex-row relative">
                 <div className="flex flex-col w-full">

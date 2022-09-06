@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
+import EditableMarkdownDisplay from '../../../components/common/EditableDisplays/EditableMarkdownDisplay';
 import EditableTextDisplay from '../../../components/common/EditableDisplays/EditableTextDisplay';
 import ProjectsService from '../../../services/ProjectsService';
 import QueryKeys from '../../../services/QueryKeys';
@@ -36,7 +37,7 @@ const ProjectPage = () => {
         textDisplayClassName="text-xl font-bold"
       />
       <div className="mt-2">
-        <EditableTextDisplay
+        <EditableMarkdownDisplay
           onBlurSubmission={getUpdaterFunction(tag, 'description')}
           initialValue={keyIssue.description}
         />
