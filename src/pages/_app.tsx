@@ -12,7 +12,13 @@ import { ReactNode } from 'react';
 import createEmotionCache from '../lib/createEmotionCache';
 import { theme } from '../lib/createTheme';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: 0,
+    },
+  },
+});
 const clientSideEmotionCache = createEmotionCache();
 
 interface CustomAppProps extends AppProps {
