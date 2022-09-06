@@ -12,6 +12,11 @@ export const GetSingleProjectInputSchema = z.object({
   issueTag: z.array(z.string()),
 });
 
+export const UpdateSingleProjectInputSchema = z.object({
+  propertyName: z.string(),
+  data: z.any(),
+});
+
 export const GetSingleProjectDataSchema = z.object({
   title: z.string(),
   description: z.string(),

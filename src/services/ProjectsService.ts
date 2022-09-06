@@ -20,6 +20,26 @@ const ProjectsService = {
 
     return response.data;
   },
+  updateProject: async (
+    issueTag: string | undefined,
+    propertyName: string,
+    data: any
+  ) => {
+    if (!issueTag) {
+      return;
+    }
+
+    await fetch(`/api/project/${issueTag}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        propertyName,
+        data,
+      }),
+    });
+
+    return null;
+  },
   getProjectsForWorkspace: async (workspaceTag: string | undefined) => {
     if (!workspaceTag) {
       return;

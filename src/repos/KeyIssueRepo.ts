@@ -46,6 +46,29 @@ const KeyIssueRepo = {
 
     return keyIssue;
   },
+  async updateKeyIssueByProperty(
+    user: User,
+    issueTag: string,
+    propertyName: string,
+    data: any
+  ) {
+    const keyIssueToUpdate = await this.getKeyIssueByTag(user, issueTag);
+
+    if (!keyIssueToUpdate) {
+      return null;
+    }
+
+    const keyIssue = await prisma.keyIssue.update({
+      where: {
+        id: keyIssueToUpdate.id,
+      },
+      data: {
+        [propertyName]: data,
+      },
+    });
+
+    return keyIssue;
+  },
 };
 
 export default KeyIssueRepo;

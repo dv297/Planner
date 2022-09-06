@@ -7,6 +7,12 @@ import EditableTextDisplay from '../../../components/common/EditableTextDisplay'
 import ProjectsService from '../../../services/ProjectsService';
 import QueryKeys from '../../../services/QueryKeys';
 
+const getUpdaterFunction =
+  (tag: string | undefined, propertyName: string) =>
+  async (textValue: string) => {
+    await ProjectsService.updateProject(tag, propertyName, textValue);
+  };
+
 const ProjectPage = () => {
   const router = useRouter();
 
@@ -25,13 +31,13 @@ const ProjectPage = () => {
   return (
     <div>
       <EditableTextDisplay
-        onBlurSubmission={() => Promise.resolve()}
+        onBlurSubmission={getUpdaterFunction(tag, 'title')}
         initialValue={keyIssue.title}
         textDisplayClassName="text-xl font-bold"
       />
       <div className="mt-2">
         <EditableTextDisplay
-          onBlurSubmission={() => Promise.resolve()}
+          onBlurSubmission={getUpdaterFunction(tag, 'description')}
           initialValue={keyIssue.description}
         />
       </div>

@@ -6,6 +6,7 @@ import UserRepo from '../../../repos/UserRepo';
 import {
   GetSingleProjectInputSchema,
   GetSingleProjectResponseSchema,
+  UpdateSingleProjectInputSchema,
 } from '../../../schemas/ProjectSchemas';
 import routeMatcher from '../../../utils/routeMatcher';
 
@@ -25,9 +26,33 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   return res.json(response);
 };
 
+const update = async (req: NextApiRequest, res: NextApiResponse) => {
+  const { issueTag } = GetSingleProjectInputSchema.parse(req.query);
+  const { propertyName, data } = UpdateSingleProjectInputSchema.parse(req.body);
+  const tag = issueTag[0];
+
+  const currentUser = await UserRepo.getCurrentUser({ req, res });
+
+  if (!currentUser) {
+    return;
+  }
+
+  const result = await KeyIssueRepo.updateKeyIssueByProperty(
+    currentUser,
+    tag,
+    propertyName,
+    data
+  );
+
+  const response = { data: result };
+
+  return res.json(response);
+};
+
 async function handle(req: NextApiRequest, res: NextApiResponse) {
   return routeMatcher(req, res, {
     GET: get,
+    PUT: update,
   });
 }
 

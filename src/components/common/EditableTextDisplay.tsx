@@ -34,7 +34,7 @@ const TextDisplay = (props: TextDisplayProps) => {
 };
 
 export interface EditableTextDisplayProps {
-  onBlurSubmission: () => Promise<void>;
+  onBlurSubmission: (data: string) => Promise<void>;
   initialValue: string;
   textDisplayClassName?: string;
 }
@@ -69,7 +69,7 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
       }
 
       setIsLoading(true);
-      onBlurSubmission?.()
+      onBlurSubmission?.(formData.text)
         .then(() => {
           setTextValue(formData.text);
           setIsEditing(false);
