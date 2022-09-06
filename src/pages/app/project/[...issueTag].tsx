@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
+import EditableTextDisplay from '../../../components/common/EditableTextDisplay';
 import ProjectsService from '../../../services/ProjectsService';
 import QueryKeys from '../../../services/QueryKeys';
 
@@ -23,9 +24,16 @@ const ProjectPage = () => {
 
   return (
     <div>
-      <h1 className="text-lg font-bold text-slate-800">{keyIssue.title}</h1>
-      <div className="mt-4">
-        <span>{keyIssue.description}</span>
+      <EditableTextDisplay
+        onBlurSubmission={() => Promise.resolve()}
+        initialValue={keyIssue.title}
+        textDisplayClassName="text-xl font-bold"
+      />
+      <div className="mt-2">
+        <EditableTextDisplay
+          onBlurSubmission={() => Promise.resolve()}
+          initialValue={keyIssue.description}
+        />
       </div>
     </div>
   );

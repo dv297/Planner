@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
+import KeyIssueRepo from '../../../repos/KeyIssueRepo';
 import UserRepo from '../../../repos/UserRepo';
 import {
   GetSingleProjectInputSchema,
@@ -9,7 +10,8 @@ import {
 import routeMatcher from '../../../utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  GetSingleProjectInputSchema.parse(req.query);
+  const { issueTag } = GetSingleProjectInputSchema.parse(req.query);
+  const tag = issueTag[0];
 
   const currentUser = await UserRepo.getCurrentUser({ req, res });
 
@@ -17,10 +19,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const result = {
-    title: 'Sample title',
-    description: 'Sample description',
-  };
+  const result = await KeyIssueRepo.getKeyIssueByTag(currentUser, tag);
 
   const response = GetSingleProjectResponseSchema.parse({ data: result });
   return res.json(response);

@@ -31,7 +31,6 @@ const Template: ComponentStory<typeof EditableTextDisplay> = (
 );
 
 export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {};
 
 export const Fails = Template.bind({});
@@ -43,4 +42,9 @@ Fails.args = {
       }, 1000);
     });
   },
+};
+
+export const StyledTextDisplay = Template.bind({});
+StyledTextDisplay.args = {
+  textDisplayClassName: 'font-bolder text-4xl text-blue-500',
 };

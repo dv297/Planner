@@ -1,4 +1,5 @@
 import { CircularProgress } from '@mui/material';
+import { clsx } from 'clsx';
 import {
   SyntheticEvent,
   useCallback,
@@ -16,11 +17,17 @@ interface EditableTextDisplayDataStructure {
 
 interface TextDisplayProps {
   value: string;
+  textDisplayClassName?: string;
 }
 
 const TextDisplay = (props: TextDisplayProps) => {
   return (
-    <span className="text-lg font-medium flex flex-row items-center w-full">
+    <span
+      className={clsx(
+        'text-lg font-medium flex flex-row items-center w-full',
+        props.textDisplayClassName
+      )}
+    >
       {props.value}
     </span>
   );
@@ -29,10 +36,11 @@ const TextDisplay = (props: TextDisplayProps) => {
 export interface EditableTextDisplayProps {
   onBlurSubmission: () => Promise<void>;
   initialValue: string;
+  textDisplayClassName?: string;
 }
 
 const EditableTextDisplay = (props: EditableTextDisplayProps) => {
-  const { onBlurSubmission, initialValue } = props;
+  const { onBlurSubmission, initialValue, textDisplayClassName } = props;
 
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -93,7 +101,10 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
         <>
           <div onClick={openEditor} className="w-full">
             {!isEditing ? (
-              <TextDisplay value={textValue} />
+              <TextDisplay
+                value={textValue}
+                textDisplayClassName={textDisplayClassName}
+              />
             ) : (
               <div className="flex flex-row relative">
                 <div className="flex flex-col w-full">
