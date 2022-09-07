@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 import { IssueSchema, KeyIssueSchema } from './IssueSchema';
-import { WorkspaceSchema } from './WorkspaceSchemas';
 
 export const CreateProjectInputSchema = z.object({
   title: z.string(),

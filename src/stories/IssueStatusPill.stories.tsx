@@ -15,9 +15,7 @@ export default {
 } as ComponentMeta<typeof EditableTextDisplay>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof EditableTextDisplay> = (
-  args: Partial<EditableTextDisplayProps>
-) => (
+const Template: ComponentStory<typeof EditableTextDisplay> = () => (
   <div className="grid grid-rows-2 grid-cols-3 gap-4">
     <IssueStatusPill issueStatus="PLANNING" />
     <IssueStatusPill issueStatus="IN_PROGRESS" />
