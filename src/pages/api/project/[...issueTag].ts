@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
+import IssueRepo from '../../../repos/IssueRepo';
 import KeyIssueRepo from '../../../repos/KeyIssueRepo';
 import UserRepo from '../../../repos/UserRepo';
 import {
@@ -20,7 +21,19 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const result = await KeyIssueRepo.getKeyIssueByTag(currentUser, tag);
+  const keyIssueResponse = await KeyIssueRepo.getKeyIssueByTag(
+    currentUser,
+    tag
+  );
+
+  const issuesResponse = await IssueRepo.getIssuesForWorkspace(
+    keyIssueResponse?.workspace?.id
+  );
+
+  const result = {
+    keyIssue: keyIssueResponse?.keyIssue,
+    issues: issuesResponse,
+  };
 
   const response = GetSingleProjectResponseSchema.parse({ data: result });
   return res.json(response);

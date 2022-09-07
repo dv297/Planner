@@ -67,6 +67,7 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
           title: 'My First Project',
           description:
             'A sample project in order to introduce you to the features of Planner',
+          workspaceIssueCount: 1,
         },
       },
     },
@@ -79,7 +80,7 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
       title: 'Get Started',
       description:
         'This is a sample issue. In here, you can describe what needs to be done.',
-      workspaceIssueCount: 1,
+      workspaceIssueCount: 2,
     },
   });
 

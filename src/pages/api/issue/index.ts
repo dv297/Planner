@@ -1,15 +1,15 @@
+import { UserPreference } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import prisma from '../../../lib/prisma';
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
 import IssueRepo from '../../../repos/IssueRepo';
 import UserRepo from '../../../repos/UserRepo';
-import { CreateProjectInputSchema } from '../../../schemas/ProjectSchemas';
+import { CreateIssueInputSchema } from '../../../schemas/IssueSchema';
 import routeMatcher from '../../../utils/routeMatcher';
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-  const input = CreateProjectInputSchema.parse(req.body);
-
+  const input = CreateIssueInputSchema.parse(req.body);
   const currentUser = await UserRepo.getCurrentUser({ req, res });
 
   if (!currentUser) {
@@ -20,17 +20,13 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     input.workspaceId
   );
 
-  const result = await prisma.project.create({
+  const result = await prisma.issue.create({
     data: {
       workspaceId: input.workspaceId,
-      keyIssue: {
-        create: {
-          workspaceId: input.workspaceId,
-          title: input.title,
-          description: input.description,
-          workspaceIssueCount: newWorkspaceCount,
-        },
-      },
+      projectId: input.projectId,
+      title: input.title,
+      description: input.description,
+      workspaceIssueCount: newWorkspaceCount,
     },
   });
 

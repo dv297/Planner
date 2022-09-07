@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-import { KeyIssueSchema } from './IssueSchema';
+import { IssueSchema, KeyIssueSchema } from './IssueSchema';
+import { WorkspaceSchema } from './WorkspaceSchemas';
 
 export const CreateProjectInputSchema = z.object({
   title: z.string(),
@@ -18,8 +19,8 @@ export const UpdateSingleProjectInputSchema = z.object({
 });
 
 export const GetSingleProjectDataSchema = z.object({
-  title: z.string(),
-  description: z.string(),
+  keyIssue: KeyIssueSchema,
+  issues: z.array(IssueSchema),
 });
 
 export const GetSingleProjectResponseSchema = z.object({

@@ -42,9 +42,15 @@ const KeyIssueRepo = {
         workspaceId,
         workspaceIssueCount: Number.parseInt(workspaceIssueCount),
       },
+      include: {
+        workspace: true,
+      },
     });
 
-    return keyIssue;
+    return {
+      workspace,
+      keyIssue,
+    };
   },
   async updateKeyIssueByProperty(
     user: User,
@@ -52,15 +58,15 @@ const KeyIssueRepo = {
     propertyName: string,
     data: any
   ) {
-    const keyIssueToUpdate = await this.getKeyIssueByTag(user, issueTag);
+    const keyIssueResponse = await this.getKeyIssueByTag(user, issueTag);
 
-    if (!keyIssueToUpdate) {
+    if (!keyIssueResponse || !keyIssueResponse.keyIssue) {
       return null;
     }
 
     const keyIssue = await prisma.keyIssue.update({
       where: {
-        id: keyIssueToUpdate.id,
+        id: keyIssueResponse.keyIssue.id,
       },
       data: {
         [propertyName]: data,

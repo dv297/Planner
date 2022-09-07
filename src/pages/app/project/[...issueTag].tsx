@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
 import EditableMarkdownDisplay from '../../../components/common/EditableDisplays/EditableMarkdownDisplay';
 import EditableTextDisplay from '../../../components/common/EditableDisplays/EditableTextDisplay';
+import IssuesList from '../../../components/common/IssuesList';
 import ProjectsService from '../../../services/ProjectsService';
 import QueryKeys from '../../../services/QueryKeys';
 
@@ -21,11 +22,11 @@ const ProjectPage = () => {
 
   const tag = Array.isArray(issueTag) ? issueTag[0] : issueTag;
 
-  const { data: keyIssue } = useQuery([QueryKeys.PROJECT], () =>
+  const { data: project } = useQuery([QueryKeys.PROJECT], () =>
     ProjectsService.getProject(tag)
   );
 
-  if (!keyIssue) {
+  if (!project) {
     return null;
   }
 
@@ -33,13 +34,19 @@ const ProjectPage = () => {
     <div>
       <EditableTextDisplay
         onBlurSubmission={getUpdaterFunction(tag, 'title')}
-        initialValue={keyIssue.title}
+        initialValue={project.keyIssue.title}
         textDisplayClassName="text-xl font-bold"
       />
       <div className="mt-2">
         <EditableMarkdownDisplay
           onBlurSubmission={getUpdaterFunction(tag, 'description')}
-          initialValue={keyIssue.description}
+          initialValue={project.keyIssue.description}
+        />
+      </div>
+      <div className="mt-4">
+        <IssuesList
+          issues={project.issues}
+          projectId={project.keyIssue.projectId}
         />
       </div>
     </div>
