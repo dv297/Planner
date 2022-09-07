@@ -1,4 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
+import Link from 'next/link';
 import { useState } from 'react';
 import { z } from 'zod';
 
@@ -46,13 +47,14 @@ const IssuesList = (props: IssuesListProps) => {
           </div>
           <div className="divide-y divide-gray-200">
             {issues.map((issue) => {
+              const issueTag = parseIssueTagFromIssue(issue);
               return (
                 <div className="px-4 py-3.5 grid-cols-12 grid" key={issue.id}>
                   <span className="col-span-2 text-gray-900">
-                    {parseIssueTagFromIssue(issue)}
+                    <Link href={`/app/issue/${issueTag}`}>{issueTag}</Link>
                   </span>
                   <span className="col-span-8 text-gray-500">
-                    {issue.description}
+                    <Link href={`/app/issue/${issueTag}`}>{issue.title}</Link>
                   </span>
                   <span className="col-span-2 flex justify-end">
                     <IssueStatusPill issueStatus={issue.issueStatus} />

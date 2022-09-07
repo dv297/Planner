@@ -1,9 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import EditableTextDisplay, {
-  EditableTextDisplayProps,
-} from '../components/common/EditableDisplays/EditableTextDisplay';
+import EditableTextDisplay from '../components/common/EditableDisplays/EditableTextDisplay';
 import IssueStatusPill from '../components/IssueStatusPill';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
