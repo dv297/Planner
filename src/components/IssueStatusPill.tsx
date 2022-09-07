@@ -1,7 +1,9 @@
 import { clsx } from 'clsx';
 
+import IssueStatusType from '../types/IssueStatusType';
+
 interface IssueStatusPillProps {
-  issueStatus: string;
+  issueStatus: IssueStatusType;
 }
 
 interface ColorPalette {
@@ -11,37 +13,37 @@ interface ColorPalette {
 
 const getColors = (status: string): ColorPalette => {
   switch (status) {
-    case 'PLANNING': {
+    case IssueStatusType.PLANNING: {
       return {
         backgroundColor: 'bg-teal-800',
         textColor: 'text-white',
       };
     }
-    case 'IN_PROGRESS': {
-      return {
-        backgroundColor: 'bg-green-600',
-        textColor: 'text-white',
-      };
-    }
-    case 'IN_REVIEW': {
-      return {
-        backgroundColor: 'bg-orange-600',
-        textColor: 'text-white',
-      };
-    }
-    case 'TESTING': {
+    case IssueStatusType.NOT_STARTED: {
       return {
         backgroundColor: 'bg-purple-500',
         textColor: 'text-white',
       };
     }
-    case 'COMPLETE': {
+    case IssueStatusType.IN_PROGRESS: {
+      return {
+        backgroundColor: 'bg-green-600',
+        textColor: 'text-white',
+      };
+    }
+    case IssueStatusType.READY_FOR_REVIEW: {
+      return {
+        backgroundColor: 'bg-orange-600',
+        textColor: 'text-white',
+      };
+    }
+    case IssueStatusType.COMPLETE: {
       return {
         backgroundColor: 'bg-blue-500',
         textColor: 'text-white',
       };
     }
-    case 'CLOSED': {
+    case IssueStatusType.CLOSED: {
       return {
         backgroundColor: 'bg-blue-900',
         textColor: 'text-white',
@@ -59,13 +61,13 @@ const getColors = (status: string): ColorPalette => {
 const IssueStatusPill = (props: IssueStatusPillProps) => {
   const { issueStatus } = props;
 
-  const text = issueStatus.replace('_', ' ').toUpperCase();
+  const text = issueStatus.split('_').join(' ').toUpperCase();
 
   const { backgroundColor, textColor } = getColors(issueStatus);
   return (
     <div
       className={clsx(
-        'w-32 rounded rounded-2xl px-4 py-0.5 flex justify-center items-center',
+        'w-40 rounded rounded-2xl px-4 py-2 flex justify-center items-center',
         backgroundColor
       )}
     >

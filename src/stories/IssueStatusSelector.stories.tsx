@@ -2,27 +2,19 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import EditableTextDisplay from '../components/common/EditableDisplays/EditableTextDisplay';
-import IssueStatusPill from '../components/IssueStatusPill';
-import IssueStatusType from '../types/IssueStatusType';
+import IssueStatusSelector from '../components/IssueStatusSelector';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'common/IssueStatusPill',
-  component: IssueStatusPill,
+  title: 'common/IssueStatusSelector',
+  component: IssueStatusSelector,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
 } as ComponentMeta<typeof EditableTextDisplay>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof EditableTextDisplay> = () => (
-  <div className="grid grid-rows-2 grid-cols-3 gap-4">
-    <IssueStatusPill issueStatus={IssueStatusType.PLANNING} />
-    <IssueStatusPill issueStatus={IssueStatusType.NOT_STARTED} />
-    <IssueStatusPill issueStatus={IssueStatusType.IN_PROGRESS} />
-    <IssueStatusPill issueStatus={IssueStatusType.READY_FOR_REVIEW} />
-    <IssueStatusPill issueStatus={IssueStatusType.CLOSED} />
-    <IssueStatusPill issueStatus={IssueStatusType.COMPLETE} />
-  </div>
+  <IssueStatusSelector />
 );
 
 export const Primary = Template.bind({});
