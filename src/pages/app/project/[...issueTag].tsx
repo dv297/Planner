@@ -43,7 +43,7 @@ const ProjectPage = () => {
           initialValue={project.keyIssue.description}
         />
       </div>
-      <div className="mt-4">
+      <div className="mt-8">
         <IssuesList
           issues={project.issues}
           projectId={project.keyIssue.projectId}

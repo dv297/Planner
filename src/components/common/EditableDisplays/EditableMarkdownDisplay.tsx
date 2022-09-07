@@ -35,7 +35,7 @@ const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
               className="w-full rounded-lg cursor-pointer border-2 border-white hover:border-solid hover:border-gray-100"
             >
               {!isEditing ? (
-                <div className="px-4 py-1">
+                <div className="px-4 pt-2 pb-8">
                   <MarkdownPreview value={textValue} />
                 </div>
               ) : (

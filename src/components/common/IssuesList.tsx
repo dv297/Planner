@@ -5,25 +5,13 @@ import { z } from 'zod';
 import { IssuesListSchema } from '../../schemas/IssueSchema';
 import { parseIssueTagFromIssue } from '../../utils/parseIssueTagFromIssue';
 import IssueCreationModal from '../IssueCreationModal';
+import IssueStatusPill from '../IssueStatusPill';
 import Button from './Button';
 
 interface IssuesListProps {
   projectId: string;
   issues: z.infer<typeof IssuesListSchema>;
 }
-
-const mockData = [
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-  { issueTag: 'TASK-1', description: 'Sample Task' },
-];
 
 const IssuesList = (props: IssuesListProps) => {
   const { projectId, issues } = props;
@@ -63,8 +51,11 @@ const IssuesList = (props: IssuesListProps) => {
                   <span className="col-span-2 text-gray-900">
                     {parseIssueTagFromIssue(issue)}
                   </span>
-                  <span className="col-span-10 text-gray-500">
+                  <span className="col-span-8 text-gray-500">
                     {issue.description}
+                  </span>
+                  <span className="col-span-2 flex justify-end">
+                    <IssueStatusPill issueStatus={issue.issueStatus} />
                   </span>
                 </div>
               );
