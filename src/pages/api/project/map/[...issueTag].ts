@@ -2,18 +2,14 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withAuthMiddleware } from '../../../../lib/withAuthMiddleware';
 import IssueRepo from '../../../../repos/IssueRepo';
-import KeyIssueRepo from '../../../../repos/KeyIssueRepo';
 import ProjectMapRepo from '../../../../repos/ProjectMapRepo';
 import ProjectRepo from '../../../../repos/ProjectRepo';
 import UserRepo from '../../../../repos/UserRepo';
 import {
   GetSingleProjectMapPositionInputSchema,
   GetSingleProjectMapPositionResponseSchema,
+  UpdateSingleProjectMapPositionInputSchema,
 } from '../../../../schemas/ProjectMapPositionSchemas';
-import {
-  GetSingleProjectInputSchema,
-  UpdateSingleProjectInputSchema,
-} from '../../../../schemas/ProjectSchemas';
 import routeMatcher from '../../../../utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -55,9 +51,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { issueTag } = GetSingleProjectInputSchema.parse(req.query);
-  const { propertyName, data } = UpdateSingleProjectInputSchema.parse(req.body);
-  const tag = issueTag[0];
+  const input = UpdateSingleProjectMapPositionInputSchema.parse(req.body);
 
   const currentUser = await UserRepo.getCurrentUser({ req, res });
 
@@ -65,12 +59,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const result = await KeyIssueRepo.updateKeyIssueByProperty(
-    currentUser,
-    tag,
-    propertyName,
-    data
-  );
+  const result = await ProjectMapRepo.updateProjectMapIssue(input);
 
   const response = { data: result };
 

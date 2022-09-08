@@ -31,10 +31,11 @@ const initialEdges: Edge[] = [];
 
 interface IssueMapProp {
   initialNodes: Node[];
+  projectMapPositionId: string;
 }
 
 const IssuesMap = (props: IssueMapProp) => {
-  const { initialNodes } = props;
+  const { initialNodes, projectMapPositionId } = props;
 
   const [nodes, setNodes] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -92,7 +93,7 @@ const IssuesMap = (props: IssueMapProp) => {
       <Background />
       <MiniMap />
       <Controls />
-      <MapPersistenceManager />
+      <MapPersistenceManager projectMapPositionId={projectMapPositionId} />
     </ReactFlow>
   );
 };
@@ -123,7 +124,12 @@ const ProjectMap = (props: ProjectMapProps) => {
     };
   });
 
-  return <IssuesMap initialNodes={initialNodes} />;
+  return (
+    <IssuesMap
+      initialNodes={initialNodes}
+      projectMapPositionId={positions.id}
+    />
+  );
 };
 
 export default ProjectMap;
