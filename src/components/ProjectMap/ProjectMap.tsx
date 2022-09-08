@@ -15,6 +15,11 @@ import ReactFlow, {
 import { z } from 'zod';
 
 import { IssuesListSchema } from '../../schemas/IssueSchema';
+import { ProjectMapPositionSchema } from '../../schemas/ProjectMapPositionSchemas';
+import {
+  Position,
+  ProjectMapPositionDataEntry,
+} from '../../styles/ProjectMapPositionDataEntry';
 import IssueNode, { IssueNodeData } from './IssueNode';
 import MapPersistenceManager from './MapPersistenceManager';
 
@@ -94,15 +99,26 @@ const IssuesMap = (props: IssueMapProp) => {
 
 interface ProjectMapProps {
   issues: z.infer<typeof IssuesListSchema>;
+  positions: z.infer<typeof ProjectMapPositionSchema>;
 }
 
 const ProjectMap = (props: ProjectMapProps) => {
-  const { issues } = props;
+  const { issues, positions } = props;
+
+  const data = JSON.parse(positions.data);
+  const positionData =
+    data.positions as unknown as ProjectMapPositionDataEntry[];
+
+  const positionDataMap = positionData.reduce((acc, entry) => {
+    acc.set(entry.issueId, entry.position);
+    return acc;
+  }, new Map<string, Position>());
+
   const initialNodes: Node<IssueNodeData>[] = issues.map((issue, index) => {
     return {
       id: issue.id,
       data: issue,
-      position: { x: index * 400, y: 100 },
+      position: positionDataMap.get(issue.id) ?? { x: 0, y: 0 },
       type: 'issue',
     };
   });

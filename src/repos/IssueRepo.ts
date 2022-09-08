@@ -73,6 +73,25 @@ const IssueRepo = {
 
     return issue;
   },
+  async getIssuesForProject(projectId: string | undefined) {
+    if (!projectId) {
+      return [];
+    }
+
+    const issues = await prisma.issue.findMany({
+      where: {
+        projectId,
+      },
+      include: {
+        workspace: true,
+      },
+      orderBy: {
+        workspaceIssueCount: 'asc',
+      },
+    });
+
+    return issues;
+  },
   async getIssuesForWorkspace(workspaceId: string | undefined) {
     if (!workspaceId) {
       return [];

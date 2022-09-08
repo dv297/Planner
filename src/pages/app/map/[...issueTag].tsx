@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
 import ProjectMap from '../../../components/ProjectMap/ProjectMap';
-import ProjectsService from '../../../services/ProjectsService';
+import ProjectMapPositionService from '../../../services/ProjectMapPositionService';
 import QueryKeys from '../../../services/QueryKeys';
 
 const Page = () => {
@@ -15,14 +15,14 @@ const Page = () => {
   const tag = Array.isArray(issueTag) ? issueTag[0] : issueTag;
 
   const { data: project } = useQuery([QueryKeys.PROJECT], () =>
-    ProjectsService.getProject(tag)
+    ProjectMapPositionService.getProjectMapPosition(tag)
   );
 
-  if (!project?.issues) {
+  if (!project?.issues || !project.positions) {
     return <h1>Issue retrieving issues. Reload the page and try again.</h1>;
   }
 
-  return <ProjectMap issues={project?.issues} />;
+  return <ProjectMap issues={project?.issues} positions={project?.positions} />;
 };
 
 Page.getLayout = function getLayout(page: ReactNode) {

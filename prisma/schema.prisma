@@ -61,11 +61,12 @@ model TeamWorkspace {
 }
 
 model Project {
-  id          String    @id @unique @default(cuid())
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  workspaceId String
-  keyIssue    KeyIssue?
-  issues      Issue[]
+  id                 String               @id @unique @default(cuid())
+  workspace          Workspace            @relation(fields: [workspaceId], references: [id])
+  workspaceId        String
+  keyIssue           KeyIssue?
+  issues             Issue[]
+  ProjectMapPosition ProjectMapPosition[]
 }
 
 model KeyIssue {
@@ -137,6 +138,13 @@ model UserPreference {
   selected_workspace Workspace? @relation(fields: [workspaceId], references: [id])
   userId             String     @unique
   workspaceId        String?
+}
+
+model ProjectMapPosition {
+  id        String  @id @unique @default(cuid())
+  project   Project @relation(fields: [projectId], references: [id])
+  data      Json?
+  projectId String  @unique
 }
 
 enum IssueStatus {
