@@ -3,7 +3,9 @@ import { FormControl, MenuItem, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select/Select';
 import { useCallback, useState } from 'react';
 
-import IssueStatusType from '../types/IssueStatusType';
+import IssueStatusType, {
+  convertToIssueStatusType,
+} from '../types/IssueStatusType';
 import { SnackbarSeverity, useSnackbar } from './common/Snackbar';
 
 interface IssueStatusSelectorProps {
@@ -21,7 +23,7 @@ const IssueStatusSelector = (props: IssueStatusSelectorProps) => {
       try {
         const updatedValue = event.target.value;
         await onChange(updatedValue);
-        setValue(updatedValue);
+        setValue(convertToIssueStatusType(updatedValue));
       } catch (err) {
         console.error(err);
         displaySnackbar({

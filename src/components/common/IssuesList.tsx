@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { z } from 'zod';
 
 import { IssuesListSchema } from '../../schemas/IssueSchema';
+import { convertToIssueStatusType } from '../../types/IssueStatusType';
 import { parseIssueTagFromIssue } from '../../utils/parseIssueTagFromIssue';
 import IssueCreationModal from '../IssueCreationModal';
 import IssueStatusPill from '../IssueStatusPill';
@@ -57,7 +58,9 @@ const IssuesList = (props: IssuesListProps) => {
                     <Link href={`/app/issue/${issueTag}`}>{issue.title}</Link>
                   </span>
                   <span className="col-span-2 flex justify-end">
-                    <IssueStatusPill issueStatus={issue.issueStatus} />
+                    <IssueStatusPill
+                      issueStatus={convertToIssueStatusType(issue.issueStatus)}
+                    />
                   </span>
                 </div>
               );

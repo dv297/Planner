@@ -60,7 +60,7 @@ function Form<FormStructure extends Record<string, any>>(
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit} onBlur={handleBlur}>
+      <form onSubmit={handleSubmit} onBlur={handleBlur} className="w-full">
         {children({
           keys,
           formState: formState as FormState<FormStructure>,

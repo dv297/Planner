@@ -1,0 +1,90 @@
+{
+  "data": {
+    "keyIssue": {
+      "id": "cl7rxi5ht1730oz5x4ohjbt5p",
+      "title": "My First Project",
+      "description": "A sample project in order to introduce you to the features of Planner",
+      "issueStatus": "PLANNING",
+      "projectId": "cl7rxi5ht1729oz5x759c5tmy",
+      "workspaceId": "cl7rxi5go1709oz5xg78x6bgh",
+      "workspace": {
+        "id": "cl7rxi5go1709oz5xg78x6bgh",
+        "name": "Task",
+        "tag": "TASK"
+      },
+      "workspaceIssueCount": 1
+    },
+    "issues": [
+      {
+        "id": "cl7rxi5ia1742oz5x0vbyzmag",
+        "title": "Get Started",
+        "description": "This is a sample issue. In here, you can describe what needs to be done.",
+        "issueStatus": "COMPLETE",
+        "projectId": "cl7rxi5ht1729oz5x759c5tmy",
+        "workspaceId": "cl7rxi5go1709oz5xg78x6bgh",
+        "workspace": {
+          "id": "cl7rxi5go1709oz5xg78x6bgh",
+          "name": "Task",
+          "tag": "TASK"
+        },
+        "workspaceIssueCount": 2
+      },
+      {
+        "id": "cl7rxodly2673oz5x2lymz0cs",
+        "title": "Daniel Title",
+        "description": "Daniel Description",
+        "issueStatus": "IN_PROGRESS",
+        "projectId": "cl7rxi5ht1729oz5x759c5tmy",
+        "workspaceId": "cl7rxi5go1709oz5xg78x6bgh",
+        "workspace": {
+          "id": "cl7rxi5go1709oz5xg78x6bgh",
+          "name": "Task",
+          "tag": "TASK"
+        },
+        "workspaceIssueCount": 3
+      },
+      {
+        "id": "cl7ryehs93999oz5xequbyprr",
+        "title": "Sample task",
+        "description": "Sample task",
+        "issueStatus": "PLANNING",
+        "projectId": "cl7rxi5ht1729oz5x759c5tmy",
+        "workspaceId": "cl7rxi5go1709oz5xg78x6bgh",
+        "workspace": {
+          "id": "cl7rxi5go1709oz5xg78x6bgh",
+          "name": "Task",
+          "tag": "TASK"
+        },
+        "workspaceIssueCount": 4
+      },
+      {
+        "id": "cl7ryft2g4148oz5x30l175zh",
+        "title": "Another task",
+        "description": "Another task",
+        "issueStatus": "PLANNING",
+        "projectId": "cl7rxi5ht1729oz5x759c5tmy",
+        "workspaceId": "cl7rxi5go1709oz5xg78x6bgh",
+        "workspace": {
+          "id": "cl7rxi5go1709oz5xg78x6bgh",
+          "name": "Task",
+          "tag": "TASK"
+        },
+        "workspaceIssueCount": 5
+      },
+      {
+        "id": "cl7s3yo4q1014vf5xvgstyj99",
+        "title": "Another sample task",
+        "description": "Filler",
+        "issueStatus": "PLANNING",
+        "projectId": "cl7rxi5ht1729oz5x759c5tmy",
+        "workspaceId": "cl7rxi5go1709oz5xg78x6bgh",
+        "workspace": {
+          "id": "cl7rxi5go1709oz5xg78x6bgh",
+          "name": "Task",
+          "tag": "TASK"
+        },
+        "workspaceIssueCount": 6
+      }
+    ]
+  }
+}

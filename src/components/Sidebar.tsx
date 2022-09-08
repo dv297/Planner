@@ -1,10 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react';
 import {
   CalendarIcon,
-  ChartBarIcon,
   FolderIcon,
   HomeIcon,
-  UsersIcon,
   XIcon,
 } from '@heroicons/react/outline';
 import Link from 'next/link';
@@ -41,12 +39,6 @@ const Sidebar = (props: SidebarProps) => {
       current: asPath.includes('/app/workspace'),
     },
     {
-      name: 'Team',
-      href: '/app/team/{WORKSPACE_TAG}',
-      icon: UsersIcon,
-      current: asPath.includes('/app/team'),
-    },
-    {
       name: 'Projects',
       href: '/app/projects/{WORKSPACE_TAG}',
       icon: FolderIcon,
@@ -57,12 +49,6 @@ const Sidebar = (props: SidebarProps) => {
       href: '#',
       icon: CalendarIcon,
       current: asPath.includes('/app/calendar'),
-    },
-    {
-      name: 'Reports',
-      href: '#',
-      icon: ChartBarIcon,
-      current: asPath.includes('/app/reports'),
     },
   ];
 

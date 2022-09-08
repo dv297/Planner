@@ -1,4 +1,6 @@
+import MapIcon from '@mui/icons-material/Map';
 import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
@@ -32,17 +34,32 @@ const ProjectPage = () => {
 
   return (
     <div>
-      <EditableTextDisplay
-        onBlurSubmission={getUpdaterFunction(tag, 'title')}
-        initialValue={project.keyIssue.title}
-        textDisplayClassName="text-xl font-bold"
-      />
+      <div className="flex flex-row items-center">
+        <div className="flex flex-grow flex-1 w-full mr-16">
+          <EditableTextDisplay
+            onBlurSubmission={getUpdaterFunction(tag, 'title')}
+            initialValue={project.keyIssue.title}
+            textDisplayClassName="text-xl font-bold"
+          />
+        </div>
+        <div>
+          <Link href={`/app/map/${tag}`}>
+            <span className="rounded-full bg-green-700 px-4 py-3 text-white font-bold cursor-pointer">
+              <span className="mr-2">
+                <MapIcon />
+              </span>
+              Navigate to Project Map
+            </span>
+          </Link>
+        </div>
+      </div>
       <div className="mt-2">
         <EditableMarkdownDisplay
           onBlurSubmission={getUpdaterFunction(tag, 'description')}
           initialValue={project.keyIssue.description}
         />
       </div>
+
       <div className="mt-8">
         <IssuesList
           issues={project.issues}
