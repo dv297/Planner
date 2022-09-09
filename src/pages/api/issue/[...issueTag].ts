@@ -22,6 +22,10 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const issueResponse = await IssueRepo.getIssueByTag(currentUser, tag);
 
+  if (!issueResponse) {
+    return res.status(404).send('Not Found');
+  }
+
   const response = GetSingleIssueResponseSchema.parse({
     data: issueResponse?.issue,
   });

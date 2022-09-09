@@ -51,12 +51,8 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
   const service = new SettingsService(req, res);
 
   return routeMatcher(req, res, {
-    GET: () => {
-      service.getPersonalInformation();
-    },
-    POST: () => {
-      service.updatePersonalInformation();
-    },
+    GET: service.getPersonalInformation,
+    POST: service.updatePersonalInformation,
   });
 }
 

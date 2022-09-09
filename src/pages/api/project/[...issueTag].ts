@@ -30,6 +30,10 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     keyIssueResponse?.workspace?.id
   );
 
+  if (!keyIssueResponse) {
+    return res.status(404).send('Not Found');
+  }
+
   const result = {
     keyIssue: keyIssueResponse?.keyIssue,
     issues: issuesResponse,

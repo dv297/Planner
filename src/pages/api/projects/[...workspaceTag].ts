@@ -9,8 +9,6 @@ import {
 } from '../../../schemas/ProjectSchemas';
 import routeMatcher from '../../../utils/routeMatcher';
 
-const emptyGetProjectsRepsonse = GetProjectsResponseSchema.parse({ data: [] });
-
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const { workspaceTag } = GetProjectsInputSchema.parse(req.query);
   const tag = workspaceTag[0];
@@ -24,7 +22,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const workspace = await UserRepo.getWorkspaceByTag(currentUser, tag);
 
   if (!workspace) {
-    return res.json(emptyGetProjectsRepsonse);
+    return res.status(404).send('Not Found');
   }
 
   const result = await ProjectRepo.getProjectsForWorkspace(workspace.id);
