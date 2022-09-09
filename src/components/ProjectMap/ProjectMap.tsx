@@ -16,10 +16,7 @@ import { z } from 'zod';
 
 import { IssuesListSchema } from '../../schemas/IssueSchema';
 import { ProjectMapPositionSchema } from '../../schemas/ProjectMapPositionSchemas';
-import {
-  Position,
-  ProjectMapPositionDataEntry,
-} from '../../styles/ProjectMapPositionDataEntry';
+import { Position } from '../../styles/ProjectMapPositionDataEntry';
 import IssueNode, { IssueNodeData } from './IssueNode';
 import MapPersistenceManager from './MapPersistenceManager';
 
@@ -111,7 +108,7 @@ const ProjectMap = (props: ProjectMapProps) => {
     return acc;
   }, new Map<string, Position>());
 
-  const initialNodes: Node<IssueNodeData>[] = issues.map((issue, index) => {
+  const initialNodes: Node<IssueNodeData>[] = issues.map((issue) => {
     return {
       id: issue.id,
       data: issue,

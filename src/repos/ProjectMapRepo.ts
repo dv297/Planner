@@ -2,7 +2,6 @@ import { z } from 'zod';
 
 import prisma from '../lib/prisma';
 import {
-  GetSingleProjectMapPositionResponseSchema,
   ProjectMapPositionSchema,
   UpdateSingleProjectMapPositionInputSchema,
 } from '../schemas/ProjectMapPositionSchemas';

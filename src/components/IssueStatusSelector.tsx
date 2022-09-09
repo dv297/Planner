@@ -33,7 +33,7 @@ const IssueStatusSelector = (props: IssueStatusSelectorProps) => {
         });
       }
     },
-    [onChange]
+    [onChange, displaySnackbar]
   );
 
   return (
