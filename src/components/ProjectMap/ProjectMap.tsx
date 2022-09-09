@@ -106,11 +106,7 @@ interface ProjectMapProps {
 const ProjectMap = (props: ProjectMapProps) => {
   const { issues, positions } = props;
 
-  const data = JSON.parse(positions.data);
-  const positionData =
-    data.positions as unknown as ProjectMapPositionDataEntry[];
-
-  const positionDataMap = positionData.reduce((acc, entry) => {
+  const positionDataMap = positions.data.positions.reduce((acc, entry) => {
     acc.set(entry.issueId, entry.position);
     return acc;
   }, new Map<string, Position>());

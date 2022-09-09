@@ -3,6 +3,7 @@ import React from 'react';
 
 import EditableTextDisplay from '../components/common/EditableDisplays/EditableTextDisplay';
 import ProjectMap from '../components/ProjectMap/ProjectMap';
+import getPositionsMockData from '../mocks/getPositions.mock.json';
 import getTaskMockData from '../mocks/getTask.mock.json';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -16,7 +17,10 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof EditableTextDisplay> = () => (
   <div className="h-screen w-screen">
-    <ProjectMap issues={getTaskMockData.data.issues} />
+    <ProjectMap
+      issues={getTaskMockData.data.issues}
+      positions={getPositionsMockData.positions}
+    />
   </div>
 );
 

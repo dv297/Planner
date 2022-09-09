@@ -1,0 +1,39 @@
+{
+  "positions": {
+    "id": "cl7tgw0i73833sh5xqg5r1gln",
+    "data": {
+      "positions": [{
+        "issueId": "cl7rxi5ia1742oz5x0vbyzmag",
+        "position": {
+          "x": 0,
+          "y": 100
+        }
+      }, {
+        "issueId": "cl7rxodly2673oz5x2lymz0cs",
+        "position": {
+          "x": 400,
+          "y": 100
+        }
+      }, {
+        "issueId": "cl7ryehs93999oz5xequbyprr",
+        "position": {
+          "x": 800,
+          "y": 100
+        }
+      }, {
+        "issueId": "cl7ryft2g4148oz5x30l175zh",
+        "position": {
+          "x": 1200,
+          "y": 100
+        }
+      }, {
+        "issueId": "cl7s3yo4q1014vf5xvgstyj99",
+        "position": {
+          "x": 1600,
+          "y": 100
+        }
+      }]
+    },
+    "projectId": "cl7rxi5ht1729oz5x759c5tmy"
+  }
+}

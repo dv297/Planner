@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 import prisma from '../lib/prisma';
 import {
-  ProjectMapPositionDataListSchema,
-  ProjectMapPositionDataSchema,
+  GetSingleProjectMapPositionResponseSchema,
+  ProjectMapPositionSchema,
   UpdateSingleProjectMapPositionInputSchema,
 } from '../schemas/ProjectMapPositionSchemas';
 import { ProjectMapPositionDataEntry } from '../styles/ProjectMapPositionDataEntry';
@@ -48,14 +48,22 @@ const ProjectMapRepo = {
       });
     }
 
-    return projectMapPosition;
+    const output = { ...projectMapPosition } as any;
+
+    if (output?.data) {
+      output.data = JSON.parse(output.data);
+    }
+
+    const parsedOutput = ProjectMapPositionSchema.parse(output);
+
+    return parsedOutput;
   },
   async updateProjectMapIssue(
     input: z.infer<typeof UpdateSingleProjectMapPositionInputSchema>
   ) {
     const { id, data } = input;
 
-    return prisma.projectMapPosition.update({
+    await prisma.projectMapPosition.update({
       where: {
         id,
       },
@@ -63,6 +71,10 @@ const ProjectMapRepo = {
         data: JSON.stringify(data),
       },
     });
+
+    return {
+      id,
+    };
   },
 };
 
