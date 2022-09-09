@@ -26,13 +26,13 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     tag
   );
 
-  const issuesResponse = await IssueRepo.getIssuesForWorkspace(
-    keyIssueResponse?.workspace?.id
-  );
-
   if (!keyIssueResponse) {
     return res.status(404).send('Not Found');
   }
+
+  const issuesResponse = await IssueRepo.getIssuesForWorkspace(
+    keyIssueResponse?.workspace?.id
+  );
 
   const result = {
     keyIssue: keyIssueResponse?.keyIssue,
@@ -60,6 +60,10 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     propertyName,
     data
   );
+
+  if (!result) {
+    return res.status(404).send('Not Found');
+  }
 
   const response = { data: result };
 

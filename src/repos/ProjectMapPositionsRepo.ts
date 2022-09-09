@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import { z } from 'zod';
 
 import prisma from '../lib/prisma';
@@ -9,6 +10,28 @@ import { ProjectMapPositionDataEntry } from '../styles/ProjectMapPositionDataEnt
 import IssueRepo from './IssueRepo';
 
 const ProjectMapPositionsRepo = {
+  async getProjectMapPosition(user: User, projectMapPositionId: string) {
+    return prisma.projectMapPosition.findFirst({
+      where: {
+        id: projectMapPositionId,
+        project: {
+          workspace: {
+            TeamWorkspace: {
+              some: {
+                team: {
+                  TeamUsers: {
+                    some: {
+                      userId: user.id,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+  },
   async getProjectMapPositionsForProject(projectId: string | undefined) {
     if (!projectId) {
       return null;
@@ -57,13 +80,20 @@ const ProjectMapPositionsRepo = {
     return parsedOutput;
   },
   async updateProjectMapPositions(
+    user: User,
     input: z.infer<typeof UpdateSingleProjectMapPositionInputSchema>
   ) {
     const { id, data } = input;
 
+    const projectMapPosition = await this.getProjectMapPosition(user, input.id);
+
+    if (!projectMapPosition) {
+      return;
+    }
+
     await prisma.projectMapPosition.update({
       where: {
-        id,
+        id: projectMapPosition.id,
       },
       data: {
         data: JSON.stringify(data),

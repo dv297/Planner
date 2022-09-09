@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import { z } from 'zod';
 
 import prisma from '../lib/prisma';
@@ -7,6 +8,28 @@ import {
 } from '../schemas/ProjectMapEdgesSetSchemas';
 
 const ProjectMapEdgesSetRepo = {
+  async getProjectMapEdgesSet(user: User, edgesSetId: string) {
+    return prisma.projectMapEdgesSet.findFirst({
+      where: {
+        id: edgesSetId,
+        project: {
+          workspace: {
+            TeamWorkspace: {
+              some: {
+                team: {
+                  TeamUsers: {
+                    some: {
+                      userId: user.id,
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+  },
   async getProjectMapEdgesSetForProject(projectId: string | undefined) {
     if (!projectId) {
       return null;
@@ -40,13 +63,20 @@ const ProjectMapEdgesSetRepo = {
     return parsedOutput;
   },
   async updateProjectEdgesSetIssue(
+    user: User,
     input: z.infer<typeof UpdateSingleProjectMapEdgesSetInputSchema>
   ) {
     const { id, data } = input;
 
+    const projectMapEdgesSet = await this.getProjectMapEdgesSet(user, input.id);
+
+    if (!projectMapEdgesSet) {
+      return;
+    }
+
     await prisma.projectMapEdgesSet.update({
       where: {
-        id,
+        id: projectMapEdgesSet.id,
       },
       data: {
         data: JSON.stringify(data),

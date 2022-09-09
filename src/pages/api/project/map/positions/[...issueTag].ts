@@ -26,7 +26,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const workspace = await UserRepo.getWorkspaceByTag(currentUser, workspaceTag);
 
   if (!workspace) {
-    return;
+    return res.status(404).send('Not Found');
   }
 
   const issuesResponse = await IssueRepo.getIssuesForWorkspace(workspace.id);
@@ -59,7 +59,10 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const result = await ProjectMapPositionsRepo.updateProjectMapPositions(input);
+  const result = await ProjectMapPositionsRepo.updateProjectMapPositions(
+    currentUser,
+    input
+  );
 
   const response = { data: result };
 

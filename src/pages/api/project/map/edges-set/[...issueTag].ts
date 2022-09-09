@@ -25,13 +25,13 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const workspace = await UserRepo.getWorkspaceByTag(currentUser, workspaceTag);
 
   if (!workspace) {
-    return;
+    return res.status(404).send('Not Found');
   }
 
   const project = await ProjectRepo.getProjectByTag(currentUser, tag);
 
   if (!project) {
-    return;
+    return res.status(404).send('Not Found');
   }
 
   const edgesResponse =
@@ -56,7 +56,14 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const result = await ProjectMapEdgesSetRepo.updateProjectEdgesSetIssue(input);
+  const result = await ProjectMapEdgesSetRepo.updateProjectEdgesSetIssue(
+    currentUser,
+    input
+  );
+
+  if (!result) {
+    return res.status(404).send('Not Found');
+  }
 
   const response = { data: result };
 
