@@ -40,6 +40,10 @@ const UserRepo = {
       const session = await unstable_getServerSession(req, res, authOptions);
       const castedSession = session as Session & { userId: string };
 
+      if (!castedSession.userId) {
+        return res.status(404).send('Not Found');
+      }
+
       user = await prisma.user.findUnique({
         where: {
           id: castedSession.userId,

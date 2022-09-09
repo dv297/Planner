@@ -1,4 +1,4 @@
-import { UserPreference } from '@prisma/client';
+import { User, UserPreference } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import prisma from '../../../lib/prisma';
@@ -13,10 +13,15 @@ import {
 import routeMatcher from '../../../utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
-  const currentUser = await UserRepo.getCurrentUser({ req, res });
+  let currentUser: User | null;
+  try {
+    currentUser = await UserRepo.getCurrentUser({ req, res });
+  } catch (err) {
+    return res.redirect('/app/login');
+  }
 
   if (!currentUser) {
-    return;
+    return res.redirect('/app/login');
   }
 
   let result: UserPreference | null =
