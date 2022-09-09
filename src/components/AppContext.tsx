@@ -1,4 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import { createContext, ReactNode, useContext } from 'react';
 import { z } from 'zod';
 
@@ -25,11 +27,22 @@ interface AppContextStructure {
 const AppContext = createContext({} as AppContextStructure);
 
 const AppContextProvider = (props: AppContextProps) => {
+  const router = useRouter();
+  useSession({
+    required: true,
+    onUnauthenticated: () => {
+      router.replace('/');
+    },
+  });
+
   const { data: workspaces, isLoading: isLoadingWorkspaces } = useQuery(
     [QueryKeys.WORKSPACES],
     WorkspaceService.getWorkspaces,
     {
       refetchOnWindowFocus: false,
+      onError: () => {
+        router.replace('/');
+      },
     }
   );
 

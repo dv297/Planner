@@ -50,6 +50,10 @@ const ProjectsService = {
       headers: { 'Content-Type': 'application/json' },
     });
 
+    if (!result.ok) {
+      throw new Error('Network response was not ok');
+    }
+
     const data = await result.json();
 
     const response = GetProjectsResponseSchema.parse(data);

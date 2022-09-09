@@ -12,6 +12,10 @@ const UserPreferencesService = {
       headers: { 'Content-Type': 'application/json' },
     });
 
+    if (!result.ok) {
+      throw new Error('Network response was not ok');
+    }
+
     const data = await result.json();
 
     const response = GetUserPreferencesResponseSchema.parse(data);
