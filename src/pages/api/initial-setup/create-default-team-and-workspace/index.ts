@@ -65,8 +65,13 @@ async function handle(req: NextApiRequest, res: NextApiResponse) {
             },
           },
           title: 'My First Project',
-          description:
-            'A sample project in order to introduce you to the features of Planner',
+          description: `A sample project in order to introduce you to the features of Planner.
+
+Here, you can provide a description of your project, just enough to help people get an idea of what you are trying to achieve. You can click on this description and most fields in the app to make modifications.
+
+This also supports **Markdown**. When you edit the description field, you'll be given various controls to style the text in this field. You can also learn more about Markdown by going to this [link](https://www.markdownguide.org/). 
+
+When you are finished editing the field, you can click outside of this field and we'll automatically close and save the edit box for you.`,
           workspaceIssueCount: 1,
         },
       },

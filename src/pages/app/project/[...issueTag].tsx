@@ -28,7 +28,7 @@ const ProjectPage = () => {
     ProjectsService.getProject(tag)
   );
 
-  if (!project) {
+  if (!project || !project.keyIssue) {
     return null;
   }
 
