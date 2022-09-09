@@ -3,15 +3,21 @@ import { useEffect, useMemo } from 'react';
 import { Edge, Node, useEdges, useNodes } from 'react-flow-renderer';
 import { z } from 'zod';
 
+import { ProjectMapEdgesSetListSchema } from '../../schemas/ProjectMapEdgesSetSchemas';
 import { ProjectMapPositionDataListSchema } from '../../schemas/ProjectMapPositionSchemas';
+import ProjectMapEdgesSetService from '../../services/ProjectMapEdgesSetService';
 import ProjectMapPositionService from '../../services/ProjectMapPositionService';
 
 interface MapPersistanceManagerProps {
   projectMapPositionId: string;
+  projectMapEdgesSetId: string;
 }
 
 const MapPersistenceManager = (props: MapPersistanceManagerProps) => {
-  const { projectMapPositionId: monitoredProjectMapPositionId } = props;
+  const {
+    projectMapPositionId: monitoredProjectMapPositionId,
+    projectMapEdgesSetId: monitoredProjectMapEdgesSetId,
+  } = props;
   const monitoredNodes = useNodes();
   const monitoredEdges = useEdges();
 
@@ -36,8 +42,20 @@ const MapPersistenceManager = (props: MapPersistanceManagerProps) => {
 
   const debouncedEdgeHandler = useMemo(
     () =>
-      debounce((edges: Edge[]) => {
-        console.log(edges);
+      debounce((edges: Edge[], projectMapEdgesSetId: string) => {
+        const mappedEntries: z.infer<typeof ProjectMapEdgesSetListSchema> =
+          edges.map((edge) => {
+            return {
+              id: edge.id,
+              source: edge.source,
+              target: edge.target,
+            };
+          });
+
+        ProjectMapEdgesSetService.updateProjectMapEdgesSet(
+          projectMapEdgesSetId,
+          mappedEntries
+        );
       }, 1000),
     []
   );
@@ -51,8 +69,8 @@ const MapPersistenceManager = (props: MapPersistanceManagerProps) => {
   ]);
 
   useEffect(() => {
-    debouncedEdgeHandler(monitoredEdges);
-  }, [debouncedEdgeHandler, monitoredEdges]);
+    debouncedEdgeHandler(monitoredEdges, monitoredProjectMapEdgesSetId);
+  }, [debouncedEdgeHandler, monitoredEdges, monitoredProjectMapEdgesSetId]);
 
   return null;
 };

@@ -3,6 +3,7 @@ import React from 'react';
 
 import EditableTextDisplay from '../components/common/EditableDisplays/EditableTextDisplay';
 import ProjectMap from '../components/ProjectMap/ProjectMap';
+import getEdgesMockData from '../mocks/getEdges.mock.json';
 import getPositionsMockData from '../mocks/getPositions.mock.json';
 import getTaskMockData from '../mocks/getTask.mock.json';
 
@@ -20,6 +21,7 @@ const Template: ComponentStory<typeof EditableTextDisplay> = () => (
     <ProjectMap
       issues={getTaskMockData.data.issues}
       positions={getPositionsMockData.positions}
+      edgesSet={getEdgesMockData.data.edges}
     />
   </div>
 );

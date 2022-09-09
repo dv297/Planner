@@ -1,0 +1,22 @@
+{
+  "data": {
+    "edges": {
+      "id": "cl7usuyy70211dd5xhtyry0vr",
+      "data": {
+        "edges": [
+          {
+            "id": "reactflow__edge-cl7rxi5ia1742oz5x0vbyzmagoutput-cl7rxodly2673oz5x2lymz0csinput",
+            "source": "cl7rxi5ia1742oz5x0vbyzmag",
+            "target": "cl7rxodly2673oz5x2lymz0cs"
+          },
+          {
+            "id": "reactflow__edge-cl7rxodly2673oz5x2lymz0csoutput-cl7ryehs93999oz5xequbyprrinput",
+            "source": "cl7rxodly2673oz5x2lymz0cs",
+            "target": "cl7ryehs93999oz5xequbyprr"
+          }
+        ]
+      },
+      "projectId": "cl7rxi5ht1729oz5x759c5tmy"
+    }
+  }
+}

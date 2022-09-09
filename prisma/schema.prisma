@@ -67,6 +67,7 @@ model Project {
   keyIssue           KeyIssue?
   issues             Issue[]
   ProjectMapPosition ProjectMapPosition[]
+  ProjectMapEdgesSet ProjectMapEdgesSet?
 }
 
 model KeyIssue {
@@ -141,6 +142,13 @@ model UserPreference {
 }
 
 model ProjectMapPosition {
+  id        String  @id @unique @default(cuid())
+  project   Project @relation(fields: [projectId], references: [id])
+  data      Json?
+  projectId String  @unique
+}
+
+model ProjectMapEdgesSet {
   id        String  @id @unique @default(cuid())
   project   Project @relation(fields: [projectId], references: [id])
   data      Json?

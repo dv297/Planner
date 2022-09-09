@@ -15,6 +15,7 @@ import ReactFlow, {
 import { z } from 'zod';
 
 import { IssuesListSchema } from '../../schemas/IssueSchema';
+import { ProjectMapEdgesSetSchema } from '../../schemas/ProjectMapEdgesSetSchemas';
 import { ProjectMapPositionSchema } from '../../schemas/ProjectMapPositionSchemas';
 import { Position } from '../../styles/ProjectMapPositionDataEntry';
 import IssueNode, { IssueNodeData } from './IssueNode';
@@ -24,15 +25,20 @@ const nodeTypes = {
   issue: IssueNode,
 };
 
-const initialEdges: Edge[] = [];
-
 interface IssueMapProp {
   initialNodes: Node[];
+  initialEdges: Edge[];
   projectMapPositionId: string;
+  projectMapEdgesSetId: string;
 }
 
 const IssuesMap = (props: IssueMapProp) => {
-  const { initialNodes, projectMapPositionId } = props;
+  const {
+    initialNodes,
+    projectMapPositionId,
+    initialEdges,
+    projectMapEdgesSetId,
+  } = props;
 
   const [nodes, setNodes] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -90,7 +96,10 @@ const IssuesMap = (props: IssueMapProp) => {
       <Background />
       <MiniMap />
       <Controls />
-      <MapPersistenceManager projectMapPositionId={projectMapPositionId} />
+      <MapPersistenceManager
+        projectMapPositionId={projectMapPositionId}
+        projectMapEdgesSetId={projectMapEdgesSetId}
+      />
     </ReactFlow>
   );
 };
@@ -98,10 +107,11 @@ const IssuesMap = (props: IssueMapProp) => {
 interface ProjectMapProps {
   issues: z.infer<typeof IssuesListSchema>;
   positions: z.infer<typeof ProjectMapPositionSchema>;
+  edgesSet: z.infer<typeof ProjectMapEdgesSetSchema>;
 }
 
 const ProjectMap = (props: ProjectMapProps) => {
-  const { issues, positions } = props;
+  const { issues, positions, edgesSet } = props;
 
   const positionDataMap = positions.data.positions.reduce((acc, entry) => {
     acc.set(entry.issueId, entry.position);
@@ -117,10 +127,14 @@ const ProjectMap = (props: ProjectMapProps) => {
     };
   });
 
+  const initialEdges = edgesSet.data.edges;
+
   return (
     <IssuesMap
       initialNodes={initialNodes}
+      initialEdges={initialEdges}
       projectMapPositionId={positions.id}
+      projectMapEdgesSetId={edgesSet.id}
     />
   );
 };

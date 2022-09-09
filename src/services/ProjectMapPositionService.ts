@@ -12,7 +12,7 @@ const ProjectsService = {
       return;
     }
 
-    const result = await fetch(`/api/project/map/${issueTag}`, {
+    const result = await fetch(`/api/project/map/positions/${issueTag}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -34,7 +34,7 @@ const ProjectsService = {
       },
     });
 
-    await fetch(`/api/project/map/TASK-1`, {
+    await fetch(`/api/project/map/positions/TASK-1`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),

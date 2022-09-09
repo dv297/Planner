@@ -4,6 +4,7 @@ enum QueryKeys {
   PROJECTS = 'projects',
   PROJECT = 'project',
   ISSUE = 'issue',
+  EDGE_SET = 'edget-set',
 }
 
 export default QueryKeys;
