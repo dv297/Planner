@@ -36,7 +36,7 @@ const Sidebar = (props: SidebarProps) => {
       name: 'Dashboard',
       href: '/app/dashboard/{WORKSPACE_TAG}',
       icon: HomeIcon,
-      current: asPath.includes('/app/workspace'),
+      current: asPath.includes('/app/dashboard'),
     },
     {
       name: 'Projects',
