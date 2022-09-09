@@ -16,6 +16,24 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
+  // Double check that the user is associated to the workspace
+  try {
+    await prisma.teamWorkspace.findFirstOrThrow({
+      where: {
+        workspaceId: input.workspaceId,
+        team: {
+          TeamUsers: {
+            some: {
+              userId: currentUser.id,
+            },
+          },
+        },
+      },
+    });
+  } catch (err) {
+    return res.status(404).send('Not Found');
+  }
+
   const newWorkspaceCount = await IssueRepo.getNewWorkspaceCount(
     input.workspaceId
   );
