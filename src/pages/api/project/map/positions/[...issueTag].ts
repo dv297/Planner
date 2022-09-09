@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withAuthMiddleware } from '../../../../../lib/withAuthMiddleware';
 import IssueRepo from '../../../../../repos/IssueRepo';
-import ProjectMapRepo from '../../../../../repos/ProjectMapRepo';
+import ProjectMapPositionsRepo from '../../../../../repos/ProjectMapPositionsRepo';
 import ProjectRepo from '../../../../../repos/ProjectRepo';
 import UserRepo from '../../../../../repos/UserRepo';
 import {
@@ -37,7 +37,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const positionsResponse =
-    await ProjectMapRepo.getProjectMapPositionsForProject(project.id);
+    await ProjectMapPositionsRepo.getProjectMapPositionsForProject(project.id);
 
   const result = {
     issues: issuesResponse,
@@ -59,7 +59,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const result = await ProjectMapRepo.updateProjectMapIssue(input);
+  const result = await ProjectMapPositionsRepo.updateProjectMapPositions(input);
 
   const response = { data: result };
 

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withAuthMiddleware } from '../../../../../lib/withAuthMiddleware';
-import ProjectMapRepo from '../../../../../repos/ProjectMapRepo';
+import ProjectMapEdgesSetRepo from '../../../../../repos/ProjectMapEdgesSetRepo';
 import ProjectRepo from '../../../../../repos/ProjectRepo';
 import UserRepo from '../../../../../repos/UserRepo';
 import {
@@ -34,9 +34,8 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const edgesResponse = await ProjectMapRepo.getProjectMapEdgesSetForProject(
-    project.id
-  );
+  const edgesResponse =
+    await ProjectMapEdgesSetRepo.getProjectMapEdgesSetForProject(project.id);
 
   const result = {
     edges: edgesResponse,
@@ -57,7 +56,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const result = await ProjectMapRepo.updateProjectEdgesSetIssue(input);
+  const result = await ProjectMapEdgesSetRepo.updateProjectEdgesSetIssue(input);
 
   const response = { data: result };
 

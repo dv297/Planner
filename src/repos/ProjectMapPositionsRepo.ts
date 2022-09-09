@@ -2,17 +2,13 @@ import { z } from 'zod';
 
 import prisma from '../lib/prisma';
 import {
-  ProjectMapEdgesSetSchema,
-  UpdateSingleProjectMapEdgesSetInputSchema,
-} from '../schemas/ProjectMapEdgesSetSchemas';
-import {
   ProjectMapPositionSchema,
   UpdateSingleProjectMapPositionInputSchema,
 } from '../schemas/ProjectMapPositionSchemas';
 import { ProjectMapPositionDataEntry } from '../styles/ProjectMapPositionDataEntry';
 import IssueRepo from './IssueRepo';
 
-const ProjectMapRepo = {
+const ProjectMapPositionsRepo = {
   async getProjectMapPositionsForProject(projectId: string | undefined) {
     if (!projectId) {
       return null;
@@ -25,7 +21,6 @@ const ProjectMapRepo = {
     });
 
     // If we don't have a project map position, intialize one.
-
     if (!projectMapPosition) {
       const issues = await IssueRepo.getIssuesForProject(projectId);
 
@@ -61,39 +56,7 @@ const ProjectMapRepo = {
 
     return parsedOutput;
   },
-  async getProjectMapEdgesSetForProject(projectId: string | undefined) {
-    if (!projectId) {
-      return null;
-    }
-
-    let edgesSet = await prisma.projectMapEdgesSet.findFirst({
-      where: {
-        projectId,
-      },
-    });
-
-    // If we don't have a project map position, intialize one.
-
-    if (!edgesSet) {
-      edgesSet = await prisma.projectMapEdgesSet.create({
-        data: {
-          projectId,
-          data: JSON.stringify({ edges: [] }),
-        },
-      });
-    }
-
-    const output = { ...edgesSet } as any;
-
-    if (output?.data) {
-      output.data = JSON.parse(output.data);
-    }
-
-    const parsedOutput = ProjectMapEdgesSetSchema.parse(output);
-
-    return parsedOutput;
-  },
-  async updateProjectMapIssue(
+  async updateProjectMapPositions(
     input: z.infer<typeof UpdateSingleProjectMapPositionInputSchema>
   ) {
     const { id, data } = input;
@@ -111,24 +74,6 @@ const ProjectMapRepo = {
       id,
     };
   },
-  async updateProjectEdgesSetIssue(
-    input: z.infer<typeof UpdateSingleProjectMapEdgesSetInputSchema>
-  ) {
-    const { id, data } = input;
-
-    await prisma.projectMapEdgesSet.update({
-      where: {
-        id,
-      },
-      data: {
-        data: JSON.stringify(data),
-      },
-    });
-
-    return {
-      id,
-    };
-  },
 };
 
-export default ProjectMapRepo;
+export default ProjectMapPositionsRepo;
