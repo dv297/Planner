@@ -122,7 +122,7 @@ const ProjectMap = (props: ProjectMapProps) => {
     return {
       id: issue.id,
       data: issue,
-      position: positionDataMap.get(issue.id) ?? { x: 0, y: 0 },
+      position: positionDataMap.get(issue.id) ?? { x: -500, y: -500 },
       type: 'issue',
     };
   });
