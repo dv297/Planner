@@ -4,6 +4,7 @@ enum QueryKeys {
   PROJECTS = 'projects',
   PROJECT = 'project',
   ISSUE = 'issue',
+  ISSUE_RELATION = 'issue-relation',
   EDGE_SET = 'edget-set',
 }
 

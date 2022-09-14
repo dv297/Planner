@@ -1,11 +1,15 @@
 import { User } from 'next-auth';
 
 import prisma from '../lib/prisma';
+import { IssueRelationSchemaResponseData } from '../schemas/IssueRelationSchema';
 
 function getIssueById(issueId: string) {
   return prisma.issue.findUnique({
     where: {
       id: issueId,
+    },
+    include: {
+      workspace: true,
     },
   });
 }
@@ -184,10 +188,12 @@ const IssueRepo = {
       )
     );
 
-    return {
+    const data = {
       BLOCKS: issuesBlockedByThisIssue,
       BLOCKED_BY: issuesCausingThisIssueToBeBlocked,
     };
+
+    return IssueRelationSchemaResponseData.parse(data);
   },
 };
 

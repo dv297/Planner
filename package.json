@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "dev": "next",
-    "build": "npm run build:db && next build",
+    "build": "npm run db:migrate && npm run build:db && next build",
     "build:db": "prisma generate",
     "build:docker": "docker build -t nextjs-docker .",
     "cypress:open": "CYPRESS_BASE_URL=http://localhost:3000 cypress open",

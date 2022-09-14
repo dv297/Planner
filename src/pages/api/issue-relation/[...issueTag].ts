@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
 import IssueRepo from '../../../repos/IssueRepo';
 import UserRepo from '../../../repos/UserRepo';
+import { IssueRelationSchemaResponse } from '../../../schemas/IssueRelationSchema';
 import {
   GetSingleIssueInputSchema,
   UpdateSingleIssueInputSchema,
@@ -28,9 +29,9 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(404).send('Not Found');
   }
 
-  const response = {
+  const response = IssueRelationSchemaResponse.parse({
     data: issueResponse,
-  };
+  });
 
   return res.json(response);
 };

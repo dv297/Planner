@@ -64,6 +64,7 @@ const ProjectPage = () => {
         <IssuesList
           issues={project.issues}
           projectId={project.keyIssue.projectId}
+          allowIssueCreation
         />
       </div>
     </div>

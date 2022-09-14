@@ -22,6 +22,16 @@ export const IssueSchema = z.object({
   workspaceIssueCount: z.number(),
 });
 
+export const IssueSchemaWithoutWorkspace = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  issueStatus: z.string(),
+  projectId: z.string(),
+  workspaceId: z.string(),
+  workspaceIssueCount: z.number(),
+});
+
 export const GetSingleIssueResponseSchema = z.object({
   data: IssueSchema,
 });
