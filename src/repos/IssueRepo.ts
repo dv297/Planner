@@ -2,6 +2,14 @@ import { User } from 'next-auth';
 
 import prisma from '../lib/prisma';
 
+function getIssueById(issueId: string) {
+  return prisma.issue.findUnique({
+    where: {
+      id: issueId,
+    },
+  });
+}
+
 const IssueRepo = {
   async getIssueByTag(user: User, issueTag: string) {
     const [workspaceTag, workspaceIssueCount] = issueTag.split('-');
@@ -130,6 +138,56 @@ const IssueRepo = {
       keyIssueAggregate._count + issueAggregate._count + 1;
 
     return newWorkspaceCount;
+  },
+  async getIssuesForIssueRelations(user: User, issueTag: string) {
+    const issueResponse = await this.getIssueByTag(user, issueTag);
+
+    if (!issueResponse) {
+      return;
+    }
+
+    const { issue } = issueResponse;
+
+    if (!issue) {
+      return;
+    }
+
+    let issuesCausingThisIssueToBeBlockedIssueRelations =
+      await prisma.issueRelation.findMany({
+        where: {
+          targetIssueId: issue.id,
+          issueRelationType: 'DEPENDS_ON',
+        },
+      });
+
+    let issuesBlockedByThisIssueIssueRelation =
+      await prisma.issueRelation.findMany({
+        where: {
+          sourceIssueId: issue.id,
+          issueRelationType: 'DEPENDS_ON',
+        },
+      });
+
+    issuesCausingThisIssueToBeBlockedIssueRelations =
+      issuesCausingThisIssueToBeBlockedIssueRelations ?? [];
+    issuesBlockedByThisIssueIssueRelation =
+      issuesBlockedByThisIssueIssueRelation ?? [];
+
+    const issuesCausingThisIssueToBeBlocked = await Promise.all(
+      issuesCausingThisIssueToBeBlockedIssueRelations.map((issue) =>
+        getIssueById(issue.sourceIssueId)
+      )
+    );
+    const issuesBlockedByThisIssue = await Promise.all(
+      issuesBlockedByThisIssueIssueRelation.map((issue) =>
+        getIssueById(issue.targetIssueId)
+      )
+    );
+
+    return {
+      BLOCKS: issuesBlockedByThisIssue,
+      BLOCKED_BY: issuesCausingThisIssueToBeBlocked,
+    };
   },
 };
 

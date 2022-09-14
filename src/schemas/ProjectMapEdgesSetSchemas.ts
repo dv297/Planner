@@ -1,3 +1,4 @@
+import { JsonValue } from 'type-fest';
 import { z } from 'zod';
 
 export const GetSingleProjectMapEdgeInputSchema = z.object({
@@ -36,3 +37,14 @@ export const GetSingleProjectMapEdgesSetResponseSchema = z.object({
     edges: ProjectMapEdgesSetSchema,
   }),
 });
+
+export const convertEdgeSetDataToEdgeset = (
+  data: string | JsonValue | undefined | null
+): z.infer<typeof ProjectMapEdgesSetDataParsedJsonSchema> => {
+  if (!data) {
+    throw new Error('Cannot parse edgeset from undefined');
+  }
+
+  const edgeset = JSON.parse(data as string);
+  return ProjectMapEdgesSetDataParsedJsonSchema.parse(edgeset);
+};

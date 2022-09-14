@@ -85,6 +85,7 @@ const ProjectMapEdgesSetRepo = {
 
     return {
       id,
+      projectId: projectMapEdgesSet.projectId,
     };
   },
 };

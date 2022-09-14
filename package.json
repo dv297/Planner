@@ -41,6 +41,7 @@
     "@uiw/react-markdown-preview": "^4.1.0",
     "@uiw/react-md-editor": "^3.6.0",
     "@xstate/react": "^3.0.1",
+    "bullmq": "^1.90.2",
     "clsx": "^1.2.1",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",

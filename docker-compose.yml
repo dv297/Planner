@@ -1,6 +1,15 @@
 version: '3.8'
 
+# For development purposes only
+
 services:
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports:
+      - '6379:6379'
+    environment:
+      - REDIS_PASSWORD=password123
   postgres:
     container_name: postgres
     image: postgres
@@ -12,33 +21,34 @@ services:
       - POSTGRES_DB=planner
     ports:
       - '5432:5432'
-  web:
-    env_file: .env
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: web
-    restart: always
-    command: ['./wait-for-it.sh', 'postgres:5432', '--', 'npm', 'run', 'dev']
-    volumes:
-      - ./:/app
-      - /app/node_modules
-      - /app/.next
-    ports:
-      - '3000:3000'
-    depends_on:
-      - postgres
-  migration:
-    env_file: .env
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: migration
-    command:
-      ['./wait-for-it.sh', 'postgres:5432', '--', 'npm', 'run', 'db:migrate']
-    volumes:
-      - ./:/app
-      - /app/node_modules
-      - /app/.next
-    depends_on:
-      - postgres
+#  web:
+#    env_file: .env
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: web
+#    restart: always
+#    command: ['npm', 'run', 'dev']
+#    volumes:
+#      - ./:/app
+#      - /app/node_modules
+#      - /app/.next
+#    ports:
+#      - '3000:3000'
+#    depends_on:
+#      - postgres
+#      - redis
+#  migration:
+#    env_file: .env
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    container_name: migration
+#    command:
+#      ['npm', 'run', 'db:migrate']
+#    volumes:
+#      - ./:/app
+#      - /app/node_modules
+#      - /app/.next
+#    depends_on:
+#      - postgres

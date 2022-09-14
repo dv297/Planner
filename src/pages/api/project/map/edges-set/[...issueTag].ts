@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withAuthMiddleware } from '../../../../../lib/withAuthMiddleware';
+import { addProjectToProcessingQueue } from '../../../../../queues/mapProcessingQueue';
 import ProjectMapEdgesSetRepo from '../../../../../repos/ProjectMapEdgesSetRepo';
 import ProjectRepo from '../../../../../repos/ProjectRepo';
 import UserRepo from '../../../../../repos/UserRepo';
@@ -60,6 +61,8 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     currentUser,
     input
   );
+
+  addProjectToProcessingQueue(result?.projectId ?? '');
 
   if (!result) {
     return res.status(404).send('Not Found');

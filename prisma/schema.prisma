@@ -155,6 +155,20 @@ model ProjectMapEdgesSet {
   projectId String  @unique
 }
 
+model IssueRelation {
+  projectId         String
+  sourceIssueId     String
+  targetIssueId     String
+  issueRelationType IssueRelationType @default(DEPENDS_ON)
+
+  @@id([sourceIssueId, targetIssueId])
+}
+
+enum IssueRelationType {
+  DEPENDS_ON
+  RELATES_TO
+}
+
 enum IssueStatus {
   PLANNING
   NOT_STARTED

@@ -50,7 +50,9 @@ const Page = () => {
             title="Learn why Planner was created"
             description="See the process, experiences, and mindset that led to Planner's creation"
             image="/images/books.jpeg"
-            onClick={() => {}}
+            onClick={() => {
+              console.log('Not implemented');
+            }}
           />
           <ActionItem
             title="Go through the example project"
