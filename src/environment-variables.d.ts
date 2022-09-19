@@ -11,5 +11,7 @@ declare namespace NodeJS {
     NODE_ENV: string;
     CYPRESS_BASE_URL: string;
     SENDGRID_API_KEY: string;
+    EMAIL_FROM_ADDRESS: string;
+    TEST_ENVIRONMENT_EMAIL_TO_ADDRESS: string;
   }
 }

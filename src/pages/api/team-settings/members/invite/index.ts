@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withAuthMiddleware } from '../../../../../lib/withAuthMiddleware';
+import { addToTeamInviteQueue } from '../../../../../queues/emailInviteQueue';
 import TeamSettingsRepo from '../../../../../repos/TeamSettingsRepo';
 import UserRepo from '../../../../../repos/UserRepo';
 import { InviteTeamMemberInputSchema } from '../../../../../schemas/TeamSettingsSchema';
@@ -15,9 +16,21 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { email } = InviteTeamMemberInputSchema.parse(req.body);
 
-  await TeamSettingsRepo.inviteTeammate(currentUser, {
+  const teamInvite = await TeamSettingsRepo.inviteTeammate(currentUser, {
     email,
   });
+
+  if (!teamInvite) {
+    const response = {
+      data: {
+        status: 'Error',
+      },
+    };
+
+    return res.status(500).json(response);
+  }
+
+  addToTeamInviteQueue(teamInvite.id);
 
   const response = {
     data: {

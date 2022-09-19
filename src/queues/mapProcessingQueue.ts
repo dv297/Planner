@@ -33,7 +33,7 @@ new Worker<MapProcessingJobData, MapProcessingJobResult>(
       const { projectId } = job.data;
 
       const loggingForJob = (message: string) =>
-        console.log(`[${job.id}][${projectId}] ${message}`);
+        console.log(`[${QUEUE_NAME}]${job.id}][${projectId}] ${message}`);
 
       loggingForJob('Beginning');
 

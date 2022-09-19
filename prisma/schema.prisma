@@ -172,6 +172,8 @@ model TeamInvite {
   email       String
   createdAt   DateTime? @default(now())
   inviteToken String    @unique @default(cuid())
+  isAccepted  Boolean?  @default(false)
+  isExpired   Boolean?  @default(false)
 }
 
 enum IssueRelationType {
