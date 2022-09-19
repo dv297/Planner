@@ -1,4 +1,9 @@
-import { CalendarIcon, FolderIcon, HomeIcon } from '@heroicons/react/outline';
+import {
+  AdjustmentsIcon,
+  ArrowLeftIcon,
+  UserGroupIcon,
+} from '@heroicons/react/outline';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { ReactNode, useState } from 'react';
@@ -8,22 +13,19 @@ import FullScreenLoader from './common/FullScreenLoader';
 import { SnackbarProvider } from './common/Snackbar';
 import DashboardBodyLayout from './DashboardBodyLayout';
 import Sidebar, { NavigationElement } from './Sidebar';
-import WorkspaceSelector from './WorkspaceSelector';
 
-interface AppDefaultLayoutProps {
+interface TeamSettingsLayoutProps {
   children: ReactNode;
 }
 
-const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
+const TeamSettingsLayout = (props: TeamSettingsLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const router = useRouter();
-
-  const { asPath } = useRouter();
+  const { replace, asPath } = useRouter();
 
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
-      router.replace('/');
+      replace('/');
     },
   });
 
@@ -33,22 +35,16 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
 
   const navigation: NavigationElement[] = [
     {
-      name: 'Dashboard',
-      href: '/app/dashboard/{WORKSPACE_TAG}',
-      icon: HomeIcon,
-      current: asPath.includes('/app/dashboard'),
+      name: 'Team Settings',
+      href: '/app/team-settings/main',
+      icon: AdjustmentsIcon,
+      current: asPath.includes('/app/team-settings/main'),
     },
     {
-      name: 'Projects',
-      href: '/app/projects/{WORKSPACE_TAG}',
-      icon: FolderIcon,
-      current: asPath.includes('/app/projects'),
-    },
-    {
-      name: 'Calendar',
-      href: '#',
-      icon: CalendarIcon,
-      current: asPath.includes('/app/calendar'),
+      name: 'Members',
+      href: '/app/team-settings/members',
+      icon: UserGroupIcon,
+      current: asPath.includes('/app/team-settings/members'),
     },
   ];
 
@@ -59,14 +55,19 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
           <Sidebar
             header={
               <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
-                <WorkspaceSelector />
+                <Link href="/app/dashboard">
+                  <div className="flex flex-row">
+                    <ArrowLeftIcon className="text-white" />
+                    <span className="text-white font-bold text-md">Back</span>
+                  </div>
+                </Link>
               </div>
             }
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
             navigation={navigation}
           />
-          <DashboardBodyLayout setSidebarOpen={setSidebarOpen} includeSearch>
+          <DashboardBodyLayout setSidebarOpen={setSidebarOpen}>
             {props.children}
           </DashboardBodyLayout>
         </div>
@@ -75,4 +76,4 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
   );
 };
 
-export default AppDefaultLayout;
+export default TeamSettingsLayout;

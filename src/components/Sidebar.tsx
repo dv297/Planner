@@ -7,7 +7,7 @@ import {
 } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 
 import { useAppContext } from './AppContext';
 import WorkspaceSelector from './WorkspaceSelector';
@@ -20,37 +20,24 @@ const injectWorkspaceTag = (href: string, workspaceTag: string) => {
   return href.replace('{WORKSPACE_TAG}', workspaceTag);
 };
 
+export interface NavigationElement {
+  name: string;
+  href: string;
+  icon: (props: any) => JSX.Element;
+  current: boolean;
+}
+
 interface SidebarProps {
   sidebarOpen: boolean;
   setSidebarOpen: (updatedState: boolean) => void;
+  navigation: NavigationElement[];
+  header?: ReactNode;
 }
 
 const Sidebar = (props: SidebarProps) => {
   const { selectedWorkspace } = useAppContext();
 
-  const { sidebarOpen, setSidebarOpen } = props;
-  const { asPath } = useRouter();
-
-  const navigation = [
-    {
-      name: 'Dashboard',
-      href: '/app/dashboard/{WORKSPACE_TAG}',
-      icon: HomeIcon,
-      current: asPath.includes('/app/dashboard'),
-    },
-    {
-      name: 'Projects',
-      href: '/app/projects/{WORKSPACE_TAG}',
-      icon: FolderIcon,
-      current: asPath.includes('/app/projects'),
-    },
-    {
-      name: 'Calendar',
-      href: '#',
-      icon: CalendarIcon,
-      current: asPath.includes('/app/calendar'),
-    },
-  ];
+  const { sidebarOpen, setSidebarOpen, navigation, header } = props;
 
   return (
     <>
@@ -167,9 +154,7 @@ const Sidebar = (props: SidebarProps) => {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
           <div className="flex-1 flex flex-col overflow-y-auto">
-            <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
-              <WorkspaceSelector />
-            </div>
+            {header}
             <nav className="flex-1 px-2 py-4 space-y-1">
               {navigation.map((item, index) => (
                 <Link

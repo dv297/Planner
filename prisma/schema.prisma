@@ -30,6 +30,7 @@ model Team {
   name          String
   TeamUsers     TeamUsers[]
   TeamWorkspace TeamWorkspace[]
+  TeamInvite    TeamInvite[]
 }
 
 model TeamUsers {
@@ -162,6 +163,15 @@ model IssueRelation {
   issueRelationType IssueRelationType @default(DEPENDS_ON)
 
   @@id([sourceIssueId, targetIssueId])
+}
+
+model TeamInvite {
+  id          String    @id @unique @default(cuid())
+  team        Team      @relation(fields: [teamId], references: [id])
+  teamId      String
+  email       String
+  createdAt   DateTime? @default(now())
+  inviteToken String    @unique @default(cuid())
 }
 
 enum IssueRelationType {
