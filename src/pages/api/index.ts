@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 declare let process: {
   env: {
     DATABASE_URL: string;

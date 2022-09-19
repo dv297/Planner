@@ -1,4 +1,4 @@
-import { BellIcon, MenuAlt2Icon } from '@heroicons/react/outline';
+import { MenuAlt2Icon } from '@heroicons/react/outline';
 import { SearchIcon } from '@heroicons/react/solid';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';

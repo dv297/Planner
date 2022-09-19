@@ -1,16 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react';
-import {
-  CalendarIcon,
-  FolderIcon,
-  HomeIcon,
-  XIcon,
-} from '@heroicons/react/outline';
+import { XIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Fragment, ReactNode } from 'react';
 
 import { useAppContext } from './AppContext';
-import WorkspaceSelector from './WorkspaceSelector';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');

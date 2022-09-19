@@ -3,10 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { withAuthMiddleware } from '../../../../../lib/withAuthMiddleware';
 import TeamSettingsRepo from '../../../../../repos/TeamSettingsRepo';
 import UserRepo from '../../../../../repos/UserRepo';
-import {
-  InviteTeamMemberInputSchema,
-  TeamMembersResponseSchema,
-} from '../../../../../schemas/TeamSettingsSchema';
+import { InviteTeamMemberInputSchema } from '../../../../../schemas/TeamSettingsSchema';
 import routeMatcher from '../../../../../utils/routeMatcher';
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
