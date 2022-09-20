@@ -103,7 +103,7 @@ const TeamSettingsRepo = {
       });
 
       if (!user) {
-        return 0;
+        return -1;
       }
 
       await prisma.teamUsers.create({
