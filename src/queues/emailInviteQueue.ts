@@ -47,7 +47,7 @@ new Worker<TeamInviteJobData, JobResult>(
         html: `
 <div>
     <p>Use the link below to accept the invitation and join this team</p>
-    <a href='http://localhost:3000/team-invite/?id=${teamInvite.id}'>Join the team!</a>
+    <a href='${process.env.BASE_URL}/team-invite/?inviteToken=${teamInvite.inviteToken}'>Join the team!</a>
 </div>`,
       });
 

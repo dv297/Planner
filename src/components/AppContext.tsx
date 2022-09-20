@@ -62,6 +62,10 @@ const AppContextProvider = (props: AppContextProps) => {
     return null;
   }
 
+  if (!userPreferences?.hasFinishedSetup) {
+    router.replace('/app/initial-setup');
+  }
+
   const selectedWorkspace =
     workspaces.find((entry) => entry.id === userPreferences.workspaceId) ??
     workspaces[0];

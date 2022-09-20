@@ -207,6 +207,15 @@ const InitialSetupRepo = {
       },
     });
 
+    await prisma.userPreference.update({
+      where: {
+        userId: user.id,
+      },
+      data: {
+        hasFinishedSetup: true,
+      },
+    });
+
     return {
       workspaceResult,
     };

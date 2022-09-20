@@ -1,5 +1,6 @@
 declare namespace NodeJS {
   interface ProcessEnv {
+    BASE_URL: string;
     DATABASE_URL: string;
     GITHUB_ID: string;
     GITHUB_SECRET: string;
