@@ -32,10 +32,12 @@ export const ProjectMapEdgesSetSchema = z.object({
   projectId: z.string(),
 });
 
+export const GetSingleProjectMapEdgesSetResponseDataSchema = z.object({
+  edges: ProjectMapEdgesSetSchema,
+});
+
 export const GetSingleProjectMapEdgesSetResponseSchema = z.object({
-  data: z.object({
-    edges: ProjectMapEdgesSetSchema,
-  }),
+  data: GetSingleProjectMapEdgesSetResponseDataSchema,
 });
 
 export const convertEdgeSetDataToEdgeset = (

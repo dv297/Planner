@@ -14,12 +14,14 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 import { z } from 'zod';
 
-import { IssuesListSchema } from '../../schemas/IssueSchema';
+import { IssueSchema, IssuesListSchema } from '../../schemas/IssueSchema';
 import { ProjectMapEdgesSetSchema } from '../../schemas/ProjectMapEdgesSetSchemas';
 import { ProjectMapPositionSchema } from '../../schemas/ProjectMapPositionSchemas';
 import { Position } from '../../styles/ProjectMapPositionDataEntry';
+import IssueStatusType from '../../types/IssueStatusType';
 import IssueNode, { IssueNodeData } from './IssueNode';
 import MapPersistenceManager from './MapPersistenceManager';
+import ProjectMapControls from './ProjectMapControls';
 
 const nodeTypes = {
   issue: IssueNode,
@@ -100,6 +102,7 @@ const IssuesMap = (props: IssueMapProp) => {
         projectMapPositionId={projectMapPositionId}
         projectMapEdgesSetId={projectMapEdgesSetId}
       />
+      <ProjectMapControls />
     </ReactFlow>
   );
 };
@@ -112,6 +115,11 @@ interface ProjectMapProps {
 
 const ProjectMap = (props: ProjectMapProps) => {
   const { issues, positions, edgesSet } = props;
+
+  const issuesMap = issues.reduce((acc, issue) => {
+    acc[issue.id] = issue;
+    return acc;
+  }, {} as Record<string, z.infer<typeof IssueSchema>>);
 
   const positionDataMap = positions.data.positions.reduce((acc, entry) => {
     acc.set(entry.issueId, entry.position);
@@ -127,7 +135,12 @@ const ProjectMap = (props: ProjectMapProps) => {
     };
   });
 
-  const initialEdges = edgesSet.data.edges;
+  const initialEdges: Edge[] = edgesSet.data.edges.map((edge) => {
+    return {
+      ...edge,
+      animated: issuesMap[edge.source].issueStatus !== IssueStatusType.PLANNING,
+    };
+  });
 
   return (
     <IssuesMap

@@ -5,28 +5,18 @@ import { ReactNode } from 'react';
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
 import FullScreenLoader from '../../../components/common/FullScreenLoader';
 import ProjectMap from '../../../components/ProjectMap/ProjectMap';
+import {
+  ProjectMapContextProvider,
+  useProjectMapContext,
+} from '../../../components/ProjectMap/ProjectMapContext';
 import ProjectMapEdgesSetService from '../../../services/ProjectMapEdgesSetService';
 import ProjectMapPositionService from '../../../services/ProjectMapPositionService';
 import QueryKeys from '../../../services/QueryKeys';
 
 const Page = () => {
-  const router = useRouter();
+  const { isLoading, project, edgeSet } = useProjectMapContext();
 
-  const { issueTag } = router.query;
-
-  const tag = Array.isArray(issueTag) ? issueTag[0] : issueTag;
-
-  const { data: project, isLoading: isLoadingPositions } = useQuery(
-    [QueryKeys.PROJECT],
-    () => ProjectMapPositionService.getProjectMapPosition(tag)
-  );
-
-  const { data: edgeSet, isLoading: isLoadingEdgeSet } = useQuery(
-    [QueryKeys.EDGE_SET],
-    () => ProjectMapEdgesSetService.getProjectMapEdgesSet(tag)
-  );
-
-  if (isLoadingPositions || isLoadingEdgeSet) {
+  if (isLoading) {
     return <FullScreenLoader />;
   }
 
@@ -44,7 +34,11 @@ const Page = () => {
 };
 
 Page.getLayout = function getLayout(page: ReactNode) {
-  return <AppDefaultLayout>{page}</AppDefaultLayout>;
+  return (
+    <AppDefaultLayout>
+      <ProjectMapContextProvider>{page}</ProjectMapContextProvider>
+    </AppDefaultLayout>
+  );
 };
 
 export default Page;

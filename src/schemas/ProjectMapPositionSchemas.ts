@@ -35,9 +35,11 @@ export const ProjectMapPositionSchema = z.object({
   projectId: z.string(),
 });
 
+export const GetSingleProjectMapPositionResponseDataSchema = z.object({
+  issues: z.array(IssueSchema),
+  positions: ProjectMapPositionSchema,
+});
+
 export const GetSingleProjectMapPositionResponseSchema = z.object({
-  data: z.object({
-    issues: z.array(IssueSchema),
-    positions: ProjectMapPositionSchema,
-  }),
+  data: GetSingleProjectMapPositionResponseDataSchema,
 });

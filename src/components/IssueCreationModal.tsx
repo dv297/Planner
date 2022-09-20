@@ -12,10 +12,11 @@ interface IssueCreationModalProps {
   isOpen: boolean;
   setIsOpen: (state: boolean) => void;
   projectId: string;
+  onIssueCreationSuccess?: () => void;
 }
 
 const IssueCreationModal = (props: IssueCreationModalProps) => {
-  const { isOpen, setIsOpen, projectId } = props;
+  const { isOpen, setIsOpen, projectId, onIssueCreationSuccess } = props;
   const cancelButtonRef = useRef(null);
   const appContext = useAppContext();
   const { displaySnackbar } = useSnackbar();
@@ -52,6 +53,7 @@ const IssueCreationModal = (props: IssueCreationModalProps) => {
                     message: 'Created task!',
                   });
 
+                  onIssueCreationSuccess?.();
                   setIsOpen(false);
                 } catch (err) {
                   console.error(err);
