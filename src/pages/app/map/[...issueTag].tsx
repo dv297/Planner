@@ -1,5 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
@@ -9,9 +7,6 @@ import {
   ProjectMapContextProvider,
   useProjectMapContext,
 } from '../../../components/ProjectMap/ProjectMapContext';
-import ProjectMapEdgesSetService from '../../../services/ProjectMapEdgesSetService';
-import ProjectMapPositionService from '../../../services/ProjectMapPositionService';
-import QueryKeys from '../../../services/QueryKeys';
 
 const Page = () => {
   const { isLoading, project, edgeSet } = useProjectMapContext();

@@ -13,6 +13,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     'simple-import-sort/imports': 'error',
     'react/no-unknown-property': 'off',
-    '@typescript-eslint/no-empty-function': 'off'
+    '@typescript-eslint/no-empty-function': 'off',
   },
 };
