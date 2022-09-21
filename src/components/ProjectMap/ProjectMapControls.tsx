@@ -51,7 +51,8 @@ const ProjectMapControls = () => {
                     if (
                       node?.classList?.contains('react-flow__minimap') ||
                       node?.classList?.contains('react-flow__controls') ||
-                      node?.classList?.contains('project-map-controls')
+                      node?.classList?.contains('project-map-controls') ||
+                      node?.classList?.contains('react-flow__attribution')
                     ) {
                       return false;
                     }

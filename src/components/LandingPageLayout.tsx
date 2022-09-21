@@ -2,13 +2,15 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { Popover, Transition } from '@headlessui/react';
-import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
+import classNames from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
 import { Fragment, ReactNode } from 'react';
 
-const navigation = [
+const resources = [
   { name: 'Home', href: '/' },
   { name: 'Features', href: '/product' },
   { name: 'Company', href: '/company' },
@@ -22,247 +24,129 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
   const router = useRouter();
 
   return (
-    <div className="bg-gray-50">
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-y-0 h-full w-full" aria-hidden="true">
-          <div className="relative h-full">
-            <svg
-              className="absolute right-full transform translate-y-1/3 translate-x-1/4 md:translate-y-1/2 sm:translate-x-1/2 lg:translate-x-full"
-              width={404}
-              height={784}
-              fill="none"
-              viewBox="0 0 404 784"
-            >
-              <defs>
-                <pattern
-                  id="e229dbec-10e9-49ee-8ec3-0286ca089edf"
-                  x={0}
-                  y={0}
-                  width={20}
-                  height={20}
-                  patternUnits="userSpaceOnUse"
+    <div className="relative bg-gray-50">
+      <Popover className="relative bg-white shadow">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
+            <div className="flex justify-start lg:w-0 lg:flex-1">
+              <a href="#">
+                <span className="sr-only">Your Company</span>
+                <img
+                  className="h-8 w-auto sm:h-10"
+                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  alt=""
+                />
+              </a>
+            </div>
+            <div className="-my-2 -mr-2 md:hidden">
+              <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <span className="sr-only">Open menu</span>
+                <div className="h-6 w-6" aria-hidden="true">
+                  <MenuIcon />
+                </div>
+              </Popover.Button>
+            </div>
+            <div className="hidden space-x-10 md:flex">
+              {resources.map((resource) => (
+                <a
+                  href={resource.href}
+                  className="text-base font-medium text-gray-500 hover:text-gray-900"
                 >
-                  <rect
-                    x={0}
-                    y={0}
-                    width={4}
-                    height={4}
-                    className="text-gray-200"
-                    fill="currentColor"
-                  />
-                </pattern>
-              </defs>
-              <rect
-                width={404}
-                height={784}
-                fill="url(#e229dbec-10e9-49ee-8ec3-0286ca089edf)"
-              />
-            </svg>
-            <svg
-              className="absolute left-full transform -translate-y-3/4 -translate-x-1/4 sm:-translate-x-1/2 md:-translate-y-1/2 lg:-translate-x-3/4"
-              width={404}
-              height={784}
-              fill="none"
-              viewBox="0 0 404 784"
-            >
-              <defs>
-                <pattern
-                  id="d2a68204-c383-44b1-b99f-42ccff4e5365"
-                  x={0}
-                  y={0}
-                  width={20}
-                  height={20}
-                  patternUnits="userSpaceOnUse"
-                >
-                  <rect
-                    x={0}
-                    y={0}
-                    width={4}
-                    height={4}
-                    className="text-gray-200"
-                    fill="currentColor"
-                  />
-                </pattern>
-              </defs>
-              <rect
-                width={404}
-                height={784}
-                fill="url(#d2a68204-c383-44b1-b99f-42ccff4e5365)"
-              />
-            </svg>
+                  {resource.name}
+                </a>
+              ))}
+            </div>
+            <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
+              <button
+                onClick={async () => {
+                  const hasSession = await getSession();
+
+                  if (hasSession) {
+                    await router.push('/app/dashboard');
+                  } else {
+                    await signIn(undefined, {
+                      callbackUrl: '/app/dashboard',
+                    });
+                  }
+                }}
+                className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer"
+              >
+                Sign in
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="relative pt-6 pb-16 sm:pb-24">
-          <Popover>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6">
-              <nav
-                className="relative flex items-center justify-between sm:h-10 md:justify-center"
-                aria-label="Global"
-              >
-                <div className="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0">
-                  <div className="flex items-center justify-between w-full md:w-auto">
-                    <a href="#">
-                      <span className="sr-only">Workflow</span>
-                      <img
-                        className="h-8 w-auto sm:h-10"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                        alt=""
-                      />
-                    </a>
-                    <div className="-mr-2 flex items-center md:hidden">
-                      <Popover.Button className="bg-gray-50 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                        <span className="sr-only">Open main menu</span>
-                        <MenuIcon className="h-6 w-6" aria-hidden="true" />
-                      </Popover.Button>
-                    </div>
+        <Transition
+          as={Fragment}
+          enter="duration-200 ease-out"
+          enterFrom="opacity-0 scale-95"
+          enterTo="opacity-100 scale-100"
+          leave="duration-100 ease-in"
+          leaveFrom="opacity-100 scale-100"
+          leaveTo="opacity-0 scale-95"
+        >
+          <Popover.Panel
+            focus
+            className="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden"
+          >
+            <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="px-5 pt-5 pb-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <img
+                      className="h-8 w-auto"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      alt="Your Company"
+                    />
+                  </div>
+                  <div className="-mr-2">
+                    <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                      <span className="sr-only">Close menu</span>
+                      <div className="h-6 w-6" aria-hidden="true">
+                        <CloseIcon />
+                      </div>
+                    </Popover.Button>
                   </div>
                 </div>
-                <div className="hidden md:flex md:space-x-10">
-                  {navigation.map((item) => (
-                    <Link
+              </div>
+              <div className="space-y-6 py-6 px-5">
+                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                  {resources.map((item) => (
+                    <a
                       key={item.name}
                       href={item.href}
-                      className="font-medium text-gray-500 hover:text-gray-900"
+                      className="text-base font-medium text-gray-900 hover:text-gray-700"
                     >
                       {item.name}
-                    </Link>
+                    </a>
                   ))}
                 </div>
-                <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
-                  <span className="inline-flex rounded-md shadow">
-                    <button
-                      onClick={async () => {
-                        const hasSession = await getSession();
+                <div>
+                  <button
+                    onClick={async () => {
+                      const hasSession = await getSession();
 
-                        if (hasSession) {
-                          await router.push('/app/dashboard');
-                        } else {
-                          await signIn(undefined, {
-                            callbackUrl: '/app/dashboard',
-                          });
-                        }
-                      }}
-                      className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500"
-                    >
-                      Log in
-                    </button>
-                  </span>
-                </div>
-              </nav>
-            </div>
-
-            <Transition
-              as={Fragment}
-              enter="duration-150 ease-out"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="duration-100 ease-in"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <Popover.Panel
-                focus
-                className="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden"
-              >
-                <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
-                  <div className="px-5 pt-4 flex items-center justify-between">
-                    <div>
-                      <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                        alt=""
-                      />
-                    </div>
-                    <div className="-mr-2">
-                      <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                        <span className="sr-only">Close main menu</span>
-                        <XIcon className="h-6 w-6" aria-hidden="true" />
-                      </Popover.Button>
-                    </div>
-                  </div>
-                  <div className="px-2 pt-2 pb-3 space-y-1">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
-                  <a
-                    href="#"
-                    className="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100 hover:text-indigo-700"
+                      if (hasSession) {
+                        await router.push('/app/dashboard');
+                      } else {
+                        await signIn(undefined, {
+                          callbackUrl: '/app/dashboard',
+                        });
+                      }
+                    }}
+                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 cursor-pointer"
                   >
-                    Log in
-                  </a>
+                    Sign in
+                  </button>
                 </div>
-              </Popover.Panel>
-            </Transition>
-          </Popover>
-          {props.children}
-        </div>
+              </div>
+            </div>
+          </Popover.Panel>
+        </Transition>
+      </Popover>
 
-        <div className="relative">
-          <div className="absolute inset-0 flex flex-col" aria-hidden="true">
-            <div className="flex-1" />
-            <div className="flex-1 w-full bg-gray-800" />
-          </div>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <img
-              className="relative rounded-lg shadow-lg"
-              src="https://tailwindui.com/img/component-images/top-nav-with-multi-column-layout-screenshot.jpg"
-              alt="App screenshot"
-            />
-          </div>
-        </div>
-      </div>
-      <div className="bg-gray-800">
-        <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-          <h2 className="text-center text-gray-400 text-base font-semibold">
-            Trusted by over 26,000 forward-thinking companies
-          </h2>
-          <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">
-            <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-              <img
-                className="h-12"
-                src="https://tailwindui.com/img/logos/tuple-logo-gray-400.svg"
-                alt="Tuple"
-              />
-            </div>
-            <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-              <img
-                className="h-12"
-                src="https://tailwindui.com/img/logos/mirage-logo-gray-400.svg"
-                alt="Mirage"
-              />
-            </div>
-            <div className="col-span-1 flex justify-center md:col-span-2 lg:col-span-1">
-              <img
-                className="h-12"
-                src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg"
-                alt="StaticKit"
-              />
-            </div>
-            <div className="col-span-1 flex justify-center md:col-span-3 lg:col-span-1">
-              <img
-                className="h-12"
-                src="https://tailwindui.com/img/logos/transistor-logo-gray-400.svg"
-                alt="Transistor"
-              />
-            </div>
-            <div className="col-span-2 flex justify-center md:col-span-3 lg:col-span-1">
-              <img
-                className="h-12"
-                src="https://tailwindui.com/img/logos/workcation-logo-gray-400.svg"
-                alt="Workcation"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+      <main className="lg:relative">{props.children}</main>
     </div>
   );
 };
