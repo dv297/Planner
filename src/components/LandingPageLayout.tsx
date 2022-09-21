@@ -4,8 +4,6 @@
 import { Popover, Transition } from '@headlessui/react';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-import classNames from 'clsx';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
 import { Fragment, ReactNode } from 'react';
@@ -47,8 +45,9 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
               </Popover.Button>
             </div>
             <div className="hidden space-x-10 md:flex">
-              {resources.map((resource) => (
+              {resources.map((resource, index) => (
                 <a
+                  key={index}
                   href={resource.href}
                   className="text-base font-medium text-gray-500 hover:text-gray-900"
                 >
