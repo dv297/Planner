@@ -4,31 +4,16 @@
  */
 
 import { PortableText } from '@portabletext/react';
-import { getImageDimensions } from '@sanity/asset-utils';
+import Img from 'next/image';
+import { useNextSanityImage } from 'next-sanity-image';
 import React, { useMemo } from 'react';
 
-import { urlFor } from '../lib/sanity';
+import { getClient } from '../lib/sanity';
 
-const ImageComponent = ({ value, isInline }) => {
-  const { width, height } = getImageDimensions(value);
-  return (
-    <img
-      src={urlFor(value, false)
-        .width(isInline ? 100 : 800)
-        .fit('max')
-        .auto('format')
-        .url()}
-      alt={value.alt || ' '}
-      loading="lazy"
-      style={{
-        // Display alongside text if image appears inside a block text span
-        display: isInline ? 'inline-block' : 'block',
+const ImageComponent = ({ value }) => {
+  const imageProps = useNextSanityImage(getClient(false), value);
 
-        // Avoid jumping around with aspect-ratio CSS property
-        aspectRatio: width / height,
-      }}
-    />
-  );
+  return <Img {...imageProps} layout="intrinsic" />;
 };
 
 const components = {

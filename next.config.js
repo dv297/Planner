@@ -5,7 +5,11 @@ module.exports = removeImports(
   removeImports({
     reactStrictMode: true,
     images: {
-      domains: ['tailwindui.com', 'avatars.githubusercontent.com'],
+      domains: [
+        'tailwindui.com',
+        'avatars.githubusercontent.com',
+        'cdn.sanity.io',
+      ],
     },
   })
 );

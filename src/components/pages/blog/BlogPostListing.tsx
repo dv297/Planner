@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { urlFor } from '../../../lib/sanity';
 
 export interface Author {
@@ -36,10 +38,14 @@ const BlogPostListing = (props: BlogPostListingProps) => {
       className="flex flex-col overflow-hidden rounded-lg shadow-lg"
     >
       <div className="flex-shrink-0">
-        <img
-          className="h-48 w-full object-cover"
+        <Image
+          className="w-full object-cover"
           src={urlFor(post.mainImage, preview).url()}
-          alt=""
+          alt="Blog Image"
+          height="300px"
+          width="512px"
+          objectFit="fill"
+          quality={50}
         />
       </div>
       <div className="flex flex-1 flex-col justify-between bg-white p-6">
@@ -52,10 +58,13 @@ const BlogPostListing = (props: BlogPostListingProps) => {
         <div className="mt-6 flex items-center">
           <div className="flex-shrink-0">
             <span className="sr-only">{post.author.name}</span>
-            <img
-              className="h-10 w-10 rounded-full"
+            <Image
+              className="rounded-full"
               src={urlFor(post.author.image, preview).url()}
-              alt=""
+              alt="Author"
+              height="40px"
+              width="40px"
+              quality={50}
             />
           </div>
           <div className="ml-3">
