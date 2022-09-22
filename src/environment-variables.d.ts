@@ -14,5 +14,8 @@ declare namespace NodeJS {
     SENDGRID_API_KEY: string;
     EMAIL_FROM_ADDRESS: string;
     TEST_ENVIRONMENT_EMAIL_TO_ADDRESS: string;
+    NEXT_PUBLIC_SANITY_PROJECT_ID: string;
+    NEXT_PUBLIC_SANITY_DATASET: string;
+    NEXT_PUBLIC_SANITY_TOKEN: string;
   }
 }

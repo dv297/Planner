@@ -11,7 +11,7 @@ import { Fragment, ReactNode } from 'react';
 const resources = [
   { name: 'Home', href: '/' },
   { name: 'Features', href: '/product' },
-  { name: 'Company', href: '/company' },
+  { name: 'Blog', href: '/blog' },
 ];
 
 interface LandingPageLayoutProps {
@@ -145,7 +145,7 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
         </Transition>
       </Popover>
 
-      <main className="lg:relative">{props.children}</main>
+      <main className="lg:relative min-h-screen">{props.children}</main>
     </div>
   );
 };
