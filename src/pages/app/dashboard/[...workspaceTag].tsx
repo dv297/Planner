@@ -34,6 +34,7 @@ const ActionItem = (props: ActionItemProps) => {
                 alt={props.alt}
                 quality={50}
                 placeholder="blur"
+                priority
               />
             </div>
           </CardMedia>
