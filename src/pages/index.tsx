@@ -49,6 +49,7 @@ export default function HomePage() {
           src="/images/map-demo.png"
           alt="Screenshot of the application"
           layout="fill"
+          priority
         />
       </div>
     </div>

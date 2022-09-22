@@ -4,6 +4,7 @@
 import { Popover, Transition } from '@headlessui/react';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
 import { Fragment, ReactNode } from 'react';
@@ -28,7 +29,7 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
           <div className="flex items-center justify-between py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <a href="#">
-                <span className="sr-only">Your Company</span>
+                <span className="sr-only">Planner</span>
                 <img
                   className="h-8 w-auto sm:h-10"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -46,13 +47,11 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
             </div>
             <div className="hidden space-x-10 md:flex">
               {resources.map((resource, index) => (
-                <a
-                  key={index}
-                  href={resource.href}
-                  className="text-base font-medium text-gray-500 hover:text-gray-900"
-                >
-                  {resource.name}
-                </a>
+                <Link key={index} href={resource.href}>
+                  <span className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
+                    {resource.name}
+                  </span>
+                </Link>
               ))}
             </div>
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
