@@ -4,7 +4,38 @@
  */
 
 import { PortableText } from '@portabletext/react';
+import { getImageDimensions } from '@sanity/asset-utils';
 import React, { useMemo } from 'react';
+
+import { urlFor } from '../lib/sanity';
+
+const ImageComponent = ({ value, isInline }) => {
+  const { width, height } = getImageDimensions(value);
+  return (
+    <img
+      src={urlFor(value, false)
+        .width(isInline ? 100 : 800)
+        .fit('max')
+        .auto('format')
+        .url()}
+      alt={value.alt || ' '}
+      loading="lazy"
+      style={{
+        // Display alongside text if image appears inside a block text span
+        display: isInline ? 'inline-block' : 'block',
+
+        // Avoid jumping around with aspect-ratio CSS property
+        aspectRatio: width / height,
+      }}
+    />
+  );
+};
+
+const components = {
+  types: {
+    image: ImageComponent,
+  },
+};
 
 /**
  * Use Tailwind CSS's `prose` classes with Portable Text markup (blocks)
@@ -45,10 +76,14 @@ const ProseableText = ({ value = [] }) => {
       {valueGroups.map((group) =>
         group[0]._type === 'block' ? (
           <div key={group[0]._key} className="prose py-4">
-            <PortableText value={group} />
+            <PortableText value={group} components={components} />
           </div>
         ) : (
-          <PortableText key={group[0]._key} value={group} />
+          <PortableText
+            key={group[0]._key}
+            value={group}
+            components={components}
+          />
         )
       )}
     </div>
