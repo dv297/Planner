@@ -1,4 +1,3 @@
-import imageUrlBuilder from '@sanity/image-url';
 import { useRouter } from 'next/router';
 import { groq } from 'next-sanity';
 import { ReactNode } from 'react';
@@ -44,7 +43,7 @@ const Posts = (props: any) => {
       </div>
       <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto mt-12 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-3">
-          {posts.map((post) => {
+          {posts.map((post: any) => {
             return (
               <BlogPostListing post={post} key={post.slug} preview={preview} />
             );
@@ -55,15 +54,9 @@ const Posts = (props: any) => {
   );
 };
 
-interface StaticPropsParams {
-  slug: string;
-}
-
 export async function getStaticProps({
-  params,
   preview = false,
 }: {
-  params: StaticPropsParams;
   preview: boolean;
 }) {
   const posts = await getClient(preview).fetch(query);
