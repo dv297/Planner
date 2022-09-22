@@ -21,7 +21,7 @@ export default function HomePage() {
         <div className="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
           <Image
             className="absolute inset-0 h-full w-full object-contain"
-            src="/images/map-demo.png"
+            src="/images/map-demo-compressed.png"
             alt="Screenshot of the application"
             layout="fill"
             priority
@@ -67,7 +67,7 @@ export default function HomePage() {
         <div className="relative h-64 w-full sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
           <Image
             className="absolute inset-0 h-full w-full object-contain"
-            src="/images/task-details.png"
+            src="/images/task-details-compressed.png"
             alt="Screenshot of the application"
             layout="fill"
           />

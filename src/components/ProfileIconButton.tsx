@@ -21,7 +21,7 @@ const ProfileIconButton = () => {
           alt="Profile picture"
           onError={({ currentTarget }) => {
             currentTarget.onerror = null;
-            currentTarget.src = '/images/user.png';
+            currentTarget.src = '/images/user-compressed.png';
           }}
         />
       </Menu.Button>
