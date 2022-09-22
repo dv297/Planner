@@ -10,7 +10,7 @@ import { Fragment, ReactNode } from 'react';
 
 const resources = [
   { name: 'Home', href: '/' },
-  { name: 'Features', href: '/product' },
+  { name: 'Features', href: '/features' },
   { name: 'Blog', href: '/blog' },
 ];
 
