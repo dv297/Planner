@@ -1,4 +1,5 @@
 import { SanityClient } from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
 import { createClient, createPreviewSubscriptionHook } from 'next-sanity';
 
 const config = {
@@ -33,3 +34,7 @@ export const getClient = (usePreview: boolean): SanityClient => {
     return client;
   }
 };
+
+export function urlFor(source: string, usePreview: boolean) {
+  return imageUrlBuilder(getClient(usePreview)).image(source);
+}
