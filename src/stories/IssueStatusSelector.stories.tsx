@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import EditableTextDisplay from '../components/common/EditableDisplays/EditableTextDisplay';
-import IssueStatusSelector from '../components/IssueStatusSelector';
+import IssueStatusSelector from '../components/pages/issue/IssueStatusSelector';
 import IssueStatusType from '../types/IssueStatusType';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

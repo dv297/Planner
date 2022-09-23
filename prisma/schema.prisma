@@ -23,6 +23,7 @@ model User {
   updatedAt      DateTime?        @default(now()) @updatedAt
   TeamUsers      TeamUsers[]
   UserPreference UserPreference[]
+  Issue          Issue[]
 }
 
 model Team {
@@ -93,6 +94,8 @@ model Issue {
   workspaceId         String
   projectId           String
   workspaceIssueCount Int?        @default(-1)
+  assignee            User?       @relation(fields: [assigneeId], references: [id])
+  assigneeId          String?
 }
 
 model Account {

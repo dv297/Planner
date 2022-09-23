@@ -5,8 +5,8 @@ import { useCallback, useState } from 'react';
 
 import IssueStatusType, {
   convertToIssueStatusType,
-} from '../types/IssueStatusType';
-import { SnackbarSeverity, useSnackbar } from './common/Snackbar';
+} from '../../../types/IssueStatusType';
+import { SnackbarSeverity, useSnackbar } from '../../common/Snackbar';
 
 interface IssueStatusSelectorProps {
   onChange: (value: string) => Promise<void>;

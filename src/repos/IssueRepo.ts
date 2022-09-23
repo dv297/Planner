@@ -54,6 +54,7 @@ const IssueRepo = {
       },
       include: {
         workspace: true,
+        assignee: true,
       },
     });
 
@@ -115,6 +116,7 @@ const IssueRepo = {
       },
       include: {
         workspace: true,
+        assignee: true,
       },
       orderBy: {
         workspaceIssueCount: 'asc',

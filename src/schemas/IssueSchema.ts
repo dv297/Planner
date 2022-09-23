@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { TeamMemberUserSchema } from './TeamSettingsSchema';
 import { WorkspaceSchema } from './WorkspaceSchemas';
 
 export const GetSingleIssueInputSchema = z.object({
@@ -20,6 +21,8 @@ export const IssueSchema = z.object({
   workspaceId: z.string(),
   workspace: WorkspaceSchema,
   workspaceIssueCount: z.number(),
+  assigneeId: z.nullable(z.string()),
+  assignee: z.nullable(TeamMemberUserSchema),
 });
 
 export const IssueSchemaWithoutWorkspace = z.object({
