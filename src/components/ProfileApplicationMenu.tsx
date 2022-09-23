@@ -9,7 +9,7 @@ function classNames(...classes: string[]) {
 
 const userNavigation = [
   { name: 'Personal Settings', href: '/app/settings' },
-  { name: 'Team Settings', href: '/app/team-settings/main' },
+  { name: 'Team Settings', href: '/app/team-settings/members' },
   { name: 'Sign out', href: '#' },
 ];
 

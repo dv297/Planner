@@ -1,8 +1,5 @@
-import {
-  AdjustmentsIcon,
-  ArrowLeftIcon,
-  UserGroupIcon,
-} from '@heroicons/react/outline';
+import { AdjustmentsIcon, UserGroupIcon } from '@heroicons/react/outline';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
@@ -35,12 +32,6 @@ const TeamSettingsLayout = (props: TeamSettingsLayoutProps) => {
 
   const navigation: NavigationElement[] = [
     {
-      name: 'Team Settings',
-      href: '/app/team-settings/main',
-      icon: AdjustmentsIcon,
-      current: asPath.includes('/app/team-settings/main'),
-    },
-    {
       name: 'Members',
       href: '/app/team-settings/members',
       icon: UserGroupIcon,
@@ -56,9 +47,13 @@ const TeamSettingsLayout = (props: TeamSettingsLayoutProps) => {
             header={
               <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
                 <Link href="/app/dashboard">
-                  <div className="flex flex-row">
-                    <ArrowLeftIcon className="text-white" />
-                    <span className="text-white font-bold text-md">Back</span>
+                  <div className="flex flex-row items-center">
+                    <div className="text-white">
+                      <ArrowBackIcon />
+                    </div>
+                    <span className="ml-2 text-white font-bold text-md">
+                      Back
+                    </span>
                   </div>
                 </Link>
               </div>
