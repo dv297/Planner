@@ -1,5 +1,4 @@
 import { MenuAlt2Icon } from '@heroicons/react/outline';
-import { SearchIcon } from '@heroicons/react/solid';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { ReactNode } from 'react';
@@ -9,11 +8,10 @@ import ProfileIconButton from './ProfileIconButton';
 interface DashboardBodyLayoutProps {
   children: ReactNode;
   setSidebarOpen: (updatedState: boolean) => void;
-  includeSearch?: boolean;
 }
 
 const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
-  const { setSidebarOpen, includeSearch } = props;
+  const { setSidebarOpen } = props;
   const isFetching = useIsFetching();
   const isMutating = useIsMutating();
 
@@ -31,29 +29,7 @@ const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
           </button>
           <div className="flex-1 px-4 flex justify-between">
             <div className="flex-1 flex">
-              {includeSearch && (
-                <form
-                  className="w-full flex md:ml-0"
-                  action="src/components/DashboardBodyLayout#"
-                  method="GET"
-                >
-                  <label htmlFor="search-field" className="sr-only">
-                    Search
-                  </label>
-                  <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                    <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none">
-                      <SearchIcon className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <input
-                      id="search-field"
-                      className="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
-                      placeholder="Search"
-                      type="search"
-                      name="search"
-                    />
-                  </div>
-                </form>
-              )}
+              {/* Search could be included here in the future */}
             </div>
             <div className="ml-4 flex items-center md:ml-6">
               <ProfileIconButton />

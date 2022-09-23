@@ -44,12 +44,6 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
       icon: FolderIcon,
       current: asPath.includes('/app/projects'),
     },
-    {
-      name: 'Calendar',
-      href: '#',
-      icon: CalendarIcon,
-      current: asPath.includes('/app/calendar'),
-    },
   ];
 
   return (
