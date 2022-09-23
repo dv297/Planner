@@ -6,7 +6,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const getSanitizedSendEmailData = (
   data: MailDataRequired | MailDataRequired[]
 ) => {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.TEST_ENVIRONMENT_EMAIL_TO_ADDRESS) {
     if (Array.isArray(data)) {
       data.forEach((entry) => {
         entry.to = process.env.TEST_ENVIRONMENT_EMAIL_TO_ADDRESS;
