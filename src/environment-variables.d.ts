@@ -17,5 +17,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_SANITY_PROJECT_ID: string;
     NEXT_PUBLIC_SANITY_DATASET: string;
     NEXT_PUBLIC_SANITY_TOKEN: string;
+    DATADOG_CLIENT_TOKEN: string;
+    DATADOG_SITE: string;
   }
 }
