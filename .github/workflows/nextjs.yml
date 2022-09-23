@@ -67,4 +67,8 @@ jobs:
       - name: Run Linter
         run: ${{ steps.detect-package-manager.outputs.manager }} run lint
       - name: Build with Next.js
+        env:
+          NEXT_PUBLIC_SANITY_PROJECT_ID: secrets.NEXT_PUBLIC_SANITY_PROJECT_ID
+          NEXT_PUBLIC_SANITY_DATASET: secrets.NEXT_PUBLIC_SANITY_DATASET
+          NEXT_PUBLIC_SANITY_TOKEN: secrets.NEXT_PUBLIC_SANITY_TOKEN
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
