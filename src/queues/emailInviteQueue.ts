@@ -1,15 +1,7 @@
-import { datadogLogs } from '@datadog/browser-logs';
 import { Queue, Worker } from 'bullmq';
 
 import mailClient, { getSanitizedSendEmailData } from '../lib/mailClient';
 import TeamSettingsRepo from '../repos/TeamSettingsRepo';
-
-datadogLogs.init({
-  clientToken: process.env.DATADOG_CLIENT_TOKEN,
-  site: process.env.DATADOG_SITE,
-  forwardErrorsToLogs: true,
-  sampleRate: 100,
-});
 
 const QUEUE_NAME = 'teamInviteQueue';
 
@@ -60,11 +52,12 @@ new Worker<TeamInviteJobData, JobResult>(
       });
 
       try {
-        const response = await mailClient.send(msg);
-        datadogLogs.logger.info('Sent email', { response });
+        await mailClient.send(msg);
       } catch (err) {
-        datadogLogs.logger.error('Error sending email', {
-          error: err,
+        console.error('Error sending email');
+        console.error(err);
+        return Promise.resolve({
+          success: false,
         });
       }
 
@@ -75,11 +68,8 @@ new Worker<TeamInviteJobData, JobResult>(
         success: true,
       });
     } catch (err) {
-      console.log('Error executing job');
-      console.log(err);
-      datadogLogs.logger.error('Error executing job', {
-        error: err,
-      });
+      console.error('Error executing job');
+      console.error(err);
       return {
         success: false,
       };
