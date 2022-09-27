@@ -1,4 +1,4 @@
-import { CalendarIcon, FolderIcon, HomeIcon } from '@heroicons/react/outline';
+import { FolderIcon, HomeIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { ReactNode, useState } from 'react';
@@ -51,16 +51,12 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
       <AppContextProvider>
         <div>
           <Sidebar
-            header={
-              <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
-                <WorkspaceSelector />
-              </div>
-            }
+            header={<WorkspaceSelector />}
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
             navigation={navigation}
           />
-          <DashboardBodyLayout setSidebarOpen={setSidebarOpen} includeSearch>
+          <DashboardBodyLayout setSidebarOpen={setSidebarOpen}>
             {props.children}
           </DashboardBodyLayout>
         </div>

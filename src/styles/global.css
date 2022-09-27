@@ -6,3 +6,42 @@ body {
   font-family: system-ui, sans-serif;
   font-size: 75%;
 }
+
+@layer base {
+  :root {
+    --color-primary: rgb(74, 144, 241);
+    --color-secondary: rgb(40, 109, 160);
+    --color-sidebar: rgb(19, 58, 82);
+    --color-sidebar-element-hover: rgb(59, 122, 210);
+    --color-sidebar-text: #fff;
+    --color-sidebar-active-element-background: #225a70;
+    --color-sidebar-active-element-text: #fff;
+    --color-sidebar-feature: rgb(14, 40, 58);
+  }
+
+  .bg-sidebar {
+    background-color: var(--color-sidebar);
+  }
+
+  .bg-sidebar-feature {
+    background-color: var(--color-sidebar-feature);
+  }
+
+  .sidebar-element {
+    color: var(--color-sidebar-text);
+  }
+
+  .sidebar-element:hover,
+  .sidebar-active-element:hover {
+    background-color: var(--color-sidebar-element-hover);
+  }
+
+  .sidebar-active-element {
+    background-color: var(--color-sidebar-active-element-background);
+    color: var(--color-sidebar-active-element-text);
+  }
+
+  .text-sidebar {
+    color: var(--color-sidebar-text);
+  }
+}

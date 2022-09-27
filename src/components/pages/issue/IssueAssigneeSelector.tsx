@@ -16,7 +16,7 @@ interface IssueAssigneeSelectorProps {
 
 const getUpdaterFunction =
   (tag: string | undefined, propertyName: string) =>
-  async (textValue: string) => {
+  async (textValue: string | null) => {
     await IssueService.updateIssue(tag, propertyName, textValue);
   };
 

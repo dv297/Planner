@@ -1,4 +1,4 @@
-import { AdjustmentsIcon, UserGroupIcon } from '@heroicons/react/outline';
+import { UserGroupIcon } from '@heroicons/react/outline';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -45,18 +45,16 @@ const TeamSettingsLayout = (props: TeamSettingsLayoutProps) => {
         <div>
           <Sidebar
             header={
-              <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
-                <Link href="/app/dashboard">
-                  <div className="flex flex-row items-center">
-                    <div className="text-white">
-                      <ArrowBackIcon />
-                    </div>
-                    <span className="ml-2 text-white font-bold text-md">
-                      Back
-                    </span>
+              <Link href="/app/dashboard">
+                <div className="flex flex-row items-center">
+                  <div className="text-white">
+                    <ArrowBackIcon />
                   </div>
-                </Link>
-              </div>
+                  <span className="ml-2 text-white font-bold text-md">
+                    Back
+                  </span>
+                </div>
+              </Link>
             }
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}

@@ -27,7 +27,9 @@
           "name": "Task",
           "tag": "TASK"
         },
-        "workspaceIssueCount": 2
+        "workspaceIssueCount": 2,
+        "assignee": null,
+        "assigneeId": null
       },
       {
         "id": "cl7rxodly2673oz5x2lymz0cs",
@@ -41,7 +43,9 @@
           "name": "Task",
           "tag": "TASK"
         },
-        "workspaceIssueCount": 3
+        "workspaceIssueCount": 3,
+        "assignee": null,
+        "assigneeId": null
       },
       {
         "id": "cl7ryehs93999oz5xequbyprr",
@@ -55,7 +59,9 @@
           "name": "Task",
           "tag": "TASK"
         },
-        "workspaceIssueCount": 4
+        "workspaceIssueCount": 4,
+        "assignee": null,
+        "assigneeId": null
       },
       {
         "id": "cl7ryft2g4148oz5x30l175zh",
@@ -69,7 +75,9 @@
           "name": "Task",
           "tag": "TASK"
         },
-        "workspaceIssueCount": 5
+        "workspaceIssueCount": 5,
+        "assignee": null,
+        "assigneeId": null
       },
       {
         "id": "cl7s3yo4q1014vf5xvgstyj99",
@@ -83,7 +91,9 @@
           "name": "Task",
           "tag": "TASK"
         },
-        "workspaceIssueCount": 6
+        "workspaceIssueCount": 6,
+        "assignee": null,
+        "assigneeId": null
       }
     ]
   }

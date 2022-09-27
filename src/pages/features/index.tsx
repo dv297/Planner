@@ -10,7 +10,7 @@ export default function HomePage() {
         <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
           <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-              <p className="block">Map your project</p>
+              <p className="block text-primary">Map your project</p>
             </h1>
             <p className="mx-auto mt-3 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
               Planner allows you to plan a project from end-to-end and see all
@@ -33,7 +33,7 @@ export default function HomePage() {
         <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
           <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-              <p className="block">Manage discoveries</p>
+              <p className="block text-primary">Manage discoveries</p>
             </h1>
             <p className="mx-auto mt-3 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
               Find something new? Easily add it to the project and make your new
@@ -55,7 +55,7 @@ export default function HomePage() {
         <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
           <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-              <p className="block">Provide clarity</p>
+              <p className="block text-primary">Provide clarity</p>
             </h1>
             <p className="mx-auto mt-3 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
               Planner has all the typical fields you would expect to ensure your
@@ -79,7 +79,7 @@ export default function HomePage() {
       <div>
         <div className="w-full text-center mt-12">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-            <p className="block text-indigo-600">
+            <p className="block text-primary">
               With more planned for the future!
             </p>
           </h1>

@@ -13,8 +13,8 @@ export default function HomePage() {
       <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
         <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-            <p className="block">Ditch your to-do list</p>{' '}
-            <p className="block text-indigo-600">Map your moves</p>
+            <p className="block text-secondary">Ditch your to-do list</p>{' '}
+            <p className="block text-primary">Map your moves</p>
           </h1>
           <p className="mx-auto mt-3 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
             With all the moving parts and dependencies, to-do lists don&apos;t
@@ -35,7 +35,7 @@ export default function HomePage() {
                     });
                   }
                 }}
-                className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
+                className="flex w-full items-center justify-center rounded-md border border-transparent bg-primary px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg"
               >
                 Get started
               </button>
