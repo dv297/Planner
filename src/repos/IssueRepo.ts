@@ -10,6 +10,7 @@ function getIssueById(issueId: string) {
     },
     include: {
       workspace: true,
+      assignee: true,
     },
   });
 }
