@@ -1,29 +1,17 @@
 import { Handle, Position } from 'react-flow-renderer';
+import { z } from 'zod';
 
+import { IssueSchema } from '../../schemas/IssueSchema';
 import { convertToIssueStatusType } from '../../types/IssueStatusType';
+import UserAvatar from '../common/UserAvatar';
 import IssueStatusPill from '../IssueStatusPill';
 
 const handleStyle = {};
 
-interface IssueWorkspaceData {
-  id: string;
-  name: string;
-  tag: string;
-}
-
-export interface IssueNodeData {
-  id: string;
-  title: string;
-  description: string;
-  issueStatus: string;
-  projectId: string;
-  workspaceId: string;
-  workspace: IssueWorkspaceData;
-  workspaceIssueCount: number;
-}
+export type IssueNodeData = z.infer<typeof IssueSchema>;
 
 interface IssueNodeProps {
-  data: IssueNodeData;
+  data: z.infer<typeof IssueSchema>;
 }
 
 const IssueNode = (props: IssueNodeProps) => {
@@ -33,6 +21,12 @@ const IssueNode = (props: IssueNodeProps) => {
     <>
       <div className="px-8 py-4 flex flex-col border border-solid border-gray-300 rounded-lg bg-white">
         <span className="text-lg font-bold">{issue.title}</span>
+        {issue.assignee && (
+          <span className="mt-2 mb-2 block text-lg flex flex-row items-center">
+            <UserAvatar user={issue.assignee} />
+            Assigned to {issue.assignee.name}
+          </span>
+        )}
         <div className="mt-2">
           <IssueStatusPill
             issueStatus={convertToIssueStatusType(issue.issueStatus)}

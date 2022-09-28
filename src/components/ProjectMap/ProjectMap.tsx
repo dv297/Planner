@@ -19,7 +19,8 @@ import { ProjectMapEdgesSetSchema } from '../../schemas/ProjectMapEdgesSetSchema
 import { ProjectMapPositionSchema } from '../../schemas/ProjectMapPositionSchemas';
 import { Position } from '../../styles/ProjectMapPositionDataEntry';
 import IssueStatusType from '../../types/IssueStatusType';
-import IssueNode, { IssueNodeData } from './IssueNode';
+import type { IssueNodeData } from './IssueNode';
+import IssueNode from './IssueNode';
 import MapPersistenceManager from './MapPersistenceManager';
 import ProjectMapControls from './ProjectMapControls';
 
