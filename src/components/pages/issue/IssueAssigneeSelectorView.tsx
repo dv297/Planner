@@ -43,7 +43,7 @@ const getAvatar = (assignee: IssueAssigneeValue) => {
   return (
     <div className="mr-4">
       <Avatar
-        src={`https://www.gravatar.com/avatar/${hash}?d=${assignee.image}`}
+        src={`https://www.gravatar.com/avatar/${hash}?d=404`}
         {...stringAvatar(assignee.name)}
       />
     </div>
