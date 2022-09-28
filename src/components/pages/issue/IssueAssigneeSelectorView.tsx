@@ -66,7 +66,9 @@ const IssueAssigneeSelectorView = (props: IssueAssigneeSelectorProps) => {
             <div className="flex flex-row items-center">
               {assignee && (
                 <ListItemIcon>
-                  <UserAvatar user={assignee} />
+                  <div className="mr-4">
+                    <UserAvatar user={assignee} />
+                  </div>
                 </ListItemIcon>
               )}
               {assignee?.name ?? 'Unassigned'}
@@ -78,7 +80,9 @@ const IssueAssigneeSelectorView = (props: IssueAssigneeSelectorProps) => {
         {initialAssignee && (
           <MenuItem value={initialAssignee.id}>
             <ListItemIcon>
-              <UserAvatar user={initialAssignee} />
+              <div className="mr-4">
+                <UserAvatar user={initialAssignee} />
+              </div>
             </ListItemIcon>
             {initialAssignee.name}
           </MenuItem>
@@ -91,7 +95,9 @@ const IssueAssigneeSelectorView = (props: IssueAssigneeSelectorProps) => {
             return (
               <MenuItem key={value.id} value={value.id}>
                 <ListItemIcon>
-                  <UserAvatar user={value} />
+                  <div className="mr-4">
+                    <UserAvatar user={value} />
+                  </div>
                 </ListItemIcon>
                 {value.name}
               </MenuItem>

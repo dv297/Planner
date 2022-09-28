@@ -42,7 +42,7 @@ const InitialSetupEstablishIndividualSettings = () => {
         third-parties.
       </p>
       <PersonalInformationForm
-        initialData={{ name: data.name, email: data.email }}
+        initialData={data}
         onSubmit={async (data) => {
           await mutation.mutate(data);
           machineSend('COMPLETE');

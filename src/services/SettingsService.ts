@@ -1,11 +1,13 @@
 interface GetPersonalInformationOutput {
   name: string;
   email: string;
+  image: string;
 }
 
-interface CreateWorkspaceInput {
+interface UpdatePersonalInformationInput {
   name: string;
   email: string;
+  image: string;
 }
 
 const SettingsService = {
@@ -20,14 +22,14 @@ const SettingsService = {
     return {
       name: data.name,
       email: data.email,
+      image: data.image,
     };
   },
-  updatePersonalInformation: async (data: CreateWorkspaceInput) => {
-    const body = { name: data.name, email: data.email };
+  updatePersonalInformation: async (data: UpdatePersonalInformationInput) => {
     await fetch('/api/settings/personal-information', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: JSON.stringify(data),
     });
   },
 };

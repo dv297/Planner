@@ -31,7 +31,7 @@ class SettingsService {
 
     const castedSession = session as Session & { userId: string };
 
-    const { name, email } = req.body;
+    const { name, email, image } = req.body;
 
     const result = await prisma.user.update({
       where: {
@@ -40,6 +40,7 @@ class SettingsService {
       data: {
         name,
         email,
+        image,
       },
     });
 

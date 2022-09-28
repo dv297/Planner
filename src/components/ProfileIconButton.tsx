@@ -1,12 +1,24 @@
 import { Menu } from '@headlessui/react';
+import { useQuery } from '@tanstack/react-query';
 import { useSession } from 'next-auth/react';
 
+import QueryKeys from '../services/QueryKeys';
+import SettingsService from '../services/SettingsService';
+import UserAvatar from './common/UserAvatar';
 import ProfileApplicationMenu from './ProfileApplicationMenu';
 
 const ProfileIconButton = () => {
-  const session = useSession();
+  const { data } = useQuery(
+    [QueryKeys.PERSONAL_INFORMATION],
+    SettingsService.getPersonalInformation,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
-  if (!session || !session?.data) {
+  console.log(data);
+
+  if (!data) {
     return null;
   }
 
@@ -14,16 +26,7 @@ const ProfileIconButton = () => {
     <Menu as="div" className="ml-3 relative">
       <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         <span className="sr-only">Open user menu</span>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          className="h-8 w-8 rounded-full bg-blue-400"
-          src={session?.data?.user?.image ?? ''}
-          alt="Profile picture"
-          onError={({ currentTarget }) => {
-            currentTarget.onerror = null;
-            currentTarget.src = '/images/user-compressed.png';
-          }}
-        />
+        <UserAvatar user={data} />
       </Menu.Button>
       <ProfileApplicationMenu />
     </Menu>

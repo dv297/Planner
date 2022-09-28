@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import Form from './common/Form';
+import FormImageUploader from './common/FormImageUploader';
 import FormSubmitButton from './common/FormSubmitButton';
 import FormTextInput from './common/FormTextInput';
 
@@ -29,6 +30,7 @@ const FormRow = (props: FormRowProps) => {
 export interface PersonalInformationFormData {
   name: string;
   email: string;
+  image: string;
 }
 
 interface PersonalInformationFormProps {
@@ -40,33 +42,39 @@ const PersonalInformationForm = (props: PersonalInformationFormProps) => {
   const { initialData, onSubmit } = props;
 
   return (
-    <Form
-      defaultValues={{
-        name: initialData.name,
-        email: initialData.email,
-      }}
-      onSubmit={onSubmit}
-    >
-      {({ keys }) => (
-        <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
-          <div>
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
-              Personal Information
-            </h3>
-          </div>
-          <div className="space-y-6 sm:space-y-5">
-            <FormRow label="Name" htmlFor="name">
-              <FormTextInput name={keys.name} id="name" className="w-80" />
-            </FormRow>
+    <>
+      <Form
+        defaultValues={{
+          name: initialData.name,
+          email: initialData.email,
+          image: initialData.image,
+        }}
+        onSubmit={onSubmit}
+      >
+        {({ keys }) => (
+          <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
+            <div>
+              <h3 className="text-lg leading-6 font-medium text-gray-900">
+                Personal Information
+              </h3>
+            </div>
+            <div className="space-y-6 sm:space-y-5">
+              <FormRow label="Name" htmlFor="name">
+                <FormTextInput name={keys.name} id="name" className="w-80" />
+              </FormRow>
 
-            <FormRow label="Email" htmlFor="email">
-              <FormTextInput name={keys.email} id="email" className="w-80" />
-            </FormRow>
+              <FormRow label="Email" htmlFor="email">
+                <FormTextInput name={keys.email} id="email" className="w-80" />
+              </FormRow>
+              <FormRow label="Image" htmlFor="image">
+                <FormImageUploader name={keys.image} id="image" />
+              </FormRow>
+            </div>
+            <FormSubmitButton label="Submit" />
           </div>
-          <FormSubmitButton label="Submit" />
-        </div>
-      )}
-    </Form>
+        )}
+      </Form>
+    </>
   );
 };
 

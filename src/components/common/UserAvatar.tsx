@@ -1,5 +1,4 @@
 import { Avatar } from '@material-ui/core';
-import md5 from 'md5';
 
 function stringToColor(string: string) {
   let hash = 0;
@@ -30,7 +29,6 @@ function stringAvatar(name: string) {
 
 export interface AvatarUser {
   name: string;
-  id: string;
   image: string;
   email: string;
 }
@@ -41,16 +39,10 @@ interface AssigneeAvatarProps {
 
 const UserAvatar = (props: AssigneeAvatarProps) => {
   const { user } = props;
-  const address = String(user.email).trim().toLowerCase();
-
-  const hash = md5(address);
 
   return (
-    <div className="mr-4" title={user.name}>
-      <Avatar
-        src={`https://www.gravatar.com/avatar/${hash}?d=404`}
-        {...stringAvatar(user.name)}
-      />
+    <div title={user.name}>
+      <Avatar src={user.image} {...stringAvatar(user.name)} />
     </div>
   );
 };

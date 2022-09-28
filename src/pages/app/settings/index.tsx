@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
@@ -7,6 +7,7 @@ import {
   useSnackbar,
 } from '../../../components/common/Snackbar';
 import PersonalInformationForm from '../../../components/PersonalInformationForm';
+import QueryKeys from '../../../services/QueryKeys';
 import SettingsService from '../../../services/SettingsService';
 
 const Settings = () => {
@@ -17,6 +18,8 @@ const Settings = () => {
       refetchOnWindowFocus: false,
     }
   );
+
+  const queryClient = useQueryClient();
 
   const mutation = useMutation(
     ['personal-information'],
@@ -40,16 +43,15 @@ const Settings = () => {
   return (
     <>
       <PersonalInformationForm
-        initialData={{
-          name: data.name,
-          email: data.email,
-        }}
-        onSubmit={(data) => {
-          mutation.mutate(data);
+        initialData={data}
+        onSubmit={async (data) => {
+          await mutation.mutate(data);
           displaySnackbar({
             severity: SnackbarSeverity.SUCCESS,
             message: 'Saved settings!',
           });
+
+          await queryClient.invalidateQueries([QueryKeys.PERSONAL_INFORMATION]);
         }}
       />
     </>
