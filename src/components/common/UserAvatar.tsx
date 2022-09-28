@@ -46,7 +46,7 @@ const UserAvatar = (props: AssigneeAvatarProps) => {
   const hash = md5(address);
 
   return (
-    <div className="mr-4">
+    <div className="mr-4" title={user.name}>
       <Avatar
         src={`https://www.gravatar.com/avatar/${hash}?d=404`}
         {...stringAvatar(user.name)}
