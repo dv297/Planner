@@ -1,6 +1,7 @@
 import { Avatar, InputLabel, ListItemIcon } from '@material-ui/core';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select/Select';
+import md5 from 'md5';
 import { useCallback, useState } from 'react';
 import { z } from 'zod';
 
@@ -35,9 +36,16 @@ function stringAvatar(name: string) {
 }
 
 const getAvatar = (assignee: IssueAssigneeValue) => {
+  const address = String(assignee.email).trim().toLowerCase();
+
+  const hash = md5(address);
+
   return (
     <div className="mr-4">
-      <Avatar src={assignee.image} {...stringAvatar(assignee.name)} />
+      <Avatar
+        src={`https://www.gravatar.com/avatar/${hash}?d=${assignee.image}`}
+        {...stringAvatar(assignee.name)}
+      />
     </div>
   );
 };
@@ -46,6 +54,7 @@ export interface IssueAssigneeValue {
   name: string;
   id: string;
   image: string;
+  email: string;
 }
 
 interface IssueAssigneeSelectorProps {
