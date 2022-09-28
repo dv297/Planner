@@ -34,6 +34,7 @@ const IssueAssigneeSelector = (props: IssueAssigneeSelectorProps) => {
         return {
           name: member.user.name,
           id: member.user.id,
+          image: member.user.image,
         };
       })
     : [];

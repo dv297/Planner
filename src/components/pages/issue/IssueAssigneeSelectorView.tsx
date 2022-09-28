@@ -1,4 +1,4 @@
-import { InputLabel } from '@material-ui/core';
+import { Avatar, InputLabel, ListItemIcon } from '@material-ui/core';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select/Select';
 import { useCallback, useState } from 'react';
@@ -7,9 +7,45 @@ import { z } from 'zod';
 import { TeamMemberUserSchema } from '../../../schemas/TeamSettingsSchema';
 import { SnackbarSeverity, useSnackbar } from '../../common/Snackbar';
 
+function stringToColor(string: string) {
+  let hash = 0;
+  let i;
+
+  for (i = 0; i < string.length; i += 1) {
+    hash = string.charCodeAt(i) + ((hash << 5) - hash);
+  }
+
+  let color = '#';
+
+  for (i = 0; i < 3; i += 1) {
+    const value = (hash >> (i * 8)) & 0xff;
+    color += `00${value.toString(16)}`.slice(-2);
+  }
+
+  return color;
+}
+
+function stringAvatar(name: string) {
+  return {
+    sx: {
+      bgcolor: stringToColor(name),
+    },
+    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+  };
+}
+
+const getAvatar = (assignee: IssueAssigneeValue) => {
+  return (
+    <div className="mr-4">
+      <Avatar src={assignee.image} {...stringAvatar(assignee.name)} />
+    </div>
+  );
+};
+
 export interface IssueAssigneeValue {
   name: string;
   id: string;
+  image: string;
 }
 
 interface IssueAssigneeSelectorProps {
@@ -56,10 +92,23 @@ const IssueAssigneeSelectorView = (props: IssueAssigneeSelectorProps) => {
         onChange={handleChange}
         size="small"
         onOpen={onOpen}
+        renderValue={(value) => {
+          const assignee = values.find((assignee) => assignee.id === value);
+
+          return (
+            <div className="flex flex-row items-center">
+              {assignee && <ListItemIcon>{getAvatar(assignee)}</ListItemIcon>}
+              {assignee?.name ?? 'Unassigned'}
+            </div>
+          );
+        }}
       >
         <MenuItem value={UNASSIGNED}>Unassigned</MenuItem>
         {initialAssignee && (
-          <MenuItem value={initialAssignee.id}>{initialAssignee.name}</MenuItem>
+          <MenuItem value={initialAssignee.id}>
+            <ListItemIcon>{getAvatar(initialAssignee)}</ListItemIcon>
+            {initialAssignee.name}
+          </MenuItem>
         )}
         {values
           .filter((value) => {
@@ -68,6 +117,7 @@ const IssueAssigneeSelectorView = (props: IssueAssigneeSelectorProps) => {
           .map((value) => {
             return (
               <MenuItem key={value.id} value={value.id}>
+                <ListItemIcon>{getAvatar(value)}</ListItemIcon>
                 {value.name}
               </MenuItem>
             );
