@@ -4,7 +4,7 @@
  */
 
 import { PortableText } from '@portabletext/react';
-import Img from 'next/image';
+import Image from 'next/image';
 import { useNextSanityImage } from 'next-sanity-image';
 import React, { useMemo } from 'react';
 
@@ -13,7 +13,9 @@ import { getClient } from '../lib/sanity';
 const ImageComponent = ({ value }) => {
   const imageProps = useNextSanityImage(getClient(false), value);
 
-  return <Img {...imageProps} layout="intrinsic" />;
+  console.log(imageProps);
+
+  return <Image {...imageProps} layout="responsive" />;
 };
 
 const components = {
