@@ -63,10 +63,10 @@ const IssuesList = (props: IssuesListProps) => {
                   <span className="col-span-6 text-gray-500">
                     <Link href={`/app/issue/${issueTag}`}>{issue.title}</Link>
                   </span>
-                  <span className="col-span-1 flex justify-end">
+                  <span className="col-span-2 flex justify-center">
                     {issue.assignee && <UserAvatar user={issue.assignee} />}
                   </span>
-                  <span className="col-span-3 flex justify-end">
+                  <span className="col-span-2 flex justify-end">
                     <IssueStatusPill
                       issueStatus={convertToIssueStatusType(issue.issueStatus)}
                     />
