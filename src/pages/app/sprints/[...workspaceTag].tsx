@@ -1,11 +1,9 @@
-import AddIcon from '@mui/icons-material/Add';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 import AppDefaultLayout from '../../../components/AppDefaultLayout';
-import Button from '../../../components/common/Button';
 import SprintCreationModalTrigger from '../../../components/pages/sprints/SprintCreationModalTrigger';
 import QueryKeys from '../../../services/QueryKeys';
 import SprintsService from '../../../services/SprintsService';

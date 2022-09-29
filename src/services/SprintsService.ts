@@ -1,5 +1,4 @@
 import { CreateSprintInput } from '../repos/SprintRepo';
-import { GetProjectsResponseSchema } from '../schemas/ProjectSchemas';
 import { GetSprintsResponseSchema } from '../schemas/SprintSchema';
 
 const SprintsService = {

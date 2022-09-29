@@ -1,6 +1,5 @@
 import { Menu } from '@headlessui/react';
 import { useQuery } from '@tanstack/react-query';
-import { useSession } from 'next-auth/react';
 
 import QueryKeys from '../services/QueryKeys';
 import SettingsService from '../services/SettingsService';
@@ -15,8 +14,6 @@ const ProfileIconButton = () => {
       refetchOnWindowFocus: false,
     }
   );
-
-  console.log(data);
 
   if (!data) {
     return null;

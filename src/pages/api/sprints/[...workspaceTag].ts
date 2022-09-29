@@ -46,11 +46,11 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const sprint = await SprintRepo.createSprint(currentUser, tag, input);
 
-  // const response = CreateSprintResponseSchema.parse({
-  //   id: sprint?.id,
-  // });
+  const response = CreateSprintResponseSchema.parse({
+    id: sprint?.id,
+  });
 
-  return res.json({});
+  return res.json(response);
 };
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {
