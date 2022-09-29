@@ -7,6 +7,7 @@ enum QueryKeys {
   ISSUE_RELATION = 'issue-relation',
   EDGE_SET = 'edget-set',
   PERSONAL_INFORMATION = 'personal-information',
+  SPRINTS = 'sprints',
 }
 
 export default QueryKeys;

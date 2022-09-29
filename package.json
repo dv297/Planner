@@ -27,6 +27,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@date-io/date-fns": "^2.16.0",
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.4",
@@ -35,6 +36,7 @@
     "@hookform/resolvers": "^2.9.7",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.3",
+    "@mui/x-date-pickers": "^5.0.3",
     "@next-auth/prisma-adapter": "^1.0.4",
     "@portabletext/react": "^1.0.6",
     "@prisma/client": "^4.2.1",
@@ -48,6 +50,7 @@
     "@xstate/react": "^3.0.1",
     "bullmq": "^1.90.2",
     "clsx": "^1.2.1",
+    "date-fns": "^2.29.3",
     "html-to-image": "^1.10.8",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",

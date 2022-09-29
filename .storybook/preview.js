@@ -3,6 +3,8 @@ import '../src/styles/global.css';
 import * as NextImage from 'next/image';
 
 import { muiTheme } from 'storybook-addon-material-ui';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const OriginalNextImage = NextImage.default;
 
@@ -21,4 +23,13 @@ export const parameters = {
   },
 };
 
-export const decorators = [muiTheme()];
+export const decorators = [
+  muiTheme(),
+  (Story) => {
+    return (
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <Story />
+      </LocalizationProvider>
+    );
+  },
+];

@@ -3,6 +3,8 @@ import '../styles/global.css';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/app';
@@ -39,12 +41,14 @@ const App = (props: CustomAppProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={theme}>
-          <SessionProvider session={pageProps.session}>
-            <CssBaseline />
-            {getLayout(<Component {...pageProps} />)}
-          </SessionProvider>
-        </ThemeProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <ThemeProvider theme={theme}>
+            <SessionProvider session={pageProps.session}>
+              <CssBaseline />
+              {getLayout(<Component {...pageProps} />)}
+            </SessionProvider>
+          </ThemeProvider>
+        </LocalizationProvider>
       </CacheProvider>
     </QueryClientProvider>
   );

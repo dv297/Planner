@@ -52,6 +52,7 @@ model Workspace {
   UserPreference UserPreference[]
   TeamWorkspace  TeamWorkspace[]
   KeyIssue       KeyIssue[]
+  Sprint         Sprint[]
 }
 
 model TeamWorkspace {
@@ -177,6 +178,15 @@ model TeamInvite {
   inviteToken String    @unique @default(cuid())
   isAccepted  Boolean?  @default(false)
   isExpired   Boolean?  @default(false)
+}
+
+model Sprint {
+  id          String    @id @unique @default(cuid())
+  workspace   Workspace @relation(fields: [workspaceId], references: [id])
+  name        String
+  beginDate   DateTime?
+  endDate     DateTime?
+  workspaceId String
 }
 
 enum IssueRelationType {
