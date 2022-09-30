@@ -48,6 +48,12 @@ const IssueAssigneeSelectorView = (props: IssueAssigneeSelectorProps) => {
     [onChange, displaySnackbar]
   );
 
+  const dropdownOptions = [...values];
+
+  if (dropdownOptions.length === 0 && initialAssignee) {
+    dropdownOptions.push(initialAssignee);
+  }
+
   return (
     <FormControl fullWidth>
       <InputLabel id="input-status-selector-label">Assignee</InputLabel>
@@ -60,7 +66,9 @@ const IssueAssigneeSelectorView = (props: IssueAssigneeSelectorProps) => {
         size="small"
         onOpen={onOpen}
         renderValue={(value) => {
-          const assignee = values.find((assignee) => assignee.id === value);
+          const assignee = dropdownOptions.find(
+            (assignee) => assignee.id === value
+          );
 
           return (
             <div className="flex flex-row items-center">
@@ -87,7 +95,7 @@ const IssueAssigneeSelectorView = (props: IssueAssigneeSelectorProps) => {
             {initialAssignee.name}
           </MenuItem>
         )}
-        {values
+        {dropdownOptions
           .filter((value) => {
             return value.id !== initialAssignee?.id;
           })
