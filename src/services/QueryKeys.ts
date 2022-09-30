@@ -10,4 +10,8 @@ enum QueryKeys {
   SPRINTS = 'sprints',
 }
 
+export const getDynamicQueryKey = (queryKey: QueryKeys, id: string) => {
+  return `${queryKey}-${id}`;
+};
+
 export default QueryKeys;

@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
 import { z } from 'zod';
 
-import prisma from '@src/lib//prisma';
+import prisma from '@src/lib/prisma';
 import {
   ProjectMapEdgesSetSchema,
   UpdateSingleProjectMapEdgesSetInputSchema,

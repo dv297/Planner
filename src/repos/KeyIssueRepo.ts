@@ -1,6 +1,6 @@
 import { User } from 'next-auth';
 
-import prisma from '@src/lib//prisma';
+import prisma from '@src/lib/prisma';
 
 const KeyIssueRepo = {
   async getKeyIssueByTag(user: User, issueTag: string) {

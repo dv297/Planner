@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
-import prisma from '@src/lib//prisma';
+import prisma from '@src/lib/prisma';
 import { ItemNotFound } from '@src/repos/RepoErrors';
 import UserRepo from '@src/repos/UserRepo';
 

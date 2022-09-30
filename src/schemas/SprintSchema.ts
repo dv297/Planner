@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { IssuesListSchema } from '@src/schemas/IssueSchema';
 import { WorkspaceSchema } from '@src/schemas/WorkspaceSchemas';
 
 const dateSchema = z.preprocess((arg: any) => {

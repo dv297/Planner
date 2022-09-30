@@ -1,6 +1,6 @@
 import { User } from 'next-auth';
 
-import prisma from '@src/lib//prisma';
+import prisma from '@src/lib/prisma';
 import UserRepo from '@src/repos/UserRepo';
 
 const ProjectRepo = {

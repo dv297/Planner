@@ -1,22 +1,25 @@
+import { Prisma } from '@prisma/client';
 import { User } from 'next-auth';
 
-import prisma from '@src/lib//prisma';
+import prisma from '@src/lib/prisma';
 import { IssueRelationSchemaResponseData } from '@src/schemas/IssueRelationSchema';
+
+export const issueFieldInclusion: Prisma.IssueInclude = {
+  workspace: true,
+  assignee: true,
+  sprint: {
+    include: {
+      workspace: true,
+    },
+  },
+};
 
 function getIssueById(issueId: string) {
   return prisma.issue.findUnique({
     where: {
       id: issueId,
     },
-    include: {
-      workspace: true,
-      assignee: true,
-      sprint: {
-        include: {
-          workspace: true,
-        },
-      },
-    },
+    include: issueFieldInclusion,
   });
 }
 
@@ -58,15 +61,7 @@ const IssueRepo = {
         workspaceId: workspace.id,
         workspaceIssueCount: Number.parseInt(workspaceIssueCount),
       },
-      include: {
-        workspace: true,
-        assignee: true,
-        sprint: {
-          include: {
-            workspace: true,
-          },
-        },
-      },
+      include: issueFieldInclusion,
     });
 
     return {
@@ -106,15 +101,7 @@ const IssueRepo = {
       where: {
         projectId,
       },
-      include: {
-        workspace: true,
-        assignee: true,
-        sprint: {
-          include: {
-            workspace: true,
-          },
-        },
-      },
+      include: issueFieldInclusion,
       orderBy: {
         workspaceIssueCount: 'asc',
       },
@@ -131,18 +118,20 @@ const IssueRepo = {
       where: {
         workspaceId,
       },
-      include: {
-        workspace: true,
-        assignee: true,
-        sprint: {
-          include: {
-            workspace: true,
-          },
-        },
-      },
+      include: issueFieldInclusion,
       orderBy: {
         workspaceIssueCount: 'asc',
       },
+    });
+
+    return issues;
+  },
+  async getIssuesForSprint(sprintId: string) {
+    const issues = await prisma.issue.findMany({
+      where: {
+        sprintId,
+      },
+      include: issueFieldInclusion,
     });
 
     return issues;

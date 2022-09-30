@@ -1,4 +1,5 @@
 import { CreateSprintInput } from '@src/repos/SprintRepo';
+import { GetIssuesForSprintResponseSchema } from '@src/schemas/IssueSchema';
 import { GetSprintsResponseSchema } from '@src/schemas/SprintSchema';
 
 const SprintsService = {
@@ -19,6 +20,26 @@ const SprintsService = {
     const data = await result.json();
 
     const response = GetSprintsResponseSchema.parse(data);
+
+    return response.data;
+  },
+  getIssuesForSprint: async (sprintId: string | undefined) => {
+    if (!sprintId) {
+      return;
+    }
+
+    const result = await fetch(`/api/sprint/${sprintId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!result.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await result.json();
+
+    const response = GetIssuesForSprintResponseSchema.parse(data);
 
     return response.data;
   },

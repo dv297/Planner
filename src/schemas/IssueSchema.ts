@@ -28,16 +28,6 @@ export const IssueSchema = z.object({
   sprint: z.nullable(SprintSchema),
 });
 
-export const IssueSchemaWithoutWorkspace = z.object({
-  id: z.string(),
-  title: z.string(),
-  description: z.string(),
-  issueStatus: z.string(),
-  projectId: z.string(),
-  workspaceId: z.string(),
-  workspaceIssueCount: z.number(),
-});
-
 export const GetSingleIssueResponseSchema = z.object({
   data: IssueSchema,
 });
@@ -60,4 +50,12 @@ export const CreateIssueInputSchema = z.object({
   projectId: z.string(),
   title: z.string(),
   description: z.string(),
+});
+
+export const GetIssuesForSprintResponseDataSchema = z.object({
+  issues: IssuesListSchema,
+});
+
+export const GetIssuesForSprintResponseSchema = z.object({
+  data: GetIssuesForSprintResponseDataSchema,
 });
