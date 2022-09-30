@@ -2,7 +2,9 @@ import { createMachine } from 'xstate';
 
 const onboardingMachine = createMachine({
   id: 'onboarding',
-  initial: 'initial',
+  // TODO: See if there is value in having a separte team initialization phase.
+  // initial: 'initial',
+  initial: 'establishIndividualSettings',
   predictableActionArguments: true,
   states: {
     initial: {

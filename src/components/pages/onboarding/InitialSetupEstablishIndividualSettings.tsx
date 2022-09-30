@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import PersonalInformationForm from '@src/components/PersonalInformationForm';
 import { useOnboardingMachine } from '@src/machines/onboarding/useOnboardingMachine';
+import OnboardingService from '@src/services/OnboardingService';
 import SettingsService from '@src/services/SettingsService';
 
 const InitialSetupEstablishIndividualSettings = () => {
@@ -20,6 +21,11 @@ const InitialSetupEstablishIndividualSettings = () => {
   const mutation = useMutation(
     ['personal-information'],
     SettingsService.updatePersonalInformation
+  );
+
+  const createDefaultWorkspaceAndTeamMutation = useMutation(
+    ['create-default-workspace-and-team'],
+    OnboardingService.createDefaultWorkspaceAndTeam
   );
 
   if (error) {
@@ -45,6 +51,7 @@ const InitialSetupEstablishIndividualSettings = () => {
         initialData={data}
         onSubmit={async (data) => {
           await mutation.mutate(data);
+          await createDefaultWorkspaceAndTeamMutation.mutate();
           machineSend('COMPLETE');
           displaySnackbar({
             severity: SnackbarSeverity.SUCCESS,
