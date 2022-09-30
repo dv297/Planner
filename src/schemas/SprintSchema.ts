@@ -40,3 +40,7 @@ export const CreateSprintBodyInputSchema = z.object({
 export const CreateSprintResponseSchema = z.object({
   id: z.string(),
 });
+
+export const GetSingleSprintInputSchema = z.object({
+  sprintId: z.array(z.string()),
+});

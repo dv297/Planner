@@ -40,6 +40,20 @@ const SprintsService = {
       throw new Error('Network response was not ok');
     }
   },
+  deleteSprint: async (sprintId: string | undefined) => {
+    if (!sprintId) {
+      return;
+    }
+
+    const result = await fetch(`/api/sprint/${sprintId}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (!result.ok) {
+      throw new Error('Network response was not ok');
+    }
+  },
 };
 
 export default SprintsService;

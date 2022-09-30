@@ -1,9 +1,11 @@
 import { ReactNode } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import Button from '@src/components/common/Button';
 import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCreationModalTrigger';
 import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
@@ -55,8 +57,18 @@ const Page = () => {
 
   const tag = Array.isArray(workspaceTag) ? workspaceTag[0] : workspaceTag;
 
+  const queryClient = useQueryClient();
+
   const { data } = useQuery([QueryKeys.SPRINTS], () =>
     SprintsService.getSprintsForWorkspace(tag)
+  );
+  const { mutate: deleteSprint } = useMutation(
+    (id: string) => SprintsService.deleteSprint(id),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QueryKeys.SPRINTS]);
+      },
+    }
   );
 
   if (!data) {
@@ -87,6 +99,16 @@ const Page = () => {
                 >
                   <div className="grid grid-rows-1 grid-cols-4 w-full pl-8">
                     <span className="col-span-1">{entry.name}</span>
+                  </div>
+                  <div>
+                    <Button
+                      onClick={() => {
+                        deleteSprint(entry.id);
+                      }}
+                      variant="text"
+                    >
+                      <DeleteIcon titleAccess="Delete" />
+                    </Button>
                   </div>
                 </div>
               );

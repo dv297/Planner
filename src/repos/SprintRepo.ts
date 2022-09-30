@@ -1,6 +1,8 @@
 import { User } from '@prisma/client';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 
 import prisma from '@src/lib//prisma';
+import { ItemNotFound } from '@src/repos/RepoErrors';
 import UserRepo from '@src/repos/UserRepo';
 
 export interface CreateSprintInput {
@@ -49,6 +51,23 @@ const SprintRepo = {
     });
 
     return sprint;
+  },
+  async deleteSprint(sprintId: string) {
+    try {
+      const response = await prisma.sprint.delete({
+        where: {
+          id: sprintId,
+        },
+      });
+
+      return response;
+    } catch (err) {
+      if (err instanceof PrismaClientKnownRequestError) {
+        if (err.code === 'P2025') {
+          throw new ItemNotFound();
+        }
+      }
+    }
   },
 };
 
