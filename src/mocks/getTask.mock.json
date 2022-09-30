@@ -29,7 +29,9 @@
         },
         "workspaceIssueCount": 2,
         "assignee": null,
-        "assigneeId": null
+        "assigneeId": null,
+        "sprint": null,
+        "sprintId": null
       },
       {
         "id": "cl7rxodly2673oz5x2lymz0cs",
@@ -45,7 +47,9 @@
         },
         "workspaceIssueCount": 3,
         "assignee": null,
-        "assigneeId": null
+        "assigneeId": null,
+        "sprint": null,
+        "sprintId": null
       },
       {
         "id": "cl7ryehs93999oz5xequbyprr",
@@ -61,7 +65,9 @@
         },
         "workspaceIssueCount": 4,
         "assignee": null,
-        "assigneeId": null
+        "assigneeId": null,
+        "sprint": null,
+        "sprintId": null
       },
       {
         "id": "cl7ryft2g4148oz5x30l175zh",
@@ -77,7 +83,9 @@
         },
         "workspaceIssueCount": 5,
         "assignee": null,
-        "assigneeId": null
+        "assigneeId": null,
+        "sprint": null,
+        "sprintId": null
       },
       {
         "id": "cl7s3yo4q1014vf5xvgstyj99",
@@ -93,7 +101,9 @@
         },
         "workspaceIssueCount": 6,
         "assignee": null,
-        "assigneeId": null
+        "assigneeId": null,
+        "sprint": null,
+        "sprintId": null
       }
     ]
   }

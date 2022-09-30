@@ -11,6 +11,11 @@ function getIssueById(issueId: string) {
     include: {
       workspace: true,
       assignee: true,
+      sprint: {
+        include: {
+          workspace: true,
+        },
+      },
     },
   });
 }
@@ -56,6 +61,11 @@ const IssueRepo = {
       include: {
         workspace: true,
         assignee: true,
+        sprint: {
+          include: {
+            workspace: true,
+          },
+        },
       },
     });
 
@@ -98,6 +108,12 @@ const IssueRepo = {
       },
       include: {
         workspace: true,
+        assignee: true,
+        sprint: {
+          include: {
+            workspace: true,
+          },
+        },
       },
       orderBy: {
         workspaceIssueCount: 'asc',
@@ -118,6 +134,11 @@ const IssueRepo = {
       include: {
         workspace: true,
         assignee: true,
+        sprint: {
+          include: {
+            workspace: true,
+          },
+        },
       },
       orderBy: {
         workspaceIssueCount: 'asc',

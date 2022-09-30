@@ -8,6 +8,7 @@ import EditableTextDisplay from '../../../components/common/EditableDisplays/Edi
 import IssueRelationList from '../../../components/IssueRelationList';
 import IssueAssigneeSelector from '../../../components/pages/issue/IssueAssigneeSelector';
 import IssueStatusSelector from '../../../components/pages/issue/IssueStatusSelector';
+import SprintSelector from '../../../components/pages/issue/SprintSelector';
 import IssueRelationService from '../../../services/IssueRelationService';
 import IssueService from '../../../services/IssueService';
 import QueryKeys from '../../../services/QueryKeys';
@@ -81,11 +82,14 @@ const ProjectPage = () => {
               initialValue={convertToIssueStatusType(issue.issueStatus)}
             />
           </div>
-          <div className="mt-8 w-full">
+          <div className="mt-8">
             <IssueAssigneeSelector
               issueTag={tag}
               initialAssignee={issue.assignee}
             />
+          </div>
+          <div className="mt-8">
+            <SprintSelector issueTag={tag} initialValue={issue.sprint} />
           </div>
         </aside>
       </div>

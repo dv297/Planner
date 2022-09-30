@@ -97,6 +97,8 @@ model Issue {
   workspaceIssueCount Int?        @default(-1)
   assignee            User?       @relation(fields: [assigneeId], references: [id])
   assigneeId          String?
+  sprint              Sprint?     @relation(fields: [sprintId], references: [id])
+  sprintId            String?
 }
 
 model Account {
@@ -187,6 +189,7 @@ model Sprint {
   beginDate   DateTime?
   endDate     DateTime?
   workspaceId String
+  Issue       Issue[]
 }
 
 enum IssueRelationType {

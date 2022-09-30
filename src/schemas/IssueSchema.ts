@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { SprintSchema } from './SprintSchema';
 import { TeamMemberUserSchema } from './TeamSettingsSchema';
 import { WorkspaceSchema } from './WorkspaceSchemas';
 
@@ -23,6 +24,8 @@ export const IssueSchema = z.object({
   workspaceIssueCount: z.number(),
   assigneeId: z.nullable(z.string()),
   assignee: z.nullable(TeamMemberUserSchema),
+  sprintId: z.nullable(z.string()),
+  sprint: z.nullable(SprintSchema),
 });
 
 export const IssueSchemaWithoutWorkspace = z.object({
