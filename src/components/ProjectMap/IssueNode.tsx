@@ -23,8 +23,15 @@ const IssueNode = (props: IssueNodeProps) => {
         <span className="text-lg font-bold">{issue.title}</span>
         {issue.assignee && (
           <span className="mt-2 mb-2 block text-lg flex flex-row items-center">
-            <UserAvatar user={issue.assignee} />
+            <div className="mr-4">
+              <UserAvatar user={issue.assignee} />
+            </div>
             Assigned to {issue.assignee.name}
+          </span>
+        )}
+        {issue.sprint && (
+          <span className="mt-2 mb-2 block text-lg flex flex-row items-center">
+            {issue.sprint.name}
           </span>
         )}
         <div className="mt-2">
