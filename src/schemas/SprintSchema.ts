@@ -2,13 +2,19 @@ import { z } from 'zod';
 
 import { WorkspaceSchema } from './WorkspaceSchemas';
 
+const dateSchema = z.preprocess((arg: any) => {
+  if (typeof arg === 'string' || arg instanceof Date) {
+    return new Date(arg);
+  }
+}, z.date());
+
 export const SprintSchema = z.object({
   id: z.string(),
   workspaceId: z.string(),
   workspace: WorkspaceSchema,
   name: z.string(),
-  beginDate: z.nullable(z.date()),
-  endDate: z.nullable(z.date()),
+  beginDate: z.nullable(dateSchema),
+  endDate: z.nullable(dateSchema),
 });
 
 export const SprintsListSchema = z.array(SprintSchema);

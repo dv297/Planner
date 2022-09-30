@@ -33,7 +33,6 @@ const SprintRepo = {
     workspaceTag: string,
     input: CreateSprintInput
   ) {
-    console.log(workspaceTag);
     const workspace = await UserRepo.getWorkspaceByTag(user, workspaceTag);
 
     console.log(workspace);
@@ -42,7 +41,6 @@ const SprintRepo = {
       return;
     }
 
-    console.log({ input });
     const sprint = await prisma.sprint.create({
       data: {
         workspaceId: workspace.id,
