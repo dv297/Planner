@@ -1,12 +1,12 @@
+import { useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRef } from 'react';
 
-import IssueService from '../services/IssueService';
-import { useAppContext } from './AppContext';
-import Modal from './common/Modal';
-import { SnackbarSeverity, useSnackbar } from './common/Snackbar';
-import CreateIssueForm from './CreateIssueForm';
+import { useAppContext } from '@src/components/AppContext';
+import Modal from '@src/components/common/Modal';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import CreateIssueForm from '@src/components/CreateIssueForm';
+import IssueService from '@src/services/IssueService';
 
 interface IssueCreationModalProps {
   isOpen: boolean;

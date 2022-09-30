@@ -1,13 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-import { SprintSchema } from '../../../schemas/SprintSchema';
-import IssueService from '../../../services/IssueService';
-import QueryKeys from '../../../services/QueryKeys';
-import SprintsService from '../../../services/SprintsService';
-import { useAppContext } from '../../AppContext';
-import GenericSelectorView from './GenericSelectorView';
+import { useAppContext } from '@src/components/AppContext';
+import GenericSelectorView from '@src/components/pages/issue/GenericSelectorView';
+import { SprintSchema } from '@src/schemas/SprintSchema';
+import IssueService from '@src/services/IssueService';
+import QueryKeys from '@src/services/QueryKeys';
+import SprintsService from '@src/services/SprintsService';
 
 interface SprintSelectorProps {
   issueTag: string | undefined;

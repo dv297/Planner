@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { CardActionArea } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -5,12 +6,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
-import { ReactNode } from 'react';
 
-import blogImage from '../../../../public/images/books.jpeg';
-import projectImage from '../../../../public/images/project.jpeg';
-import supportImage from '../../../../public/images/support.jpeg';
-import AppDefaultLayout from '../../../components/AppDefaultLayout';
+import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import blogImage from '@public/images/books.jpeg';
+import projectImage from '@public/images/project.jpeg';
+import supportImage from '@public/images/support.jpeg';
 
 interface ActionItemProps {
   title: string;

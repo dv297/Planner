@@ -1,13 +1,13 @@
 import { User } from '@prisma/client';
 import { z } from 'zod';
 
-import prisma from '../lib/prisma';
+import prisma from '@src/lib//prisma';
+import IssueRepo from '@src/repos/IssueRepo';
 import {
   ProjectMapPositionSchema,
   UpdateSingleProjectMapPositionInputSchema,
-} from '../schemas/ProjectMapPositionSchemas';
-import { ProjectMapPositionDataEntry } from '../styles/ProjectMapPositionDataEntry';
-import IssueRepo from './IssueRepo';
+} from '@src/schemas/ProjectMapPositionSchemas';
+import { ProjectMapPositionDataEntry } from '@src/styles/ProjectMapPositionDataEntry';
 
 const ProjectMapPositionsRepo = {
   async getProjectMapPosition(user: User, projectMapPositionId: string) {

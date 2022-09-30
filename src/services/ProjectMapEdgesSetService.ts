@@ -4,7 +4,7 @@ import {
   GetSingleProjectMapEdgesSetResponseSchema,
   ProjectMapEdgesSetListSchema,
   UpdateSingleProjectMapEdgesSetInputSchema,
-} from '../schemas/ProjectMapEdgesSetSchemas';
+} from '@src/schemas/ProjectMapEdgesSetSchemas';
 
 const ProjectMapEdgesSetService = {
   getProjectMapEdgesSet: async (issueTag: string | undefined) => {

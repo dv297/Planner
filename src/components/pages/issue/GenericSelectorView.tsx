@@ -1,9 +1,9 @@
+import { useCallback, useState } from 'react';
 import { InputLabel } from '@material-ui/core';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select/Select';
-import { useCallback, useState } from 'react';
 
-import { SnackbarSeverity, useSnackbar } from '../../common/Snackbar';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 
 export interface GenericSelectorOption extends Record<string, any> {
   id: string;

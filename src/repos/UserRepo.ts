@@ -2,8 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { Session, User } from 'next-auth';
 import { unstable_getServerSession } from 'next-auth/next';
 
-import prisma from '../lib/prisma';
-import { authOptions } from '../pages/api/auth/[...nextauth]';
+import prisma from '@src/lib//prisma';
+import { authOptions } from '@src/pages/api/auth/[...nextauth]';
 
 const UserRepo = {
   getCurrentUser: async ({

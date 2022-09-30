@@ -1,10 +1,10 @@
 import { Handle, Position } from 'react-flow-renderer';
 import { z } from 'zod';
 
-import { IssueSchema } from '../../schemas/IssueSchema';
-import { convertToIssueStatusType } from '../../types/IssueStatusType';
-import UserAvatar from '../common/UserAvatar';
-import IssueStatusPill from '../IssueStatusPill';
+import UserAvatar from '@src/components/common/UserAvatar';
+import IssueStatusPill from '@src/components/IssueStatusPill';
+import { IssueSchema } from '@src/schemas/IssueSchema';
+import { convertToIssueStatusType } from '@src/types/IssueStatusType';
 
 const handleStyle = {};
 

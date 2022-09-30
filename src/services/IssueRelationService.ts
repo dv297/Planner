@@ -1,4 +1,4 @@
-import { IssueRelationSchemaResponse } from '../schemas/IssueRelationSchema';
+import { IssueRelationSchemaResponse } from '@src/schemas/IssueRelationSchema';
 
 const IssueRelationService = {
   getIssueRelation: async (issueTag: string | undefined) => {

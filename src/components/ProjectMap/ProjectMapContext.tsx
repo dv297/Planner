@@ -1,13 +1,13 @@
+import { createContext, ReactNode, useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { createContext, ReactNode, useContext, useState } from 'react';
 import { z } from 'zod';
 
-import { GetSingleProjectMapEdgesSetResponseDataSchema } from '../../schemas/ProjectMapEdgesSetSchemas';
-import { GetSingleProjectMapPositionResponseDataSchema } from '../../schemas/ProjectMapPositionSchemas';
-import ProjectMapEdgesSetService from '../../services/ProjectMapEdgesSetService';
-import ProjectMapPositionService from '../../services/ProjectMapPositionService';
-import QueryKeys from '../../services/QueryKeys';
+import { GetSingleProjectMapEdgesSetResponseDataSchema } from '@src/schemas/ProjectMapEdgesSetSchemas';
+import { GetSingleProjectMapPositionResponseDataSchema } from '@src/schemas/ProjectMapPositionSchemas';
+import ProjectMapEdgesSetService from '@src/services/ProjectMapEdgesSetService';
+import ProjectMapPositionService from '@src/services/ProjectMapPositionService';
+import QueryKeys from '@src/services/QueryKeys';
 
 interface ProjectMapContextType {
   refresh: () => void;

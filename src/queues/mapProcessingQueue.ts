@@ -1,7 +1,7 @@
 import { Queue, Worker } from 'bullmq';
 
-import { prisma } from '../lib/prisma';
-import { convertEdgeSetDataToEdgeset } from '../schemas/ProjectMapEdgesSetSchemas';
+import { prisma } from '@src/lib/prisma';
+import { convertEdgeSetDataToEdgeset } from '@src/schemas/ProjectMapEdgesSetSchemas';
 
 const QUEUE_NAME = 'mapProcessingQueue';
 

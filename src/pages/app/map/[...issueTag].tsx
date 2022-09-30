@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
-import AppDefaultLayout from '../../../components/AppDefaultLayout';
-import FullScreenLoader from '../../../components/common/FullScreenLoader';
-import ProjectMap from '../../../components/ProjectMap/ProjectMap';
+import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import FullScreenLoader from '@src/components/common/FullScreenLoader';
+import ProjectMap from '@src/components/ProjectMap/ProjectMap';
 import {
   ProjectMapContextProvider,
   useProjectMapContext,
-} from '../../../components/ProjectMap/ProjectMapContext';
+} from '@src/components/ProjectMap/ProjectMapContext';
 
 const Page = () => {
   const { isLoading, project, edgeSet } = useProjectMapContext();

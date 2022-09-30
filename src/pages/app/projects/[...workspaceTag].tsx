@@ -1,14 +1,14 @@
+import { ReactNode } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
 
-import AppDefaultLayout from '../../../components/AppDefaultLayout';
-import Button from '../../../components/common/Button';
-import ProjectsService from '../../../services/ProjectsService';
-import QueryKeys from '../../../services/QueryKeys';
-import { parseIssueTagFromIssue } from '../../../utils/parseIssueTagFromIssue';
+import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import Button from '@src/components/common/Button';
+import ProjectsService from '@src/services/ProjectsService';
+import QueryKeys from '@src/services/QueryKeys';
+import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
 
 const Page = () => {
   const router = useRouter();

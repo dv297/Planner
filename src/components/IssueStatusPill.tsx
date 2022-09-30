@@ -1,6 +1,6 @@
 import { clsx } from 'clsx';
 
-import IssueStatusType from '../types/IssueStatusType';
+import IssueStatusType from '@src/types/IssueStatusType';
 
 interface IssueStatusPillProps {
   issueStatus: IssueStatusType;

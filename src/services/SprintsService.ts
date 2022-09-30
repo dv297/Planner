@@ -1,5 +1,5 @@
-import { CreateSprintInput } from '../repos/SprintRepo';
-import { GetSprintsResponseSchema } from '../schemas/SprintSchema';
+import { CreateSprintInput } from '@src/repos/SprintRepo';
+import { GetSprintsResponseSchema } from '@src/schemas/SprintSchema';
 
 const SprintsService = {
   getSprintsForWorkspace: async (workspaceTag: string | undefined) => {

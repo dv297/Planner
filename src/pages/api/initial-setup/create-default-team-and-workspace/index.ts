@@ -1,8 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { withAuthMiddleware } from '../../../../lib/withAuthMiddleware';
-import InitialSetupRepo from '../../../../repos/InitialSetupRepo';
-import UserRepo from '../../../../repos/UserRepo';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import InitialSetupRepo from '@src/repos/InitialSetupRepo';
+import UserRepo from '@src/repos/UserRepo';
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {
   const currentUser = await UserRepo.getCurrentUser({ req, res });

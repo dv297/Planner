@@ -1,18 +1,18 @@
+import { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
 
-import AppDefaultLayout from '../../../components/AppDefaultLayout';
-import EditableMarkdownDisplay from '../../../components/common/EditableDisplays/EditableMarkdownDisplay';
-import EditableTextDisplay from '../../../components/common/EditableDisplays/EditableTextDisplay';
-import IssueRelationList from '../../../components/IssueRelationList';
-import IssueAssigneeSelector from '../../../components/pages/issue/IssueAssigneeSelector';
-import IssueStatusSelector from '../../../components/pages/issue/IssueStatusSelector';
-import SprintSelector from '../../../components/pages/issue/SprintSelector';
-import IssueRelationService from '../../../services/IssueRelationService';
-import IssueService from '../../../services/IssueService';
-import QueryKeys from '../../../services/QueryKeys';
-import { convertToIssueStatusType } from '../../../types/IssueStatusType';
+import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import EditableMarkdownDisplay from '@src/components/common/EditableDisplays/EditableMarkdownDisplay';
+import EditableTextDisplay from '@src/components/common/EditableDisplays/EditableTextDisplay';
+import IssueRelationList from '@src/components/IssueRelationList';
+import IssueAssigneeSelector from '@src/components/pages/issue/IssueAssigneeSelector';
+import IssueStatusSelector from '@src/components/pages/issue/IssueStatusSelector';
+import SprintSelector from '@src/components/pages/issue/SprintSelector';
+import IssueRelationService from '@src/services/IssueRelationService';
+import IssueService from '@src/services/IssueService';
+import QueryKeys from '@src/services/QueryKeys';
+import { convertToIssueStatusType } from '@src/types/IssueStatusType';
 
 const getUpdaterFunction =
   (tag: string | undefined, propertyName: string) =>

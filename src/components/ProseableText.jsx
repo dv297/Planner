@@ -3,12 +3,12 @@
  * Copied from https://www.sanity.io/guides/tailwindcss-typography-prose-portable-text
  */
 
+import React, { useMemo } from 'react';
 import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import { useNextSanityImage } from 'next-sanity-image';
-import React, { useMemo } from 'react';
 
-import { getClient } from '../lib/sanity';
+import { getClient } from '@src/lib/sanity';
 
 const ImageComponent = ({ value }) => {
   const imageProps = useNextSanityImage(getClient(false), value);

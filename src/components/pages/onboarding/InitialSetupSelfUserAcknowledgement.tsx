@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
-import OnboardingService from '../../../services/OnboardingService';
-import Button from '../../common/Button';
+import Button from '@src/components/common/Button';
+import { useOnboardingMachine } from '@src/machines/onboarding/useOnboardingMachine';
+import OnboardingService from '@src/services/OnboardingService';
 
 const InitialSetupSelfUserAcknowledgement = () => {
   const { machineSend } = useOnboardingMachine();

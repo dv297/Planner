@@ -1,10 +1,10 @@
 import { Menu } from '@headlessui/react';
 import { useQuery } from '@tanstack/react-query';
 
-import QueryKeys from '../services/QueryKeys';
-import SettingsService from '../services/SettingsService';
-import UserAvatar from './common/UserAvatar';
-import ProfileApplicationMenu from './ProfileApplicationMenu';
+import UserAvatar from '@src/components/common/UserAvatar';
+import ProfileApplicationMenu from '@src/components/ProfileApplicationMenu';
+import QueryKeys from '@src/services/QueryKeys';
+import SettingsService from '@src/services/SettingsService';
 
 const ProfileIconButton = () => {
   const { data } = useQuery(

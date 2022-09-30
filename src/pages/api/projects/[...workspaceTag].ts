@@ -1,13 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
-import ProjectRepo from '../../../repos/ProjectRepo';
-import UserRepo from '../../../repos/UserRepo';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import ProjectRepo from '@src/repos/ProjectRepo';
+import UserRepo from '@src/repos/UserRepo';
 import {
   GetProjectsInputSchema,
   GetProjectsResponseSchema,
-} from '../../../schemas/ProjectSchemas';
-import routeMatcher from '../../../utils/routeMatcher';
+} from '@src/schemas/ProjectSchemas';
+import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const { workspaceTag } = GetProjectsInputSchema.parse(req.query);

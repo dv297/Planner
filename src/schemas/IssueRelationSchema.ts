@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { IssueSchema } from './IssueSchema';
+import { IssueSchema } from '@src/schemas/IssueSchema';
 
 export const IssueRelationSchemaResponseData = z.object({
   BLOCKED_BY: z.array(IssueSchema),

@@ -1,4 +1,4 @@
-import { TeamMembersResponseSchema } from '../schemas/TeamSettingsSchema';
+import { TeamMembersResponseSchema } from '@src/schemas/TeamSettingsSchema';
 
 const TeamMembersService = {
   getTeamMembers: async () => {

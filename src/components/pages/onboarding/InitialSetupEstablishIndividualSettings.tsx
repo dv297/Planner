@@ -1,9 +1,9 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
-import SettingsService from '../../../services/SettingsService';
-import { SnackbarSeverity, useSnackbar } from '../../common/Snackbar';
-import PersonalInformationForm from '../../PersonalInformationForm';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import PersonalInformationForm from '@src/components/PersonalInformationForm';
+import { useOnboardingMachine } from '@src/machines/onboarding/useOnboardingMachine';
+import SettingsService from '@src/services/SettingsService';
 
 const InitialSetupEstablishIndividualSettings = () => {
   const { machineSend } = useOnboardingMachine();

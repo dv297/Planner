@@ -14,15 +14,15 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 import { z } from 'zod';
 
-import { IssueSchema, IssuesListSchema } from '../../schemas/IssueSchema';
-import { ProjectMapEdgesSetSchema } from '../../schemas/ProjectMapEdgesSetSchemas';
-import { ProjectMapPositionSchema } from '../../schemas/ProjectMapPositionSchemas';
-import { Position } from '../../styles/ProjectMapPositionDataEntry';
-import IssueStatusType from '../../types/IssueStatusType';
-import type { IssueNodeData } from './IssueNode';
-import IssueNode from './IssueNode';
-import MapPersistenceManager from './MapPersistenceManager';
-import ProjectMapControls from './ProjectMapControls';
+import type { IssueNodeData } from '@src/components/ProjectMap/IssueNode';
+import IssueNode from '@src/components/ProjectMap/IssueNode';
+import MapPersistenceManager from '@src/components/ProjectMap/MapPersistenceManager';
+import ProjectMapControls from '@src/components/ProjectMap/ProjectMapControls';
+import { IssueSchema, IssuesListSchema } from '@src/schemas/IssueSchema';
+import { ProjectMapEdgesSetSchema } from '@src/schemas/ProjectMapEdgesSetSchemas';
+import { ProjectMapPositionSchema } from '@src/schemas/ProjectMapPositionSchemas';
+import { Position } from '@src/styles/ProjectMapPositionDataEntry';
+import IssueStatusType from '@src/types/IssueStatusType';
 
 const nodeTypes = {
   issue: IssueNode,

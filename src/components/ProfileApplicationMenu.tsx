@@ -1,7 +1,7 @@
+import { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
 import { signOut } from 'next-auth/react';
-import { Fragment } from 'react';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');

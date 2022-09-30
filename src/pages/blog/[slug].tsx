@@ -1,11 +1,11 @@
+import { ReactNode } from 'react';
 import imageUrlBuilder from '@sanity/image-url';
 import { useRouter } from 'next/router';
 import { groq } from 'next-sanity';
-import { ReactNode } from 'react';
 
-import LandingPageLayout from '../../components/LandingPageLayout';
-import ProseableText from '../../components/ProseableText';
-import { getClient, usePreviewSubscription } from '../../lib/sanity';
+import LandingPageLayout from '@src/components/LandingPageLayout';
+import ProseableText from '@src/components/ProseableText';
+import { getClient, usePreviewSubscription } from '@src/lib/sanity';
 
 const query = groq`
   *[_type == "post" && slug.current == $slug][0] {

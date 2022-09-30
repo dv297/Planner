@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 
-import TeamMembersService from '../services/TeamMembersService';
-import Form from './common/Form';
-import FormSubmitButton from './common/FormSubmitButton';
-import FormTextInput from './common/FormTextInput';
-import Modal from './common/Modal';
-import { SnackbarSeverity, useSnackbar } from './common/Snackbar';
+import Form from '@src/components/common/Form';
+import FormSubmitButton from '@src/components/common/FormSubmitButton';
+import FormTextInput from '@src/components/common/FormTextInput';
+import Modal from '@src/components/common/Modal';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import TeamMembersService from '@src/services/TeamMembersService';
 
 interface MemberInvitationModalProps {
   isOpen: boolean;

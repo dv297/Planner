@@ -1,10 +1,10 @@
+import { ReactNode } from 'react';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
-import { ReactNode } from 'react';
 
-import Button from '../../components/common/Button';
-import TeamSettingsRepo from '../../repos/TeamSettingsRepo';
+import Button from '@src/components/common/Button';
+import TeamSettingsRepo from '@src/repos/TeamSettingsRepo';
 
 interface TeamInviteProps {
   isSuccess: boolean;

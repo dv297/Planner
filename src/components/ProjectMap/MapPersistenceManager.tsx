@@ -1,12 +1,12 @@
-import debounce from 'lodash.debounce';
 import { useEffect, useMemo } from 'react';
 import { Edge, Node, useEdges, useNodes } from 'react-flow-renderer';
+import debounce from 'lodash.debounce';
 import { z } from 'zod';
 
-import { ProjectMapEdgesSetListSchema } from '../../schemas/ProjectMapEdgesSetSchemas';
-import { ProjectMapPositionDataListSchema } from '../../schemas/ProjectMapPositionSchemas';
-import ProjectMapEdgesSetService from '../../services/ProjectMapEdgesSetService';
-import ProjectMapPositionService from '../../services/ProjectMapPositionService';
+import { ProjectMapEdgesSetListSchema } from '@src/schemas/ProjectMapEdgesSetSchemas';
+import { ProjectMapPositionDataListSchema } from '@src/schemas/ProjectMapPositionSchemas';
+import ProjectMapEdgesSetService from '@src/services/ProjectMapEdgesSetService';
+import ProjectMapPositionService from '@src/services/ProjectMapPositionService';
 
 interface MapPersistanceManagerProps {
   projectMapPositionId: string;

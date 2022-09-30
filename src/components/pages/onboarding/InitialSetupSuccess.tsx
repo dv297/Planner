@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import Button from '../../common/Button';
+import Button from '@src/components/common/Button';
 
 const InitialSetupSuccess = () => {
   const router = useRouter();

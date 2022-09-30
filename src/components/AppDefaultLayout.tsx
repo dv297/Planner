@@ -1,15 +1,15 @@
+import { ReactNode, useState } from 'react';
 import { FolderIcon, HomeIcon } from '@heroicons/react/outline';
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { ReactNode, useState } from 'react';
 
-import { AppContextProvider } from './AppContext';
-import FullScreenLoader from './common/FullScreenLoader';
-import { SnackbarProvider } from './common/Snackbar';
-import DashboardBodyLayout from './DashboardBodyLayout';
-import Sidebar, { NavigationElement } from './Sidebar';
-import WorkspaceSelector from './WorkspaceSelector';
+import { AppContextProvider } from '@src/components/AppContext';
+import FullScreenLoader from '@src/components/common/FullScreenLoader';
+import { SnackbarProvider } from '@src/components/common/Snackbar';
+import DashboardBodyLayout from '@src/components/DashboardBodyLayout';
+import Sidebar, { NavigationElement } from '@src/components/Sidebar';
+import WorkspaceSelector from '@src/components/WorkspaceSelector';
 
 interface AppDefaultLayoutProps {
   children: ReactNode;

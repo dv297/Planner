@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { urlFor } from '../../../lib/sanity';
+import { urlFor } from '@src/lib//sanity';
 
 export interface Author {
   name: string;

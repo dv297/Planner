@@ -1,4 +1,3 @@
-import { Alert, Snackbar } from '@mui/material';
 import {
   createContext,
   ReactNode,
@@ -6,6 +5,7 @@ import {
   useContext,
   useReducer,
 } from 'react';
+import { Alert, Snackbar } from '@mui/material';
 
 enum SnackbarSeverity {
   SUCCESS = 'success',

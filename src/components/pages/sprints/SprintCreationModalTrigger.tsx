@@ -1,8 +1,8 @@
-import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
 
-import Button from '../../common/Button';
-import SprintCreationModal from './SprintCreationModal';
+import Button from '@src/components/common/Button';
+import SprintCreationModal from '@src/components/pages/sprints/SprintCreationModal';
 
 const SprintCreationModalTrigger = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,4 +1,4 @@
-import { useOnboardingMachine } from '../../../machines/onboarding/useOnboardingMachine';
+import { useOnboardingMachine } from '@src/machines/onboarding/useOnboardingMachine';
 
 interface LargeSetupButtonProps {
   title: string;

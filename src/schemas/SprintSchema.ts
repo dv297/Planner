@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { WorkspaceSchema } from './WorkspaceSchemas';
+import { WorkspaceSchema } from '@src/schemas/WorkspaceSchemas';
 
 const dateSchema = z.preprocess((arg: any) => {
   if (typeof arg === 'string' || arg instanceof Date) {

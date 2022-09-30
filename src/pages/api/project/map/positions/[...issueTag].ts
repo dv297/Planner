@@ -1,16 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { withAuthMiddleware } from '../../../../../lib/withAuthMiddleware';
-import IssueRepo from '../../../../../repos/IssueRepo';
-import ProjectMapPositionsRepo from '../../../../../repos/ProjectMapPositionsRepo';
-import ProjectRepo from '../../../../../repos/ProjectRepo';
-import UserRepo from '../../../../../repos/UserRepo';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import IssueRepo from '@src/repos/IssueRepo';
+import ProjectMapPositionsRepo from '@src/repos/ProjectMapPositionsRepo';
+import ProjectRepo from '@src/repos/ProjectRepo';
+import UserRepo from '@src/repos/UserRepo';
 import {
   GetSingleProjectMapPositionInputSchema,
   GetSingleProjectMapPositionResponseSchema,
   UpdateSingleProjectMapPositionInputSchema,
-} from '../../../../../schemas/ProjectMapPositionSchemas';
-import routeMatcher from '../../../../../utils/routeMatcher';
+} from '@src/schemas/ProjectMapPositionSchemas';
+import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const { issueTag } = GetSingleProjectMapPositionInputSchema.parse(req.query);

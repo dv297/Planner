@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { TeamMembersListSchema } from '../schemas/TeamSettingsSchema';
+import { TeamMembersListSchema } from '@src/schemas/TeamSettingsSchema';
 
 interface MembersListProps {
   members: z.infer<typeof TeamMembersListSchema>;

@@ -1,12 +1,12 @@
+import { useCallback, useState } from 'react';
 import { InputLabel } from '@material-ui/core';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select/Select';
-import { useCallback, useState } from 'react';
 
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import IssueStatusType, {
   convertToIssueStatusType,
-} from '../../../types/IssueStatusType';
-import { SnackbarSeverity, useSnackbar } from '../../common/Snackbar';
+} from '@src/types/IssueStatusType';
 
 interface IssueStatusSelectorProps {
   onChange: (value: string) => Promise<void>;

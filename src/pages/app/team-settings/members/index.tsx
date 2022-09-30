@@ -1,12 +1,12 @@
+import { ReactNode, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { useQuery } from '@tanstack/react-query';
-import { ReactNode, useState } from 'react';
 
-import Button from '../../../../components/common/Button';
-import MemberInvitationModal from '../../../../components/MemberInvitationModal';
-import MembersList from '../../../../components/MembersList';
-import TeamSettingsLayout from '../../../../components/TeamSettingsLayout';
-import TeamMembersService from '../../../../services/TeamMembersService';
+import Button from '@src/components/common/Button';
+import MemberInvitationModal from '@src/components/MemberInvitationModal';
+import MembersList from '@src/components/MembersList';
+import TeamSettingsLayout from '@src/components/TeamSettingsLayout';
+import TeamMembersService from '@src/services/TeamMembersService';
 
 const Page = () => {
   const [isAddMembersModalOpen, setIsAddMembersModalOpen] = useState(false);

@@ -1,18 +1,18 @@
+import { createContext, ReactNode, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { createContext, ReactNode, useContext } from 'react';
 import { z } from 'zod';
 
-import { UserPreferencesSchema } from '../schemas/UserPreferencesSchemas';
+import FullScreenLoader from '@src/components/common/FullScreenLoader';
+import { UserPreferencesSchema } from '@src/schemas/UserPreferencesSchemas';
 import {
   GetWorkspacesResponseDataSchema,
   WorkspaceSchema,
-} from '../schemas/WorkspaceSchemas';
-import QueryKeys from '../services/QueryKeys';
-import UserPreferencesService from '../services/UserPreferencesService';
-import WorkspaceService from '../services/WorkspaceService';
-import FullScreenLoader from './common/FullScreenLoader';
+} from '@src/schemas/WorkspaceSchemas';
+import QueryKeys from '@src/services/QueryKeys';
+import UserPreferencesService from '@src/services/UserPreferencesService';
+import WorkspaceService from '@src/services/WorkspaceService';
 
 interface AppContextProps {
   children: ReactNode;

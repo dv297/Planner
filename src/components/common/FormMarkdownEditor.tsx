@@ -1,10 +1,10 @@
-import '@uiw/react-md-editor/markdown-editor.css';
-import '@uiw/react-markdown-preview/markdown.css';
-
-import dynamic from 'next/dynamic';
 import { FocusEvent } from 'react';
 import Foco from 'react-foco';
 import { Controller, useFormContext } from 'react-hook-form';
+import dynamic from 'next/dynamic';
+
+import '@uiw/react-md-editor/markdown-editor.css';
+import '@uiw/react-markdown-preview/markdown.css';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
 

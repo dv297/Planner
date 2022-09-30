@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { IssueSchema } from '../schemas/IssueSchema';
-import IssuesList from './common/IssuesList';
+import IssuesList from '@src/components/common/IssuesList';
+import { IssueSchema } from '@src/schemas/IssueSchema';
 
 interface IssueRelationListProps {
   relationshipLabel: string;

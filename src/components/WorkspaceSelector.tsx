@@ -1,12 +1,12 @@
+import { Fragment, ReactNode } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/solid';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { Fragment, ReactNode } from 'react';
 
-import QueryKeys from '../services/QueryKeys';
-import UserPreferencesService from '../services/UserPreferencesService';
-import { useAppContext } from './AppContext';
+import { useAppContext } from '@src/components/AppContext';
+import QueryKeys from '@src/services/QueryKeys';
+import UserPreferencesService from '@src/services/UserPreferencesService';
 
 interface WorkspaceMenuItemProps {
   children: ReactNode;

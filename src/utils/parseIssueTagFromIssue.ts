@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { IssueSchema, KeyIssueSchema } from '../schemas/IssueSchema';
+import { IssueSchema, KeyIssueSchema } from '@src/schemas/IssueSchema';
 
 export const parseIssueTagFromIssue = (
   issue: z.infer<typeof KeyIssueSchema | typeof IssueSchema>

@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
-import { AppContextProvider, useAppContext } from './AppContext';
+import { AppContextProvider, useAppContext } from '@src/components/AppContext';
 
 const Redirecter = ({ url }: { url: string }) => {
   const { selectedWorkspace } = useAppContext();

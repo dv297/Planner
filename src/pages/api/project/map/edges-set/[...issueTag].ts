@@ -1,16 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { withAuthMiddleware } from '../../../../../lib/withAuthMiddleware';
-import { addProjectToProcessingQueue } from '../../../../../queues/mapProcessingQueue';
-import ProjectMapEdgesSetRepo from '../../../../../repos/ProjectMapEdgesSetRepo';
-import ProjectRepo from '../../../../../repos/ProjectRepo';
-import UserRepo from '../../../../../repos/UserRepo';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import { addProjectToProcessingQueue } from '@src/queues/mapProcessingQueue';
+import ProjectMapEdgesSetRepo from '@src/repos/ProjectMapEdgesSetRepo';
+import ProjectRepo from '@src/repos/ProjectRepo';
+import UserRepo from '@src/repos/UserRepo';
 import {
   GetSingleProjectMapEdgeInputSchema,
   GetSingleProjectMapEdgesSetResponseSchema,
   UpdateSingleProjectMapEdgesSetInputSchema,
-} from '../../../../../schemas/ProjectMapEdgesSetSchemas';
-import routeMatcher from '../../../../../utils/routeMatcher';
+} from '@src/schemas/ProjectMapEdgesSetSchemas';
+import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const { issueTag } = GetSingleProjectMapEdgeInputSchema.parse(req.query);

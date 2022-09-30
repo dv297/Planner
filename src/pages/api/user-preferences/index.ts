@@ -1,16 +1,16 @@
 import { UserPreference } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import prisma from '../../../lib/prisma';
-import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
-import UserPreferenceRepo from '../../../repos/UserPreferenceRepo';
-import UserRepo from '../../../repos/UserRepo';
+import prisma from '@src/lib/prisma';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import UserPreferenceRepo from '@src/repos/UserPreferenceRepo';
+import UserRepo from '@src/repos/UserRepo';
 import {
   GetUserPreferencesResponseSchema,
   UpdateUserPreferenceInputSchema,
   UpdateUserPreferenceResponseSchema,
-} from '../../../schemas/UserPreferencesSchemas';
-import routeMatcher from '../../../utils/routeMatcher';
+} from '@src/schemas/UserPreferencesSchemas';
+import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const currentUser = await UserRepo.getCurrentUser({ req, res });

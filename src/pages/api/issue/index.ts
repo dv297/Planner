@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import prisma from '../../../lib/prisma';
-import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
-import IssueRepo from '../../../repos/IssueRepo';
-import UserRepo from '../../../repos/UserRepo';
-import { CreateIssueInputSchema } from '../../../schemas/IssueSchema';
-import routeMatcher from '../../../utils/routeMatcher';
+import prisma from '@src/lib/prisma';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import IssueRepo from '@src/repos/IssueRepo';
+import UserRepo from '@src/repos/UserRepo';
+import { CreateIssueInputSchema } from '@src/schemas/IssueSchema';
+import routeMatcher from '@src/utils/routeMatcher';
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   const input = CreateIssueInputSchema.parse(req.body);

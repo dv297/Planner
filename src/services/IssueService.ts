@@ -3,7 +3,7 @@ import { z } from 'zod';
 import {
   CreateIssueInputSchema,
   GetSingleIssueResponseSchema,
-} from '../schemas/IssueSchema';
+} from '@src/schemas/IssueSchema';
 
 const IssueService = {
   getIssue: async (issueTag: string | undefined) => {

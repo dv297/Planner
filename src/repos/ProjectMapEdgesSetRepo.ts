@@ -1,11 +1,11 @@
 import { User } from '@prisma/client';
 import { z } from 'zod';
 
-import prisma from '../lib/prisma';
+import prisma from '@src/lib//prisma';
 import {
   ProjectMapEdgesSetSchema,
   UpdateSingleProjectMapEdgesSetInputSchema,
-} from '../schemas/ProjectMapEdgesSetSchemas';
+} from '@src/schemas/ProjectMapEdgesSetSchemas';
 
 const ProjectMapEdgesSetRepo = {
   async getProjectMapEdgesSet(user: User, edgesSetId: string) {

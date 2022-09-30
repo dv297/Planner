@@ -1,7 +1,7 @@
 import { Queue, Worker } from 'bullmq';
 
-import mailClient, { getSanitizedSendEmailData } from '../lib/mailClient';
-import TeamSettingsRepo from '../repos/TeamSettingsRepo';
+import mailClient, { getSanitizedSendEmailData } from '@src/lib/mailClient';
+import TeamSettingsRepo from '@src/repos/TeamSettingsRepo';
 
 const QUEUE_NAME = 'teamInviteQueue';
 

@@ -1,7 +1,7 @@
 import { User } from 'next-auth';
 
-import prisma from '../lib/prisma';
-import { IssueRelationSchemaResponseData } from '../schemas/IssueRelationSchema';
+import prisma from '@src/lib//prisma';
+import { IssueRelationSchemaResponseData } from '@src/schemas/IssueRelationSchema';
 
 function getIssueById(issueId: string) {
   return prisma.issue.findUnique({

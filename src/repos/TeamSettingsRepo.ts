@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 
-import prisma from '../lib/prisma';
+import prisma from '@src/lib//prisma';
 
 const TeamSettingsRepo = {
   async getTeamUsers(user: User) {

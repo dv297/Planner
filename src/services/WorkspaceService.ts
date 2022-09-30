@@ -1,4 +1,4 @@
-import { GetWorkspacesResponseSchema } from '../schemas/WorkspaceSchemas';
+import { GetWorkspacesResponseSchema } from '@src/schemas/WorkspaceSchemas';
 
 interface CreateWorkspaceInput {
   name: string;

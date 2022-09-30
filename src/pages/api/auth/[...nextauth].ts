@@ -6,7 +6,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
-import prisma from '../../../lib/prisma';
+import prisma from '@src/lib/prisma';
 
 const authHandler: NextApiHandler = (req, res) =>
   NextAuth(req, res, authOptions);

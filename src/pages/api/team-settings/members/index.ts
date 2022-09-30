@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { withAuthMiddleware } from '../../../../lib/withAuthMiddleware';
-import TeamSettingsRepo from '../../../../repos/TeamSettingsRepo';
-import UserRepo from '../../../../repos/UserRepo';
-import { TeamMembersResponseSchema } from '../../../../schemas/TeamSettingsSchema';
-import routeMatcher from '../../../../utils/routeMatcher';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import TeamSettingsRepo from '@src/repos/TeamSettingsRepo';
+import UserRepo from '@src/repos/UserRepo';
+import { TeamMembersResponseSchema } from '@src/schemas/TeamSettingsSchema';
+import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const currentUser = await UserRepo.getCurrentUser({ req, res });

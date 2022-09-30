@@ -1,8 +1,8 @@
+import { ReactNode } from 'react';
 import { getProviders, signIn } from 'next-auth/react';
 import { ClientSafeProvider } from 'next-auth/react/types';
-import { ReactNode } from 'react';
 
-import LandingPageLayout from '../../components/LandingPageLayout';
+import LandingPageLayout from '@src/components/LandingPageLayout';
 
 interface SigninProps {
   providers: ClientSafeProvider[];

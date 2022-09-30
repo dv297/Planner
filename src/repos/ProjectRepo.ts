@@ -1,7 +1,7 @@
 import { User } from 'next-auth';
 
-import prisma from '../lib/prisma';
-import UserRepo from './UserRepo';
+import prisma from '@src/lib//prisma';
+import UserRepo from '@src/repos/UserRepo';
 
 const ProjectRepo = {
   async getProjectByTag(currentUser: User, projectTag: string) {

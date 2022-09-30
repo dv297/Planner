@@ -1,9 +1,9 @@
 import { CircularProgress } from '@mui/material';
 
-import Form from '../Form';
-import FormMarkdownEditor from '../FormMarkdownEditor';
-import MarkdownPreview from './MarkdownPreview';
-import useEditableDisplay from './useEditableDisplay';
+import MarkdownPreview from '@src/components/common/EditableDisplays/MarkdownPreview';
+import useEditableDisplay from '@src/components/common/EditableDisplays/useEditableDisplay';
+import Form from '@src/components/common/Form';
+import FormMarkdownEditor from '@src/components/common/FormMarkdownEditor';
 
 export interface EditableMarkdownDisplayProps {
   onBlurSubmission: (data: string) => Promise<void>;

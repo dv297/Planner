@@ -1,9 +1,9 @@
+import { Fragment, ReactNode } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
-import { Fragment, ReactNode } from 'react';
 
-import { useAppContext } from './AppContext';
+import { useAppContext } from '@src/components/AppContext';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');

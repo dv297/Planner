@@ -4,7 +4,7 @@ import {
   GetSingleProjectMapPositionResponseSchema,
   ProjectMapPositionDataListSchema,
   UpdateSingleProjectMapPositionInputSchema,
-} from '../schemas/ProjectMapPositionSchemas';
+} from '@src/schemas/ProjectMapPositionSchemas';
 
 const ProjectsService = {
   getProjectMapPosition: async (issueTag: string | undefined) => {

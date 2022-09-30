@@ -1,9 +1,9 @@
+import { ReactNode } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
-import { ReactNode } from 'react';
 
-import LandingPageLayout from '../components/LandingPageLayout';
+import LandingPageLayout from '@src/components/LandingPageLayout';
 
 export default function HomePage() {
   const router = useRouter();

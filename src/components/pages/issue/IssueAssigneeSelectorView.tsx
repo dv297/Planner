@@ -1,12 +1,12 @@
+import { useCallback, useState } from 'react';
 import { InputLabel, ListItemIcon } from '@material-ui/core';
 import { FormControl, MenuItem, Select } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select/Select';
-import { useCallback, useState } from 'react';
 import { z } from 'zod';
 
-import { TeamMemberUserSchema } from '../../../schemas/TeamSettingsSchema';
-import { SnackbarSeverity, useSnackbar } from '../../common/Snackbar';
-import UserAvatar from '../../common/UserAvatar';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import UserAvatar from '@src/components/common/UserAvatar';
+import { TeamMemberUserSchema } from '@src/schemas/TeamSettingsSchema';
 
 export interface IssueAssigneeValue {
   name: string;

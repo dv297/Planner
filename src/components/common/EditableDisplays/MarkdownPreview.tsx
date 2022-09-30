@@ -1,6 +1,6 @@
-import '@uiw/react-markdown-preview/markdown.css';
-
 import dynamic from 'next/dynamic';
+
+import '@uiw/react-markdown-preview/markdown.css';
 
 const ReactMarkdownPreview = dynamic(
   () => import('@uiw/react-markdown-preview'),

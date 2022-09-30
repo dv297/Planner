@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import { ReactNode } from 'react';
+import Link from 'next/link';
 
-import LandingPageLayout from '../../components/LandingPageLayout';
+import LandingPageLayout from '@src/components/LandingPageLayout';
 
 const Logout = () => {
   return (

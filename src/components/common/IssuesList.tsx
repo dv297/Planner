@@ -1,15 +1,15 @@
+import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
-import { useState } from 'react';
 import { z } from 'zod';
 
-import { IssuesListSchema } from '../../schemas/IssueSchema';
-import { convertToIssueStatusType } from '../../types/IssueStatusType';
-import { parseIssueTagFromIssue } from '../../utils/parseIssueTagFromIssue';
-import IssueCreationModal from '../IssueCreationModal';
-import IssueStatusPill from '../IssueStatusPill';
-import Button from './Button';
-import UserAvatar from './UserAvatar';
+import Button from '@src/components/common/Button';
+import UserAvatar from '@src/components/common/UserAvatar';
+import IssueCreationModal from '@src/components/IssueCreationModal';
+import IssueStatusPill from '@src/components/IssueStatusPill';
+import { IssuesListSchema } from '@src/schemas/IssueSchema';
+import { convertToIssueStatusType } from '@src/types/IssueStatusType';
+import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
 
 interface IssuesListProps {
   projectId?: string;

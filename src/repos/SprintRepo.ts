@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
 
-import prisma from '../lib/prisma';
-import UserRepo from './UserRepo';
+import prisma from '@src/lib//prisma';
+import UserRepo from '@src/repos/UserRepo';
 
 export interface CreateSprintInput {
   name: string;

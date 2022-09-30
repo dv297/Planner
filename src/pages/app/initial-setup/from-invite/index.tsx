@@ -1,4 +1,4 @@
-import InitialSetupEstablishIndividualSettings from '../../../../components/pages/onboarding/InitialSetupEstablishIndividualSettings';
+import InitialSetupEstablishIndividualSettings from '@src/components/pages/onboarding/InitialSetupEstablishIndividualSettings';
 
 const InitialSetup = () => {
   return (

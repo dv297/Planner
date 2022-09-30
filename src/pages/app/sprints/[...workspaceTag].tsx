@@ -1,12 +1,12 @@
+import { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
 
-import AppDefaultLayout from '../../../components/AppDefaultLayout';
-import SprintCreationModalTrigger from '../../../components/pages/sprints/SprintCreationModalTrigger';
-import QueryKeys from '../../../services/QueryKeys';
-import SprintsService from '../../../services/SprintsService';
+import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCreationModalTrigger';
+import QueryKeys from '@src/services/QueryKeys';
+import SprintsService from '@src/services/SprintsService';
 
 const EmptyPlaceholder = () => {
   return (

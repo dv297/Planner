@@ -1,15 +1,15 @@
+import { ReactNode, useState } from 'react';
 import { UserGroupIcon } from '@heroicons/react/outline';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { ReactNode, useState } from 'react';
 
-import { AppContextProvider } from './AppContext';
-import FullScreenLoader from './common/FullScreenLoader';
-import { SnackbarProvider } from './common/Snackbar';
-import DashboardBodyLayout from './DashboardBodyLayout';
-import Sidebar, { NavigationElement } from './Sidebar';
+import { AppContextProvider } from '@src/components/AppContext';
+import FullScreenLoader from '@src/components/common/FullScreenLoader';
+import { SnackbarProvider } from '@src/components/common/Snackbar';
+import DashboardBodyLayout from '@src/components/DashboardBodyLayout';
+import Sidebar, { NavigationElement } from '@src/components/Sidebar';
 
 interface TeamSettingsLayoutProps {
   children: ReactNode;

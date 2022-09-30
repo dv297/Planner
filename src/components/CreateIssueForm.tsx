@@ -1,8 +1,8 @@
-import Button from './common/Button';
-import Form from './common/Form';
-import FormMarkdownEditor from './common/FormMarkdownEditor';
-import FormSubmitButton from './common/FormSubmitButton';
-import FormTextInput from './common/FormTextInput';
+import Button from '@src/components/common/Button';
+import Form from '@src/components/common/Form';
+import FormMarkdownEditor from '@src/components/common/FormMarkdownEditor';
+import FormSubmitButton from '@src/components/common/FormSubmitButton';
+import FormTextInput from '@src/components/common/FormTextInput';
 
 interface CreateIssueOutput {
   title: string;

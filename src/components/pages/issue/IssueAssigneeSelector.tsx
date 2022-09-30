@@ -1,13 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-import { TeamMemberUserSchema } from '../../../schemas/TeamSettingsSchema';
-import IssueService from '../../../services/IssueService';
-import TeamMembersService from '../../../services/TeamMembersService';
 import IssueAssigneeSelectorView, {
   IssueAssigneeValue,
-} from './IssueAssigneeSelectorView';
+} from '@src/components/pages/issue/IssueAssigneeSelectorView';
+import { TeamMemberUserSchema } from '@src/schemas/TeamSettingsSchema';
+import IssueService from '@src/services/IssueService';
+import TeamMembersService from '@src/services/TeamMembersService';
 
 interface IssueAssigneeSelectorProps {
   issueTag: string | undefined;

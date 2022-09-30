@@ -1,14 +1,11 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ReactNode } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import AppDefaultLayout from '../../../components/AppDefaultLayout';
-import {
-  SnackbarSeverity,
-  useSnackbar,
-} from '../../../components/common/Snackbar';
-import PersonalInformationForm from '../../../components/PersonalInformationForm';
-import QueryKeys from '../../../services/QueryKeys';
-import SettingsService from '../../../services/SettingsService';
+import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import PersonalInformationForm from '@src/components/PersonalInformationForm';
+import QueryKeys from '@src/services/QueryKeys';
+import SettingsService from '@src/services/SettingsService';
 
 const Settings = () => {
   const { data, isLoading, error } = useQuery(

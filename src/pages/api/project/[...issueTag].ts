@@ -1,15 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
-import IssueRepo from '../../../repos/IssueRepo';
-import KeyIssueRepo from '../../../repos/KeyIssueRepo';
-import UserRepo from '../../../repos/UserRepo';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import IssueRepo from '@src/repos/IssueRepo';
+import KeyIssueRepo from '@src/repos/KeyIssueRepo';
+import UserRepo from '@src/repos/UserRepo';
 import {
   GetSingleProjectInputSchema,
   GetSingleProjectResponseSchema,
   UpdateSingleProjectInputSchema,
-} from '../../../schemas/ProjectSchemas';
-import routeMatcher from '../../../utils/routeMatcher';
+} from '@src/schemas/ProjectSchemas';
+import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const { issueTag } = GetSingleProjectInputSchema.parse(req.query);

@@ -1,11 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { withAuthMiddleware } from '../../../../../lib/withAuthMiddleware';
-import { addToTeamInviteQueue } from '../../../../../queues/emailInviteQueue';
-import TeamSettingsRepo from '../../../../../repos/TeamSettingsRepo';
-import UserRepo from '../../../../../repos/UserRepo';
-import { InviteTeamMemberInputSchema } from '../../../../../schemas/TeamSettingsSchema';
-import routeMatcher from '../../../../../utils/routeMatcher';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import { addToTeamInviteQueue } from '@src/queues/emailInviteQueue';
+import TeamSettingsRepo from '@src/repos/TeamSettingsRepo';
+import UserRepo from '@src/repos/UserRepo';
+import { InviteTeamMemberInputSchema } from '@src/schemas/TeamSettingsSchema';
+import routeMatcher from '@src/utils/routeMatcher';
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
   const currentUser = await UserRepo.getCurrentUser({ req, res });

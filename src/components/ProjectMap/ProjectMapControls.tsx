@@ -1,11 +1,11 @@
+import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { toPng } from 'html-to-image';
-import { useState } from 'react';
 
-import IssueCreationModal from '../IssueCreationModal';
-import { useProjectMapContext } from './ProjectMapContext';
+import IssueCreationModal from '@src/components/IssueCreationModal';
+import { useProjectMapContext } from '@src/components/ProjectMap/ProjectMapContext';
 
 function downloadImage(dataUrl: string) {
   const a = document.createElement('a');

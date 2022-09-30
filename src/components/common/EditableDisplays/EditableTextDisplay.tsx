@@ -1,9 +1,9 @@
 import { CircularProgress } from '@mui/material';
 
-import Form from '../Form';
-import FormTextInput from '../FormTextInput';
-import TextDisplay from './TextDisplay';
-import useEditableDisplay from './useEditableDisplay';
+import TextDisplay from '@src/components/common/EditableDisplays/TextDisplay';
+import useEditableDisplay from '@src/components/common/EditableDisplays/useEditableDisplay';
+import Form from '@src/components/common/Form';
+import FormTextInput from '@src/components/common/FormTextInput';
 
 export interface EditableTextDisplayProps {
   onBlurSubmission: (data: string) => Promise<void>;

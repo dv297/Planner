@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-import { SprintSchema } from './SprintSchema';
-import { TeamMemberUserSchema } from './TeamSettingsSchema';
-import { WorkspaceSchema } from './WorkspaceSchemas';
+import { SprintSchema } from '@src/schemas/SprintSchema';
+import { TeamMemberUserSchema } from '@src/schemas/TeamSettingsSchema';
+import { WorkspaceSchema } from '@src/schemas/WorkspaceSchemas';
 
 export const GetSingleIssueInputSchema = z.object({
   issueTag: z.array(z.string()),

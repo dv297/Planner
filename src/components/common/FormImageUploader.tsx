@@ -1,8 +1,8 @@
-import { useS3Upload } from 'next-s3-upload';
 import { Controller, useFormContext } from 'react-hook-form';
 import Resizer from 'react-image-file-resizer';
+import { useS3Upload } from 'next-s3-upload';
 
-import Button from './Button';
+import Button from '@src/components/common/Button';
 
 interface FormImageUploaderProps {
   name: string;

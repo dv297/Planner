@@ -2,11 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { Session } from 'next-auth';
 import { unstable_getServerSession } from 'next-auth/next';
 
-import prisma from '../../../../lib/prisma';
-import { withAuthMiddleware } from '../../../../lib/withAuthMiddleware';
-import UserRepo from '../../../../repos/UserRepo';
-import routeMatcher from '../../../../utils/routeMatcher';
-import { authOptions } from '../../auth/[...nextauth]';
+import prisma from '@src/lib/prisma';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import { authOptions } from '@src/pages/api/auth/[...nextauth]';
+import UserRepo from '@src/repos/UserRepo';
+import routeMatcher from '@src/utils/routeMatcher';
 
 class SettingsService {
   private req: NextApiRequest;

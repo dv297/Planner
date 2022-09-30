@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import AppDefaultLayout from '../../../components/AppDefaultLayout';
-import CreateIssueForm from '../../../components/CreateIssueForm';
+import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import CreateIssueForm from '@src/components/CreateIssueForm';
 
 const CreateProjectPage = () => {
   return (

@@ -1,11 +1,11 @@
+import { ReactNode } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { groq } from 'next-sanity';
-import { ReactNode } from 'react';
 
-import LandingPageLayout from '../../components/LandingPageLayout';
-import BlogPostListing from '../../components/pages/blog/BlogPostListing';
-import { getClient, usePreviewSubscription } from '../../lib/sanity';
+import LandingPageLayout from '@src/components/LandingPageLayout';
+import BlogPostListing from '@src/components/pages/blog/BlogPostListing';
+import { getClient, usePreviewSubscription } from '@src/lib/sanity';
 
 const query = groq`
   *[_type == "post"]  | order(publishedAt desc) {

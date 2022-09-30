@@ -1,16 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { withAuthMiddleware } from '../../../lib/withAuthMiddleware';
-import SprintRepo from '../../../repos/SprintRepo';
-import UserRepo from '../../../repos/UserRepo';
+import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import SprintRepo from '@src/repos/SprintRepo';
+import UserRepo from '@src/repos/UserRepo';
 import {
   CreateSprintBodyInputSchema,
   CreateSprintResponseSchema,
   CreateSprintUrlInputSchema,
   GetSprintsInputSchema,
   GetSprintsResponseSchema,
-} from '../../../schemas/SprintSchema';
-import routeMatcher from '../../../utils/routeMatcher';
+} from '@src/schemas/SprintSchema';
+import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const { workspaceTag } = GetSprintsInputSchema.parse(req.query);

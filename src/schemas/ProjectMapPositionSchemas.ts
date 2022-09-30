@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { IssueSchema } from './IssueSchema';
+import { IssueSchema } from '@src/schemas/IssueSchema';
 
 export const GetSingleProjectMapPositionInputSchema = z.object({
   issueTag: z.array(z.string()),

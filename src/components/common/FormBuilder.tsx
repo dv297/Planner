@@ -1,11 +1,11 @@
 import { FieldValues } from 'react-hook-form';
 
-import Button from './Button';
-import Form from './Form';
-import FormDateInput from './FormDateInput';
-import FormMarkdownEditor from './FormMarkdownEditor';
-import FormSubmitButton from './FormSubmitButton';
-import FormTextInput from './FormTextInput';
+import Button from '@src/components/common/Button';
+import Form from '@src/components/common/Form';
+import FormDateInput from '@src/components/common/FormDateInput';
+import FormMarkdownEditor from '@src/components/common/FormMarkdownEditor';
+import FormSubmitButton from '@src/components/common/FormSubmitButton';
+import FormTextInput from '@src/components/common/FormTextInput';
 
 function getComponentForInputType(input: Input<any>) {
   const key = input.name as string;

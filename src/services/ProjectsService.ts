@@ -1,7 +1,7 @@
 import {
   GetProjectsResponseSchema,
   GetSingleProjectResponseSchema,
-} from '../schemas/ProjectSchemas';
+} from '@src/schemas/ProjectSchemas';
 
 const ProjectsService = {
   getProject: async (issueTag: string | undefined) => {

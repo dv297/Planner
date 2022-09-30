@@ -1,6 +1,7 @@
 // TODO: Remove ESlint disable
 /* eslint-disable @next/next/no-img-element */
 
+import { Fragment, ReactNode } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -8,7 +9,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
-import { Fragment, ReactNode } from 'react';
 
 const resources = [
   { name: 'Home', href: '/' },

@@ -1,6 +1,6 @@
+import { ReactNode } from 'react';
 import type { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 import MuiButton from '@mui/material/Button';
-import { ReactNode } from 'react';
 
 interface ButtonProps {
   children: ReactNode;

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
-import Form from './common/Form';
-import FormImageUploader from './common/FormImageUploader';
-import FormSubmitButton from './common/FormSubmitButton';
-import FormTextInput from './common/FormTextInput';
+import Form from '@src/components/common/Form';
+import FormImageUploader from '@src/components/common/FormImageUploader';
+import FormSubmitButton from '@src/components/common/FormSubmitButton';
+import FormTextInput from '@src/components/common/FormTextInput';
 
 interface FormRowProps {
   label: string;

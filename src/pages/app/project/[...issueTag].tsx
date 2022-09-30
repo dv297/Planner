@@ -1,15 +1,15 @@
+import { ReactNode } from 'react';
 import MapIcon from '@mui/icons-material/Map';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
 
-import AppDefaultLayout from '../../../components/AppDefaultLayout';
-import EditableMarkdownDisplay from '../../../components/common/EditableDisplays/EditableMarkdownDisplay';
-import EditableTextDisplay from '../../../components/common/EditableDisplays/EditableTextDisplay';
-import IssuesList from '../../../components/common/IssuesList';
-import ProjectsService from '../../../services/ProjectsService';
-import QueryKeys from '../../../services/QueryKeys';
+import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import EditableMarkdownDisplay from '@src/components/common/EditableDisplays/EditableMarkdownDisplay';
+import EditableTextDisplay from '@src/components/common/EditableDisplays/EditableTextDisplay';
+import IssuesList from '@src/components/common/IssuesList';
+import ProjectsService from '@src/services/ProjectsService';
+import QueryKeys from '@src/services/QueryKeys';
 
 const getUpdaterFunction =
   (tag: string | undefined, propertyName: string) =>

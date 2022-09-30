@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import { ReactNode } from 'react';
+import Image from 'next/image';
 
-import LandingPageLayout from '../../components/LandingPageLayout';
+import LandingPageLayout from '@src/components/LandingPageLayout';
 
 export default function HomePage() {
   return (

@@ -1,9 +1,9 @@
+import { ReactNode } from 'react';
 import { MenuAlt2Icon } from '@heroicons/react/outline';
 import LinearProgress from '@mui/material/LinearProgress';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
-import { ReactNode } from 'react';
 
-import ProfileIconButton from './ProfileIconButton';
+import ProfileIconButton from '@src/components/ProfileIconButton';
 
 interface DashboardBodyLayoutProps {
   children: ReactNode;

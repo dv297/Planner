@@ -1,13 +1,13 @@
+import { useRef } from 'react';
 import { Dialog } from '@headlessui/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRef } from 'react';
 
-import QueryKeys from '../../../services/QueryKeys';
-import SprintsService from '../../../services/SprintsService';
-import { useAppContext } from '../../AppContext';
-import FormBuilder from '../../common/FormBuilder';
-import Modal from '../../common/Modal';
-import { SnackbarSeverity, useSnackbar } from '../../common/Snackbar';
+import { useAppContext } from '@src/components/AppContext';
+import FormBuilder from '@src/components/common/FormBuilder';
+import Modal from '@src/components/common/Modal';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import QueryKeys from '@src/services/QueryKeys';
+import SprintsService from '@src/services/SprintsService';
 
 interface SprintCreationModalProps {
   isOpen: boolean;
