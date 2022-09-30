@@ -1,9 +1,11 @@
 import { Fragment, ReactNode } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
+import PeopleIcon from '@mui/icons-material/People';
 import Link from 'next/link';
 
 import { useAppContext } from '@src/components/AppContext';
+import FeatureFlags from '@src/FeatureFlags';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -107,8 +109,8 @@ const Sidebar = (props: SidebarProps) => {
                           }}
                           className={classNames(
                             item.current
-                              ? 'bg-gray-900 text-white'
-                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                              ? 'sidebar-active-element'
+                              : 'sidebar-element',
                             'group flex items-center px-2 py-2 text-base font-medium rounded-md'
                           )}
                         >
@@ -129,6 +131,28 @@ const Sidebar = (props: SidebarProps) => {
                     ))}
                   </nav>
                 </div>
+                {FeatureFlags.allowMultipleTeams && (
+                  <footer className="py-2">
+                    <div className="w-full px-2">
+                      <button
+                        className={classNames(
+                          'sidebar-element',
+
+                          'group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full'
+                        )}
+                      >
+                        <PeopleIcon
+                          className={classNames(
+                            'text-gray-400 group-hover:text-gray-300',
+                            'mr-3 flex-shrink-0 h-6 w-6'
+                          )}
+                          aria-hidden="true"
+                        />
+                        Change Team
+                      </button>
+                    </div>
+                  </footer>
+                )}
               </Dialog.Panel>
             </Transition.Child>
             <div className="flex-shrink-0 w-14" aria-hidden="true">
@@ -142,7 +166,7 @@ const Sidebar = (props: SidebarProps) => {
       <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex-1 flex flex-col min-h-0 bg-sidebar">
-          <div className="flex-1 flex flex-col overflow-y-auto">
+          <div className="flex-1 flex flex-col overflow-y-auto h-full">
             <div className="flex items-center h-16 flex-shrink-0 px-4 bg-sidebar-feature">
               {header}
             </div>
@@ -175,6 +199,28 @@ const Sidebar = (props: SidebarProps) => {
                 </Link>
               ))}
             </nav>
+            {FeatureFlags.allowMultipleTeams && (
+              <footer className="py-2">
+                <div className="w-full px-2">
+                  <button
+                    className={classNames(
+                      'sidebar-element',
+
+                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full'
+                    )}
+                  >
+                    <PeopleIcon
+                      className={classNames(
+                        'text-gray-400 group-hover:text-gray-300',
+                        'mr-3 flex-shrink-0 h-6 w-6'
+                      )}
+                      aria-hidden="true"
+                    />
+                    Change Team
+                  </button>
+                </div>
+              </footer>
+            )}
           </div>
         </div>
       </div>

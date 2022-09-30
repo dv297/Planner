@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 
-import LandingPageLayout from '@src/components/LandingPageLayout';
 import OnboardingLayout from '@src/components/OnboardingLayout';
 import InitialSetupEstablishIndividualSettings from '@src/components/pages/onboarding/InitialSetupEstablishIndividualSettings';
 import InitialSetupPathSelectorPage from '@src/components/pages/onboarding/InitialSetupPathSelectorPage';

@@ -18,6 +18,7 @@ const UserPreferenceRepo = {
       select: {
         team: {
           select: {
+            id: true,
             TeamWorkspace: {
               include: {
                 workspace: true,
@@ -36,6 +37,7 @@ const UserPreferenceRepo = {
       data: {
         userId,
         workspaceId: workspaces[0]?.id,
+        teamId: teamUsers[0].team.id,
         hasFinishedSetup: workspaces.length > 0,
       },
     });

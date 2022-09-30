@@ -27,11 +27,12 @@ model User {
 }
 
 model Team {
-  id            String          @id @unique @default(cuid())
-  name          String
-  TeamUsers     TeamUsers[]
-  TeamWorkspace TeamWorkspace[]
-  TeamInvite    TeamInvite[]
+  id             String           @id @unique @default(cuid())
+  name           String
+  TeamUsers      TeamUsers[]
+  TeamWorkspace  TeamWorkspace[]
+  TeamInvite     TeamInvite[]
+  UserPreference UserPreference[]
 }
 
 model TeamUsers {
@@ -146,6 +147,8 @@ model UserPreference {
   selected_workspace Workspace? @relation(fields: [workspaceId], references: [id])
   userId             String     @unique
   workspaceId        String?
+  selectedTeam       Team?      @relation(fields: [teamId], references: [id])
+  teamId             String?
 }
 
 model ProjectMapPosition {

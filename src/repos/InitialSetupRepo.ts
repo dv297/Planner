@@ -166,7 +166,7 @@ const InitialSetupRepo = {
   async performInitialTeamSetupForIndividualUser(user: User) {
     const teamResult = await prisma.team.create({
       data: {
-        name: 'Team',
+        name: 'Personal',
       },
     });
 

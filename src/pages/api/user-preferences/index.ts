@@ -29,7 +29,12 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
-  const response = GetUserPreferencesResponseSchema.parse({ data: result });
+  const response = GetUserPreferencesResponseSchema.parse({
+    data: {
+      ...result,
+      teamId: result.teamId ?? null,
+    },
+  });
   return res.json(response);
 };
 
