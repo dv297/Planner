@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import Button from '@src/components/common/Button';
 import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCreationModalTrigger';
+import SprintsList from '@src/components/pages/sprints/SprintsList';
 import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
 
@@ -57,21 +58,11 @@ const Page = () => {
 
   const tag = Array.isArray(workspaceTag) ? workspaceTag[0] : workspaceTag;
 
-  const queryClient = useQueryClient();
-
-  const { data } = useQuery([QueryKeys.SPRINTS], () =>
+  const { data: sprints } = useQuery([QueryKeys.SPRINTS], () =>
     SprintsService.getSprintsForWorkspace(tag)
   );
-  const { mutate: deleteSprint } = useMutation(
-    (id: string) => SprintsService.deleteSprint(id),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QueryKeys.SPRINTS]);
-      },
-    }
-  );
 
-  if (!data) {
+  if (!sprints) {
     return null;
   }
 
@@ -83,36 +74,15 @@ const Page = () => {
         </h1>
       </div>
 
-      {data?.length === 0 ? (
+      {sprints?.length === 0 ? (
         <EmptyPlaceholder />
       ) : (
         <div className="flex flex-col w-full">
           <div className="flex flex-row justify-end w-full">
             <SprintCreationModalTrigger />
           </div>
-          <div className="flex flex-col mt-4 border-solid border-gray-300 border rounded-md">
-            {data.map((entry) => {
-              return (
-                <div
-                  className="h-12 w-full border-solid border-b-gray-300 border-b last:border-b-0 flex flex-row items-center cursor-pointer"
-                  key={entry.id}
-                >
-                  <div className="grid grid-rows-1 grid-cols-4 w-full pl-8">
-                    <span className="col-span-1">{entry.name}</span>
-                  </div>
-                  <div>
-                    <Button
-                      onClick={() => {
-                        deleteSprint(entry.id);
-                      }}
-                      variant="text"
-                    >
-                      <DeleteIcon titleAccess="Delete" />
-                    </Button>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="mt-8">
+            <SprintsList sprints={sprints} />
           </div>
         </div>
       )}
