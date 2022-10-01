@@ -7,19 +7,45 @@ import FormBuilder from '@src/components/common/FormBuilder';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import QueryKeys from '@src/services/QueryKeys';
 import TeamsService from '@src/services/TeamsService';
+import UserPreferencesService from '@src/services/UserPreferencesService';
 
 const Page = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const snackbar = useSnackbar();
 
   const mutation = useMutation([], TeamsService.createTeamForUser, {
-    onSuccess: () => {
+    onSuccess: async (createdTeam) => {
       queryClient.invalidateQueries([QueryKeys.TEAMS]);
-      router.push('/app/dashboard');
+
+      await setUserPreferenceMutation.mutate([
+        {
+          field: 'teamId',
+          value: createdTeam.id,
+        },
+      ]);
     },
   });
 
-  const snackbar = useSnackbar();
+  const setUserPreferenceMutation = useMutation(
+    [QueryKeys.USER_PREFERENCES],
+    UserPreferencesService.update,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries([QueryKeys.USER_PREFERENCES]);
+
+        snackbar.displaySnackbar({
+          message:
+            'Successfully created a new team! Switching you to their workspace.',
+          severity: SnackbarSeverity.SUCCESS,
+        });
+
+        setTimeout(() => {
+          router.push('/app/dashboard');
+        }, 500);
+      },
+    }
+  );
 
   return (
     <div>
@@ -27,10 +53,6 @@ const Page = () => {
       <FormBuilder
         onSubmit={async (data) => {
           await mutation.mutate(data);
-          snackbar.displaySnackbar({
-            message: 'Successfully created a new team!',
-            severity: SnackbarSeverity.SUCCESS,
-          });
         }}
         initialData={{ name: '' }}
         inputs={[

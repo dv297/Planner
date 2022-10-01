@@ -41,7 +41,7 @@ const UserPreferenceRepo = {
       data: {
         userId,
         workspaceId: workspaces[0]?.id,
-        teamId: teamUsers[0].team.id,
+        teamId: teamUsers[0]?.team?.id,
         hasFinishedSetup: workspaces.length > 0,
       },
     });

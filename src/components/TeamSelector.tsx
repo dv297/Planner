@@ -54,7 +54,7 @@ const TeamSelector = () => {
           }
           aria-hidden="true"
         />
-        Change Team
+        {appContext.selectedTeam.name}
       </button>
       <Dialog onClose={handleClose} open={isOpen} fullWidth>
         <DialogTitle>Select Team</DialogTitle>
