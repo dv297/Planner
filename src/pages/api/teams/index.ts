@@ -4,7 +4,11 @@ import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
 import { ItemNotFound } from '@src/repos/RepoErrors';
 import TeamsRepo from '@src/repos/TeamsRepo';
 import UserRepo from '@src/repos/UserRepo';
-import { GetTeamsResponseSchema } from '@src/schemas/TeamsSchema';
+import {
+  CreateTeamInputSchema,
+  CreateTeamResponseSchema,
+  GetTeamsResponseSchema,
+} from '@src/schemas/TeamsSchema';
 import routeMatcher from '@src/utils/routeMatcher';
 
 const getItem = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -31,9 +35,27 @@ const getItem = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
+const createItem = async (req: NextApiRequest, res: NextApiResponse) => {
+  const currentUser = await UserRepo.getCurrentUser({ req, res });
+  const input = CreateTeamInputSchema.parse(req.body);
+
+  if (!currentUser) {
+    return;
+  }
+
+  const team = await TeamsRepo.createTeamForUser(currentUser, input);
+
+  const response = CreateTeamResponseSchema.parse({
+    data: team,
+  });
+
+  return res.json(response);
+};
+
 async function handle(req: NextApiRequest, res: NextApiResponse) {
   return routeMatcher(req, res, {
     GET: getItem,
+    POST: createItem,
   });
 }
 

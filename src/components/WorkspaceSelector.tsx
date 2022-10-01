@@ -1,10 +1,11 @@
 import { Fragment, ReactNode } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/solid';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import { useAppContext } from '@src/components/AppContext';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import QueryKeys from '@src/services/QueryKeys';
 import UserPreferencesService from '@src/services/UserPreferencesService';
 
@@ -34,22 +35,27 @@ const WorkspaceMenuItem = (props: WorkspaceMenuItemProps) => {
 
 const WorkspaceSelector = () => {
   const router = useRouter();
+  const snackbar = useSnackbar();
   const { workspaces, selectedWorkspace } = useAppContext();
-  const queryClient = useQueryClient();
   const mutation = useMutation(
     [QueryKeys.USER_PREFERENCES],
-    UserPreferencesService.update,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QueryKeys.USER_PREFERENCES]);
-      },
-    }
+    UserPreferencesService.update
   );
 
   const onWorkspaceSelection = async ({ id }: { id: string }) => {
-    await mutation.mutate({
-      workspaceId: id,
+    await mutation.mutate([
+      {
+        field: 'workspaceId',
+        value: id,
+      },
+    ]);
+    snackbar.displaySnackbar({
+      message: `Changing workspace`,
+      severity: SnackbarSeverity.SUCCESS,
     });
+    setTimeout(() => {
+      router.push('/app/dashboard');
+    }, 500);
   };
 
   const onAddWorkSpaceClick = () => {

@@ -1,4 +1,8 @@
+import { User } from '@prisma/client';
+import { z } from 'zod';
+
 import prisma from '@src/lib/prisma';
+import { UpdateUserPreferenceInputSchema } from '@src/schemas/UserPreferencesSchemas';
 
 const UserPreferenceRepo = {
   async getUserPreference(userId: string) {
@@ -40,6 +44,24 @@ const UserPreferenceRepo = {
         teamId: teamUsers[0].team.id,
         hasFinishedSetup: workspaces.length > 0,
       },
+    });
+
+    return result;
+  },
+  async updateUserPreference(
+    user: User,
+    updates: z.infer<typeof UpdateUserPreferenceInputSchema>
+  ) {
+    const updateObject = updates.reduce((acc, entry) => {
+      acc[entry.field] = entry.value;
+      return acc;
+    }, {} as Record<string, string>);
+
+    const result = await prisma.userPreference.update({
+      where: {
+        userId: user.id,
+      },
+      data: updateObject,
     });
 
     return result;

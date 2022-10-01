@@ -1,10 +1,10 @@
 import { Fragment, ReactNode } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XIcon } from '@heroicons/react/outline';
-import PeopleIcon from '@mui/icons-material/People';
 import Link from 'next/link';
 
 import { useAppContext } from '@src/components/AppContext';
+import TeamSelector from '@src/components/TeamSelector';
 import FeatureFlags from '@src/FeatureFlags';
 
 function classNames(...classes: string[]) {
@@ -134,22 +134,7 @@ const Sidebar = (props: SidebarProps) => {
                 {FeatureFlags.allowMultipleTeams && (
                   <footer className="py-2">
                     <div className="w-full px-2">
-                      <button
-                        className={classNames(
-                          'sidebar-element',
-
-                          'group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full'
-                        )}
-                      >
-                        <PeopleIcon
-                          className={classNames(
-                            'text-gray-400 group-hover:text-gray-300',
-                            'mr-3 flex-shrink-0 h-6 w-6'
-                          )}
-                          aria-hidden="true"
-                        />
-                        Change Team
-                      </button>
+                      <TeamSelector />
                     </div>
                   </footer>
                 )}
@@ -202,22 +187,7 @@ const Sidebar = (props: SidebarProps) => {
             {FeatureFlags.allowMultipleTeams && (
               <footer className="py-2">
                 <div className="w-full px-2">
-                  <button
-                    className={classNames(
-                      'sidebar-element',
-
-                      'group flex items-center px-2 py-2 text-sm font-medium rounded-md w-full'
-                    )}
-                  >
-                    <PeopleIcon
-                      className={classNames(
-                        'text-gray-400 group-hover:text-gray-300',
-                        'mr-3 flex-shrink-0 h-6 w-6'
-                      )}
-                      aria-hidden="true"
-                    />
-                    Change Team
-                  </button>
+                  <TeamSelector />
                 </div>
               </footer>
             )}

@@ -1,7 +1,6 @@
 import { UserPreference } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import prisma from '@src/lib/prisma';
 import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
 import UserPreferenceRepo from '@src/repos/UserPreferenceRepo';
 import UserRepo from '@src/repos/UserRepo';
@@ -46,14 +45,10 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const result = await prisma.userPreference.update({
-    where: {
-      userId: currentUser.id,
-    },
-    data: {
-      workspaceId: input.workspaceId,
-    },
-  });
+  const result = await UserPreferenceRepo.updateUserPreference(
+    currentUser,
+    input
+  );
 
   const response = UpdateUserPreferenceResponseSchema.parse({ data: result });
   return res.json(response);
