@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import {
   CreateIssueInputSchema,
   GetSingleIssueResponseSchema,
@@ -11,7 +12,7 @@ const IssueService = {
       return;
     }
 
-    const result = await fetch(`/api/issue/${issueTag}`, {
+    const result = await handleTeamSpecificFetch(`/api/issue/${issueTag}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -25,7 +26,7 @@ const IssueService = {
   createIssue: async (input: z.infer<typeof CreateIssueInputSchema>) => {
     CreateIssueInputSchema.parse(input);
 
-    await fetch('/api/issue', {
+    await handleTeamSpecificFetch('/api/issue', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(input),
@@ -40,7 +41,7 @@ const IssueService = {
       return;
     }
 
-    await fetch(`/api/issue/${issueTag}`, {
+    await handleTeamSpecificFetch(`/api/issue/${issueTag}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

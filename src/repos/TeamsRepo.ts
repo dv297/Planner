@@ -33,6 +33,19 @@ const TeamsRepo = {
       },
     });
 
+    // Establish a default workspace for the newly created team
+    await prisma.workspace.create({
+      data: {
+        name: 'Task',
+        tag: 'TASK',
+        TeamWorkspace: {
+          create: {
+            teamId: team.id,
+          },
+        },
+      },
+    });
+
     return team;
   },
 };

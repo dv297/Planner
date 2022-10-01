@@ -2,6 +2,7 @@ import { UserPreference } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
+import TeamsRepo from '@src/repos/TeamsRepo';
 import UserPreferenceRepo from '@src/repos/UserPreferenceRepo';
 import UserRepo from '@src/repos/UserRepo';
 import {
@@ -28,10 +29,20 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     );
   }
 
+  let teamId = result.teamId;
+
+  if (!teamId) {
+    const teams = await TeamsRepo.getTeamsForUser(currentUser);
+
+    if (teams.length > 0) {
+      teamId = teams[0].id;
+    }
+  }
+
   const response = GetUserPreferencesResponseSchema.parse({
     data: {
       ...result,
-      teamId: result.teamId ?? null,
+      teamId: teamId ?? null,
     },
   });
   return res.json(response);

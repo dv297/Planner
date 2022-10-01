@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import {
   GetSingleProjectMapPositionResponseSchema,
   ProjectMapPositionDataListSchema,
@@ -12,10 +13,13 @@ const ProjectsService = {
       return;
     }
 
-    const result = await fetch(`/api/project/map/positions/${issueTag}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const result = await handleTeamSpecificFetch(
+      `/api/project/map/positions/${issueTag}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
 
     const data = await result.json();
 
@@ -34,7 +38,7 @@ const ProjectsService = {
       },
     });
 
-    await fetch(`/api/project/map/positions/TASK-1`, {
+    await handleTeamSpecificFetch(`/api/project/map/positions/TASK-1`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import {
   GetSingleProjectMapEdgesSetResponseSchema,
   ProjectMapEdgesSetListSchema,
@@ -12,10 +13,13 @@ const ProjectMapEdgesSetService = {
       return;
     }
 
-    const result = await fetch(`/api/project/map/edges-set/${issueTag}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const result = await handleTeamSpecificFetch(
+      `/api/project/map/edges-set/${issueTag}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
 
     const data = await result.json();
 
@@ -34,7 +38,7 @@ const ProjectMapEdgesSetService = {
       },
     });
 
-    await fetch(`/api/project/map/edges-set/TASK-1`, {
+    await handleTeamSpecificFetch(`/api/project/map/edges-set/TASK-1`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),

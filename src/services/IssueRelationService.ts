@@ -1,3 +1,4 @@
+import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import { IssueRelationSchemaResponse } from '@src/schemas/IssueRelationSchema';
 
 const IssueRelationService = {
@@ -6,10 +7,13 @@ const IssueRelationService = {
       return;
     }
 
-    const result = await fetch(`/api/issue-relation/${issueTag}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const result = await handleTeamSpecificFetch(
+      `/api/issue-relation/${issueTag}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
 
     const data = await result.json();
 

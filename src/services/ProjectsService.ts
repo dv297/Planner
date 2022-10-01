@@ -1,3 +1,4 @@
+import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import {
   GetProjectsResponseSchema,
   GetSingleProjectResponseSchema,
@@ -9,7 +10,7 @@ const ProjectsService = {
       return;
     }
 
-    const result = await fetch(`/api/project/${issueTag}`, {
+    const result = await handleTeamSpecificFetch(`/api/project/${issueTag}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -29,7 +30,7 @@ const ProjectsService = {
       return;
     }
 
-    await fetch(`/api/project/${issueTag}`, {
+    await handleTeamSpecificFetch(`/api/project/${issueTag}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -45,10 +46,13 @@ const ProjectsService = {
       return;
     }
 
-    const result = await fetch(`/api/projects/${workspaceTag}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const result = await handleTeamSpecificFetch(
+      `/api/projects/${workspaceTag}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
 
     if (!result.ok) {
       throw new Error('Network response was not ok');

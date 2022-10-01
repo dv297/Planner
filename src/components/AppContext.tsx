@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
@@ -32,12 +38,28 @@ const AppContext = createContext({} as AppContextStructure);
 
 const AppContextProvider = (props: AppContextProps) => {
   const router = useRouter();
+
+  const [isTeamIdWrittenToLocalStorage, setIsTeamIdWrittenToLocalStorage] =
+    useState(false);
+
   useSession({
     required: true,
     onUnauthenticated: () => {
       router.replace('/');
     },
   });
+
+  const { data: userPreferences, isLoading: isLoadingUserPreferences } =
+    useQuery([QueryKeys.USER_PREFERENCES], UserPreferencesService.get, {
+      refetchOnWindowFocus: false,
+    });
+
+  useEffect(() => {
+    if (userPreferences?.teamId) {
+      localStorage.setItem('team-id', userPreferences.teamId);
+      setIsTeamIdWrittenToLocalStorage(true);
+    }
+  }, [userPreferences]);
 
   const { data: workspaces, isLoading: isLoadingWorkspaces } = useQuery(
     [QueryKeys.WORKSPACES],
@@ -47,19 +69,16 @@ const AppContextProvider = (props: AppContextProps) => {
       onError: () => {
         router.replace('/');
       },
+      enabled: isTeamIdWrittenToLocalStorage,
     }
   );
-
-  const { data: userPreferences, isLoading: isLoadingUserPreferences } =
-    useQuery([QueryKeys.USER_PREFERENCES], UserPreferencesService.get, {
-      refetchOnWindowFocus: false,
-    });
 
   const { data: teams, isLoading: isLoadingTeams } = useQuery(
     [QueryKeys.TEAMS],
     TeamsService.getTeamsForUser,
     {
       refetchOnWindowFocus: false,
+      enabled: isTeamIdWrittenToLocalStorage,
     }
   );
 

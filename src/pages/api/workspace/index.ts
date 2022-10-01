@@ -7,9 +7,18 @@ import {
   CreateWorkspaceSchema,
   GetWorkspacesResponseSchema,
 } from '@src/schemas/WorkspaceSchemas';
+import extractSingle from '@src/utils/extractSingle';
 import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
   const currentUser = await UserRepo.getCurrentUser({ req, res });
 
   if (!currentUser) {
@@ -19,6 +28,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamUser = await prisma.teamUsers.findFirst({
     where: {
       userId: currentUser.id,
+      teamId: teamId,
     },
     select: {
       team: {

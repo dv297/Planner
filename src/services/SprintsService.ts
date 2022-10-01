@@ -1,3 +1,4 @@
+import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import { CreateSprintInput } from '@src/repos/SprintRepo';
 import { GetIssuesForSprintResponseSchema } from '@src/schemas/IssueSchema';
 import { GetSprintsResponseSchema } from '@src/schemas/SprintSchema';
@@ -8,10 +9,13 @@ const SprintsService = {
       return;
     }
 
-    const result = await fetch(`/api/sprints/${workspaceTag}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const result = await handleTeamSpecificFetch(
+      `/api/sprints/${workspaceTag}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
 
     if (!result.ok) {
       throw new Error('Network response was not ok');
@@ -28,7 +32,7 @@ const SprintsService = {
       return;
     }
 
-    const result = await fetch(`/api/sprint/${sprintId}`, {
+    const result = await handleTeamSpecificFetch(`/api/sprint/${sprintId}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -51,11 +55,14 @@ const SprintsService = {
       return;
     }
 
-    const result = await fetch(`/api/sprints/${workspaceTag}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(input),
-    });
+    const result = await handleTeamSpecificFetch(
+      `/api/sprints/${workspaceTag}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(input),
+      }
+    );
 
     if (!result.ok) {
       throw new Error('Network response was not ok');
@@ -66,7 +73,7 @@ const SprintsService = {
       return;
     }
 
-    const result = await fetch(`/api/sprint/${sprintId}`, {
+    const result = await handleTeamSpecificFetch(`/api/sprint/${sprintId}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     });

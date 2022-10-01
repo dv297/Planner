@@ -1,3 +1,4 @@
+import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import { GetWorkspacesResponseSchema } from '@src/schemas/WorkspaceSchemas';
 
 interface CreateWorkspaceInput {
@@ -7,7 +8,7 @@ interface CreateWorkspaceInput {
 
 const WorkspaceService = {
   getWorkspaces: async () => {
-    const result = await fetch('/api/workspace', {
+    const result = await handleTeamSpecificFetch('/api/workspace', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     });
@@ -24,7 +25,7 @@ const WorkspaceService = {
   },
   createWorkspace: async (data: CreateWorkspaceInput) => {
     const body = { name: data.name, tag: data.tag };
-    await fetch('/api/workspace', {
+    await handleTeamSpecificFetch('/api/workspace', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
