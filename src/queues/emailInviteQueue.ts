@@ -2,6 +2,7 @@ import { Queue, Worker } from 'bullmq';
 
 import mailClient, { getSanitizedSendEmailData } from '@src/lib/mailClient';
 import TeamSettingsRepo from '@src/repos/TeamSettingsRepo';
+import TeamsRepo from '@src/repos/TeamsRepo';
 
 const QUEUE_NAME = 'teamInviteQueue';
 
@@ -38,14 +39,21 @@ new Worker<TeamInviteJobData, JobResult>(
       loggingForJob('Beginning');
 
       const teamInvite = await TeamSettingsRepo.getTeamInviteById(teamInviteId);
+      const team = await TeamsRepo.getTeamById(teamInvite.teamId);
+
+      if (!team) {
+        return Promise.resolve({
+          success: false,
+        });
+      }
 
       const msg = getSanitizedSendEmailData({
         to: teamInvite.email,
         from: process.env.EMAIL_FROM_ADDRESS,
         subject: 'Planner - Team Invite',
-        text: 'You have been invited to collaborate using Planner.',
         html: `
 <div>
+    <p>You have been invited to collaborate using Planner for the team "${team.name}".</p>
     <p>Use the link below to accept the invitation and join this team</p>
     <a href='${process.env.BASE_URL}/team-invite/?inviteToken=${teamInvite.inviteToken}'>Join the team!</a>
 </div>`,

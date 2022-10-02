@@ -28,3 +28,7 @@ export const TeamMembersResponseSchema = z.object({
 export const InviteTeamMemberInputSchema = z.object({
   email: z.string(),
 });
+
+export const AcceptTeamInviteInputSchema = z.object({
+  inviteToken: z.string(),
+});

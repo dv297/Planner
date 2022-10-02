@@ -5,9 +5,18 @@ import { addToTeamInviteQueue } from '@src/queues/emailInviteQueue';
 import TeamSettingsRepo from '@src/repos/TeamSettingsRepo';
 import UserRepo from '@src/repos/UserRepo';
 import { InviteTeamMemberInputSchema } from '@src/schemas/TeamSettingsSchema';
+import extractSingle from '@src/utils/extractSingle';
 import routeMatcher from '@src/utils/routeMatcher';
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
   const currentUser = await UserRepo.getCurrentUser({ req, res });
 
   if (!currentUser) {
@@ -18,6 +27,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const teamInvite = await TeamSettingsRepo.inviteTeammate(currentUser, {
     email,
+    teamId,
   });
 
   if (!teamInvite) {

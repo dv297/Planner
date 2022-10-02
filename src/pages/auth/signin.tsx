@@ -1,8 +1,10 @@
 import { ReactNode } from 'react';
+import { useRouter } from 'next/router';
 import { getProviders, signIn } from 'next-auth/react';
 import { ClientSafeProvider } from 'next-auth/react/types';
 
 import LandingPageLayout from '@src/components/LandingPageLayout';
+import extractSingle from '@src/utils/extractSingle';
 
 interface SigninProps {
   providers: ClientSafeProvider[];
@@ -10,6 +12,7 @@ interface SigninProps {
 
 const Signin = (props: SigninProps) => {
   const { providers } = props;
+  const router = useRouter();
 
   return (
     <div className="w-screen min-h-screen flex flex-col justify-center items-center">
@@ -24,11 +27,13 @@ const Signin = (props: SigninProps) => {
             Object.values(providers).map((provider) => (
               <div className="mt-4" key={provider.id}>
                 <button
-                  onClick={() =>
+                  onClick={() => {
                     signIn(provider.id, {
-                      callbackUrl: '/app/dashboard',
-                    })
-                  }
+                      callbackUrl:
+                        extractSingle(router.query.callbackUrl) ??
+                        '/app/dashboard',
+                    });
+                  }}
                   className="w-full inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Sign in with {provider.name}

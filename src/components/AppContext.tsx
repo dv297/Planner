@@ -21,6 +21,7 @@ import QueryKeys from '@src/services/QueryKeys';
 import TeamsService from '@src/services/TeamsService';
 import UserPreferencesService from '@src/services/UserPreferencesService';
 import WorkspaceService from '@src/services/WorkspaceService';
+import extractSingle from '@src/utils/extractSingle';
 
 interface AppContextProps {
   children: ReactNode;
@@ -82,6 +83,15 @@ const AppContextProvider = (props: AppContextProps) => {
     }
   );
 
+  if (!isLoadingUserPreferences && !userPreferences?.hasFinishedSetup) {
+    const inviteToken = extractSingle(router.query.inviteToken);
+    if (inviteToken) {
+      router.replace(`/app/initial-setup?inviteToken=${inviteToken}`);
+    } else {
+      router.replace('/app/initial-setup');
+    }
+  }
+
   const isLoading =
     isLoadingWorkspaces || isLoadingUserPreferences || isLoadingTeams;
   const hasAllData = !!workspaces && !!userPreferences && !!teams;
@@ -92,10 +102,6 @@ const AppContextProvider = (props: AppContextProps) => {
 
   if (!hasAllData) {
     return null;
-  }
-
-  if (!userPreferences?.hasFinishedSetup) {
-    router.replace('/app/initial-setup');
   }
 
   const selectedWorkspace =

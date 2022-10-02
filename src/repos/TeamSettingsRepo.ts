@@ -32,10 +32,15 @@ const TeamSettingsRepo = {
 
     return teamUsers;
   },
-  async inviteTeammate(user: User, { email }: { email: string }) {
+  async inviteTeammate(
+    user: User,
+    { email, teamId }: { email: string; teamId: string }
+  ) {
+    // Ensure user is part of team they want to invite their friend to
     const teamUserForUser = await prisma.teamUsers.findFirst({
       where: {
         userId: user.id,
+        teamId,
       },
     });
 

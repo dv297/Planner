@@ -48,6 +48,13 @@ const TeamsRepo = {
 
     return team;
   },
+  async getTeamById(teamId: string) {
+    return prisma.team.findUnique({
+      where: {
+        id: teamId,
+      },
+    });
+  },
 };
 
 export default TeamsRepo;
