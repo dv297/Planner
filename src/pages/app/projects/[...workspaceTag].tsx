@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import Button from '@src/components/common/Button';
+import EmptyPlaceholder from '@src/components/EmptyPlaceholder';
 import ProjectsService from '@src/services/ProjectsService';
 import QueryKeys from '@src/services/QueryKeys';
 import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
@@ -22,6 +23,36 @@ const Page = () => {
 
   if (!data) {
     return null;
+  }
+
+  if (data.length === 0) {
+    return (
+      <>
+        <h1 className="text-lg font-bold">Projects</h1>
+        <EmptyPlaceholder
+          description={
+            <div>
+              Projects are a collection of issues that are closely related.
+              Issues have to be grouped together in order to be shown on a
+              project map.
+            </div>
+          }
+          pluralItemName="projects"
+          actionButton={
+            <Button
+              onClick={() => {
+                router.push(`/app/project/create`);
+              }}
+            >
+              <div className="mr-2">
+                <AddIcon />
+              </div>
+              <span>Create a Project</span>
+            </Button>
+          }
+        />
+      </>
+    );
   }
 
   return (
