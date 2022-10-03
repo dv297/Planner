@@ -53,6 +53,11 @@ const IssuesList = (props: IssuesListProps) => {
             </span>
           </div>
           <div className="divide-y divide-gray-200">
+            {issues.length === 0 && (
+              <div className="h-24 flex justify-center items-center">
+                <p className="italic">No tasks</p>
+              </div>
+            )}
             {issues.map((issue) => {
               const issueTag = parseIssueTagFromIssue(issue);
               return (
