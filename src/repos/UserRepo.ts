@@ -67,7 +67,7 @@ const UserRepo = {
     return user;
   },
 
-  async getWorkspaceByTag(user: User, workspaceTag: string) {
+  async getWorkspaceByTag(user: User, workspaceTag: string, teamId: string) {
     const workspace = await prisma.workspace.findFirst({
       where: {
         AND: {
@@ -77,6 +77,9 @@ const UserRepo = {
               team: {
                 TeamUsers: {
                   some: {
+                    teamId: {
+                      equals: teamId,
+                    },
                     userId: {
                       equals: user.id,
                     },

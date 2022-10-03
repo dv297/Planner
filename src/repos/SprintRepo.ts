@@ -12,8 +12,12 @@ export interface CreateSprintInput {
 }
 
 const SprintRepo = {
-  async getSprints(user: User, workspaceTag: string) {
-    const workspace = await UserRepo.getWorkspaceByTag(user, workspaceTag);
+  async getSprints(user: User, workspaceTag: string, teamId: string) {
+    const workspace = await UserRepo.getWorkspaceByTag(
+      user,
+      workspaceTag,
+      teamId
+    );
 
     if (!workspace) {
       return;
@@ -33,11 +37,14 @@ const SprintRepo = {
   async createSprint(
     user: User,
     workspaceTag: string,
+    teamId: string,
     input: CreateSprintInput
   ) {
-    const workspace = await UserRepo.getWorkspaceByTag(user, workspaceTag);
-
-    console.log(workspace);
+    const workspace = await UserRepo.getWorkspaceByTag(
+      user,
+      workspaceTag,
+      teamId
+    );
 
     if (!workspace) {
       return;

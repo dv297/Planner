@@ -10,9 +10,18 @@ import {
   GetSprintsInputSchema,
   GetSprintsResponseSchema,
 } from '@src/schemas/SprintSchema';
+import extractSingle from '@src/utils/extractSingle';
 import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
   const { workspaceTag } = GetSprintsInputSchema.parse(req.query);
   const tag = workspaceTag[0];
 
@@ -22,7 +31,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const sprints = await SprintRepo.getSprints(currentUser, tag);
+  const sprints = await SprintRepo.getSprints(currentUser, tag, teamId);
 
   if (!sprints) {
     return res.status(404).send('Not Found');
@@ -33,7 +42,14 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log(req.body);
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
   const { workspaceTag } = CreateSprintUrlInputSchema.parse(req.query);
   const input = CreateSprintBodyInputSchema.parse(req.body);
   const tag = workspaceTag[0];
@@ -44,7 +60,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const sprint = await SprintRepo.createSprint(currentUser, tag, input);
+  const sprint = await SprintRepo.createSprint(currentUser, tag, teamId, input);
 
   const response = CreateSprintResponseSchema.parse({
     id: sprint?.id,

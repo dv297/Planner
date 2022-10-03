@@ -1,5 +1,8 @@
+import { z } from 'zod';
+
 import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import {
+  CreateProjectInputSchema,
   GetProjectsResponseSchema,
   GetSingleProjectResponseSchema,
 } from '@src/schemas/ProjectSchemas';
@@ -20,6 +23,17 @@ const ProjectsService = {
     const response = GetSingleProjectResponseSchema.parse(data);
 
     return response.data;
+  },
+  createProject: async (input: z.infer<typeof CreateProjectInputSchema>) => {
+    CreateProjectInputSchema.parse(input);
+
+    const response = await handleTeamSpecificFetch(`/api/project/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(input),
+    });
+
+    return response;
   },
   updateProject: async (
     issueTag: string | undefined,

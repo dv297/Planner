@@ -4,7 +4,7 @@ import prisma from '@src/lib/prisma';
 import UserRepo from '@src/repos/UserRepo';
 
 const ProjectRepo = {
-  async getProjectByTag(currentUser: User, projectTag: string) {
+  async getProjectByTag(currentUser: User, projectTag: string, teamId: string) {
     const [workspaceTag, workspaceIssueCount] = projectTag.split('-');
 
     if (!workspaceTag || !workspaceIssueCount) {
@@ -13,7 +13,8 @@ const ProjectRepo = {
 
     const workspace = await UserRepo.getWorkspaceByTag(
       currentUser,
-      workspaceTag
+      workspaceTag,
+      teamId
     );
 
     if (!workspace) {

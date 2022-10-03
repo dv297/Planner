@@ -10,9 +10,18 @@ import {
   GetSingleProjectMapEdgesSetResponseSchema,
   UpdateSingleProjectMapEdgesSetInputSchema,
 } from '@src/schemas/ProjectMapEdgesSetSchemas';
+import extractSingle from '@src/utils/extractSingle';
 import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
   const { issueTag } = GetSingleProjectMapEdgeInputSchema.parse(req.query);
   const tag = issueTag[0];
 
@@ -23,13 +32,17 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const workspaceTag = tag.split('-')[0];
-  const workspace = await UserRepo.getWorkspaceByTag(currentUser, workspaceTag);
+  const workspace = await UserRepo.getWorkspaceByTag(
+    currentUser,
+    workspaceTag,
+    teamId
+  );
 
   if (!workspace) {
     return res.status(404).send('Not Found');
   }
 
-  const project = await ProjectRepo.getProjectByTag(currentUser, tag);
+  const project = await ProjectRepo.getProjectByTag(currentUser, tag, teamId);
 
   if (!project) {
     return res.status(404).send('Not Found');

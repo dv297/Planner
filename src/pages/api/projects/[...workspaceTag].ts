@@ -7,9 +7,18 @@ import {
   GetProjectsInputSchema,
   GetProjectsResponseSchema,
 } from '@src/schemas/ProjectSchemas';
+import extractSingle from '@src/utils/extractSingle';
 import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
   const { workspaceTag } = GetProjectsInputSchema.parse(req.query);
   const tag = workspaceTag[0];
 
@@ -19,7 +28,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const workspace = await UserRepo.getWorkspaceByTag(currentUser, tag);
+  const workspace = await UserRepo.getWorkspaceByTag(currentUser, tag, teamId);
 
   if (!workspace) {
     return res.status(404).send('Not Found');
