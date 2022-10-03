@@ -1,6 +1,6 @@
 import AppPage from '../page/AppPage';
 
-describe('Workspace', () => {
+describe('Projects', () => {
   beforeEach(() => {
     cy.exec('node scripts/seed-database.js');
     cy.visit('/');

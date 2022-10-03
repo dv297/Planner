@@ -62,6 +62,7 @@ function splitStringByNotQuotedSemicolon(input) {
 const main = async () => {
   // shell.exec('npm run db:reset -- --force');
   const tablesToEmpty = [
+    'Sprint',
     'ProjectMapPosition',
     'ProjectMapEdgesSet',
     'Issue',

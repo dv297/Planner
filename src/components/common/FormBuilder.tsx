@@ -14,6 +14,7 @@ function getComponentForInputType(input: Input<any>) {
       return (
         <div className="mt-6" key={key}>
           <FormTextInput
+            id={key}
             label={input.label}
             name={key}
             required={input.isRequired}
@@ -26,7 +27,7 @@ function getComponentForInputType(input: Input<any>) {
         <div className="mt-6" key={key}>
           <label className="font-medium">{input.label}</label>
           <div className="mt-2">
-            <FormMarkdownEditor name={key} />
+            <FormMarkdownEditor name={key} key={key} />
           </div>
         </div>
       );
@@ -35,6 +36,7 @@ function getComponentForInputType(input: Input<any>) {
       return (
         <div className="mt-6" key={key}>
           <FormDateInput
+            id={key}
             name={key}
             label={input.label}
             required={input.isRequired}

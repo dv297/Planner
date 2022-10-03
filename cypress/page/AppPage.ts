@@ -11,8 +11,14 @@ const AppPage = {
     const sidebar = cy.findByTestId('app-sidebar');
     return {
       projects: () => sidebar.findByText(/Projects/),
+      sprints: () => sidebar.findByText(/Sprints/),
     };
   },
+  addSprintForm: () => ({
+    nameForm: () => cy.findByLabelText('Name'),
+    beginDateForm: () => cy.findByLabelText('Begin Date'),
+    endDateForm: () => cy.findByText('End Date'),
+  }),
 };
 
 export default AppPage;
