@@ -39,11 +39,18 @@ if (
         },
       },
       async authorize(credentials) {
+        console.log(credentials);
+        if (!credentials?.email) {
+          return null;
+        }
+
+        console.log(credentials);
         const user = await prisma.user.findFirst({
           where: {
             email: credentials?.email,
           },
         });
+        console.log(user);
         return user;
       },
     })
