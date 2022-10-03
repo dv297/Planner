@@ -19,7 +19,7 @@ describe('Workspace', () => {
     // so we must tell it to visit our website with the `cy.visit()` command.
     // Since we want to visit the same URL at the start of all our tests,
     // we include it in our beforeEach function so that it runs before each test
-    cy.visit('/app/workspace');
+    cy.visit('/');
 
     // TODO: Refactor to not perform log in every time
     cy.login();
@@ -29,11 +29,16 @@ describe('Workspace', () => {
     AppPage.workspaceSelector().click();
     AppPage.addWorkspaceButton().click();
 
-    AppPage.addWorkspaceForm().nameForm().type('Test');
-    AppPage.addWorkspaceForm().tagForm().type('Test');
+    AppPage.addWorkspaceForm().nameForm().type('DVU TEST WORKSPACE');
+    AppPage.addWorkspaceForm().tagForm().type('DVUTEST');
 
     AppPage.addWorkspaceForm().submitButton().click();
 
     cy.findByText(/Successfully added workspace/i).should('exist');
+
+    cy.visit('/app/dashboard');
+
+    AppPage.workspaceSelector().click();
+    cy.findByText(/DVU TEST WORKSPACE/i).should('exist');
   });
 });

@@ -77,7 +77,7 @@ const Signin = (props: SigninProps) => {
                   className="mt-6 py-1 w-full bg-blue-500 text-white rounded-md hover:outline hover:outline-blue-700 hover:shadow"
                   type="submit"
                 >
-                  Sign in
+                  Sign in with Credentials
                 </button>
               </form>
             </div>

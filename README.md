@@ -25,3 +25,9 @@ truncate "User" cascade;
 truncate "Workspace" cascade;
 truncate "Team" cascade;
 ```
+
+## Database Backup
+
+```
+pg_dumpall -c -U root > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
+```

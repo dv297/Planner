@@ -12,12 +12,12 @@
 import '@testing-library/cypress/add-commands';
 
 Cypress.Commands.add('login', () => {
-  cy.findByText(/Log in/i).click();
-  cy.findByLabelText(/Email/i).type('dvv297@gmail.com');
+  cy.findByText(/Sign in/i).click();
+  cy.findByLabelText(/Username/i).type('dvv297@gmail.com');
   cy.findByText(/Sign in with Credentials/i).click();
-  cy.findByRole('main').within(() => {
-    cy.findByText(/dashboard/i).should('exist');
-  });
+  cy.findByText(/We have set up some resources to help you get started./i, {
+    timeout: 10000,
+  }).should('exist');
 });
 
 //
