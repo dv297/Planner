@@ -44,6 +44,7 @@ const KeyIssueRepo = {
       },
       include: {
         workspace: true,
+        project: true,
       },
     });
 

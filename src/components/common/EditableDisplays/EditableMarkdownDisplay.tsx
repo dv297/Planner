@@ -8,10 +8,11 @@ import FormMarkdownEditor from '@src/components/common/FormMarkdownEditor';
 export interface EditableMarkdownDisplayProps {
   onBlurSubmission: (data: string) => Promise<void>;
   initialValue: string;
+  label: string;
 }
 
 const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
-  const { onBlurSubmission, initialValue } = props;
+  const { onBlurSubmission, initialValue, label } = props;
   const {
     textValue,
     handleBlurSubmission,

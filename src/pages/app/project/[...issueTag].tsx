@@ -55,6 +55,7 @@ const ProjectPage = () => {
       </div>
       <div className="mt-2">
         <EditableMarkdownDisplay
+          label="Description"
           onBlurSubmission={getUpdaterFunction(tag, 'description')}
           initialValue={project.keyIssue.description}
         />

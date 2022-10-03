@@ -38,6 +38,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
     input.workspaceId
   );
 
+  // TODO: Extract to ProjectRepo
   const result = await prisma.project.create({
     data: {
       workspaceId: input.workspaceId,

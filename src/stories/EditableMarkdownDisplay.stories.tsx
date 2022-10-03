@@ -18,6 +18,7 @@ const Template: ComponentStory<typeof EditableMarkdownDisplay> = (
   args: Partial<EditableMarkdownDisplayProps>
 ) => (
   <EditableMarkdownDisplay
+    label="Description"
     onBlurSubmission={() => {
       return new Promise((resolve) => {
         setTimeout(() => {
