@@ -60,8 +60,40 @@ function splitStringByNotQuotedSemicolon(input) {
 }
 
 const main = async () => {
-  shell.exec('npm run db:reset -- --force');
-  await seedDatabase();
+  // shell.exec('npm run db:reset -- --force');
+  const tablesToEmpty = [
+    'ProjectMapPosition',
+    'ProjectMapEdgesSet',
+    'Issue',
+    'KeyIssue',
+    'Project',
+    'TeamWorkspace',
+    'TeamUsers',
+    'Team',
+    'Workspace',
+    'Account',
+    'UserPreference',
+    'User',
+  ];
+
+  for (let table of tablesToEmpty) {
+    try {
+      console.log(`Deleting table ${table}`);
+      await prisma[table].deleteMany({ where: {} });
+    } catch (err) {
+      console.error(`Error deleting table`);
+      console.error(err);
+    }
+  }
+  try {
+    console.log('Seeding database');
+    await seedDatabase();
+  } catch (err) {
+    console.error('Error seeding database');
+    console.error(err);
+  }
+
+  console.log('Success');
 };
 
 main();
