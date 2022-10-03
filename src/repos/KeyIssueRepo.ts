@@ -3,7 +3,7 @@ import { User } from 'next-auth';
 import prisma from '@src/lib/prisma';
 
 const KeyIssueRepo = {
-  async getKeyIssueByTag(user: User, issueTag: string) {
+  async getKeyIssueByTag(user: User, issueTag: string, teamId: string) {
     const [workspaceTag, workspaceIssueCount] = issueTag.split('-');
 
     if (!workspaceTag || !workspaceIssueCount) {
@@ -17,6 +17,7 @@ const KeyIssueRepo = {
           TeamWorkspace: {
             some: {
               team: {
+                id: teamId,
                 TeamUsers: {
                   some: {
                     userId: {
@@ -57,9 +58,14 @@ const KeyIssueRepo = {
     user: User,
     issueTag: string,
     propertyName: string,
+    teamId: string,
     data: any
   ) {
-    const keyIssueResponse = await this.getKeyIssueByTag(user, issueTag);
+    const keyIssueResponse = await this.getKeyIssueByTag(
+      user,
+      issueTag,
+      teamId
+    );
 
     if (!keyIssueResponse || !keyIssueResponse.keyIssue) {
       return null;

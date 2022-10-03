@@ -5,9 +5,18 @@ import { withAuthMiddleware } from '@src/lib/withAuthMiddleware';
 import IssueRepo from '@src/repos/IssueRepo';
 import UserRepo from '@src/repos/UserRepo';
 import { CreateProjectInputSchema } from '@src/schemas/ProjectSchemas';
+import extractSingle from '@src/utils/extractSingle';
 import routeMatcher from '@src/utils/routeMatcher';
 
 const create = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
   const input = CreateProjectInputSchema.parse(req.body);
 
   const currentUser = await UserRepo.getCurrentUser({ req, res });
@@ -24,6 +33,7 @@ const create = async (req: NextApiRequest, res: NextApiResponse) => {
         team: {
           TeamUsers: {
             some: {
+              teamId,
               userId: currentUser.id,
             },
           },

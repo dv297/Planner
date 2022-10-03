@@ -24,7 +24,7 @@ function getIssueById(issueId: string) {
 }
 
 const IssueRepo = {
-  async getIssueByTag(user: User, issueTag: string) {
+  async getIssueByTag(user: User, issueTag: string, teamId: string) {
     const [workspaceTag, workspaceIssueCount] = issueTag.split('-');
 
     if (!workspaceTag || !workspaceIssueCount) {
@@ -38,6 +38,7 @@ const IssueRepo = {
           TeamWorkspace: {
             some: {
               team: {
+                id: teamId,
                 TeamUsers: {
                   some: {
                     userId: {
@@ -73,9 +74,10 @@ const IssueRepo = {
     user: User,
     issueTag: string,
     propertyName: string,
+    teamId: string,
     data: any
   ) {
-    const issueResponse = await this.getIssueByTag(user, issueTag);
+    const issueResponse = await this.getIssueByTag(user, issueTag, teamId);
 
     if (!issueResponse || !issueResponse.issue) {
       return null;
@@ -156,8 +158,12 @@ const IssueRepo = {
 
     return newWorkspaceCount;
   },
-  async getIssuesForIssueRelations(user: User, issueTag: string) {
-    const issueResponse = await this.getIssueByTag(user, issueTag);
+  async getIssuesForIssueRelations(
+    user: User,
+    issueTag: string,
+    teamId: string
+  ) {
+    const issueResponse = await this.getIssueByTag(user, issueTag, teamId);
 
     if (!issueResponse) {
       return;

@@ -8,9 +8,18 @@ import {
   GetSingleIssueInputSchema,
   UpdateSingleIssueInputSchema,
 } from '@src/schemas/IssueSchema';
+import extractSingle from '@src/utils/extractSingle';
 import routeMatcher from '@src/utils/routeMatcher';
 
 const get = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
   const { issueTag } = GetSingleIssueInputSchema.parse(req.query);
   const tag = issueTag[0];
 
@@ -22,7 +31,8 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const issueResponse = await IssueRepo.getIssuesForIssueRelations(
     currentUser,
-    tag
+    tag,
+    teamId
   );
 
   if (!issueResponse) {
@@ -37,6 +47,14 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
 };
 
 const update = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
   const { issueTag } = GetSingleIssueInputSchema.parse(req.query);
   const { propertyName, data } = UpdateSingleIssueInputSchema.parse(req.body);
   const tag = issueTag[0];
@@ -51,6 +69,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
     currentUser,
     tag,
     propertyName,
+    teamId,
     data
   );
 
