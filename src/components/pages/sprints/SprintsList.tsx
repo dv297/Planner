@@ -18,7 +18,6 @@ import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
 
 const formatDate = (date: Date) => {
-  console.log(date);
   return format(new Date(date), 'M/d/yy');
 };
 

@@ -35,7 +35,6 @@ const FormImageUploader = (props: FormImageUploaderProps) => {
                       0,
                       async (uri) => {
                         const uriFile = uri as File;
-                        console.log(uriFile);
                         const { url } = await uploadToS3(uriFile);
                         onChange(url);
                       },

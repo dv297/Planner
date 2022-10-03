@@ -5,3 +5,4 @@ node_modules/
 .idea/
 tsconfig.tsbuildinfo
 cypress.env.json
+cypress/videos/

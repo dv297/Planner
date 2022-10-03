@@ -34,7 +34,6 @@ const FormDateInput = (props: FormDateInputProps) => {
                 onChange(newValue);
               }}
               renderInput={(params) => {
-                console.log(params);
                 return (
                   <TextField
                     inputRef={inputRef}
