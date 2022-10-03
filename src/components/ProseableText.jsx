@@ -13,7 +13,7 @@ import { getClient } from '@src/lib/sanity';
 const ImageComponent = ({ value }) => {
   const imageProps = useNextSanityImage(getClient(false), value);
 
-  return <Image {...imageProps} layout="responsive" />;
+  return <Image {...imageProps} layout="responsive" alt="" />;
 };
 
 const components = {

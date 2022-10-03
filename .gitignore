@@ -4,5 +4,5 @@ node_modules/
 .env
 .idea/
 tsconfig.tsbuildinfo
-cypress.env.json
 cypress/videos/
+server-logs.txt
