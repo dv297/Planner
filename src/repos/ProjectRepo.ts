@@ -27,6 +27,41 @@ const ProjectRepo = {
           id: {
             equals: workspace.id,
           },
+          tag: {
+            equals: workspaceTag,
+          },
+        },
+      },
+    });
+
+    return project;
+  },
+  async getProjectByKeyIssueTag(
+    currentUser: User,
+    keyIssueTag: string,
+    teamId: string
+  ) {
+    const [workspaceTag, workspaceIssueCount] = keyIssueTag.split('-');
+
+    if (!workspaceTag || !workspaceIssueCount) {
+      return;
+    }
+
+    const workspace = await UserRepo.getWorkspaceByTag(
+      currentUser,
+      workspaceTag,
+      teamId
+    );
+
+    if (!workspace) {
+      return;
+    }
+
+    const project = await prisma.project.findFirst({
+      where: {
+        workspaceId: workspace.id,
+        keyIssue: {
+          workspaceIssueCount: Number.parseInt(workspaceIssueCount),
         },
       },
     });

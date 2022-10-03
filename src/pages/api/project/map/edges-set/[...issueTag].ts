@@ -42,7 +42,11 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(404).send('Not Found');
   }
 
-  const project = await ProjectRepo.getProjectByTag(currentUser, tag, teamId);
+  const project = await ProjectRepo.getProjectByKeyIssueTag(
+    currentUser,
+    tag,
+    teamId
+  );
 
   if (!project) {
     return res.status(404).send('Not Found');

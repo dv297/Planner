@@ -42,13 +42,17 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(404).send('Not Found');
   }
 
-  const issuesResponse = await IssueRepo.getIssuesForWorkspace(workspace.id);
-  const project = await ProjectRepo.getProjectByTag(currentUser, tag, teamId);
+  const project = await ProjectRepo.getProjectByKeyIssueTag(
+    currentUser,
+    tag,
+    teamId
+  );
 
   if (!project) {
     return;
   }
 
+  const issuesResponse = await IssueRepo.getIssuesForProject(project.id);
   const positionsResponse =
     await ProjectMapPositionsRepo.getProjectMapPositionsForProject(project.id);
 
