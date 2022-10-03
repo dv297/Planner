@@ -12,7 +12,7 @@ export interface EditableMarkdownDisplayProps {
 }
 
 const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
-  const { onBlurSubmission, initialValue, label } = props;
+  const { onBlurSubmission, initialValue } = props;
   const {
     textValue,
     handleBlurSubmission,
