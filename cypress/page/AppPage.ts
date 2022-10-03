@@ -6,6 +6,13 @@ const AppPage = {
     tagForm: () => cy.findByLabelText('Tag'),
     submitButton: () => cy.findByText('Submit'),
   }),
+  sidebar: () => {
+    // eslint-disable-next-line cypress/no-assigning-return-values
+    const sidebar = cy.findByTestId('app-sidebar');
+    return {
+      projects: () => sidebar.findByText(/Projects/),
+    };
+  },
 };
 
 export default AppPage;

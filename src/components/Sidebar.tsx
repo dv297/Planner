@@ -93,7 +93,7 @@ const Sidebar = (props: SidebarProps) => {
                   {header}
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
-                  <nav className="px-2 space-y-1">
+                  <nav className="px-2 space-y-1" data-testid="app-sidebar">
                     {navigation.map((item, index) => (
                       <Link
                         href={injectWorkspaceTag(
@@ -155,7 +155,10 @@ const Sidebar = (props: SidebarProps) => {
             <div className="flex items-center h-16 flex-shrink-0 px-4 bg-sidebar-feature">
               {header}
             </div>
-            <nav className="flex-1 px-2 py-4 space-y-1">
+            <nav
+              className="flex-1 px-2 py-4 space-y-1"
+              data-testid="app-sidebar"
+            >
               {navigation.map((item, index) => (
                 <Link
                   href={injectWorkspaceTag(item.href, selectedWorkspace.tag)}
