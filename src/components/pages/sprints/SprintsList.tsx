@@ -43,10 +43,12 @@ const SprintsList = (props: SprintsListProps) => {
 
   return (
     <>
-      <Button onClick={() => setIsEdit((value) => !value)} variant="text">
-        <div className="mr-2">{isEdit ? <CloseIcon /> : <EditIcon />}</div>
-        {isEdit ? 'Close Edit' : 'Edit'}
-      </Button>
+      <div className="mb-3">
+        <Button onClick={() => setIsEdit((value) => !value)} variant="text">
+          <div className="mr-2">{isEdit ? <CloseIcon /> : <EditIcon />}</div>
+          {isEdit ? 'Close Edit' : 'Edit'}
+        </Button>
+      </div>
       {sprints.map((sprint) => {
         return (
           <Accordion key={sprint.id} TransitionProps={{ unmountOnExit: true }}>

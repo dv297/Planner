@@ -148,8 +148,8 @@ const Sidebar = (props: SidebarProps) => {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
+      {/* Sidebar component, swap this element with another sidebar if you like */}
       <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-        {/* Sidebar component, swap this element with another sidebar if you like */}
         <div className="flex-1 flex flex-col min-h-0 bg-sidebar border-r border-gray-200">
           <div className="flex-1 flex flex-col overflow-y-auto h-full">
             <div className="flex items-center h-16 flex-shrink-0 px-4 sidebar-feature border-solid border-b border-gray-200">

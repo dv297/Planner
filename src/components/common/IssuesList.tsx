@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import { clsx } from 'clsx';
 import Link from 'next/link';
 import { z } from 'zod';
 
@@ -65,8 +66,16 @@ const IssuesList = (props: IssuesListProps) => {
                   <span className="col-span-2 text-gray-900">
                     <Link href={`/app/issue/${issueTag}`}>{issueTag}</Link>
                   </span>
-                  <span className="col-span-6 text-gray-500">
-                    <Link href={`/app/issue/${issueTag}`}>{issue.title}</Link>
+                  <span className="col-span-6 text-gray-500 cursor-pointer">
+                    <Link href={`/app/issue/${issueTag}`}>
+                      <span
+                        className={clsx({
+                          'line-through': issue.issueStatus === 'CLOSED',
+                        })}
+                      >
+                        {issue.title}
+                      </span>
+                    </Link>
                   </span>
                   <span className="col-span-2 flex justify-center">
                     {issue.assignee && <UserAvatar user={issue.assignee} />}
