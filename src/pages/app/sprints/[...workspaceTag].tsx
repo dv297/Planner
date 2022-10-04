@@ -7,6 +7,7 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { z } from 'zod';
@@ -94,21 +95,30 @@ const Page = () => {
 
             if (issueDragged?.id && targetSprintData) {
               const { sprintId, sprintName } = targetSprintData;
+              const fromSprintId = issueDragged.sprintId;
               const issueTag = parseIssueTagFromIssue(
                 issueDragged as z.infer<typeof IssueSchema>
               );
-              await IssueService.updateIssue(issueTag, 'sprintId', sprintId);
+              await IssueService.updateIssue(
+                issueTag,
+                'sprintId',
+                sprintId ?? null
+              );
               await Promise.all([
                 queryClient.invalidateQueries([
                   getDynamicQueryKey(QueryKeys.SPRINTS, sprintId),
                 ]),
+                queryClient.invalidateQueries([
+                  getDynamicQueryKey(QueryKeys.SPRINTS, fromSprintId),
+                ]),
+
                 queryClient.invalidateQueries([QueryKeys.BACKLOG_ISSUES]),
               ]);
 
               snackbar.displaySnackbar({
                 message: sprintName
                   ? `Moved issue to ${sprintName}`
-                  : 'Moved issue',
+                  : 'Moved issue to backlog',
                 severity: SnackbarSeverity.SUCCESS,
               });
             }
@@ -119,6 +129,15 @@ const Page = () => {
               <SprintCreationModalTrigger />
             </div>
             <div className="mt-8">
+              <div className="bg-blue-100 py-4 rounded-lg mb-2 flex flex-row items-center text-lg text-blue-500">
+                <div className="w-12 px-6 flex items-center justify-center">
+                  <InfoOutlinedIcon />
+                </div>
+                <p className="leading-6 pr-4">
+                  Tip: You can drag and drop issues into expanded sprint to move
+                  that issue to that sprint.
+                </p>
+              </div>
               <SprintsList sprints={sprints} />
             </div>
           </div>

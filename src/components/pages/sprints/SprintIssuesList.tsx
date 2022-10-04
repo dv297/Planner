@@ -41,7 +41,7 @@ const SprintIssuesList = (props: SprintIssuesListProps) => {
   return (
     <>
       <DragTargetOverlay
-        label={`Add issue to ${sprintName}`}
+        label={`Move issue to ${sprintName}`}
         isOpen={!!active}
         innerRef={setNodeRef}
       >
