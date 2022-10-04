@@ -93,17 +93,22 @@ const Page = () => {
             const targetSprintData = event.over?.data.current;
 
             if (issueDragged?.id && targetSprintData) {
-              const { sprintId } = targetSprintData;
+              const { sprintId, sprintName } = targetSprintData;
               const issueTag = parseIssueTagFromIssue(
                 issueDragged as z.infer<typeof IssueSchema>
               );
               await IssueService.updateIssue(issueTag, 'sprintId', sprintId);
-              await queryClient.invalidateQueries([
-                getDynamicQueryKey(QueryKeys.SPRINTS, sprintId),
+              await Promise.all([
+                queryClient.invalidateQueries([
+                  getDynamicQueryKey(QueryKeys.SPRINTS, sprintId),
+                ]),
+                queryClient.invalidateQueries([QueryKeys.BACKLOG_ISSUES]),
               ]);
 
               snackbar.displaySnackbar({
-                message: 'Moved issue to sprint',
+                message: sprintName
+                  ? `Moved issue to ${sprintName}`
+                  : 'Moved issue',
                 severity: SnackbarSeverity.SUCCESS,
               });
             }

@@ -22,6 +22,7 @@ const SprintIssuesList = (props: SprintIssuesListProps) => {
     id: `sprint-droppable-${sprintId}`,
     data: {
       sprintId,
+      sprintName,
     },
   });
 
