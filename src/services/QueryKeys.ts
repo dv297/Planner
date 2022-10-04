@@ -9,6 +9,7 @@ enum QueryKeys {
   PERSONAL_INFORMATION = 'personal-information',
   SPRINTS = 'sprints',
   TEAMS = 'teams',
+  BACKLOG_ISSUES = 'backlog-issues',
 }
 
 export const getDynamicQueryKey = (queryKey: QueryKeys, id: string) => {

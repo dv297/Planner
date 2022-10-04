@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import { AppContextProvider, useAppContext } from '@src/components/AppContext';
+import FullScreenLoader from '@src/components/common/FullScreenLoader';
 
 const Redirecter = ({ url }: { url: string }) => {
   const { selectedWorkspace } = useAppContext();
@@ -14,7 +15,7 @@ const Redirecter = ({ url }: { url: string }) => {
     }
   }, [selectedWorkspace, url, router]);
 
-  return <>Loading</>;
+  return <FullScreenLoader />;
 };
 
 const PageRedirectToSlug = ({ url }: { url: string }) => {

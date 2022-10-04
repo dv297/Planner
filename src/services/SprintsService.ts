@@ -47,6 +47,25 @@ const SprintsService = {
 
     return response.data;
   },
+  async getIssuesInBacklog(workspaceTag: string) {
+    const result = await handleTeamSpecificFetch(
+      `/api/sprint/backlog/${workspaceTag}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+
+    if (!result.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await result.json();
+
+    const response = GetIssuesForSprintResponseSchema.parse(data);
+
+    return response.data;
+  },
   createSprint: async (
     workspaceTag: string | undefined,
     input: CreateSprintInput

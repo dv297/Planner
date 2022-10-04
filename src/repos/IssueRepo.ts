@@ -2,6 +2,7 @@ import { Prisma } from '@prisma/client';
 import { User } from 'next-auth';
 
 import prisma from '@src/lib/prisma';
+import WorkspaceRepo from '@src/repos/WorkspaceRepo';
 import { IssueRelationSchemaResponseData } from '@src/schemas/IssueRelationSchema';
 
 export const issueFieldInclusion: Prisma.IssueInclude = {
@@ -31,26 +32,10 @@ const IssueRepo = {
       return null;
     }
 
-    const workspace = await prisma.workspace.findFirst({
-      where: {
-        AND: {
-          tag: workspaceTag,
-          TeamWorkspace: {
-            some: {
-              team: {
-                id: teamId,
-                TeamUsers: {
-                  some: {
-                    userId: {
-                      equals: user.id,
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
+    const workspace = await WorkspaceRepo.getWorkspaceByTag({
+      user,
+      teamId,
+      workspaceTag,
     });
 
     if (!workspace) {
@@ -102,23 +87,6 @@ const IssueRepo = {
     const issues = await prisma.issue.findMany({
       where: {
         projectId,
-      },
-      include: issueFieldInclusion,
-      orderBy: {
-        workspaceIssueCount: 'asc',
-      },
-    });
-
-    return issues;
-  },
-  async getIssuesForWorkspace(workspaceId: string | undefined) {
-    if (!workspaceId) {
-      return [];
-    }
-
-    const issues = await prisma.issue.findMany({
-      where: {
-        workspaceId,
       },
       include: issueFieldInclusion,
       orderBy: {
@@ -213,6 +181,27 @@ const IssueRepo = {
     };
 
     return IssueRelationSchemaResponseData.parse(data);
+  },
+  async getIssuesWithoutSprintsAssigned(
+    user: User,
+    workspaceId: string,
+    meta: { skip: number; take: number } = { skip: 0, take: 10 }
+  ) {
+    const { skip, take } = meta;
+    const issues = await prisma.issue.findMany({
+      where: {
+        workspaceId,
+        sprintId: null,
+      },
+      include: issueFieldInclusion,
+      orderBy: {
+        workspaceIssueCount: 'asc',
+      },
+      skip,
+      take,
+    });
+
+    return issues;
   },
 };
 

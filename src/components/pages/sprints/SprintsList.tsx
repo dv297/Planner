@@ -12,6 +12,7 @@ import { format } from 'date-fns';
 import { z } from 'zod';
 
 import Button from '@src/components/common/Button';
+import BacklogIssuesList from '@src/components/pages/sprints/BacklogIssuesList';
 import SprintIssuesList from '@src/components/pages/sprints/SprintIssuesList';
 import { SprintsListSchema } from '@src/schemas/SprintSchema';
 import QueryKeys from '@src/services/QueryKeys';
@@ -89,6 +90,24 @@ const SprintsList = (props: SprintsListProps) => {
           </Accordion>
         );
       })}
+      <Accordion TransitionProps={{ unmountOnExit: true }}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls={`panel-backlog-content`}
+          id={`panel-backlog-header`}
+        >
+          <div className="grid grid-cols-12 items-center w-full">
+            <div className="col-span-2">
+              <Typography>Backlog</Typography>
+            </div>
+            <div className="col-span-9" />
+            <div className="col-span-1 flex-row justify-end" />
+          </div>
+        </AccordionSummary>
+        <AccordionDetails>
+          <BacklogIssuesList />
+        </AccordionDetails>
+      </Accordion>
     </>
   );
 };
