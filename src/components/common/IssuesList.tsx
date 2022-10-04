@@ -1,16 +1,11 @@
 import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import { clsx } from 'clsx';
-import Link from 'next/link';
 import { z } from 'zod';
 
 import Button from '@src/components/common/Button';
-import UserAvatar from '@src/components/common/UserAvatar';
 import IssueCreationModal from '@src/components/IssueCreationModal';
-import IssueStatusPill from '@src/components/IssueStatusPill';
+import IssueListItem from '@src/components/IssueListItem';
 import { IssuesListSchema } from '@src/schemas/IssueSchema';
-import { convertToIssueStatusType } from '@src/types/IssueStatusType';
-import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
 
 interface IssuesListProps {
   projectId?: string;
@@ -60,33 +55,7 @@ const IssuesList = (props: IssuesListProps) => {
               </div>
             )}
             {issues.map((issue) => {
-              const issueTag = parseIssueTagFromIssue(issue);
-              return (
-                <div className="px-4 py-3.5 grid-cols-12 grid" key={issue.id}>
-                  <span className="col-span-2 text-gray-900">
-                    <Link href={`/app/issue/${issueTag}`}>{issueTag}</Link>
-                  </span>
-                  <span className="col-span-6 text-gray-500 cursor-pointer">
-                    <Link href={`/app/issue/${issueTag}`}>
-                      <span
-                        className={clsx({
-                          'line-through': issue.issueStatus === 'CLOSED',
-                        })}
-                      >
-                        {issue.title}
-                      </span>
-                    </Link>
-                  </span>
-                  <span className="col-span-2 flex justify-center">
-                    {issue.assignee && <UserAvatar user={issue.assignee} />}
-                  </span>
-                  <span className="col-span-2 flex justify-end">
-                    <IssueStatusPill
-                      issueStatus={convertToIssueStatusType(issue.issueStatus)}
-                    />
-                  </span>
-                </div>
-              );
+              return <IssueListItem issue={issue} key={issue.id} />;
             })}
           </div>
         </div>

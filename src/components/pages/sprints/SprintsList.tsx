@@ -85,7 +85,7 @@ const SprintsList = (props: SprintsListProps) => {
               </div>
             </AccordionSummary>
             <AccordionDetails>
-              <SprintIssuesList sprintId={sprint.id} />
+              <SprintIssuesList sprintId={sprint.id} sprintName={sprint.name} />
             </AccordionDetails>
           </Accordion>
         );

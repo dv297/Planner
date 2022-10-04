@@ -35,6 +35,7 @@
   "license": "MIT",
   "dependencies": {
     "@date-io/date-fns": "^2.16.0",
+    "@dnd-kit/core": "^6.0.5",
     "@emotion/react": "^11.10.4",
     "@emotion/server": "^11.10.0",
     "@emotion/styled": "^11.10.4",
