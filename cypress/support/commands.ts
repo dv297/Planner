@@ -11,6 +11,7 @@
 /*  eslint-disable @typescript-eslint/no-namespace */
 
 import '@testing-library/cypress/add-commands';
+import '@4tw/cypress-drag-drop';
 
 Cypress.Commands.add('login', () => {
   cy.findByText(/Sign in/i).click();

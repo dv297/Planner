@@ -50,7 +50,7 @@ const SprintsList = (props: SprintsListProps) => {
           {isEdit ? 'Close Edit' : 'Edit'}
         </Button>
       </div>
-      {sprints.map((sprint) => {
+      {sprints.map((sprint, index) => {
         return (
           <Accordion key={sprint.id} TransitionProps={{ unmountOnExit: true }}>
             <AccordionSummary
@@ -85,7 +85,11 @@ const SprintsList = (props: SprintsListProps) => {
               </div>
             </AccordionSummary>
             <AccordionDetails>
-              <SprintIssuesList sprintId={sprint.id} sprintName={sprint.name} />
+              <SprintIssuesList
+                sprintId={sprint.id}
+                sprintName={sprint.name}
+                index={index}
+              />
             </AccordionDetails>
           </Accordion>
         );

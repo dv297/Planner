@@ -10,10 +10,11 @@ import SprintsService from '@src/services/SprintsService';
 interface SprintIssuesListProps {
   sprintId: string;
   sprintName: string;
+  index: number;
 }
 
 const SprintIssuesList = (props: SprintIssuesListProps) => {
-  const { sprintId, sprintName } = props;
+  const { sprintId, sprintName, index } = props;
   const { data, isLoading } = useQuery(
     [getDynamicQueryKey(QueryKeys.SPRINTS, sprintId)],
     () => SprintsService.getIssuesForSprint(sprintId)
@@ -44,6 +45,7 @@ const SprintIssuesList = (props: SprintIssuesListProps) => {
         label={`Move issue to ${sprintName}`}
         isOpen={!!active}
         innerRef={setNodeRef}
+        id={`sprint-drag-overlay-${index}`}
       >
         {data.issues.length > 0 ? (
           <IssuesList issues={data.issues} />

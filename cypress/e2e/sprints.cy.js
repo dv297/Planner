@@ -19,5 +19,17 @@ describe('Sprints', () => {
 
     cy.findByText(/Created sprint!/i).should('exist');
     cy.findByText(/Test Sprint/i).should('exist');
+
+    cy.findByText(/Test Sprint/i).click();
+    cy.findByText(/No issues assigned to this sprint yet/i).should('exist');
+
+    cy.findByText(/Backlog/i).should('exist');
+    cy.findByText(/Backlog/i).click();
+
+    cy.findByText(/Setup Github repository/i).should('exist');
+
+    // cy.findByText(/Setup Github repository/i).drag('#sprint-drag-overlay-0', {
+    //   force: true,
+    // });
   });
 });
