@@ -3,6 +3,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useQuery } from '@tanstack/react-query';
 
 import Button from '@src/components/common/Button';
+import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import MemberInvitationModal from '@src/components/MemberInvitationModal';
 import MembersList from '@src/components/MembersList';
 import TeamSettingsLayout from '@src/components/TeamSettingsLayout';
@@ -48,7 +49,11 @@ const Page = () => {
 };
 
 Page.getLayout = function getLayout(page: ReactNode) {
-  return <TeamSettingsLayout>{page}</TeamSettingsLayout>;
+  return (
+    <TeamSettingsLayout>
+      <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
+    </TeamSettingsLayout>
+  );
 };
 
 export default Page;

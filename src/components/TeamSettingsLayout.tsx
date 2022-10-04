@@ -45,16 +45,16 @@ const TeamSettingsLayout = (props: TeamSettingsLayoutProps) => {
         <div>
           <Sidebar
             header={
-              <Link href="/app/dashboard">
-                <div className="flex flex-row items-center">
-                  <div className="text-white">
-                    <ArrowBackIcon />
+              <div className="cursor-pointer">
+                <Link href="/app/dashboard">
+                  <div className="flex flex-row items-center">
+                    <div>
+                      <ArrowBackIcon />
+                    </div>
+                    <span className="ml-2 font-bold text-md">Back</span>
                   </div>
-                  <span className="ml-2 text-white font-bold text-md">
-                    Back
-                  </span>
-                </div>
-              </Link>
+                </Link>
+              </div>
             }
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}

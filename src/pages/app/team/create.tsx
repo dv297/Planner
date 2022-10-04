@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import FormBuilder from '@src/components/common/FormBuilder';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import QueryKeys from '@src/services/QueryKeys';
 import TeamsService from '@src/services/TeamsService';
 import UserPreferencesService from '@src/services/UserPreferencesService';
@@ -69,7 +70,11 @@ const Page = () => {
 };
 
 Page.getLayout = function getLayout(page: ReactNode) {
-  return <AppDefaultLayout>{page}</AppDefaultLayout>;
+  return (
+    <AppDefaultLayout>
+      <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
+    </AppDefaultLayout>
+  );
 };
 
 export default Page;

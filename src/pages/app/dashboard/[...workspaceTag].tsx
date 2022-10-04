@@ -54,15 +54,17 @@ const ActionItem = (props: ActionItemProps) => {
 
 const Page = () => {
   return (
-    <div className="pb-24">
-      <h1 className="mt-12 text-slate-800 text-3xl font-bold w-full text-center">
-        Welcome to Planner!
-      </h1>
-      <div className="mt-8 text-md text-center w-full">
-        We have set up some resources to help you get started.
+    <div className="min-h-screen flex flex-col">
+      <div className="pb-16">
+        <h1 className="mt-12 text-slate-800 text-4xl font-bold w-full text-center">
+          Welcome to <span className="text-primary">Planner!</span>
+        </h1>
+        <div className="mt-8 text-md text-center w-full">
+          We have set up some resources to help you get started.
+        </div>
       </div>
-      <div className="mt-12">
-        <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-3">
+      <div className="flex-1 py-12">
+        <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-3 px-8">
           <div className="flex justify-center">
             <ActionItem
               title="Learn why Planner was created"

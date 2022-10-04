@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import PersonalInformationForm from '@src/components/PersonalInformationForm';
 import QueryKeys from '@src/services/QueryKeys';
 import SettingsService from '@src/services/SettingsService';
@@ -56,7 +57,11 @@ const Settings = () => {
 };
 
 Settings.getLayout = function getLayout(page: ReactNode) {
-  return <AppDefaultLayout>{page}</AppDefaultLayout>;
+  return (
+    <AppDefaultLayout>
+      <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
+    </AppDefaultLayout>
+  );
 };
 
 export default Settings;

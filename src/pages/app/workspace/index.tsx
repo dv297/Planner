@@ -7,6 +7,7 @@ import Form from '@src/components/common/Form';
 import FormSubmitButton from '@src/components/common/FormSubmitButton';
 import FormTextInput from '@src/components/common/FormTextInput';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import { CreateWorkspaceSchema } from '@src/schemas/WorkspaceSchemas';
 import QueryKeys from '@src/services/QueryKeys';
 import WorkspaceService from '@src/services/WorkspaceService';
@@ -17,7 +18,7 @@ const Workspace = () => {
 
   return (
     <>
-      <h1 className="mb-4">Add Workspace</h1>
+      <h1 className="font-bold text-lg mb-4">Add Workspace</h1>
       <Form
         onSubmit={async (data) => {
           WorkspaceService.createWorkspace(data)
@@ -55,7 +56,11 @@ const Workspace = () => {
 };
 
 Workspace.getLayout = function getLayout(page: ReactNode) {
-  return <AppDefaultLayout>{page}</AppDefaultLayout>;
+  return (
+    <AppDefaultLayout>
+      <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
+    </AppDefaultLayout>
+  );
 };
 
 export default Workspace;

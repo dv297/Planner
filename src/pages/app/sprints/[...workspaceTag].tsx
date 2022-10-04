@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import EmptyPlaceholder from '@src/components/EmptyPlaceholder';
 import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCreationModalTrigger';
 import SprintsList from '@src/components/pages/sprints/SprintsList';
@@ -65,7 +66,11 @@ const Page = () => {
 };
 
 Page.getLayout = function getLayout(page: ReactNode) {
-  return <AppDefaultLayout>{page}</AppDefaultLayout>;
+  return (
+    <AppDefaultLayout>
+      <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
+    </AppDefaultLayout>
+  );
 };
 
 export default Page;

@@ -8,6 +8,7 @@ import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import EditableMarkdownDisplay from '@src/components/common/EditableDisplays/EditableMarkdownDisplay';
 import EditableTextDisplay from '@src/components/common/EditableDisplays/EditableTextDisplay';
 import IssuesList from '@src/components/common/IssuesList';
+import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import ProjectsService from '@src/services/ProjectsService';
 import QueryKeys from '@src/services/QueryKeys';
 
@@ -73,7 +74,11 @@ const ProjectPage = () => {
 };
 
 ProjectPage.getLayout = function getLayout(page: ReactNode) {
-  return <AppDefaultLayout>{page}</AppDefaultLayout>;
+  return (
+    <AppDefaultLayout>
+      <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
+    </AppDefaultLayout>
+  );
 };
 
 export default ProjectPage;

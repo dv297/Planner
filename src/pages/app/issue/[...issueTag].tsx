@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import EditableMarkdownDisplay from '@src/components/common/EditableDisplays/EditableMarkdownDisplay';
 import EditableTextDisplay from '@src/components/common/EditableDisplays/EditableTextDisplay';
+import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import IssueRelationList from '@src/components/IssueRelationList';
 import IssueAssigneeSelector from '@src/components/pages/issue/IssueAssigneeSelector';
 import IssueStatusSelector from '@src/components/pages/issue/IssueStatusSelector';
@@ -99,7 +100,11 @@ const ProjectPage = () => {
 };
 
 ProjectPage.getLayout = function getLayout(page: ReactNode) {
-  return <AppDefaultLayout>{page}</AppDefaultLayout>;
+  return (
+    <AppDefaultLayout>
+      <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
+    </AppDefaultLayout>
+  );
 };
 
 export default ProjectPage;

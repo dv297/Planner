@@ -11,20 +11,22 @@ body {
   :root {
     --color-primary: rgb(74, 144, 241);
     --color-secondary: rgb(40, 109, 160);
-    --color-sidebar: rgb(19, 58, 82);
-    --color-sidebar-element-hover: rgb(59, 122, 210);
-    --color-sidebar-text: #fff;
-    --color-sidebar-active-element-background: #225a70;
+    --color-sidebar: #fff;
+    --color-sidebar-element-hover-background: #0ea5e9;
+    --color-sidebar-element-hover-text: #fff;
+    --color-sidebar-text: #1c1917;
+    --color-sidebar-active-element-background: rgb(74, 144, 241);
     --color-sidebar-active-element-text: #fff;
-    --color-sidebar-feature: rgb(14, 40, 58);
+    --color-sidebar-feature: #fff;
   }
 
   .bg-sidebar {
     background-color: var(--color-sidebar);
   }
 
-  .bg-sidebar-feature {
+  .sidebar-feature {
     background-color: var(--color-sidebar-feature);
+    color: var(--color-sidebar-text);
   }
 
   .sidebar-element {
@@ -33,7 +35,8 @@ body {
 
   .sidebar-element:hover,
   .sidebar-active-element:hover {
-    background-color: var(--color-sidebar-element-hover);
+    background-color: var(--color-sidebar-element-hover-background);
+    color: var(--color-sidebar-element-hover-text);
   }
 
   .sidebar-active-element {
@@ -43,5 +46,9 @@ body {
 
   .text-sidebar {
     color: var(--color-sidebar-text);
+  }
+
+  .bg-primary {
+    background-color: var(--color-primary);
   }
 }
