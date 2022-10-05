@@ -8,6 +8,7 @@ import ConstrainDashboardContainer from '@src/components/ConstrainDashboardConta
 import EmptyPlaceholder from '@src/components/EmptyPlaceholder';
 import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCreationModalTrigger';
 import SprintsList from '@src/components/pages/sprints/SprintsList';
+import SprintIssueDragContextProvider from '@src/components/SprintIssueDragContext';
 import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
 import timeInMinutes from '@src/utils/timeInMinutes';
@@ -72,7 +73,9 @@ const Page = () => {
                 that issue to that sprint.
               </p>
             </div>
-            <SprintsList sprints={sprints} />
+            <SprintIssueDragContextProvider>
+              <SprintsList sprints={sprints} />
+            </SprintIssueDragContextProvider>
           </div>
         </div>
       )}

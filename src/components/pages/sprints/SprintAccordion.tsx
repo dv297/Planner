@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useDrop } from 'react-dnd';
-import { DropTargetHookSpec } from 'react-dnd/src/hooks/types';
+import { useDroppable } from '@dnd-kit/core';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
@@ -13,8 +12,6 @@ import { z } from 'zod';
 import Button from '@src/components/common/Button';
 import DragTargetOverlay from '@src/components/DragTargetOverlay';
 import SprintIssuesList from '@src/components/pages/sprints/SprintIssuesList';
-import { useSprintIssueDragContext } from '@src/components/SprintIssueDragContext';
-import { IssueSchema } from '@src/schemas/IssueSchema';
 import { SprintSchema } from '@src/schemas/SprintSchema';
 
 const formatDate = (date: Date) => {
@@ -31,30 +28,21 @@ interface SprintAccordionProps {
 const SprintAccordion = (props: SprintAccordionProps) => {
   const { sprint, isEdit, deleteSprint, index } = props;
 
-  const sprintIssueDragContext = useSprintIssueDragContext();
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
 
-  const dragAndDropConfigArg = (): DropTargetHookSpec<any, any, any> => ({
-    // The type (or types) to accept - strings or symbols
-    accept: 'BOX',
-    // Props to collect
-    collect: (monitor) => {
-      return {
-        isOver: monitor.isOver(),
-        canDrop:
-          monitor.canDrop() &&
-          (monitor.getItem() as z.infer<typeof IssueSchema>).sprintId !==
-            sprint.id,
-      };
-    },
-    drop: (item) => {
-      const issue = IssueSchema.parse(item);
-      sprintIssueDragContext.moveToSprint(issue, sprint.id, sprint.name);
+  const { setNodeRef: setNodeRefForTitle, active } = useDroppable({
+    id: `sprint-droppable-${sprint.id}-title`,
+    data: {
+      sprint,
     },
   });
 
-  const [{ canDrop }, titleDrop] = useDrop(dragAndDropConfigArg, [sprint]);
-  const [, bodyDrop] = useDrop(dragAndDropConfigArg, [sprint]);
+  const { setNodeRef: setNodeRefForBody } = useDroppable({
+    id: `sprint-droppable-${sprint.id}-body`,
+    data: {
+      sprint,
+    },
+  });
 
   return (
     <Accordion
@@ -70,8 +58,8 @@ const SprintAccordion = (props: SprintAccordionProps) => {
       >
         <DragTargetOverlay
           label={isAccordionOpen ? '' : `Move issue to ${sprint.name}`}
-          isOpen={canDrop}
-          innerRef={titleDrop}
+          isOpen={!!active}
+          innerRef={setNodeRefForTitle}
           id={`sprint-drag-overlay-${index}-title`}
         >
           <div
@@ -104,8 +92,8 @@ const SprintAccordion = (props: SprintAccordionProps) => {
       <AccordionDetails>
         <DragTargetOverlay
           label={isAccordionOpen ? `Move issue to ${sprint.name}` : ''}
-          isOpen={canDrop}
-          innerRef={bodyDrop}
+          isOpen={!!active}
+          innerRef={setNodeRefForBody}
           id={`sprint-drag-overlay-${index}-body`}
         >
           <SprintIssuesList sprintId={sprint.id} />

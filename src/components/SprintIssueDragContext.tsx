@@ -38,23 +38,28 @@ const SprintIssueDragContextProvider = (props: SprintIssueDragContextProps) => {
 
   const moveToSprint = useCallback<MoveToSprint>(
     async (issue, sprintId, sprintName) => {
-      const fromSprintId = issue.sprintId ?? '';
-      const issueTag = parseIssueTagFromIssue(issue);
-      await IssueService.updateIssue(issueTag, 'sprintId', sprintId ?? null);
-      await Promise.all([
-        queryClient.invalidateQueries([QueryKeys.SPRINTS, { sprintId }]),
-        queryClient.invalidateQueries([
-          QueryKeys.SPRINTS,
-          { sprintId: fromSprintId },
-        ]),
+      try {
+        const fromSprintId = issue.sprintId ?? '';
+        const issueTag = parseIssueTagFromIssue(issue);
+        await IssueService.updateIssue(issueTag, 'sprintId', sprintId ?? null);
+        await Promise.all([
+          queryClient.invalidateQueries([QueryKeys.SPRINTS, { sprintId }]),
+          queryClient.invalidateQueries([
+            QueryKeys.SPRINTS,
+            { sprintId: fromSprintId },
+          ]),
 
-        queryClient.invalidateQueries([QueryKeys.BACKLOG_ISSUES]),
-      ]);
+          queryClient.invalidateQueries([QueryKeys.BACKLOG_ISSUES]),
+        ]);
 
-      snackbar.displaySnackbar({
-        message: `Moved issue to ${sprintName}`,
-        severity: SnackbarSeverity.SUCCESS,
-      });
+        snackbar.displaySnackbar({
+          message: `Moved issue to ${sprintName}`,
+          severity: SnackbarSeverity.SUCCESS,
+        });
+      } catch (err) {
+        console.error('Issue moving sprint');
+        console.error(err);
+      }
     },
     [queryClient, snackbar]
   );
