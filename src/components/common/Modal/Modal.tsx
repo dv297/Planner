@@ -2,7 +2,7 @@ import { Fragment, MutableRefObject, ReactNode } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import CloseIcon from '@mui/icons-material/Close';
 
-interface ModalProps {
+export interface ModalProps {
   initialFocusRef: MutableRefObject<HTMLElement | null> | undefined;
   children: ReactNode;
   isOpen: boolean;

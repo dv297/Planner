@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { useAppContext } from '@src/components/AppContext';
 import FormBuilder from '@src/components/common/FormBuilder';
-import Modal from '@src/components/common/Modal';
+import LazyModal from '@src/components/common/Modal/LazyModal';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
@@ -23,7 +23,7 @@ const SprintCreationModal = (props: SprintCreationModalProps) => {
   const queryClient = useQueryClient();
 
   return (
-    <Modal
+    <LazyModal
       initialFocusRef={cancelButtonRef}
       isOpen={isOpen}
       setIsOpen={setIsOpen}
@@ -93,7 +93,7 @@ const SprintCreationModal = (props: SprintCreationModalProps) => {
           />
         </div>
       </Dialog.Panel>
-    </Modal>
+    </LazyModal>
   );
 };
 

@@ -3,7 +3,7 @@ import { Dialog } from '@headlessui/react';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useAppContext } from '@src/components/AppContext';
-import Modal from '@src/components/common/Modal';
+import Modal from '@src/components/common/Modal/Modal';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import CreateIssueForm from '@src/components/CreateIssueForm';
 import IssueService from '@src/services/IssueService';

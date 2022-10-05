@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import Form from '@src/components/common/Form';
 import FormSubmitButton from '@src/components/common/FormSubmitButton';
 import FormTextInput from '@src/components/common/FormTextInput';
-import Modal from '@src/components/common/Modal';
+import LazyModal from '@src/components/common/Modal/LazyModal';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import TeamMembersService from '@src/services/TeamMembersService';
 
@@ -18,7 +18,7 @@ const MemberInvitationModal = (props: MemberInvitationModalProps) => {
   const snackbarContext = useSnackbar();
 
   return (
-    <Modal initialFocusRef={inputRef} isOpen={isOpen} setIsOpen={setIsOpen}>
+    <LazyModal initialFocusRef={inputRef} isOpen={isOpen} setIsOpen={setIsOpen}>
       <h1 className="font-bold text-lg">Invite others to collaborate</h1>
       <p className="lead-6 mt-2">
         Add their email below and we will send them an invite to work on your
@@ -59,7 +59,7 @@ const MemberInvitationModal = (props: MemberInvitationModalProps) => {
           );
         }}
       </Form>
-    </Modal>
+    </LazyModal>
   );
 };
 
