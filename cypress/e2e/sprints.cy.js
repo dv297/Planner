@@ -28,8 +28,11 @@ describe('Sprints', () => {
 
     cy.findByText(/Setup Github repository/i).should('exist');
 
-    // cy.findByText(/Setup Github repository/i).drag('#sprint-drag-overlay-0', {
-    //   force: true,
-    // });
+    cy.findByText(/Setup Github repository/i).drag('#sprint-drag-overlay-0');
+
+    cy.findByText(/Moved issue to Test Sprint/i).should('exist');
+    cy.findByTestId('sprint-accordion-0').within(() => {
+      cy.findByText(/Setup Github repository/i).should('exist');
+    });
   });
 });

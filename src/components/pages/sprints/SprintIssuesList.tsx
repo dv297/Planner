@@ -1,9 +1,12 @@
-import { useDroppable } from '@dnd-kit/core';
+import { useDrop } from 'react-dnd';
 import { CircularProgress } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import { z } from 'zod';
 
 import IssuesList from '@src/components/common/IssuesList';
 import DragTargetOverlay from '@src/components/DragTargetOverlay';
+import { useSprintIssueDragContext } from '@src/components/SprintIssueDragContext';
+import { IssueSchema } from '@src/schemas/IssueSchema';
 import QueryKeys, { getDynamicQueryKey } from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
 
@@ -15,17 +18,35 @@ interface SprintIssuesListProps {
 
 const SprintIssuesList = (props: SprintIssuesListProps) => {
   const { sprintId, sprintName, index } = props;
+  const sprintIssueDragContext = useSprintIssueDragContext();
   const { data, isLoading } = useQuery(
     [getDynamicQueryKey(QueryKeys.SPRINTS, sprintId)],
     () => SprintsService.getIssuesForSprint(sprintId)
   );
-  const { setNodeRef, active } = useDroppable({
-    id: `sprint-droppable-${sprintId}`,
-    data: {
-      sprintId,
-      sprintName,
-    },
-  });
+  const [{ canDrop }, drop] = useDrop(
+    () => ({
+      // The type (or types) to accept - strings or symbols
+      accept: 'BOX',
+      // Props to collect
+      collect: (monitor) => {
+        return {
+          isOver: monitor.isOver(),
+          canDrop:
+            monitor.canDrop() &&
+            !data?.issues.some(
+              (issue) =>
+                issue.id ===
+                (monitor.getItem() as z.infer<typeof IssueSchema>).id
+            ),
+        };
+      },
+      drop: (item) => {
+        const issue = IssueSchema.parse(item);
+        sprintIssueDragContext.moveToSprint(issue, sprintId, sprintName);
+      },
+    }),
+    [data]
+  );
 
   if (isLoading) {
     return (
@@ -43,12 +64,12 @@ const SprintIssuesList = (props: SprintIssuesListProps) => {
     <>
       <DragTargetOverlay
         label={`Move issue to ${sprintName}`}
-        isOpen={!!active}
-        innerRef={setNodeRef}
+        isOpen={canDrop}
+        innerRef={drop}
         id={`sprint-drag-overlay-${index}`}
       >
         {data.issues.length > 0 ? (
-          <IssuesList issues={data.issues} />
+          <IssuesList issues={data.issues} allowDrag />
         ) : (
           <div className="text-lg">No issues assigned to this sprint yet</div>
         )}

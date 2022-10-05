@@ -1,4 +1,4 @@
-import { useDraggable } from '@dnd-kit/core';
+import { useDrag } from 'react-dnd';
 import { clsx } from 'clsx';
 import Link from 'next/link';
 import { z } from 'zod';
@@ -11,19 +11,28 @@ import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
 
 interface IssueListItemProps {
   issue: z.infer<typeof IssueSchema>;
+  allowDrag?: boolean;
 }
 
 const IssueListItem = (props: IssueListItemProps) => {
-  const { issue } = props;
+  const { issue, allowDrag } = props;
   const issueTag = parseIssueTagFromIssue(issue);
 
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: `draggable-issue-${issue.id}`,
-    data: issue,
-  });
-  const style = transform
+  const [{ isDragging }, drag] = useDrag(() => ({
+    // "type" is required. It is used by the "accept" specification of drop targets.
+    type: 'BOX',
+    // The collect function utilizes a "monitor" instance (see the Overview for what this is)
+    // to pull important pieces of state from the DnD system.
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+    item: issue,
+  }));
+
+  const style = isDragging
     ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        // transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        opacity: 0.5,
         zIndex: '100000',
       }
     : undefined;
@@ -32,10 +41,8 @@ const IssueListItem = (props: IssueListItemProps) => {
     <div
       className="px-4 py-3.5 grid-cols-12 grid"
       key={issue.id}
-      ref={setNodeRef}
+      ref={allowDrag ? drag : undefined}
       style={style}
-      {...listeners}
-      {...attributes}
     >
       <span className="col-span-2 text-gray-900">
         <Link href={`/app/issue/${issueTag}`}>

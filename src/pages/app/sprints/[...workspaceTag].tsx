@@ -1,28 +1,15 @@
 import { ReactNode } from 'react';
-import {
-  DndContext,
-  KeyboardSensor,
-  MouseSensor,
-  TouchSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { z } from 'zod';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
-import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import EmptyPlaceholder from '@src/components/EmptyPlaceholder';
 import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCreationModalTrigger';
 import SprintsList from '@src/components/pages/sprints/SprintsList';
-import { IssueSchema } from '@src/schemas/IssueSchema';
-import IssueService from '@src/services/IssueService';
-import QueryKeys, { getDynamicQueryKey } from '@src/services/QueryKeys';
+import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
-import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
 
 const Page = () => {
   const router = useRouter();
@@ -30,30 +17,9 @@ const Page = () => {
 
   const tag = Array.isArray(workspaceTag) ? workspaceTag[0] : workspaceTag;
 
-  const snackbar = useSnackbar();
-  const queryClient = useQueryClient();
-
   const { data: sprints } = useQuery([QueryKeys.SPRINTS], () =>
     SprintsService.getSprintsForWorkspace(tag)
   );
-
-  const mouseSensor = useSensor(MouseSensor, {
-    // Require the mouse to move by 10 pixels before activating
-    activationConstraint: {
-      distance: 10,
-    },
-  });
-  const touchSensor = useSensor(TouchSensor, {
-    // Press delay of 250ms, with tolerance of 5px of movement
-    activationConstraint: {
-      delay: 250,
-      tolerance: 5,
-    },
-  });
-
-  const keyboardSensor = useSensor(KeyboardSensor);
-
-  const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
 
   if (!sprints) {
     return null;
@@ -87,61 +53,23 @@ const Page = () => {
           actionButton={<SprintCreationModalTrigger />}
         />
       ) : (
-        <DndContext
-          sensors={sensors}
-          onDragEnd={async (event) => {
-            const issueDragged = event.active.data.current;
-            const targetSprintData = event.over?.data.current;
-
-            if (issueDragged?.id && targetSprintData) {
-              const { sprintId, sprintName } = targetSprintData;
-              const fromSprintId = issueDragged.sprintId;
-              const issueTag = parseIssueTagFromIssue(
-                issueDragged as z.infer<typeof IssueSchema>
-              );
-              await IssueService.updateIssue(
-                issueTag,
-                'sprintId',
-                sprintId ?? null
-              );
-              await Promise.all([
-                queryClient.invalidateQueries([
-                  getDynamicQueryKey(QueryKeys.SPRINTS, sprintId),
-                ]),
-                queryClient.invalidateQueries([
-                  getDynamicQueryKey(QueryKeys.SPRINTS, fromSprintId),
-                ]),
-
-                queryClient.invalidateQueries([QueryKeys.BACKLOG_ISSUES]),
-              ]);
-
-              snackbar.displaySnackbar({
-                message: sprintName
-                  ? `Moved issue to ${sprintName}`
-                  : 'Moved issue to backlog',
-                severity: SnackbarSeverity.SUCCESS,
-              });
-            }
-          }}
-        >
-          <div className="flex flex-col w-full">
-            <div className="flex flex-row justify-end w-full">
-              <SprintCreationModalTrigger />
-            </div>
-            <div className="mt-8">
-              <div className="bg-blue-100 py-4 rounded-lg mb-2 flex flex-row items-center text-lg text-blue-500">
-                <div className="w-12 px-6 flex items-center justify-center">
-                  <InfoOutlinedIcon />
-                </div>
-                <p className="leading-6 pr-4">
-                  Tip: You can drag and drop issues into expanded sprint to move
-                  that issue to that sprint.
-                </p>
-              </div>
-              <SprintsList sprints={sprints} />
-            </div>
+        <div className="flex flex-col w-full">
+          <div className="flex flex-row justify-end w-full">
+            <SprintCreationModalTrigger />
           </div>
-        </DndContext>
+          <div className="mt-8">
+            <div className="bg-blue-100 py-4 rounded-lg mb-2 flex flex-row items-center text-lg text-blue-500">
+              <div className="w-12 px-6 flex items-center justify-center">
+                <InfoOutlinedIcon />
+              </div>
+              <p className="leading-6 pr-4">
+                Tip: You can drag and drop issues into expanded sprint to move
+                that issue to that sprint.
+              </p>
+            </div>
+            <SprintsList sprints={sprints} />
+          </div>
+        </div>
       )}
     </>
   );

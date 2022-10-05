@@ -11,10 +11,11 @@ interface IssuesListProps {
   projectId?: string;
   issues: z.infer<typeof IssuesListSchema>;
   allowIssueCreation?: boolean;
+  allowDrag?: boolean;
 }
 
 const IssuesList = (props: IssuesListProps) => {
-  const { projectId, issues, allowIssueCreation = false } = props;
+  const { projectId, issues, allowIssueCreation = false, allowDrag } = props;
   const [isIssueCreationModalOpen, setIsIssueCreationModalOpen] =
     useState(false);
 
@@ -55,7 +56,13 @@ const IssuesList = (props: IssuesListProps) => {
               </div>
             )}
             {issues.map((issue) => {
-              return <IssueListItem issue={issue} key={issue.id} />;
+              return (
+                <IssueListItem
+                  issue={issue}
+                  key={issue.id}
+                  allowDrag={allowDrag}
+                />
+              );
             })}
           </div>
         </div>
