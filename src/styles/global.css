@@ -9,7 +9,7 @@ body {
 
 @layer base {
   :root {
-    --color-primary: rgb(74, 144, 241);
+    --color-primary: #116DEE;
     --color-secondary: rgb(40, 109, 160);
     --color-sidebar: #fff;
     --color-sidebar-element-hover-background: #0ea5e9;

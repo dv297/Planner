@@ -7,17 +7,19 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer(
   withTM(
-    removeImports(
-      removeImports({
-        reactStrictMode: true,
-        images: {
-          domains: [
-            'tailwindui.com',
-            'avatars.githubusercontent.com',
-            'cdn.sanity.io',
-          ],
-        },
-      })
-    )
+    removeImports({
+      reactStrictMode: true,
+      images: {
+        domains: [
+          'tailwindui.com',
+          'avatars.githubusercontent.com',
+          'cdn.sanity.io',
+        ],
+      },
+      i18n: {
+        locales: ['en'],
+        defaultLocale: 'en',
+      },
+    })
   )
 );

@@ -45,7 +45,7 @@ const Posts = (props: any) => {
             Planner
           </span>
         </h1>
-        <p className="mt-2 tracking-px-n leading-tight text-center w-full">
+        <p className="mt-2 tracking-px-n leading-tight text-center w-full text-xl">
           We are always learning and exploring new ideas. We try to share our
           experiences through these blogs, and{' '}
           <Link href="https://twitter.com/thedanielvu">
