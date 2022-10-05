@@ -2,10 +2,7 @@ import AppPage from '../page/AppPage';
 
 describe('Projects', () => {
   beforeEach(() => {
-    cy.exec('node scripts/seed-database.js');
-    cy.visit('/');
-
-    cy.login();
+    cy.visit('/app/dashboard');
   });
 
   it('starts with a starter project', () => {

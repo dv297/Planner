@@ -2,10 +2,7 @@ import AppPage from '../page/AppPage';
 
 describe('Sprints', () => {
   beforeEach(() => {
-    cy.exec('node scripts/seed-database.js');
-    cy.visit('/');
-
-    cy.login();
+    cy.visit('/app/dashboard');
   });
 
   it('allows you to add a sprint', () => {
@@ -60,6 +57,16 @@ describe('Sprints', () => {
     });
     cy.findByTestId('backlog-accordion').within(() => {
       cy.findByText(/Setup Github repository/i).should('exist');
+    });
+
+    // Allows you to move to backlog while backlog is closed
+    // Close backlog
+    cy.findByText(/Backlog/i).click();
+    cy.findByText(/TASK-3/i).drag('#backlog-drag-overlay-title');
+    // Reopen backlog
+    cy.findByText(/Backlog/i).click();
+    cy.findByTestId('backlog-accordion').within(() => {
+      cy.findByText(/TASK-3/i).should('exist');
     });
   });
 });

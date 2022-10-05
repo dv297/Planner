@@ -13,6 +13,13 @@
 import '@testing-library/cypress/add-commands';
 import '@4tw/cypress-drag-drop';
 
+before(() => {
+  cy.exec('node scripts/seed-database.js');
+  cy.visit('/');
+
+  cy.login();
+});
+
 Cypress.Commands.add('login', () => {
   cy.findByText(/Sign in/i).click();
   cy.findByLabelText(/Username/i).type('dvv297@gmail.com');

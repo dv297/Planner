@@ -2,10 +2,7 @@ import AppPage from '../page/AppPage';
 
 describe('Workspace', () => {
   beforeEach(() => {
-    cy.exec('node scripts/seed-database.js');
-    cy.visit('/');
-
-    cy.login();
+    cy.visit('/app/dashboard');
   });
 
   it('allows you to add a workspace', () => {
