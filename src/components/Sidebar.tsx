@@ -101,6 +101,7 @@ const Sidebar = (props: SidebarProps) => {
                           selectedWorkspace.tag
                         )}
                         key={index}
+                        prefetch={false}
                       >
                         <a
                           key={item.name}
@@ -163,6 +164,7 @@ const Sidebar = (props: SidebarProps) => {
                 <Link
                   href={injectWorkspaceTag(item.href, selectedWorkspace.tag)}
                   key={index}
+                  prefetch={false}
                 >
                   <a
                     key={item.name}

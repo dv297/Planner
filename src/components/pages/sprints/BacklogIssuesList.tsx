@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
 import { useAppContext } from '@src/components/AppContext';
-import IssuesList from '@src/components/common/IssuesList';
 import DragTargetOverlay from '@src/components/DragTargetOverlay';
+import IssuesList from '@src/components/IssuesList';
 import { useSprintIssueDragContext } from '@src/components/SprintIssueDragContext';
 import { IssueSchema } from '@src/schemas/IssueSchema';
 import QueryKeys from '@src/services/QueryKeys';

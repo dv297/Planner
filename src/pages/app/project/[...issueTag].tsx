@@ -7,8 +7,8 @@ import { useRouter } from 'next/router';
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import EditableMarkdownDisplay from '@src/components/common/EditableDisplays/EditableMarkdownDisplay';
 import EditableTextDisplay from '@src/components/common/EditableDisplays/EditableTextDisplay';
-import IssuesList from '@src/components/common/IssuesList';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
+import IssuesList from '@src/components/IssuesList';
 import ProjectsService from '@src/services/ProjectsService';
 import QueryKeys from '@src/services/QueryKeys';
 
