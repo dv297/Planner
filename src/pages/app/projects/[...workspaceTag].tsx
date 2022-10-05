@@ -11,6 +11,7 @@ import EmptyPlaceholder from '@src/components/EmptyPlaceholder';
 import ProjectsService from '@src/services/ProjectsService';
 import QueryKeys from '@src/services/QueryKeys';
 import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
+import timeInMinutes from '@src/utils/timeInMinutes';
 
 const Page = () => {
   const router = useRouter();
@@ -18,8 +19,12 @@ const Page = () => {
 
   const tag = Array.isArray(workspaceTag) ? workspaceTag[0] : workspaceTag;
 
-  const { data } = useQuery([QueryKeys.PROJECTS], () =>
-    ProjectsService.getProjectsForWorkspace(tag)
+  const { data } = useQuery(
+    [QueryKeys.PROJECTS, { tag }],
+    () => ProjectsService.getProjectsForWorkspace(tag),
+    {
+      staleTime: timeInMinutes(5),
+    }
   );
 
   if (!data) {

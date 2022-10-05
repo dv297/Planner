@@ -53,9 +53,7 @@ const WorkspaceSelector = () => {
       message: `Changing workspace`,
       severity: SnackbarSeverity.SUCCESS,
     });
-    setTimeout(() => {
-      router.push('/app/dashboard');
-    }, 500);
+    router.push('/app/dashboard');
   };
 
   const onAddWorkSpaceClick = () => {

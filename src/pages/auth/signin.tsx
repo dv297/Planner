@@ -21,9 +21,15 @@ interface SigninProps {
 const Signin = (props: SigninProps) => {
   const { providers } = props;
   const router = useRouter();
+  const error = router.query.error;
 
   return (
     <div className="w-screen min-h-screen flex flex-col justify-center items-center">
+      {error && (
+        <div className="bg-rose-200 border-rose-300 border-solid border px-4 py-1 rounded-md mb-8">
+          There was an error while attempting to sign in. Please try again.
+        </div>
+      )}
       <div className="flex flex-col justify-center items-center">
         <div className="w-80 bg-white shadow-lg px-12 py-12 rounded-2xl">
           <div className="w-full text-center pb-3">
@@ -70,7 +76,7 @@ const Signin = (props: SigninProps) => {
                     id="usernameInput"
                     name="username"
                     type="text"
-                    className="mt-2 outline outline-gray-300 rounded-md w-full pl-2"
+                    className="mt-2 h-8 outline outline-gray-300 rounded-md w-full pl-2 text-lg"
                   />
                 </label>
                 <button

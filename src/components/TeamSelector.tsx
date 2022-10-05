@@ -73,9 +73,7 @@ const TeamSelector = () => {
                   message: `Changing team to ${team.name}`,
                   severity: SnackbarSeverity.SUCCESS,
                 });
-                setTimeout(() => {
-                  router.push('/app/dashboard');
-                }, 500);
+                router.push('/app/dashboard');
               }}
               key={team.id}
             >

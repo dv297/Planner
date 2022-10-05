@@ -25,8 +25,12 @@ const ProjectPage = () => {
 
   const tag = Array.isArray(issueTag) ? issueTag[0] : issueTag;
 
-  const { data: project } = useQuery([QueryKeys.PROJECT], () =>
-    ProjectsService.getProject(tag)
+  const { data: project } = useQuery(
+    [QueryKeys.PROJECT, { tag }],
+    () => ProjectsService.getProject(tag),
+    {
+      keepPreviousData: true,
+    }
   );
 
   if (!project || !project.keyIssue) {

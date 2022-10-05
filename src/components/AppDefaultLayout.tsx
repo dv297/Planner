@@ -6,7 +6,6 @@ import { useSession } from 'next-auth/react';
 
 import { AppContextProvider } from '@src/components/AppContext';
 import FullScreenLoader from '@src/components/common/FullScreenLoader';
-import { SnackbarProvider } from '@src/components/common/Snackbar';
 import DashboardBodyLayout from '@src/components/DashboardBodyLayout';
 import Sidebar, { NavigationElement } from '@src/components/Sidebar';
 import WorkspaceSelector from '@src/components/WorkspaceSelector';
@@ -35,7 +34,7 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
   const navigation: NavigationElement[] = [
     {
       name: 'Dashboard',
-      href: '/app/dashboard/{WORKSPACE_TAG}',
+      href: '/app/dashboard',
       icon: HomeIcon,
       current: asPath.includes('/app/dashboard'),
     },
@@ -54,21 +53,19 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
   ];
 
   return (
-    <SnackbarProvider>
-      <AppContextProvider>
-        <div>
-          <Sidebar
-            header={<WorkspaceSelector />}
-            sidebarOpen={sidebarOpen}
-            setSidebarOpen={setSidebarOpen}
-            navigation={navigation}
-          />
-          <DashboardBodyLayout setSidebarOpen={setSidebarOpen}>
-            {props.children}
-          </DashboardBodyLayout>
-        </div>
-      </AppContextProvider>
-    </SnackbarProvider>
+    <AppContextProvider>
+      <div>
+        <Sidebar
+          header={<WorkspaceSelector />}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          navigation={navigation}
+        />
+        <DashboardBodyLayout setSidebarOpen={setSidebarOpen}>
+          {props.children}
+        </DashboardBodyLayout>
+      </div>
+    </AppContextProvider>
   );
 };
 

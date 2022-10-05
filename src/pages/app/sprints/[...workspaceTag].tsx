@@ -10,6 +10,7 @@ import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCrea
 import SprintsList from '@src/components/pages/sprints/SprintsList';
 import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
+import timeInMinutes from '@src/utils/timeInMinutes';
 
 const Page = () => {
   const router = useRouter();
@@ -17,8 +18,12 @@ const Page = () => {
 
   const tag = Array.isArray(workspaceTag) ? workspaceTag[0] : workspaceTag;
 
-  const { data: sprints } = useQuery([QueryKeys.SPRINTS], () =>
-    SprintsService.getSprintsForWorkspace(tag)
+  const { data: sprints } = useQuery(
+    [QueryKeys.SPRINTS, { tag }],
+    () => SprintsService.getSprintsForWorkspace(tag),
+    {
+      staleTime: timeInMinutes(5),
+    }
   );
 
   if (!sprints) {

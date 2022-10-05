@@ -5,22 +5,18 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 
+import { SnackbarProvider } from '@src/components/common/Snackbar';
 import createEmotionCache from '@src/lib/createEmotionCache';
 import { theme } from '@src/lib/createTheme';
 
 import '@src/styles/global.css';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      cacheTime: 0,
-    },
-  },
-});
+const queryClient = new QueryClient();
 const clientSideEmotionCache = createEmotionCache();
 
 interface CustomAppProps extends AppProps {
@@ -45,11 +41,14 @@ const App = (props: CustomAppProps) => {
           <ThemeProvider theme={theme}>
             <SessionProvider session={pageProps.session}>
               <CssBaseline />
-              {getLayout(<Component {...pageProps} />)}
+              <SnackbarProvider>
+                {getLayout(<Component {...pageProps} />)}
+              </SnackbarProvider>
             </SessionProvider>
           </ThemeProvider>
         </LocalizationProvider>
       </CacheProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };
