@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import Button from '@src/components/common/Button';
-import FullScreenLoader from '@src/components/common/FullScreenLoader';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import EmptyPlaceholder from '@src/components/EmptyPlaceholder';
 import ProjectsService from '@src/services/ProjectsService';
@@ -29,7 +28,7 @@ const Page = () => {
   );
 
   if (isLoading || !data) {
-    return <FullScreenLoader />;
+    return null;
   }
 
   if (data.length === 0) {
