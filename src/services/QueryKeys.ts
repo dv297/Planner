@@ -12,8 +12,4 @@ enum QueryKeys {
   BACKLOG_ISSUES = 'backlog-issues',
 }
 
-export const getDynamicQueryKey = (queryKey: QueryKeys, id: string) => {
-  return `${queryKey}-${id}`;
-};
-
 export default QueryKeys;

@@ -7,7 +7,7 @@ import DragTargetOverlay from '@src/components/DragTargetOverlay';
 import IssuesList from '@src/components/IssuesList';
 import { useSprintIssueDragContext } from '@src/components/SprintIssueDragContext';
 import { IssueSchema } from '@src/schemas/IssueSchema';
-import QueryKeys, { getDynamicQueryKey } from '@src/services/QueryKeys';
+import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
 
 interface SprintIssuesListProps {
@@ -19,9 +19,8 @@ interface SprintIssuesListProps {
 const SprintIssuesList = (props: SprintIssuesListProps) => {
   const { sprintId, sprintName, index } = props;
   const sprintIssueDragContext = useSprintIssueDragContext();
-  const { data, isLoading } = useQuery(
-    [getDynamicQueryKey(QueryKeys.SPRINTS, sprintId)],
-    () => SprintsService.getIssuesForSprint(sprintId)
+  const { data, isLoading } = useQuery([QueryKeys.SPRINTS, { sprintId }], () =>
+    SprintsService.getIssuesForSprint(sprintId)
   );
   const [{ canDrop }, drop] = useDrop(
     () => ({

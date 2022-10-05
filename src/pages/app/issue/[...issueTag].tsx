@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
@@ -15,12 +15,6 @@ import IssueService from '@src/services/IssueService';
 import QueryKeys from '@src/services/QueryKeys';
 import { convertToIssueStatusType } from '@src/types/IssueStatusType';
 
-const getUpdaterFunction =
-  (tag: string | undefined, propertyName: string) =>
-  async (textValue: string) => {
-    await IssueService.updateIssue(tag, propertyName, textValue);
-  };
-
 const ProjectPage = () => {
   const router = useRouter();
 
@@ -28,18 +22,27 @@ const ProjectPage = () => {
 
   const tag = Array.isArray(issueTag) ? issueTag[0] : issueTag;
 
-  const { data: issue } = useQuery([`${QueryKeys.ISSUE}-${tag}`], () =>
+  const { data: issue } = useQuery([QueryKeys.ISSUE, { tag }], () =>
     IssueService.getIssue(tag)
   );
 
   const { data: issueRelation } = useQuery(
-    [`${QueryKeys.ISSUE_RELATION}-${tag}`],
+    [QueryKeys.ISSUE_RELATION, { tag }],
     () => IssueRelationService.getIssueRelation(tag)
   );
+
+  const queryClient = useQueryClient();
 
   if (!issue) {
     return null;
   }
+
+  const getUpdaterFunction =
+    (tag: string | undefined, propertyName: string) =>
+    async (textValue: string) => {
+      await IssueService.updateIssue(tag, propertyName, textValue);
+      queryClient.invalidateQueries();
+    };
 
   return (
     <div className="h-full" key={issue.id}>

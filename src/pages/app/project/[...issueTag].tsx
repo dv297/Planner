@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import MapIcon from '@mui/icons-material/Map';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -11,12 +11,6 @@ import ConstrainDashboardContainer from '@src/components/ConstrainDashboardConta
 import IssuesList from '@src/components/IssuesList';
 import ProjectsService from '@src/services/ProjectsService';
 import QueryKeys from '@src/services/QueryKeys';
-
-const getUpdaterFunction =
-  (tag: string | undefined, propertyName: string) =>
-  async (textValue: string) => {
-    await ProjectsService.updateProject(tag, propertyName, textValue);
-  };
 
 const ProjectPage = () => {
   const router = useRouter();
@@ -29,13 +23,23 @@ const ProjectPage = () => {
     [QueryKeys.PROJECT, { tag }],
     () => ProjectsService.getProject(tag),
     {
+      cacheTime: 0,
       keepPreviousData: true,
     }
   );
 
+  const queryClient = useQueryClient();
+
   if (!project || !project.keyIssue) {
     return null;
   }
+
+  const getUpdaterFunction =
+    (tag: string | undefined, propertyName: string) =>
+    async (textValue: string) => {
+      await ProjectsService.updateProject(tag, propertyName, textValue);
+      queryClient.invalidateQueries([QueryKeys.PROJECT, { tag }]);
+    };
 
   return (
     <div>

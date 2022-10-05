@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import { IssueSchema } from '@src/schemas/IssueSchema';
 import IssueService from '@src/services/IssueService';
-import QueryKeys, { getDynamicQueryKey } from '@src/services/QueryKeys';
+import QueryKeys from '@src/services/QueryKeys';
 import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
 
 type MoveToSprint = (
@@ -42,11 +42,10 @@ const SprintIssueDragContextProvider = (props: SprintIssueDragContextProps) => {
       const issueTag = parseIssueTagFromIssue(issue);
       await IssueService.updateIssue(issueTag, 'sprintId', sprintId ?? null);
       await Promise.all([
+        queryClient.invalidateQueries([QueryKeys.SPRINTS, { sprintId }]),
         queryClient.invalidateQueries([
-          getDynamicQueryKey(QueryKeys.SPRINTS, sprintId),
-        ]),
-        queryClient.invalidateQueries([
-          getDynamicQueryKey(QueryKeys.SPRINTS, fromSprintId),
+          QueryKeys.SPRINTS,
+          { sprintId: fromSprintId },
         ]),
 
         queryClient.invalidateQueries([QueryKeys.BACKLOG_ISSUES]),
@@ -67,7 +66,8 @@ const SprintIssueDragContextProvider = (props: SprintIssueDragContextProps) => {
       await IssueService.updateIssue(issueTag, 'sprintId', null);
       await Promise.all([
         queryClient.invalidateQueries([
-          getDynamicQueryKey(QueryKeys.SPRINTS, fromSprintId),
+          QueryKeys.SPRINTS,
+          { sprintId: fromSprintId },
         ]),
 
         queryClient.invalidateQueries([QueryKeys.BACKLOG_ISSUES]),
