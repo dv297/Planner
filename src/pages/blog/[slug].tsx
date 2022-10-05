@@ -42,15 +42,20 @@ const Post = (props: any) => {
   return (
     <>
       <article>
-        <div
-          style={{
-            background: `url(${urlFor(post.mainImage).url()})`,
-            width: '100%',
-            height: '500px',
-            backgroundSize: 'cover',
-            backgroundPositionY: -120,
-          }}
-        />
+        {post.mainImage && (
+          <div
+            style={{
+              background: post.mainImage
+                ? `url(${urlFor(post.mainImage).url()})`
+                : '',
+              width: '100%',
+              height: '500px',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPositionY: -120,
+            }}
+          />
+        )}
         <div className="flex xl:justify-center">
           <div className="px-8 lg:px-32 py-8">
             <h1 className="text-xl lg:text-3xl font-semibold text-gray-900">

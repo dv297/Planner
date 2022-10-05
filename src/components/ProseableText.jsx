@@ -8,6 +8,7 @@ import { PortableText } from '@portabletext/react';
 import Image from 'next/image';
 import { useNextSanityImage } from 'next-sanity-image';
 
+import CodeBlock from '@src/components/CodeBlock';
 import { getClient } from '@src/lib/sanity';
 
 const ImageComponent = ({ value }) => {
@@ -19,6 +20,7 @@ const ImageComponent = ({ value }) => {
 const components = {
   types: {
     image: ImageComponent,
+    code: CodeBlock,
   },
 };
 
@@ -58,8 +60,12 @@ const ProseableText = ({ value = [] }) => {
 
   return (
     <div>
-      {valueGroups.map((group) =>
-        group[0]._type === 'block' ? (
+      {valueGroups.map((group) => {
+        if (group[0]._type === 'code') {
+          return <CodeBlock key={group[0]._key} node={group[0]} />;
+        }
+
+        return group[0]._type === 'block' ? (
           <div key={group[0]._key} className="prose py-4">
             <PortableText value={group} components={components} />
           </div>
@@ -69,8 +75,8 @@ const ProseableText = ({ value = [] }) => {
             value={group}
             components={components}
           />
-        )
-      )}
+        );
+      })}
     </div>
   );
 };

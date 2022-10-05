@@ -40,15 +40,19 @@ const BlogPostListing = (props: BlogPostListingProps) => {
     >
       <div className="flex-shrink-0">
         <a href={`/blog/${post.slug}`} className="mt-2 block">
-          <Image
-            className="w-full object-cover"
-            src={urlFor(post.mainImage, preview).url()}
-            alt="Blog Image"
-            height="300px"
-            width="512px"
-            objectFit="fill"
-            quality={50}
-          />
+          {post.mainImage ? (
+            <Image
+              className="w-full object-cover"
+              src={urlFor(post.mainImage, preview).url()}
+              alt="Blog Image"
+              height="300px"
+              width="512px"
+              objectFit="fill"
+              quality={50}
+            />
+          ) : (
+            <div className="bg-gray-200" style={{ height: 250 }} />
+          )}
         </a>
       </div>
       <div className="flex flex-1 flex-col justify-between bg-white p-6">
@@ -61,14 +65,16 @@ const BlogPostListing = (props: BlogPostListingProps) => {
         <div className="mt-6 flex items-center">
           <div className="flex-shrink-0">
             <span className="sr-only">{post.author.name}</span>
-            <Image
-              className="rounded-full"
-              src={urlFor(post.author.image, preview).url()}
-              alt="Author"
-              height="40px"
-              width="40px"
-              quality={50}
-            />
+            {post.author.image && (
+              <Image
+                className="rounded-full"
+                src={urlFor(post.author.image, preview).url()}
+                alt="Author"
+                height="40px"
+                width="40px"
+                quality={50}
+              />
+            )}
           </div>
           <div className="ml-3">
             <p className="text-sm font-medium text-gray-900">
