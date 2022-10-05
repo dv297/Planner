@@ -1,6 +1,9 @@
 import { ReactNode, useState } from 'react';
-import { FolderIcon, HomeIcon } from '@heroicons/react/outline';
-import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined';
+import {
+  FolderIcon,
+  HomeIcon,
+  TrendingDownIcon,
+} from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
@@ -42,12 +45,15 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
       name: 'Projects',
       href: '/app/projects/{WORKSPACE_TAG}',
       icon: FolderIcon,
-      current: asPath.includes('/app/projects'),
+      current:
+        asPath.includes('/app/projects') ||
+        asPath.includes('/app/project') ||
+        asPath.includes('/app/issue'),
     },
     {
       name: 'Sprints',
       href: '/app/sprints/{WORKSPACE_TAG}',
-      icon: TimelineOutlinedIcon,
+      icon: TrendingDownIcon,
       current: asPath.includes('/app/sprints'),
     },
   ];

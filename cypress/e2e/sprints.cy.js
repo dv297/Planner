@@ -28,10 +28,37 @@ describe('Sprints', () => {
 
     cy.findByText(/Setup Github repository/i).should('exist');
 
-    cy.findByText(/Setup Github repository/i).drag('#sprint-drag-overlay-0');
+    // Allows you to drag when the accordion is open
+    cy.findByText(/Setup Github repository/i).drag(
+      '#sprint-drag-overlay-0-body'
+    );
 
     cy.findByText(/Moved issue to Test Sprint/i).should('exist');
     cy.findByTestId('sprint-accordion-0').within(() => {
+      cy.findByText(/Setup Github repository/i).should('exist');
+    });
+
+    // Allows you to drag when the accordion is closed
+    cy.get('#sprint-drag-overlay-0-title').click();
+    cy.findByText(/TASK-3/i).drag('#sprint-drag-overlay-0-title');
+
+    cy.findByText(/Moved issue to Test Sprint/i).should('exist');
+
+    // Reopen accordion
+    cy.get('#sprint-drag-overlay-0-title').click();
+    cy.findByTestId('sprint-accordion-0').within(() => {
+      cy.findByText(/Setup Github repository/i).should('exist');
+    });
+
+    // Allows you to move to backlog while backlog is open
+    cy.findByText(/Setup Github repository/i).drag(
+      '#backlog-drag-overlay-body'
+    );
+    cy.findByText(/Moved issue to backlog/i).should('exist');
+    cy.findByTestId('sprint-accordion-0').within(() => {
+      cy.findByText(/Setup Github repository/i).should('not.exist');
+    });
+    cy.findByTestId('backlog-accordion').within(() => {
       cy.findByText(/Setup Github repository/i).should('exist');
     });
   });
