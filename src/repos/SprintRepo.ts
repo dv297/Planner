@@ -1,9 +1,11 @@
 import { User } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { z } from 'zod';
 
 import prisma from '@src/lib/prisma';
 import { ItemNotFound } from '@src/repos/RepoErrors';
 import UserRepo from '@src/repos/UserRepo';
+import { UpdateSingleSprintElementListSchema } from '@src/schemas/SprintSchema';
 
 export interface CreateSprintInput {
   name: string;
@@ -30,6 +32,17 @@ const SprintRepo = {
       include: {
         workspace: true,
       },
+      orderBy: [
+        {
+          beginDate: {
+            sort: 'asc',
+            nulls: 'first',
+          },
+        },
+        {
+          name: 'asc',
+        },
+      ],
     });
 
     const activeSprint = await prisma.activeSprint.findUnique({
@@ -68,13 +81,45 @@ const SprintRepo = {
 
     return sprint;
   },
+  async updateSprint(
+    sprintId: string,
+    data: z.infer<typeof UpdateSingleSprintElementListSchema>
+  ) {
+    try {
+      const response = await prisma.sprint.update({
+        where: {
+          id: sprintId,
+        },
+        data: data.reduce((acc, entry) => {
+          acc[entry.propertyName] = entry.data;
+          return acc;
+        }, {} as Record<string, any>),
+      });
+
+      return response;
+    } catch (err) {
+      if (err instanceof PrismaClientKnownRequestError) {
+        if (err.code === 'P2025') {
+          throw new ItemNotFound();
+        }
+      }
+    }
+  },
   async deleteSprint(sprintId: string) {
     try {
+      await prisma.activeSprint.deleteMany({
+        where: {
+          sprintId,
+        },
+      });
+
       const response = await prisma.sprint.delete({
         where: {
           id: sprintId,
         },
       });
+
+      console.log(response);
 
       return response;
     } catch (err) {

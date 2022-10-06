@@ -53,3 +53,16 @@ export const GetSingleSprintInputSchema = z.object({
 export const SetActiveSprintBodyInputSchema = z.object({
   sprintId: z.string(),
 });
+
+export const UpdateSingleSprintElementSchema = z.object({
+  propertyName: z.string(),
+  data: z.any(),
+});
+
+export const UpdateSingleSprintElementListSchema = z.array(
+  UpdateSingleSprintElementSchema
+);
+
+export const UpdateSingleSprintBodyInputSchema = z.object({
+  data: UpdateSingleSprintElementListSchema,
+});

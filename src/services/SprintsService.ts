@@ -1,7 +1,12 @@
+import { z } from 'zod';
+
 import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import { CreateSprintInput } from '@src/repos/SprintRepo';
 import { GetIssuesForSprintResponseSchema } from '@src/schemas/IssueSchema';
-import { GetSprintsResponseSchema } from '@src/schemas/SprintSchema';
+import {
+  GetSprintsResponseSchema,
+  UpdateSingleSprintElementListSchema,
+} from '@src/schemas/SprintSchema';
 
 const SprintsService = {
   getSprintsForWorkspace: async (workspaceTag: string | undefined) => {
@@ -82,6 +87,26 @@ const SprintsService = {
         body: JSON.stringify(input),
       }
     );
+
+    if (!result.ok) {
+      throw new Error('Network response was not ok');
+    }
+  },
+  updateSprint: async (
+    sprintId: string | undefined,
+    data: z.infer<typeof UpdateSingleSprintElementListSchema>
+  ) => {
+    if (!sprintId) {
+      return;
+    }
+
+    UpdateSingleSprintElementListSchema.parse(data);
+
+    const result = await handleTeamSpecificFetch(`/api/sprint/${sprintId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data }),
+    });
 
     if (!result.ok) {
       throw new Error('Network response was not ok');

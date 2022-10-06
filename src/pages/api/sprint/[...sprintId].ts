@@ -6,7 +6,11 @@ import { ItemNotFound } from '@src/repos/RepoErrors';
 import SprintRepo from '@src/repos/SprintRepo';
 import UserRepo from '@src/repos/UserRepo';
 import { GetIssuesForSprintResponseSchema } from '@src/schemas/IssueSchema';
-import { GetSingleSprintInputSchema } from '@src/schemas/SprintSchema';
+import {
+  GetSingleSprintInputSchema,
+  UpdateSingleSprintBodyInputSchema,
+} from '@src/schemas/SprintSchema';
+import extractSingle from '@src/utils/extractSingle';
 import routeMatcher from '@src/utils/routeMatcher';
 
 const getItem = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -71,9 +75,43 @@ const deleteItem = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
+const update = async (req: NextApiRequest, res: NextApiResponse) => {
+  const teamId = extractSingle(req.headers['team-id']);
+
+  if (!teamId) {
+    return res.status(500).json({
+      message: 'Header `team-id` not provided',
+    });
+  }
+
+  const { sprintId: sprintIdArray } = GetSingleSprintInputSchema.parse(
+    req.query
+  );
+  const { data } = UpdateSingleSprintBodyInputSchema.parse(req.body);
+  const sprintId = extractSingle(sprintIdArray);
+
+  if (!sprintId) {
+    return res.status(300).json({
+      message: 'No sprintId provided',
+    });
+  }
+
+  const currentUser = await UserRepo.getCurrentUser({ req, res });
+
+  if (!currentUser) {
+    return;
+  }
+
+  const result = await SprintRepo.updateSprint(sprintId, data);
+  const response = { data: result };
+
+  return res.json(response);
+};
+
 async function handle(req: NextApiRequest, res: NextApiResponse) {
   return routeMatcher(req, res, {
     GET: getItem,
+    PUT: update,
     DELETE: deleteItem,
   });
 }
