@@ -32,7 +32,16 @@ const SprintRepo = {
       },
     });
 
-    return sprints;
+    const activeSprint = await prisma.activeSprint.findUnique({
+      where: {
+        workspaceId: workspace.id,
+      },
+    });
+
+    return {
+      sprints,
+      activeSprintId: activeSprint?.sprintId ?? null,
+    };
   },
   async createSprint(
     user: User,
@@ -75,6 +84,37 @@ const SprintRepo = {
         }
       }
     }
+  },
+  async setActiveSprint(
+    user: User,
+    workspaceTag: string,
+    teamId: string,
+    sprintId: string
+  ) {
+    const workspace = await UserRepo.getWorkspaceByTag(
+      user,
+      workspaceTag,
+      teamId
+    );
+
+    if (!workspace) {
+      return;
+    }
+
+    const activeSprint = await prisma.activeSprint.upsert({
+      where: {
+        workspaceId: workspace.id,
+      },
+      create: {
+        workspaceId: workspace.id,
+        sprintId,
+      },
+      update: {
+        sprintId,
+      },
+    });
+
+    return activeSprint;
   },
 };
 

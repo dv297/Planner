@@ -23,8 +23,13 @@ export const GetSprintsInputSchema = z.object({
   workspaceTag: z.array(z.string()),
 });
 
+export const GetSprintsResponseDataSchema = z.object({
+  sprints: SprintsListSchema,
+  activeSprintId: z.nullable(z.string()),
+});
+
 export const GetSprintsResponseSchema = z.object({
-  data: SprintsListSchema,
+  data: GetSprintsResponseDataSchema,
 });
 
 export const CreateSprintUrlInputSchema = z.object({
@@ -43,4 +48,8 @@ export const CreateSprintResponseSchema = z.object({
 
 export const GetSingleSprintInputSchema = z.object({
   sprintId: z.array(z.string()),
+});
+
+export const SetActiveSprintBodyInputSchema = z.object({
+  sprintId: z.string(),
 });

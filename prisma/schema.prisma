@@ -54,6 +54,7 @@ model Workspace {
   TeamWorkspace  TeamWorkspace[]
   KeyIssue       KeyIssue[]
   Sprint         Sprint[]
+  ActiveSprint   ActiveSprint?
 }
 
 model TeamWorkspace {
@@ -186,13 +187,23 @@ model TeamInvite {
 }
 
 model Sprint {
-  id          String    @id @unique @default(cuid())
+  id           String         @id @unique @default(cuid())
+  workspace    Workspace      @relation(fields: [workspaceId], references: [id])
+  name         String
+  beginDate    DateTime?
+  endDate      DateTime?
+  workspaceId  String
+  Issue        Issue[]
+  ActiveSprint ActiveSprint[]
+}
+
+model ActiveSprint {
   workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  name        String
-  beginDate   DateTime?
-  endDate     DateTime?
-  workspaceId String
-  Issue       Issue[]
+  workspaceId String    @unique
+  sprint      Sprint    @relation(fields: [sprintId], references: [id])
+  sprintId    String
+
+  @@id([workspaceId])
 }
 
 enum IssueRelationType {

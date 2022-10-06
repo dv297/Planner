@@ -18,7 +18,7 @@ const Page = () => {
 
   const tag = Array.isArray(workspaceTag) ? workspaceTag[0] : workspaceTag;
 
-  const { data: sprints } = useQuery(
+  const { data: sprintsResponse } = useQuery(
     [QueryKeys.SPRINTS, { tag }],
     () => SprintsService.getSprintsForWorkspace(tag),
     {
@@ -26,9 +26,11 @@ const Page = () => {
     }
   );
 
-  if (!sprints) {
+  if (!sprintsResponse) {
     return null;
   }
+
+  const { sprints, activeSprintId } = sprintsResponse;
 
   return (
     <>
@@ -72,7 +74,7 @@ const Page = () => {
                 that issue to that sprint.
               </p>
             </div>
-            <SprintsList sprints={sprints} />
+            <SprintsList sprints={sprints} activeSprintId={activeSprintId} />
           </div>
         </div>
       )}

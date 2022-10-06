@@ -3,7 +3,6 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import CloseIcon from '@mui/icons-material/Close';
 import EditIcon from '@mui/icons-material/Edit';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 
 import Button from '@src/components/common/Button';
@@ -11,28 +10,16 @@ import BacklogAccordion from '@src/components/pages/sprints/BacklogAccordion';
 import SprintAccordion from '@src/components/pages/sprints/SprintAccordion';
 import SprintIssueDragContextProvider from '@src/components/SprintIssueDragContext';
 import { SprintsListSchema } from '@src/schemas/SprintSchema';
-import QueryKeys from '@src/services/QueryKeys';
-import SprintsService from '@src/services/SprintsService';
 
 interface SprintsListProps {
   sprints: z.infer<typeof SprintsListSchema>;
+  activeSprintId: string | null;
 }
 
 const SprintsList = (props: SprintsListProps) => {
-  const { sprints } = props;
+  const { sprints, activeSprintId } = props;
 
   const [isEdit, setIsEdit] = useState(false);
-
-  const queryClient = useQueryClient();
-
-  const { mutate: deleteSprint } = useMutation(
-    (id: string) => SprintsService.deleteSprint(id),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QueryKeys.SPRINTS]);
-      },
-    }
-  );
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -54,7 +41,7 @@ const SprintsList = (props: SprintsListProps) => {
                 sprint={sprint}
                 index={index}
                 isEdit={isEdit}
-                deleteSprint={deleteSprint}
+                activeSprintId={activeSprintId}
               />
             </div>
           );

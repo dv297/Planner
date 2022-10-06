@@ -31,13 +31,17 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
     return;
   }
 
-  const sprints = await SprintRepo.getSprints(currentUser, tag, teamId);
+  const sprintsResponse = await SprintRepo.getSprints(currentUser, tag, teamId);
 
-  if (!sprints) {
+  if (!sprintsResponse) {
     return res.status(404).send('Not Found');
   }
 
-  const response = GetSprintsResponseSchema.parse({ data: sprints });
+  const { sprints, activeSprintId } = sprintsResponse;
+
+  const response = GetSprintsResponseSchema.parse({
+    data: { sprints, activeSprintId: activeSprintId },
+  });
   return res.json(response);
 };
 

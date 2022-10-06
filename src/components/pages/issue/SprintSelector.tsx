@@ -44,7 +44,7 @@ const SprintSelector = (props: SprintSelectorProps) => {
         setHasBeenOpened(true);
       }}
       initialValue={initialValue}
-      values={data}
+      values={data?.sprints}
       displayKey="name"
     />
   );

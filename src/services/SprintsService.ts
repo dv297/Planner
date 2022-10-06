@@ -101,6 +101,27 @@ const SprintsService = {
       throw new Error('Network response was not ok');
     }
   },
+  setActiveSprint: async (
+    workspaceTag: string | undefined,
+    sprintId: string
+  ) => {
+    if (!workspaceTag) {
+      return;
+    }
+
+    const result = await handleTeamSpecificFetch(
+      `/api/sprints/active-sprint/${workspaceTag}`,
+      {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sprintId }),
+      }
+    );
+
+    if (!result.ok) {
+      throw new Error('Network response was not ok');
+    }
+  },
 };
 
 export default SprintsService;

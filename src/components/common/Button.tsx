@@ -5,14 +5,15 @@ import MuiButton from '@mui/material/Button';
 interface ButtonProps {
   children: ReactNode;
   variant?: MuiButtonProps['variant'];
-  onClick: () => void;
+  onClick: MuiButtonProps['onClick'];
+  isDisabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
-  const { variant = 'contained', children, onClick } = props;
+  const { variant = 'contained', children, onClick, isDisabled } = props;
 
   return (
-    <MuiButton variant={variant} onClick={onClick}>
+    <MuiButton variant={variant} onClick={onClick} disabled={isDisabled}>
       {children}
     </MuiButton>
   );
