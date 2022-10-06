@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { useAppContext } from '@src/components/AppContext';
 import Button from '@src/components/common/Button';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import SprintDateEditCell from '@src/components/pages/sprints/SprintDateEditCell';
 import {
   SprintSchema,
   SprintsListSchema,
@@ -99,6 +100,17 @@ const SprintsEditList = (props: SprintsEditList) => {
             width: 175,
             editable: true,
             valueGetter: (params) => formatDate(params.row.beginDate),
+            renderEditCell: (params) => {
+              const sprint = params.row;
+
+              return (
+                <SprintDateEditCell
+                  sprint={sprint}
+                  propertyName="beginDate"
+                  label="Begin Date"
+                />
+              );
+            },
           },
           {
             field: 'endDate',
@@ -106,6 +118,17 @@ const SprintsEditList = (props: SprintsEditList) => {
             width: 175,
             editable: true,
             valueGetter: (params) => formatDate(params.row.endDate),
+            renderEditCell: (params) => {
+              const sprint = params.row;
+
+              return (
+                <SprintDateEditCell
+                  sprint={sprint}
+                  propertyName="endDate"
+                  label="End Date"
+                />
+              );
+            },
           },
           {
             field: 'isActive',
