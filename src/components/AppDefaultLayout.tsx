@@ -1,5 +1,6 @@
 import { ReactNode, useState } from 'react';
 import {
+  ClipboardCheckIcon,
   FolderIcon,
   HomeIcon,
   TrendingDownIcon,
@@ -55,6 +56,12 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
       href: '/app/sprints/{WORKSPACE_TAG}',
       icon: TrendingDownIcon,
       current: asPath.includes('/app/sprints'),
+    },
+    {
+      name: 'Board',
+      href: '/app/board/{WORKSPACE_TAG}',
+      icon: ClipboardCheckIcon,
+      current: asPath.includes('/app/board'),
     },
   ];
 

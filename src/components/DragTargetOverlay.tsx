@@ -28,7 +28,7 @@ const DragTargetOverlay = (props: DragTargetOverlay) => {
             isOpen,
         })}
       />
-      <div className="absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center">
+      <div className="absolute top-0 bottom-0 right-0 left-0 flex justify-center items-center text-center px-2">
         <span className="text-white font-bold">{label}</span>
       </div>
       {children}
