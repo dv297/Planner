@@ -43,7 +43,7 @@ const ProjectPage = () => {
 
   return (
     <div>
-      <div className="flex flex-row items-center">
+      <div className="flex flex-col sm:flex-row sm:items-center">
         <div className="flex flex-grow flex-1 w-full mr-16">
           <EditableTextDisplay
             onBlurSubmission={getUpdaterFunction(tag, 'title')}
@@ -51,7 +51,7 @@ const ProjectPage = () => {
             textDisplayClassName="text-xl font-bold"
           />
         </div>
-        <div>
+        <div className="ml-3 mt-4 sm:ml-0 sm:mt-0">
           <Link href={`/app/map/${tag}`}>
             <span className="rounded-full bg-green-700 px-4 py-3 text-white font-bold cursor-pointer">
               <span className="mr-2">

@@ -28,11 +28,11 @@ const IssuesList = (props: IssuesListProps) => {
           projectId={projectId}
         />
       )}
-      <div className="w-full rounded-md text-left border-solid border-gray-300 border">
+      <div className="w-full rounded-md text-left border-solid border-gray-300 border text-sm sm:text-md">
         <div className="divide-y divide-gray-300">
           <div className="flex flex-row items-center bg-gray-50 divide-gray-200 px-4 py-2 grid-cols-12 grid">
             <span className="col-span-2 font-bold text-gray-900">Task</span>
-            <span className="col-span-5 font-bold text-gray-900">
+            <span className="col-span-5 font-bold text-gray-900 invisible sm:visible">
               Description
             </span>
             <span className="col-span-5 text-right">

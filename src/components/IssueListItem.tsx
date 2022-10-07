@@ -39,17 +39,17 @@ const IssueListItem = (props: IssueListItemProps) => {
 
   return (
     <div
-      className="px-4 py-3.5 grid-cols-12 grid"
+      className="px-4 py-3.5 grid-cols-12 grid sm:items-center"
       key={issue.id}
       ref={allowDrag ? drag : undefined}
       style={style}
     >
-      <span className="col-span-2 text-gray-900">
+      <span className="col-span-12 sm:col-span-2 text-gray-900">
         <Link href={`/app/issue/${issueTag}`}>
           <span className="cursor-pointer hover:text-primary">{issueTag}</span>
         </Link>
       </span>
-      <span className="col-span-6 text-gray-600">
+      <span className="col-span-12 sm:col-span-6 text-gray-600">
         <Link href={`/app/issue/${issueTag}`}>
           <span
             className={clsx(
@@ -63,10 +63,15 @@ const IssueListItem = (props: IssueListItemProps) => {
           </span>
         </Link>
       </span>
-      <span className="col-span-2 flex justify-center">
-        {issue.assignee && <UserAvatar user={issue.assignee} />}
+      <span className="col-span-12 sm:col-span-2 flex mt-2 sm:mt-0 sm:justify-center">
+        {issue.assignee && (
+          <div className="flex flex-row items-center">
+            <UserAvatar user={issue.assignee} />
+            <span className="sm:hidden ml-2">{issue.assignee.name}</span>
+          </div>
+        )}
       </span>
-      <span className="col-span-2 flex justify-end">
+      <span className="col-span-12 sm:col-span-2 flex sm:justify-end mt-2 sm:mt-0">
         <IssueStatusPill
           issueStatus={convertToIssueStatusType(issue.issueStatus)}
         />
