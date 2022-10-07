@@ -49,7 +49,11 @@ const Board = () => {
     return null;
   }
 
-  if (!isLoadingActiveSprintId && !isLoadingSprintIssues && !sprintsResponse) {
+  if (
+    !isLoadingActiveSprintId &&
+    !isLoadingSprintIssues &&
+    (!sprintsResponse || sprintsResponse.sprints.length === 0)
+  ) {
     return (
       <ConstrainDashboardContainer>
         <EmptyPlaceholder
