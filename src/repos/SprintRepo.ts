@@ -72,10 +72,30 @@ const SprintRepo = {
       return;
     }
 
+    // First see if there are any other springs so that we know if we should mark this one as active upon creation
+    const existingSprint = await prisma.sprint.findFirst({
+      where: {
+        workspaceId: workspace.id,
+      },
+    });
+
+    const shouldMarkActive = !existingSprint;
+
+    const activeSprintCreationData = shouldMarkActive
+      ? {
+          ActiveSprint: {
+            create: {
+              workspaceId: workspace.id,
+            },
+          },
+        }
+      : {};
+
     const sprint = await prisma.sprint.create({
       data: {
         workspaceId: workspace.id,
         ...input,
+        ...activeSprintCreationData,
       },
     });
 

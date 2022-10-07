@@ -8,57 +8,37 @@ import { authOptions } from '@src/pages/api/auth/[...nextauth]';
 import UserRepo from '@src/repos/UserRepo';
 import routeMatcher from '@src/utils/routeMatcher';
 
-class SettingsService {
-  private req: NextApiRequest;
-  private res: NextApiResponse;
+const get = async (req: NextApiRequest, res: NextApiResponse) => {
+  const currentUser = await UserRepo.getCurrentUser({ req, res });
 
-  constructor(req: NextApiRequest, res: NextApiResponse) {
-    this.req = req;
-    this.res = res;
-  }
+  return res.json(currentUser);
+};
 
-  async getPersonalInformation() {
-    const { req, res } = this;
+const update = async (req: NextApiRequest, res: NextApiResponse) => {
+  const session = await unstable_getServerSession(req, res, authOptions);
 
-    const currentUser = await UserRepo.getCurrentUser({ req, res });
+  const castedSession = session as Session & { userId: string };
 
-    return res.json(currentUser);
-  }
+  const { name, email, image } = req.body;
 
-  async updatePersonalInformation() {
-    const { req, res } = this;
-    const session = await unstable_getServerSession(req, res, authOptions);
+  const result = await prisma.user.update({
+    where: {
+      id: castedSession.userId,
+    },
+    data: {
+      name,
+      email,
+      image,
+    },
+  });
 
-    const castedSession = session as Session & { userId: string };
-
-    const { name, email, image } = req.body;
-
-    const result = await prisma.user.update({
-      where: {
-        id: castedSession.userId,
-      },
-      data: {
-        name,
-        email,
-        image,
-      },
-    });
-
-    res.json(result);
-  }
-}
+  res.json(result);
+};
 
 async function handle(req: NextApiRequest, res: NextApiResponse) {
-  const service = new SettingsService(req, res);
-
   return routeMatcher(req, res, {
-    // Don't mess with this; written like this to maintain "this" binding
-    GET: () => {
-      service.getPersonalInformation();
-    },
-    POST: () => {
-      service.updatePersonalInformation();
-    },
+    GET: get,
+    POST: update,
   });
 }
 

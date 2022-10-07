@@ -4,16 +4,22 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import Button from '@src/components/common/Button';
+import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
+import EmptyPlaceholder from '@src/components/EmptyPlaceholder';
 import KanbanBoard from '@src/components/pages/board/KanbanBoard';
+import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCreationModalTrigger';
 import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
 import timeInMinutes from '@src/utils/timeInMinutes';
+import useNavigateToWorkspaceSpecificPage from '@src/utils/useNavigateToWorkspaceSpecificPage';
 
 const Board = () => {
   const router = useRouter();
   const { workspaceTag } = router.query;
 
   const tag = Array.isArray(workspaceTag) ? workspaceTag[0] : workspaceTag;
+  const navigateToWorkspaceSpecificPage = useNavigateToWorkspaceSpecificPage();
 
   const { data: sprintsResponse, isLoading: isLoadingActiveSprintId } =
     useQuery(
@@ -26,30 +32,72 @@ const Board = () => {
 
   const sprintId = sprintsResponse?.activeSprintId;
 
-  const { data: sprintIssues, isLoading: isLoadingSprintIssues } = useQuery(
-    [QueryKeys.SPRINTS, { sprintId }],
-    () => {
-      if (sprintId) {
-        return SprintsService.getIssuesForSprint(sprintId);
+  const { data: sprintIssues, isInitialLoading: isLoadingSprintIssues } =
+    useQuery(
+      [QueryKeys.SPRINTS, { sprintId }],
+      () => {
+        if (sprintId) {
+          return SprintsService.getIssuesForSprint(sprintId);
+        }
+      },
+      {
+        enabled: !!sprintsResponse?.activeSprintId,
       }
-    },
-    {
-      enabled: !!sprintId,
-    }
-  );
+    );
 
   if (isLoadingActiveSprintId || isLoadingSprintIssues) {
     return null;
   }
 
-  if (!isLoadingActiveSprintId && !isLoadingSprintIssues && !sprintIssues) {
+  if (!isLoadingActiveSprintId && !isLoadingSprintIssues && !sprintsResponse) {
     return (
-      <div>It looks like your team does not have an active sprint set yet!</div>
+      <ConstrainDashboardContainer>
+        <EmptyPlaceholder
+          description={
+            <div>
+              <p>
+                Boards are a way of seeing all of the statuses for the issues in
+                a particular sprint. To use the Board functionality, you first
+                need to create a sprint and set it as &quot;Active&quot;.
+              </p>
+            </div>
+          }
+          pluralItemName="sprints"
+          actionButton={<SprintCreationModalTrigger />}
+        />
+      </ConstrainDashboardContainer>
     );
   }
 
-  if (!sprintIssues) {
-    return <div>There are no issues in the active sprint.</div>;
+  if (
+    sprintIssues?.issues === undefined ||
+    sprintIssues?.issues?.length === 0
+  ) {
+    return (
+      <ConstrainDashboardContainer>
+        <EmptyPlaceholder
+          description={
+            <div>
+              <p>
+                Boards are a way of seeing all of the statuses for the issues in
+                a particular sprint. To use the Board functionality, you first
+                need to create a sprint and set it as &quot;Active&quot;.
+              </p>
+            </div>
+          }
+          pluralItemName="issues in the active sprint"
+          actionButton={
+            <Button
+              onClick={() => {
+                navigateToWorkspaceSpecificPage('sprints');
+              }}
+            >
+              Go to Sprint Page
+            </Button>
+          }
+        />
+      </ConstrainDashboardContainer>
+    );
   }
 
   return (

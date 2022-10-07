@@ -22,6 +22,7 @@ const EmptyPlaceholder = (props: EmptyPlaceholderProps) => {
               width={250}
               layout="fixed"
               quality={50}
+              priority
             />
           </div>
         </div>
