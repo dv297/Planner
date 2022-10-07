@@ -57,11 +57,11 @@ const Post = (props: any) => {
           />
         )}
         <div className="flex xl:justify-center">
-          <div className="px-8 lg:px-32 py-8">
+          <div className="max-w-screen px-8 lg:px-32 py-8 mx-auto box-border">
             <h1 className="text-xl lg:text-3xl font-semibold text-gray-900">
               {post.title}
             </h1>
-            <div className="mt-4 flex">
+            <div className="mt-4">
               <ProseableText value={post.body} />
             </div>
           </div>

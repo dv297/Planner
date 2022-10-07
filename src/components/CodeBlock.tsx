@@ -1,4 +1,4 @@
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 interface CodeBlockProps {
@@ -15,7 +15,12 @@ const CodeBlock = (props: CodeBlockProps) => {
   }
 
   return (
-    <SyntaxHighlighter language={node.language || 'text'} style={atomDark}>
+    <SyntaxHighlighter
+      language={node.language || 'text'}
+      style={atomDark}
+      showInlineLineNumbers
+      wrapLongLines
+    >
       {node.code}
     </SyntaxHighlighter>
   );
