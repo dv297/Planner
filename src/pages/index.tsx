@@ -12,9 +12,11 @@ export default function HomePage() {
     <div className="lg:relative">
       <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
         <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-            <p className="block text-secondary">Ditch your to-do list</p>{' '}
-            <p className="block text-primary">Map your moves</p>
+          <h1 className="font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
+            <p className="text-4xl block text-slate-600">
+              Ditch your to-do list
+            </p>{' '}
+            <p className="text-7xl block text-primary">Map your moves</p>
           </h1>
           <p className="mx-auto mt-3 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
             With all the moving parts and dependencies, to-do lists don&apos;t
