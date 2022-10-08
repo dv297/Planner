@@ -105,8 +105,8 @@ const Board = () => {
   }
 
   return (
-    <div className="px-4">
-      <div className="bg-blue-100 py-4 rounded-lg mb-4 flex flex-row items-center text-lg text-blue-500">
+    <div className="px-4 flex flex-col h-full">
+      <div className="flex-shrink bg-blue-100 py-4 rounded-lg mb-4 flex flex-row items-center text-lg text-blue-500">
         <div className="w-12 px-6 flex items-center justify-center">
           <InfoOutlinedIcon />
         </div>
@@ -115,7 +115,9 @@ const Board = () => {
           the status for that issue.
         </p>
       </div>
-      <KanbanBoard issues={sprintIssues.issues} />
+      <div className="h-full">
+        <KanbanBoard issues={sprintIssues.issues} />
+      </div>
     </div>
   );
 };
