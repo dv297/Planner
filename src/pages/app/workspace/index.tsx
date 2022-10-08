@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import Form from '@src/components/common/Form';
@@ -11,11 +12,28 @@ import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import { CreateWorkspaceSchema } from '@src/schemas/WorkspaceSchemas';
 import QueryKeys from '@src/services/QueryKeys';
+import UserPreferencesService from '@src/services/UserPreferencesService';
 import WorkspaceService from '@src/services/WorkspaceService';
 
 const Workspace = () => {
   const snackbar = useSnackbar();
   const queryClient = useQueryClient();
+  const router = useRouter();
+
+  const userPreferencesMutation = useMutation(
+    [QueryKeys.USER_PREFERENCES],
+    UserPreferencesService.update,
+    {
+      onSuccess: async () => {
+        await queryClient.invalidateQueries([QueryKeys.USER_PREFERENCES]);
+        snackbar.displaySnackbar({
+          message: `Changing workspace`,
+          severity: SnackbarSeverity.SUCCESS,
+        });
+        router.push('/app/dashboard');
+      },
+    }
+  );
 
   return (
     <>
@@ -23,12 +41,18 @@ const Workspace = () => {
       <Form
         onSubmit={async (data) => {
           WorkspaceService.createWorkspace(data)
-            .then(() => {
+            .then(async (workspaceId) => {
               snackbar.displaySnackbar({
                 message: 'Successfully added workspace!',
                 severity: SnackbarSeverity.SUCCESS,
               });
               queryClient.invalidateQueries([QueryKeys.WORKSPACES]);
+              await userPreferencesMutation.mutate([
+                {
+                  field: 'workspaceId',
+                  value: workspaceId,
+                },
+              ]);
             })
             .catch((err) => {
               console.log(err);

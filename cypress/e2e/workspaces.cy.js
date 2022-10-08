@@ -16,9 +16,7 @@ describe('Workspace', () => {
 
     cy.findByText(/Successfully added workspace/i).should('exist');
 
-    cy.visit('/app/dashboard');
-
-    AppPage.workspaceSelector().click();
+    cy.url().should('include', '/app/dashboard');
     cy.findByText(/DVU TEST WORKSPACE/i).should('exist');
   });
 });

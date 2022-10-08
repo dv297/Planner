@@ -25,11 +25,19 @@ const WorkspaceService = {
   },
   createWorkspace: async (data: CreateWorkspaceInput) => {
     const body = { name: data.name, tag: data.tag };
-    await handleTeamSpecificFetch('/api/workspace', {
+    const result = await handleTeamSpecificFetch('/api/workspace', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
+
+    if (!result.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const response = await result.json();
+
+    return response.workspaceResult.id as string;
   },
 };
 
