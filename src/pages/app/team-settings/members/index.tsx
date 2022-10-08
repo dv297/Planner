@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { useQuery } from '@tanstack/react-query';
+import Head from 'next/head';
 
 import Button from '@src/components/common/Button';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
@@ -51,6 +52,9 @@ const Page = () => {
 Page.getLayout = function getLayout(page: ReactNode) {
   return (
     <TeamSettingsLayout>
+      <Head>
+        <title>Planner - Team Settings</title>
+      </Head>
       <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
     </TeamSettingsLayout>
   );

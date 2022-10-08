@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import MapIcon from '@mui/icons-material/Map';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -11,6 +12,7 @@ import ConstrainDashboardContainer from '@src/components/ConstrainDashboardConta
 import IssuesList from '@src/components/IssuesList';
 import ProjectsService from '@src/services/ProjectsService';
 import QueryKeys from '@src/services/QueryKeys';
+import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
 
 const ProjectPage = () => {
   const router = useRouter();
@@ -43,6 +45,9 @@ const ProjectPage = () => {
 
   return (
     <div>
+      <Head>
+        <title>Planner - {parseIssueTagFromIssue(project.keyIssue)}</title>
+      </Head>
       <div className="flex flex-col sm:flex-row sm:items-center">
         <div className="flex flex-grow flex-1 w-full mr-16">
           <EditableTextDisplay

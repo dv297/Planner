@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/app';
+import Head from 'next/head';
 import { SessionProvider } from 'next-auth/react';
 
 import { SnackbarProvider } from '@src/components/common/Snackbar';
@@ -36,6 +37,9 @@ const App = (props: CustomAppProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Head>
+        <title>Planner</title>
+      </Head>
       <CacheProvider value={emotionCache}>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <ThemeProvider theme={theme}>

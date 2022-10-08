@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { useAppContext } from '@src/components/AppContext';
@@ -53,6 +54,9 @@ const CreateProjectPage = () => {
 CreateProjectPage.getLayout = function getLayout(page: ReactNode) {
   return (
     <AppDefaultLayout>
+      <Head>
+        <title>Planner - Create Project</title>
+      </Head>
       <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
     </AppDefaultLayout>
   );

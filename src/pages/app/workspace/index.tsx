@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
+import Head from 'next/head';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import Form from '@src/components/common/Form';
@@ -58,6 +59,9 @@ const Workspace = () => {
 Workspace.getLayout = function getLayout(page: ReactNode) {
   return (
     <AppDefaultLayout>
+      <Head>
+        <title>Planner - Create Workspace</title>
+      </Head>
       <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
     </AppDefaultLayout>
   );

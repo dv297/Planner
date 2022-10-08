@@ -5,6 +5,7 @@ import {
   HomeIcon,
   TrendingDownIcon,
 } from '@heroicons/react/outline';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
@@ -67,6 +68,10 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
 
   return (
     <AppContextProvider>
+      <Head>
+        <title>Planner</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
       <div>
         <Sidebar
           header={<WorkspaceSelector />}

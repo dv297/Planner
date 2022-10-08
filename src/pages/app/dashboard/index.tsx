@@ -4,6 +4,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import Head from 'next/head';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 
@@ -99,7 +100,14 @@ const Page = () => {
 };
 
 Page.getLayout = function getLayout(page: ReactNode) {
-  return <AppDefaultLayout>{page}</AppDefaultLayout>;
+  return (
+    <AppDefaultLayout>
+      <Head>
+        <title>Planner - Dashboard</title>
+      </Head>
+      {page}
+    </AppDefaultLayout>
+  );
 };
 
 export default Page;

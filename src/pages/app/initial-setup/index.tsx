@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Head from 'next/head';
 
 import OnboardingLayout from '@src/components/OnboardingLayout';
 import InitialSetupEstablishIndividualSettings from '@src/components/pages/onboarding/InitialSetupEstablishIndividualSettings';
@@ -36,7 +37,14 @@ const Wrapper = () => {
 };
 
 Wrapper.getLayout = function getLayout(page: ReactNode) {
-  return <OnboardingLayout>{page}</OnboardingLayout>;
+  return (
+    <OnboardingLayout>
+      <Head>
+        <title>Planner - Initial Setup</title>
+      </Head>
+      {page}
+    </OnboardingLayout>
+  );
 };
 
 export default Wrapper;

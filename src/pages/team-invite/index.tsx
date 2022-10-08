@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
 
@@ -85,16 +86,21 @@ const TeamInvitePage = (props: TeamInviteProps) => {
 
 TeamInvitePage.getLayout = function getLayout(page: ReactNode) {
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="h-16 border-b border-gray-200 bg-white">
-        <div className="flex flex-row items-center h-full pl-12">
-          <h1>Planner</h1>
+    <>
+      <Head>
+        <title>Planner - Accept Invite</title>
+      </Head>
+      <div className="min-h-screen flex flex-col">
+        <div className="h-16 border-b border-gray-200 bg-white">
+          <div className="flex flex-row items-center h-full pl-12">
+            <h1>Planner</h1>
+          </div>
         </div>
+        <main className="flex flex-col bg-gray-100 flex h-full items-center justify-center flex-1">
+          {page}
+        </main>
       </div>
-      <main className="flex flex-col bg-gray-100 flex h-full items-center justify-center flex-1">
-        {page}
-      </main>
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { useQuery } from '@tanstack/react-query';
+import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -104,6 +105,9 @@ const Page = () => {
 Page.getLayout = function getLayout(page: ReactNode) {
   return (
     <AppDefaultLayout>
+      <Head>
+        <title>Planner - Projects</title>
+      </Head>
       <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
     </AppDefaultLayout>
   );

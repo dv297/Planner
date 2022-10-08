@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Head from 'next/head';
 import Link from 'next/link';
 
 import LandingPageLayout from '@src/components/LandingPageLayout';
@@ -24,7 +25,14 @@ const Logout = () => {
 };
 
 Logout.getLayout = function getLayout(page: ReactNode) {
-  return <LandingPageLayout>{page}</LandingPageLayout>;
+  return (
+    <LandingPageLayout>
+      <Head>
+        <title>Planner - Sign Out</title>
+      </Head>
+      {page}
+    </LandingPageLayout>
+  );
 };
 
 export default Logout;

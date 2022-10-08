@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Head from 'next/head';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import FullScreenLoader from '@src/components/common/FullScreenLoader';
@@ -31,6 +32,9 @@ const Page = () => {
 Page.getLayout = function getLayout(page: ReactNode) {
   return (
     <AppDefaultLayout>
+      <Head>
+        <title>Planner - Project Map</title>
+      </Head>
       <ProjectMapContextProvider>{page}</ProjectMapContextProvider>
     </AppDefaultLayout>
   );

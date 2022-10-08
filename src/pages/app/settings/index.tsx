@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import Head from 'next/head';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
@@ -59,6 +60,9 @@ const Settings = () => {
 Settings.getLayout = function getLayout(page: ReactNode) {
   return (
     <AppDefaultLayout>
+      <Head>
+        <title>Planner - Personal Settings</title>
+      </Head>
       <ConstrainDashboardContainer>{page}</ConstrainDashboardContainer>
     </AppDefaultLayout>
   );
