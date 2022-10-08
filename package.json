@@ -1,7 +1,7 @@
 {
-  "name": "hello-next",
+  "name": "planner",
   "version": "1.0.0",
-  "description": "",
+  "description": "Web app to help plan projects and tasks",
   "scripts": {
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
