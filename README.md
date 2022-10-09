@@ -1,4 +1,4 @@
-![Logo](./public/images/logo/logo-no-background.svg)
+<img alt="Logo" height="90.5" src="./public/images/logo/logo-no-background.svg" width="500"/>
 
 ---
 
