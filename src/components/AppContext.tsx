@@ -132,4 +132,4 @@ const useAppContext = () => {
   return context;
 };
 
-export { AppContextProvider, useAppContext };
+export { AppContextProvider, useAppContext, AppContext as _AppContext };

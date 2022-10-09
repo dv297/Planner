@@ -1,6 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { UserGroupIcon } from '@heroicons/react/outline';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -10,6 +11,7 @@ import { AppContextProvider } from '@src/components/AppContext';
 import FullScreenLoader from '@src/components/common/FullScreenLoader';
 import { SnackbarProvider } from '@src/components/common/Snackbar';
 import DashboardBodyLayout from '@src/components/DashboardBodyLayout';
+import ProfileIconButton from '@src/components/ProfileIconButton';
 import Sidebar, { NavigationElement } from '@src/components/Sidebar';
 
 interface TeamSettingsLayoutProps {
@@ -19,6 +21,10 @@ interface TeamSettingsLayoutProps {
 const TeamSettingsLayout = (props: TeamSettingsLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { replace, asPath } = useRouter();
+
+  const countOfFetches = useIsFetching();
+  const countOfMutations = useIsMutating();
+  const isLoading = countOfMutations + countOfFetches !== 0;
 
   const { status } = useSession({
     required: true,
@@ -64,7 +70,11 @@ const TeamSettingsLayout = (props: TeamSettingsLayoutProps) => {
             setSidebarOpen={setSidebarOpen}
             navigation={navigation}
           />
-          <DashboardBodyLayout setSidebarOpen={setSidebarOpen}>
+          <DashboardBodyLayout
+            setSidebarOpen={setSidebarOpen}
+            isLoading={isLoading}
+            topRightNav={<ProfileIconButton />}
+          >
             {props.children}
           </DashboardBodyLayout>
         </div>

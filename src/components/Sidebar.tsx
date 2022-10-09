@@ -4,7 +4,6 @@ import { XIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
 
 import { useAppContext } from '@src/components/AppContext';
-import TeamSelector from '@src/components/TeamSelector';
 import FeatureFlags from '@src/FeatureFlags';
 
 function classNames(...classes: string[]) {
@@ -27,12 +26,13 @@ interface SidebarProps {
   setSidebarOpen: (updatedState: boolean) => void;
   navigation: NavigationElement[];
   header?: ReactNode;
+  footer?: ReactNode;
 }
 
 const Sidebar = (props: SidebarProps) => {
   const { selectedWorkspace } = useAppContext();
 
-  const { sidebarOpen, setSidebarOpen, navigation, header } = props;
+  const { sidebarOpen, setSidebarOpen, navigation, header, footer } = props;
 
   return (
     <>
@@ -132,13 +132,9 @@ const Sidebar = (props: SidebarProps) => {
                     ))}
                   </nav>
                 </div>
-                {FeatureFlags.allowMultipleTeams && (
-                  <footer className="py-2">
-                    <div className="w-full px-2">
-                      <TeamSelector />
-                    </div>
-                  </footer>
-                )}
+                <footer className="py-2">
+                  <div className="w-full px-2">{footer}</div>
+                </footer>
               </Dialog.Panel>
             </Transition.Child>
             <div className="flex-shrink-0 w-14" aria-hidden="true">
@@ -189,13 +185,9 @@ const Sidebar = (props: SidebarProps) => {
                 </Link>
               ))}
             </nav>
-            {FeatureFlags.allowMultipleTeams && (
-              <footer className="py-2">
-                <div className="w-full px-2">
-                  <TeamSelector />
-                </div>
-              </footer>
-            )}
+            <footer className="py-2">
+              <div className="w-full px-2">{footer}</div>
+            </footer>
           </div>
         </div>
       </div>

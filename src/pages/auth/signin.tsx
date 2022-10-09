@@ -80,7 +80,7 @@ const Signin = (props: SigninProps) => {
                   />
                 </label>
                 <button
-                  className="mt-6 py-1 w-full bg-blue-500 text-white rounded-md hover:outline hover:outline-blue-700 hover:shadow"
+                  className="mt-6 py-1 w-full bg-accent-blue-500 text-white rounded-md hover:outline hover:outline-accent-blue-700 hover:shadow"
                   type="submit"
                 >
                   Sign in with Credentials

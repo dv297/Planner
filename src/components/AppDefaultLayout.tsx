@@ -5,6 +5,7 @@ import {
   HomeIcon,
   TrendingDownIcon,
 } from '@heroicons/react/outline';
+import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
@@ -12,8 +13,11 @@ import { useSession } from 'next-auth/react';
 import { AppContextProvider } from '@src/components/AppContext';
 import FullScreenLoader from '@src/components/common/FullScreenLoader';
 import DashboardBodyLayout from '@src/components/DashboardBodyLayout';
+import ProfileIconButton from '@src/components/ProfileIconButton';
 import Sidebar, { NavigationElement } from '@src/components/Sidebar';
+import TeamSelector from '@src/components/TeamSelector';
 import WorkspaceSelector from '@src/components/WorkspaceSelector';
+import FeatureFlags from '@src/FeatureFlags';
 
 interface AppDefaultLayoutProps {
   children: ReactNode;
@@ -31,6 +35,10 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
       router.replace('/');
     },
   });
+
+  const countOfFetches = useIsFetching();
+  const countOfMutations = useIsMutating();
+  const isLoading = countOfMutations + countOfFetches !== 0;
 
   if (status !== 'authenticated') {
     return <FullScreenLoader />;
@@ -75,11 +83,16 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
       <div>
         <Sidebar
           header={<WorkspaceSelector />}
+          footer={FeatureFlags.allowMultipleTeams ? <TeamSelector /> : null}
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
           navigation={navigation}
         />
-        <DashboardBodyLayout setSidebarOpen={setSidebarOpen}>
+        <DashboardBodyLayout
+          setSidebarOpen={setSidebarOpen}
+          isLoading={isLoading}
+          topRightNav={<ProfileIconButton />}
+        >
           {props.children}
         </DashboardBodyLayout>
       </div>

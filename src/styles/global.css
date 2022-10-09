@@ -9,10 +9,17 @@ body {
 
 @layer base {
   :root {
-    --color-primary: #0F4880;
-    --color-secondary: #336E7B;
+    --color-accent-blue-900: #0F4880;
+    --color-accent-blue-700: #1053A3;
+    --color-accent-blue-500: #1D79C0;
+    --color-accent-blue-300: #45ACC0;
+    --color-accent-blue-100: #C9E2FF;
+
+
+    --color-primary: var(--color-accent-blue-500);
+    --color-secondary: var(--color-accent-blue-700);
     --color-sidebar: #fff;
-    --color-sidebar-element-hover-background: #0ea5e9;
+    --color-sidebar-element-hover-background: var(--color-accent-blue-700);
     --color-sidebar-element-hover-text: #fff;
     --color-sidebar-text: #1c1917;
     --color-sidebar-active-element-background: var(--color-primary);

@@ -10,12 +10,12 @@ import ProfileIconButton from '@src/components/ProfileIconButton';
 interface DashboardBodyLayoutProps {
   children: ReactNode;
   setSidebarOpen: (updatedState: boolean) => void;
+  isLoading: boolean;
+  topRightNav?: ReactNode;
 }
 
 const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
-  const { setSidebarOpen } = props;
-  const isFetching = useIsFetching();
-  const isMutating = useIsMutating();
+  const { setSidebarOpen, isLoading, topRightNav } = props;
 
   return (
     <>
@@ -35,7 +35,7 @@ const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
                 {/* Search could be included here in the future */}
               </div>
               <div className="ml-4 flex items-center md:ml-6">
-                <ProfileIconButton />
+                {topRightNav}
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@ const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
             <div className="py-6 h-full">{props.children}</div>
           </main>
         </div>
-        {isFetching || isMutating ? (
+        {isLoading ? (
           <div className="fixed bottom-0 left-0 right-0">
             <LinearProgress />
           </div>
