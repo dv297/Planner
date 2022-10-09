@@ -17,7 +17,7 @@
 > A Jira-like clone for learning Next.JS, Tailwind, and Next-Auth
 
 ### ✨ [Demo](https://planner-nine.vercel.app/)
-### ✨ [Blogs Outlining Thoughts During Development](https://planner-nine.vercel.app/blog)
+### ✨ [Blog Outlining Thoughts During Development](https://planner-nine.vercel.app/blog)
 
 ## Install
 
