@@ -5,7 +5,7 @@ import EditableTextDisplay from '../components/common/EditableDisplays/EditableT
 import FormBuilder from '../components/common/FormBuilder';
 
 export default {
-  title: 'common/FormBuilder',
+  title: 'Forms/FormBuilder',
   component: FormBuilder,
   argTypes: {},
 } as ComponentMeta<typeof FormBuilder>;

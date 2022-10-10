@@ -14,6 +14,7 @@ body {
     --color-accent-blue-500: #1D79C0;
     --color-accent-blue-300: #45ACC0;
     --color-accent-blue-100: #C9E2FF;
+    --color-accent-blue-50: #f1f8fc;
 
 
     --color-primary: var(--color-accent-blue-500);

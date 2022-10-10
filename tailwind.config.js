@@ -12,6 +12,7 @@ module.exports = {
           500: 'var(--color-accent-blue-500)',
           300: 'var(--color-accent-blue-300)',
           100: 'var(--color-accent-blue-100)',
+          50: 'var(--color-accent-blue-50)',
         },
       },
     },

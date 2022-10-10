@@ -7,7 +7,7 @@ import IssueStatusType from '../types/IssueStatusType';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'common/IssueStatusSelector',
+  title: 'Issues/IssueStatusSelector',
   component: IssueStatusSelector,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
