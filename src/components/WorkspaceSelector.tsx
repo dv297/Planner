@@ -1,7 +1,7 @@
 import { Fragment, ReactNode } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/solid';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 
 import { useAppContext } from '@src/components/AppContext';
@@ -37,6 +37,7 @@ const WorkspaceSelector = () => {
   const router = useRouter();
   const snackbar = useSnackbar();
   const { workspaces, selectedWorkspace } = useAppContext();
+  const queryClient = useQueryClient();
   const mutation = useMutation(
     [QueryKeys.USER_PREFERENCES],
     UserPreferencesService.update
@@ -49,6 +50,7 @@ const WorkspaceSelector = () => {
         value: id,
       },
     ]);
+    await queryClient.invalidateQueries([QueryKeys.USER_PREFERENCES]);
     snackbar.displaySnackbar({
       message: `Changing workspace`,
       severity: SnackbarSeverity.SUCCESS,
