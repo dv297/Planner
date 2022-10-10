@@ -4,7 +4,6 @@ import { XIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
 
 import { useAppContext } from '@src/components/AppContext';
-import FeatureFlags from '@src/FeatureFlags';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');

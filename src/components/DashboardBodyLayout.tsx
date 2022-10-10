@@ -3,9 +3,6 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { MenuAlt2Icon } from '@heroicons/react/outline';
 import LinearProgress from '@mui/material/LinearProgress';
-import { useIsFetching, useIsMutating } from '@tanstack/react-query';
-
-import ProfileIconButton from '@src/components/ProfileIconButton';
 
 interface DashboardBodyLayoutProps {
   children: ReactNode;

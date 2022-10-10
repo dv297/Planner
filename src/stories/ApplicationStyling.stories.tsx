@@ -9,7 +9,6 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import PeopleIcon from '@mui/icons-material/People';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { clsx } from 'clsx';
-import Link from 'next/link';
 
 import { _AppContext } from '@src/components/AppContext';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
@@ -18,7 +17,6 @@ import Sidebar, { NavigationElement } from '@src/components/Sidebar';
 
 import EditableTextDisplay from '../components/common/EditableDisplays/EditableTextDisplay';
 import IssueStatusPill from '../components/IssueStatusPill';
-import IssueStatusType from '../types/IssueStatusType';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

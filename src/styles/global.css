@@ -9,13 +9,12 @@ body {
 
 @layer base {
   :root {
-    --color-accent-blue-900: #0F4880;
-    --color-accent-blue-700: #1053A3;
-    --color-accent-blue-500: #1D79C0;
-    --color-accent-blue-300: #45ACC0;
-    --color-accent-blue-100: #C9E2FF;
+    --color-accent-blue-900: #0f4880;
+    --color-accent-blue-700: #1053a3;
+    --color-accent-blue-500: #1d79c0;
+    --color-accent-blue-300: #45acc0;
+    --color-accent-blue-100: #c9e2ff;
     --color-accent-blue-50: #f1f8fc;
-
 
     --color-primary: var(--color-accent-blue-500);
     --color-secondary: var(--color-accent-blue-700);
