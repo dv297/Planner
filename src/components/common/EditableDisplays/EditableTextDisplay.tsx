@@ -1,4 +1,5 @@
 import { CircularProgress } from '@mui/material';
+import clsx from 'clsx';
 
 import TextDisplay from '@src/components/common/EditableDisplays/TextDisplay';
 import useEditableDisplay from '@src/components/common/EditableDisplays/useEditableDisplay';
@@ -37,7 +38,12 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
         <>
           <div
             onClick={openEditor}
-            className="w-full rounded-lg cursor-pointer border-2 border-theme-background hover:border-solid hover:border-gray-100"
+            className={clsx(
+              'w-full rounded-lg cursor-pointer border-2 border-theme-background hover:border-solid',
+              {
+                'hover:border-gray-100 hover:dark:border-gray-700': !isEditing,
+              }
+            )}
           >
             {!isEditing ? (
               <div className="px-4 py-1">

@@ -35,9 +35,9 @@ const TextInput = (props: TextInputProps) => {
         <label
           htmlFor={props.id}
           className={clsx(
-            'text-base absolute left-2 px-2 top-4 text-slate-400 ease-out duration-75',
+            'text-base absolute left-2 px-2 my-auto top-0 bottom-0 text-slate-400 ease-out duration-75 flex items-center',
             {
-              '-top-5 px-2 !text-sm': isLabelFloating,
+              '-top-14 px-2 !my-0 !text-xs': isLabelFloating,
               'text-accent-blue-500 dark:text-accent-blue-300': isFocussed,
               '!text-red-600': props.error,
             }
@@ -49,7 +49,7 @@ const TextInput = (props: TextInputProps) => {
           id={props.id}
           type="text"
           className={clsx(
-            'w-full h-14 border border-gray-300 dark:border-0 text-lg px-4 py-1 rounded-lg',
+            'w-full h-10 border border-gray-300 dark:border-0 text-lg px-4 py-1 rounded-lg',
             'focus:outline focus:outline-accent-blue-500 dark:outline-accent-blue-300',
             {
               'outline !outline-red-500': props.error,
