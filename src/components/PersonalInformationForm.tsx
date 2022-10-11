@@ -18,7 +18,7 @@ const FormRow = (props: FormRowProps) => {
     <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
       <label
         htmlFor={htmlFor}
-        className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2"
+        className="block text-sm font-medium sm:mt-px sm:pt-2"
       >
         {label}
       </label>
@@ -54,7 +54,7 @@ const PersonalInformationForm = (props: PersonalInformationFormProps) => {
         {({ keys }) => (
           <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
             <div>
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
+              <h3 className="text-lg leading-6 font-medium">
                 Personal Information
               </h3>
             </div>
