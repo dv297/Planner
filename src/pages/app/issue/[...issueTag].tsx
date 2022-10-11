@@ -58,6 +58,8 @@ const ProjectPage = () => {
               onBlurSubmission={getUpdaterFunction(tag, 'title')}
               initialValue={issue.title}
               textDisplayClassName="text-xl font-bold"
+              id="title"
+              label="Title"
             />
             <div className="mt-2">
               <EditableMarkdownDisplay

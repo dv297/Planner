@@ -50,7 +50,7 @@ const MemberInvitationModal = (props: MemberInvitationModalProps) => {
           return (
             <div className="mt-6">
               <div className="flex flex-row">
-                <FormTextInput name={keys.email} />
+                <FormTextInput name={keys.email} id="email" label="Email" />
                 <div className="ml-4">
                   <FormSubmitButton label="Invite" />
                 </div>

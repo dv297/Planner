@@ -6,13 +6,16 @@ import Form from '@src/components/common/Form';
 import FormTextInput from '@src/components/common/FormTextInput';
 
 export interface EditableTextDisplayProps {
+  id: string;
+  label: string;
   onBlurSubmission: (data: string) => Promise<void>;
   initialValue: string;
   textDisplayClassName?: string;
 }
 
 const EditableTextDisplay = (props: EditableTextDisplayProps) => {
-  const { onBlurSubmission, initialValue, textDisplayClassName } = props;
+  const { onBlurSubmission, initialValue, textDisplayClassName, label, id } =
+    props;
   const {
     textValue,
     handleBlurSubmission,
@@ -46,7 +49,12 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
             ) : (
               <div className="flex flex-row relative">
                 <div className="flex flex-col w-full">
-                  <FormTextInput name={keys.text} inputRef={inputRef} />
+                  <FormTextInput
+                    name={keys.text}
+                    inputRef={inputRef}
+                    label={label}
+                    id={id}
+                  />
                 </div>
                 {isLoading ? (
                   <div className="absolute right-4 h-full flex items-center">

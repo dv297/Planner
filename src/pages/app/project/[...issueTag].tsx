@@ -54,6 +54,8 @@ const ProjectPage = () => {
             onBlurSubmission={getUpdaterFunction(tag, 'title')}
             initialValue={project.keyIssue.title}
             textDisplayClassName="text-xl font-bold"
+            id="title"
+            label="Title"
           />
         </div>
         <div className="ml-3 mt-4 sm:ml-0 sm:mt-0">

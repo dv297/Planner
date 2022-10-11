@@ -59,13 +59,8 @@ const PersonalInformationForm = (props: PersonalInformationFormProps) => {
               </h3>
             </div>
             <div className="space-y-6 sm:space-y-5">
-              <FormRow label="Name" htmlFor="name">
-                <FormTextInput name={keys.name} id="name" className="w-80" />
-              </FormRow>
-
-              <FormRow label="Email" htmlFor="email">
-                <FormTextInput name={keys.email} id="email" className="w-80" />
-              </FormRow>
+              <FormTextInput name={keys.name} id="name" label="Name" />
+              <FormTextInput name={keys.email} id="email" label="Email" />
               <FormRow label="Image" htmlFor="image">
                 <FormImageUploader name={keys.image} id="image" />
               </FormRow>

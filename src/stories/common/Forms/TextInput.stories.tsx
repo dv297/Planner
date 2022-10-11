@@ -17,31 +17,31 @@ const Template: ComponentStory<typeof TextInput> = () => {
   const [value6, setValue6] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-row gap-x-8">
+    <div className="grid grid-rows-1 grid-cols-2 gap-x-4">
       <div className="flex flex-col flex-1">
         <TextInput
           id="label-1"
           value={value1}
-          onChange={(value) => setValue1(value)}
+          onChange={(event) => setValue1(event.target.value)}
           label="Label 1"
         />
         <TextInput
           id="label-2"
           value={value2}
-          onChange={(value) => setValue2(value)}
+          onChange={(event) => setValue2(event.target.value)}
           label="Label 2"
           required
         />
         <TextInput
           id="label-3"
           value={value3}
-          onChange={(value) => setValue3(value)}
+          onChange={(event) => setValue3(event.target.value)}
           label="Label 3"
         />
         <TextInput
           id="label-4"
           value={value4}
-          onChange={(value) => setValue4(value)}
+          onChange={(event) => setValue4(event.target.value)}
           label="Label 4"
           required
           error
@@ -49,25 +49,29 @@ const Template: ComponentStory<typeof TextInput> = () => {
         <TextInput
           id="label-5"
           value={value5}
-          onChange={(value) => setValue5(value)}
+          onChange={(event) => setValue5(event.target.value)}
           label="Label 5"
           error
-          helperMessage="Must be 3 or more characters"
+          helperText="Must be 3 or more characters"
         />
         <TextInput
           id="label-6"
           value={value6}
-          onChange={(value) => setValue6(value)}
+          onChange={(event) => setValue6(event.target.value)}
           label="Label 6"
         />
       </div>
       <div className="flex-1">
         <pre className="w-full">
-          {JSON.stringify({
-            value1,
-            value2,
-            value3,
-          })}
+          {JSON.stringify(
+            {
+              value1,
+              value2,
+              value3,
+            },
+            null,
+            2
+          )}
         </pre>
       </div>
     </div>

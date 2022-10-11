@@ -18,6 +18,7 @@ const Template: ComponentStory<typeof EditableTextDisplay> = (
   args: Partial<EditableTextDisplayProps>
 ) => (
   <EditableTextDisplay
+    id="title"
     onBlurSubmission={() => {
       return new Promise((resolve) => {
         setTimeout(() => {
@@ -25,6 +26,7 @@ const Template: ComponentStory<typeof EditableTextDisplay> = (
         }, 1000);
       });
     }}
+    label="Title"
     initialValue="Sample title"
     {...args}
   />
