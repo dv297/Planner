@@ -18,10 +18,10 @@ const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
     <div className="theme-background">
       <DndProvider backend={HTML5Backend}>
         <div className="md:pl-56 flex flex-col h-screen">
-          <div className="sticky top-0 shadow md:shadow-none md:relative z-10 flex-shrink-0 flex h-16">
+          <div className="sticky top-0 shadow md:shadow-none dark:shadow-none dark:border-b dark:border-gray-700 dark:md:border-b-0 md:relative z-10 flex-shrink-0 flex h-16">
             <button
               type="button"
-              className="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
+              className="px-4 border-r border-gray-200 dark:border-gray-700 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
               onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>

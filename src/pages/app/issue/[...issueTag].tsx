@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import EditableMarkdownDisplay from '@src/components/common/EditableDisplays/EditableMarkdownDisplay';
 import EditableTextDisplay from '@src/components/common/EditableDisplays/EditableTextDisplay';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import IssueRelationList from '@src/components/IssueRelationList';
 import IssueAssigneeSelector from '@src/components/pages/issue/IssueAssigneeSelector';
@@ -33,6 +34,8 @@ const ProjectPage = () => {
     () => IssueRelationService.getIssueRelation(tag)
   );
 
+  const snackbar = useSnackbar();
+
   const queryClient = useQueryClient();
 
   if (!issue) {
@@ -42,8 +45,16 @@ const ProjectPage = () => {
   const getUpdaterFunction =
     (tag: string | undefined, propertyName: string) =>
     async (textValue: string) => {
-      await IssueService.updateIssue(tag, propertyName, textValue);
-      queryClient.invalidateQueries();
+      try {
+        await IssueService.updateIssue(tag, propertyName, textValue);
+        queryClient.invalidateQueries();
+      } catch (err) {
+        snackbar.displaySnackbar({
+          message:
+            'There was an error saving your change. Make a change and try again',
+          severity: SnackbarSeverity.ERROR,
+        });
+      }
     };
 
   return (

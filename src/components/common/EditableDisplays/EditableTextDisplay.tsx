@@ -63,13 +63,13 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
                   />
                 </div>
                 {isLoading ? (
-                  <div className="absolute right-4 h-full flex items-center">
+                  <div className="absolute -top-3.5 right-4 h-full flex items-center">
                     <CircularProgress size={20} />
                   </div>
                 ) : (
                   <div>
                     <button
-                      className="absolute right-4 h-full"
+                      className="absolute -top-3.5 right-4 h-full"
                       onClick={handleCancelClick}
                       ref={cancelButtonRef}
                     >

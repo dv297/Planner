@@ -27,7 +27,7 @@ const TextInput = (props: TextInputProps) => {
 
   return (
     <div
-      className="relative mt-5 mb-6"
+      className="relative mt-5 mb-12"
       onFocus={() => setIsFocussed(true)}
       onBlur={() => setIsFocussed(false)}
     >

@@ -18,7 +18,7 @@ const Template: ComponentStory<typeof TextInput> = () => {
 
   return (
     <div className="grid grid-rows-1 grid-cols-2 gap-x-4">
-      <div className="flex flex-col flex-1">
+      <div className="flex-1">
         <TextInput
           id="label-1"
           value={value1}
