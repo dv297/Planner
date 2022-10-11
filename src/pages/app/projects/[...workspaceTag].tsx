@@ -65,9 +65,7 @@ const Page = () => {
   return (
     <>
       <div className="flex flex-row items-center">
-        <h1 className="text-lg font-bold text-slate-800 flex flex-grow">
-          Projects
-        </h1>
+        <h1 className="text-lg font-bold flex flex-grow">Projects</h1>
         <Button
           onClick={() => {
             router.push(`/app/project/create`);

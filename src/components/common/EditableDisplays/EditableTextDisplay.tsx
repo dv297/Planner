@@ -34,7 +34,7 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
         <>
           <div
             onClick={openEditor}
-            className="w-full rounded-lg cursor-pointer border-2 border-white hover:border-solid hover:border-gray-100"
+            className="w-full rounded-lg cursor-pointer border-2 border-theme-background hover:border-solid hover:border-gray-100"
           >
             {!isEditing ? (
               <div className="px-4 py-1">

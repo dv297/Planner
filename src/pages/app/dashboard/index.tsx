@@ -57,7 +57,7 @@ const Page = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="pb-16">
-        <h1 className="mt-12 text-slate-800 text-4xl font-bold w-full text-center">
+        <h1 className="mt-12 text-4xl font-bold w-full text-center">
           Welcome to <span className="text-primary">Planner!</span>
         </h1>
         <div className="mt-8 text-md text-center w-full">

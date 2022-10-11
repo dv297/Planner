@@ -58,7 +58,7 @@ const ProjectPage = () => {
         </div>
         <div className="ml-3 mt-4 sm:ml-0 sm:mt-0">
           <Link href={`/app/map/${tag}`}>
-            <span className="rounded-full bg-green-700 px-4 py-3 text-white font-bold cursor-pointer">
+            <span className="rounded-full bg-green-700 px-4 py-3 text-white font-bold cursor-pointer whitespace-nowrap">
               <span className="mr-2">
                 <MapIcon />
               </span>

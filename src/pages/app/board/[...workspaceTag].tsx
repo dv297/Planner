@@ -57,6 +57,9 @@ const Board = () => {
   ) {
     return (
       <ConstrainDashboardContainer>
+        <div className="flex flex-row items-center">
+          <h1 className="text-lg font-bold flex flex-grow">Board</h1>
+        </div>
         <EmptyPlaceholder
           description={
             <div>
@@ -80,6 +83,9 @@ const Board = () => {
   ) {
     return (
       <ConstrainDashboardContainer>
+        <div className="flex flex-row items-center">
+          <h1 className="text-lg font-bold flex flex-grow">Sprints</h1>
+        </div>
         <EmptyPlaceholder
           description={
             <div>

@@ -2,6 +2,7 @@ import { FocusEvent } from 'react';
 import Foco from 'react-foco';
 import { Controller, useFormContext } from 'react-hook-form';
 import dynamic from 'next/dynamic';
+import { useTheme } from 'next-themes';
 
 import '@uiw/react-md-editor/markdown-editor.css';
 import '@uiw/react-markdown-preview/markdown.css';
@@ -24,9 +25,10 @@ interface FormMarkdownEditorProps {
 const FormMarkdownEditor = (props: FormMarkdownEditorProps) => {
   const { name, onBlur, shouldAutoFocus } = props;
   const { control } = useFormContext(); // retrieve all hook methods
+  const { theme } = useTheme();
 
-  if (global.window?.document) {
-    window.document.documentElement.setAttribute('data-color-mode', 'light');
+  if (global.window?.document && theme) {
+    window.document.documentElement.setAttribute('data-color-mode', theme);
   }
 
   return (

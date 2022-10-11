@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider as MuiThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -10,6 +10,7 @@ import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { SessionProvider } from 'next-auth/react';
+import { ThemeProvider } from 'next-themes';
 
 import { SnackbarProvider } from '@src/components/common/Snackbar';
 import createEmotionCache from '@src/lib/createEmotionCache';
@@ -37,22 +38,24 @@ const App = (props: CustomAppProps) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Head>
-        <title>Planner</title>
-      </Head>
-      <CacheProvider value={emotionCache}>
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <ThemeProvider theme={theme}>
-            <SessionProvider session={pageProps.session}>
-              <CssBaseline />
-              <SnackbarProvider>
-                {getLayout(<Component {...pageProps} />)}
-              </SnackbarProvider>
-            </SessionProvider>
-          </ThemeProvider>
-        </LocalizationProvider>
-      </CacheProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ThemeProvider attribute="class">
+        <Head>
+          <title>Planner</title>
+        </Head>
+        <CacheProvider value={emotionCache}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <MuiThemeProvider theme={theme}>
+              <SessionProvider session={pageProps.session}>
+                <CssBaseline />
+                <SnackbarProvider>
+                  {getLayout(<Component {...pageProps} />)}
+                </SnackbarProvider>
+              </SessionProvider>
+            </MuiThemeProvider>
+          </LocalizationProvider>
+        </CacheProvider>
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };

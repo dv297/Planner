@@ -11,8 +11,10 @@ const EmptyPlaceholder = (props: EmptyPlaceholderProps) => {
   const { description, pluralItemName, actionButton } = props;
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col sm:flex-row w-full items-center border-solid border-gray-300 border-b mb-8">
-        <div className="grow w-full mt-6 mr-6 prose">{description}</div>
+      <div className="flex flex-col sm:flex-row w-full items-center border-solid border-gray-300 border-b mb-8 pb-8">
+        <div className="grow w-full mt-6 mr-6 prose dark:prose-invert">
+          {description}
+        </div>
         <div className="flex-1">
           <div className="flex flex-row items-end justify-end w-full text-center">
             <Image
