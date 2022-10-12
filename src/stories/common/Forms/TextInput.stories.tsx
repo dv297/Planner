@@ -8,66 +8,25 @@ export default {
   component: TextInput,
 } as ComponentMeta<typeof TextInput>;
 
-const Template: ComponentStory<typeof TextInput> = () => {
-  const [value1, setValue1] = useState<string | null>(null);
-  const [value2, setValue2] = useState<string | null>(null);
-  const [value3, setValue3] = useState<string | null>('Initial value');
-  const [value4, setValue4] = useState<string | null>(null);
-  const [value5, setValue5] = useState<string | null>(null);
-  const [value6, setValue6] = useState<string | null>(null);
+const Template: ComponentStory<typeof TextInput> = (props) => {
+  const [value, setValue] = useState<string | null>(props.value ?? null);
 
   return (
-    <div className="grid grid-rows-1 grid-cols-2 gap-x-4">
-      <div className="flex-1">
+    <div className="grid grid-rows-1 grid-cols-4 gap-x-4">
+      <div className="col-span-3">
         <TextInput
-          id="label-1"
-          value={value1}
-          onChange={(event) => setValue1(event.target.value)}
-          label="Label 1"
-        />
-        <TextInput
-          id="label-2"
-          value={value2}
-          onChange={(event) => setValue2(event.target.value)}
-          label="Label 2"
-          required
-        />
-        <TextInput
-          id="label-3"
-          value={value3}
-          onChange={(event) => setValue3(event.target.value)}
-          label="Label 3"
-        />
-        <TextInput
-          id="label-4"
-          value={value4}
-          onChange={(event) => setValue4(event.target.value)}
-          label="Label 4"
-          required
-          error
-        />
-        <TextInput
-          id="label-5"
-          value={value5}
-          onChange={(event) => setValue5(event.target.value)}
-          label="Label 5"
-          error
-          helperText="Must be 3 or more characters"
-        />
-        <TextInput
-          id="label-6"
-          value={value6}
-          onChange={(event) => setValue6(event.target.value)}
-          label="Label 6"
+          {...props}
+          id="text-input"
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          label="Name"
         />
       </div>
-      <div className="flex-1">
+      <div className="col-span-1">
         <pre className="w-full">
           {JSON.stringify(
             {
-              value1,
-              value2,
-              value3,
+              value,
             },
             null,
             2
@@ -80,3 +39,24 @@ const Template: ComponentStory<typeof TextInput> = () => {
 
 export const Primary = Template.bind({});
 Primary.args = {};
+
+export const Required = Template.bind({});
+Required.args = {
+  required: true,
+};
+
+export const ValueFilled = Template.bind({});
+ValueFilled.args = {
+  value: 'Daniel Vu',
+};
+
+export const WithError = Template.bind({});
+WithError.args = {
+  error: true,
+};
+
+export const WithErrorMessage = Template.bind({});
+WithErrorMessage.args = {
+  error: true,
+  helperText: 'Value must match the pattern',
+};
