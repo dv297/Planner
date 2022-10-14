@@ -39,6 +39,14 @@ export const parameters = {
 };
 
 export const decorators = [
+  (Story, { globals }) => {
+    return (
+      <main>
+        <h1 className="mb-8">Storybook</h1>
+        <Story />
+      </main>
+    );
+  },
   muiTheme(),
   (Story) => {
     return (

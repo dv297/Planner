@@ -25,13 +25,22 @@ const ProjectPage = () => {
 
   const tag = Array.isArray(issueTag) ? issueTag[0] : issueTag;
 
-  const { data: issue } = useQuery([QueryKeys.ISSUE, { tag }], () =>
-    IssueService.getIssue(tag)
+  const { data: issue } = useQuery(
+    [QueryKeys.ISSUE, { tag }],
+    () => IssueService.getIssue(tag),
+    {
+      cacheTime: 0,
+      keepPreviousData: false,
+    }
   );
 
   const { data: issueRelation } = useQuery(
     [QueryKeys.ISSUE_RELATION, { tag }],
-    () => IssueRelationService.getIssueRelation(tag)
+    () => IssueRelationService.getIssueRelation(tag),
+    {
+      cacheTime: 0,
+      keepPreviousData: false,
+    }
   );
 
   const snackbar = useSnackbar();
@@ -99,7 +108,7 @@ const ProjectPage = () => {
               ) : null}
             </div>
           </main>
-          <aside className="relative w-full mt-8 lg:mt-0 lg:w-72 flex-shrink-0 overflow-y-auto lg:border-l border-gray-200 md:flex md:flex-col lg:px-4">
+          <aside className="relative w-full mt-8 lg:mt-0 lg:w-72 flex-shrink-0 overflow-y-auto lg:border-l border-gray-200 md:flex md:flex-col lg:px-4 pb-96 lg:pb-0">
             <div>
               <IssueStatusSelector
                 onChange={getUpdaterFunction(tag, 'issueStatus')}
@@ -113,7 +122,11 @@ const ProjectPage = () => {
               />
             </div>
             <div className="mt-8">
-              <SprintSelector issueTag={tag} initialValue={issue.sprint} />
+              <SprintSelector
+                issueTag={tag}
+                initialValue={issue.sprint}
+                key={issue.sprintId}
+              />
             </div>
           </aside>
         </div>

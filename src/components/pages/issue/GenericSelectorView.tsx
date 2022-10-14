@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
-import { InputLabel } from '@material-ui/core';
-import { FormControl, MenuItem, Select } from '@mui/material';
-import { SelectChangeEvent } from '@mui/material/Select/Select';
 
+import Dropdown, {
+  SelectionValue,
+} from '@src/components/common/Forms/Dropdown';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 
 export interface GenericSelectorOption extends Record<string, any> {
@@ -14,7 +14,7 @@ interface GenericSelectorProps<TValue extends GenericSelectorOption> {
   label: string;
   onChange: (value: string | null) => Promise<void>;
   onOpen: () => void;
-  initialValue: TValue | null;
+  initialValue: any;
   values: TValue[] | undefined;
   displayKey: keyof TValue;
 }
@@ -37,12 +37,12 @@ function GenericSelectorView<TValue extends GenericSelectorOption>(
   const { displaySnackbar } = useSnackbar();
 
   const handleChange = useCallback(
-    async (event: SelectChangeEvent) => {
+    async (selection: SelectionValue) => {
       try {
         const updatedValue =
-          event.target.value === UNASSIGNED ? null : event.target.value;
+          selection.value === UNASSIGNED ? null : selection.value;
         await onChange(updatedValue);
-        setValue(event.target.value);
+        setValue(selection.value);
       } catch (err) {
         console.error(err);
         displaySnackbar({
@@ -61,47 +61,26 @@ function GenericSelectorView<TValue extends GenericSelectorOption>(
   }
 
   return (
-    <FormControl fullWidth>
-      <InputLabel id={`${id}-label`}>{label}</InputLabel>
-      <Select
-        labelId="input-status-selector-label"
+    <>
+      <Dropdown
         id={id}
-        value={value}
         label={label}
+        options={[
+          { label: 'Unassigned', value: UNASSIGNED },
+          ...dropdownOptions
+            .filter((value) => {
+              return value.id !== initialValue?.value;
+            })
+            .map((option) => ({
+              value: option.id,
+              label: option[displayKey],
+            })),
+        ]}
+        initialValue={value}
         onChange={handleChange}
-        size="small"
         onOpen={onOpen}
-        renderValue={(value) => {
-          const selectedValue = dropdownOptions.find(
-            (option) => option.id === value
-          );
-
-          return (
-            <div className="flex flex-row items-center">
-              {selectedValue?.[displayKey] ?? 'Unassigned'}
-            </div>
-          );
-        }}
-      >
-        <MenuItem value={UNASSIGNED}>Unassigned</MenuItem>
-        {initialValue && (
-          <MenuItem value={initialValue.id}>
-            {initialValue[displayKey]}
-          </MenuItem>
-        )}
-        {dropdownOptions
-          .filter((value) => {
-            return value.id !== initialValue?.id;
-          })
-          .map((value) => {
-            return (
-              <MenuItem key={value.id} value={value.id}>
-                {value[displayKey]}
-              </MenuItem>
-            );
-          })}
-      </Select>
-    </FormControl>
+      />
+    </>
   );
 }
 
