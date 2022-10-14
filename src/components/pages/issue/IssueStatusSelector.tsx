@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import Dropdown, {
-  SelectionValue,
+  GenericSelectorOption,
 } from '@src/components/common/Forms/Dropdown';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import IssueStatusType, {
@@ -13,17 +13,30 @@ interface IssueStatusSelectorProps {
   initialValue: IssueStatusType;
 }
 
+const options = [
+  { id: IssueStatusType.PLANNING, label: 'Planning' },
+  { id: IssueStatusType.NOT_STARTED, label: 'Not Started' },
+  { id: IssueStatusType.IN_PROGRESS, label: 'In Progress' },
+  {
+    id: IssueStatusType.READY_FOR_REVIEW,
+    label: 'Ready for Review',
+  },
+  { id: IssueStatusType.COMPLETE, label: 'Complete' },
+  { id: IssueStatusType.CLOSED, label: 'Closed' },
+];
+
 const IssueStatusSelector = (props: IssueStatusSelectorProps) => {
   const { onChange, initialValue } = props;
   const [value, setValue] = useState(initialValue);
   const { displaySnackbar } = useSnackbar();
 
   const handleChange = useCallback(
-    async (item: SelectionValue) => {
+    async (item: GenericSelectorOption<{ id: string }>) => {
       try {
-        console.log(item);
-        await onChange(item.value);
-        setValue(convertToIssueStatusType(item.value));
+        if (item.id) {
+          await onChange(item.id);
+          setValue(convertToIssueStatusType(item.id));
+        }
       } catch (err) {
         console.error(err);
         displaySnackbar({
@@ -40,19 +53,10 @@ const IssueStatusSelector = (props: IssueStatusSelectorProps) => {
     <Dropdown
       id="sprint-status"
       label="Status"
-      options={[
-        { value: IssueStatusType.PLANNING, label: 'Planning' },
-        { value: IssueStatusType.NOT_STARTED, label: 'Not Started' },
-        { value: IssueStatusType.IN_PROGRESS, label: 'In Progress' },
-        {
-          value: IssueStatusType.READY_FOR_REVIEW,
-          label: 'Ready for Review',
-        },
-        { value: IssueStatusType.COMPLETE, label: 'Complete' },
-        { value: IssueStatusType.CLOSED, label: 'Closed' },
-      ]}
-      initialValue={value}
-      onChange={handleChange}
+      options={options}
+      initialOptionId={value}
+      onChange={(item) => handleChange(item)}
+      displayKey="label"
     />
   );
 };

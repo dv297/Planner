@@ -1,10 +1,8 @@
-import { useCallback, useState } from 'react';
-import { InputLabel, ListItemIcon } from '@material-ui/core';
-import { FormControl, MenuItem, Select } from '@mui/material';
-import { SelectChangeEvent } from '@mui/material/Select/Select';
+import { ListItemIcon } from '@mui/material';
+import clsx from 'clsx';
 import { z } from 'zod';
 
-import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import Dropdown from '@src/components/common/Forms/Dropdown';
 import UserAvatar from '@src/components/common/UserAvatar';
 import { TeamMemberUserSchema } from '@src/schemas/TeamSettingsSchema';
 
@@ -26,93 +24,62 @@ const UNASSIGNED = 'UNASSIGNED_VALUE';
 
 const IssueAssigneeSelectorView = (props: IssueAssigneeSelectorProps) => {
   const { onChange, onOpen, initialAssignee, values } = props;
-  const [value, setValue] = useState(initialAssignee?.id || UNASSIGNED);
-  const { displaySnackbar } = useSnackbar();
 
-  const handleChange = useCallback(
-    async (event: SelectChangeEvent) => {
-      try {
-        const updatedValue =
-          event.target.value === UNASSIGNED ? null : event.target.value;
-        await onChange(updatedValue);
-        setValue(event.target.value);
-      } catch (err) {
-        console.error(err);
-        displaySnackbar({
-          severity: SnackbarSeverity.ERROR,
-          message:
-            'There was an error saving the field. Please try again later.',
-        });
-      }
-    },
-    [onChange, displaySnackbar]
-  );
-
-  const dropdownOptions = [...values];
+  const dropdownOptions: IssueAssigneeValue[] = [
+    { id: UNASSIGNED, email: '', image: '', name: 'Unassigned' },
+    ...values,
+  ];
 
   if (dropdownOptions.length === 0 && initialAssignee) {
     dropdownOptions.push(initialAssignee);
   }
 
-  return (
-    <FormControl fullWidth>
-      <InputLabel id="input-status-selector-label">Assignee</InputLabel>
-      <Select
-        labelId="input-status-selector-label"
-        id="input-status-selector"
-        value={value}
-        label="Assignee"
-        onChange={handleChange}
-        size="small"
-        onOpen={onOpen}
-        renderValue={(value) => {
-          const assignee = dropdownOptions.find(
-            (assignee) => assignee.id === value
-          );
+  if (
+    initialAssignee &&
+    !dropdownOptions.some((option) => option.id === initialAssignee.id)
+  ) {
+    dropdownOptions.push(initialAssignee);
+  }
 
-          return (
-            <div className="flex flex-row items-center">
-              {assignee && (
+  return (
+    <Dropdown
+      id="issue-assignee"
+      label="Assignee"
+      initialOptionId={initialAssignee?.id}
+      onChange={async (assignee) => {
+        const idToEmit =
+          (assignee?.id !== UNASSIGNED ? assignee?.id : null) ?? null;
+        await onChange(idToEmit);
+      }}
+      onOpen={onOpen}
+      displayKey="name"
+      renderItem={(assignee, details) => {
+        return (
+          <li
+            key={assignee.id}
+            className={clsx(
+              details.classes,
+              'bg-white dark:bg-gray-700 py-2 px-6 shadow-sm text-base flex flex-row items-center'
+            )}
+            {...details.props}
+          >
+            <div>
+              {assignee && assignee.image && (
                 <ListItemIcon>
                   <div className="mr-4">
                     <UserAvatar user={assignee} />
                   </div>
                 </ListItemIcon>
               )}
-              {assignee?.name ?? 'Unassigned'}
             </div>
-          );
-        }}
-      >
-        <MenuItem value={UNASSIGNED}>Unassigned</MenuItem>
-        {initialAssignee && (
-          <MenuItem value={initialAssignee.id}>
-            <ListItemIcon>
-              <div className="mr-4">
-                <UserAvatar user={initialAssignee} />
-              </div>
-            </ListItemIcon>
-            {initialAssignee.name}
-          </MenuItem>
-        )}
-        {dropdownOptions
-          .filter((value) => {
-            return value.id !== initialAssignee?.id;
-          })
-          .map((value) => {
-            return (
-              <MenuItem key={value.id} value={value.id}>
-                <ListItemIcon>
-                  <div className="mr-4">
-                    <UserAvatar user={value} />
-                  </div>
-                </ListItemIcon>
-                {value.name}
-              </MenuItem>
-            );
-          })}
-      </Select>
-    </FormControl>
+            <div>
+              <span>{assignee?.name ?? 'Unassigned'}</span>
+            </div>
+          </li>
+        );
+      }}
+      options={dropdownOptions}
+    />
   );
 };
 

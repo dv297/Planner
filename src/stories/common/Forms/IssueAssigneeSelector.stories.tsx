@@ -2,41 +2,36 @@ import React, { useState } from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Dropdown from '@src/components/common/Forms/Dropdown';
+import IssueAssigneeSelectorView, {
+  IssueAssigneeValue,
+} from '@src/components/pages/issue/IssueAssigneeSelectorView';
+import mockOptions from '@src/mocks/issueAssigneeView.mock.json';
 
 export default {
-  title: 'Common/Forms/Dropdown',
+  title: 'Issues/IssueAssigneeSelector',
   component: Dropdown,
 } as ComponentMeta<typeof Dropdown>;
 
 const Template: ComponentStory<typeof Dropdown> = () => {
   const [value, setValue] = useState<string | null>(null);
-
-  const options = [
-    { label: 'Unassigned', id: 'Unassigned' },
-    { label: 'In Planning', id: 'In Planning' },
-    { label: 'Not Started', id: 'Not Started' },
-    { label: 'In Progress', id: 'In Progress' },
-    { label: 'Ready for Review', id: 'Ready for Review' },
-    { label: 'Complete', id: 'Complete' },
-  ];
+  const [options, setOptions] = useState<IssueAssigneeValue[]>([]);
 
   return (
     <div className="grid grid-rows-1 grid-cols-4 gap-x-4">
       <div className="col-span-3">
         <div className="w-96">
-          <Dropdown
-            id="sprint-status"
-            label="Issue Status"
-            options={options}
-            onChange={(item) => {
-              if (item?.id === 'Unassigned') {
-                setValue(null);
-              } else {
-                setValue(item?.id ?? null);
-              }
+          <IssueAssigneeSelectorView
+            onChange={(value) => {
+              setValue(value);
+              return Promise.resolve();
             }}
-            initialOptionId={value}
-            displayKey="label"
+            onOpen={() => {
+              setTimeout(() => {
+                setOptions(mockOptions);
+              }, 0);
+            }}
+            initialAssignee={null}
+            values={options}
           />
         </div>
       </div>

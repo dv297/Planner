@@ -1,29 +1,45 @@
-import { Fragment } from 'react';
+import { Fragment, ReactNode } from 'react';
 import { Transition } from '@headlessui/react';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
 import { useSelect } from 'downshift';
 
-export interface SelectionValue {
-  value: any;
+export type GenericSelectorOption<TValue extends Record<string, any>> = {
+  [P in keyof TValue]: TValue[P];
+} & { id: string | null | undefined };
+
+export interface RenderItemDetails {
+  classes: Record<string, any>;
+  props: any;
 }
 
-export interface DropdownOption {
+interface DropdownProps<TValue extends GenericSelectorOption<TValue>> {
   label: string;
-  value: any;
-}
-
-interface DropdownProps {
-  label: string;
-  onChange?: (value: SelectionValue) => void;
-  options: DropdownOption[];
-  initialValue?: any;
+  onChange?: (value: TValue) => void;
+  options: TValue[];
+  initialOptionId?: string | undefined | null;
   id: string;
   onOpen?: () => void;
+  renderItem?: (
+    value: TValue,
+    details: RenderItemDetails
+  ) => ReactNode | undefined;
+  displayKey: keyof TValue;
 }
 
-const Dropdown = (props: DropdownProps) => {
-  const { onChange, label, options, initialValue, id, onOpen } = props;
+function Dropdown<TValue extends GenericSelectorOption<TValue>>(
+  props: DropdownProps<GenericSelectorOption<TValue>>
+) {
+  const {
+    onChange,
+    label,
+    options,
+    initialOptionId,
+    id,
+    onOpen,
+    renderItem,
+    displayKey,
+  } = props;
   const {
     isOpen,
     getToggleButtonProps,
@@ -33,15 +49,14 @@ const Dropdown = (props: DropdownProps) => {
     getItemProps,
     selectedItem,
   } = useSelect({
-    initialSelectedItem: options.find(
-      (option) => option.value === initialValue
-    ),
+    initialSelectedItem: initialOptionId
+      ? options.find((option) => option.id === initialOptionId)
+      : undefined,
     items: options,
-    itemToString(item) {
-      return item ? item.label : '';
-    },
     onSelectedItemChange(stateChange) {
-      onChange?.({ value: stateChange?.selectedItem?.value ?? undefined });
+      if (stateChange.selectedItem) {
+        onChange?.(stateChange.selectedItem);
+      }
     },
     onIsOpenChange(stateChange) {
       if (stateChange.isOpen) {
@@ -66,7 +81,7 @@ const Dropdown = (props: DropdownProps) => {
           {...getToggleButtonProps({}, { suppressRefError: true })}
         >
           <span className="grow flex-1 flex justify-start">
-            {selectedItem ? selectedItem.label : 'Select...'}
+            {selectedItem ? selectedItem[displayKey] : 'Select...'}
           </span>
           <span className="flex-shrink">
             {isOpen ? (
@@ -103,24 +118,38 @@ const Dropdown = (props: DropdownProps) => {
                 No selections available
               </li>
             )}
-            {options.map((item, index) => (
-              <li
-                className={clsx(
-                  highlightedIndex === index && 'bg-accent-blue-500 text-white',
-                  selectedItem?.value === item.value && 'font-bold',
-                  'bg-white dark:bg-gray-700 py-2 px-6 shadow-sm flex flex-col text-base'
-                )}
-                key={`${item.value}-${index}`}
-                {...getItemProps({ item, index })}
-              >
-                <span>{item.label}</span>
-              </li>
-            ))}
+            {renderItem
+              ? options.map((item, index) => {
+                  return renderItem(item, {
+                    classes: {
+                      'bg-accent-blue-500 text-white':
+                        highlightedIndex === index,
+                      'font-bold': selectedItem?.id === item.id,
+                    },
+                    props: getItemProps({ item, index }),
+                  });
+                })
+              : options.map((item, index) => (
+                  <li
+                    className={clsx(
+                      {
+                        'font-bold': selectedItem?.id === item.id,
+                        'bg-accent-blue-500 text-white':
+                          highlightedIndex === index,
+                      },
+                      'bg-white dark:bg-gray-700 py-2 px-6 shadow-sm flex flex-col text-base'
+                    )}
+                    key={`${item.id}-${index}`}
+                    {...getItemProps({ item, index })}
+                  >
+                    <span>{item[displayKey]}</span>
+                  </li>
+                ))}
           </ul>
         </Transition>
       </div>
     </div>
   );
-};
+}
 
 export default Dropdown;

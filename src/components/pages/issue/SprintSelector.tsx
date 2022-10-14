@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
 import { useAppContext } from '@src/components/AppContext';
-import GenericSelectorView from '@src/components/pages/issue/GenericSelectorView';
-import { SprintSchema } from '@src/schemas/SprintSchema';
+import Dropdown from '@src/components/common/Forms/Dropdown';
+import { SprintSchema, SprintsListSchema } from '@src/schemas/SprintSchema';
 import IssueService from '@src/services/IssueService';
 import QueryKeys from '@src/services/QueryKeys';
 import SprintsService from '@src/services/SprintsService';
@@ -19,6 +19,8 @@ const getUpdaterFunction =
   async (textValue: string | null) => {
     await IssueService.updateIssue(tag, propertyName, textValue);
   };
+
+const UNASSIGNED = 'UNASSIGNED';
 
 const SprintSelector = (props: SprintSelectorProps) => {
   const { issueTag, initialValue } = props;
@@ -35,17 +37,38 @@ const SprintSelector = (props: SprintSelectorProps) => {
     }
   );
 
+  let dropdownOptions: z.infer<typeof SprintsListSchema> = [
+    {
+      id: UNASSIGNED,
+      name: 'Unassigned',
+    } as z.infer<typeof SprintSchema>,
+  ];
+
+  if (data?.sprints) {
+    dropdownOptions = [...dropdownOptions, ...data.sprints];
+  }
+
+  if (
+    initialValue &&
+    !dropdownOptions.some((option) => option.id === initialValue.id)
+  ) {
+    dropdownOptions.push(initialValue);
+  }
+
   return (
-    <GenericSelectorView
+    <Dropdown
       id="sprint-selector"
       label="Sprint"
-      onChange={getUpdaterFunction(issueTag, 'sprintId')}
+      onChange={(item) => {
+        const mutation = getUpdaterFunction(issueTag, 'sprintId');
+        return mutation((item.id !== UNASSIGNED ? item.id : null) ?? null);
+      }}
       onOpen={() => {
         setHasBeenOpened(true);
       }}
-      initialValue={initialValue}
-      values={data?.sprints}
+      initialOptionId={initialValue?.id}
       displayKey="name"
+      options={dropdownOptions}
     />
   );
 };
