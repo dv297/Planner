@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useQuery } from '@tanstack/react-query';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
