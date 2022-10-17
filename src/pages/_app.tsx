@@ -9,12 +9,13 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { SessionProvider } from 'next-auth/react';
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider, useTheme } from 'next-themes';
 
 import { SnackbarProvider } from '@src/components/common/Snackbar';
 import createEmotionCache from '@src/lib/createEmotionCache';
-import { theme } from '@src/lib/createTheme';
+import { getTheme } from '@src/lib/createTheme';
 
 import '@src/styles/global.css';
 
@@ -27,6 +28,26 @@ interface CustomAppProps extends AppProps {
 
 type ComponentWithLayout = NextComponentType<NextPageContext, any> & {
   getLayout: undefined | (() => NextComponentType<NextPageContext, any>);
+};
+
+interface MuiWrapperProps {
+  children: ReactNode;
+}
+
+const MuiWrapper = (props: MuiWrapperProps) => {
+  const { resolvedTheme } = useTheme();
+
+  const router = useRouter();
+
+  const sanitizedTheme = !router.pathname.includes('app')
+    ? 'light'
+    : resolvedTheme;
+
+  return (
+    <MuiThemeProvider theme={getTheme(sanitizedTheme)}>
+      {props.children}
+    </MuiThemeProvider>
+  );
 };
 
 const App = (props: CustomAppProps) => {
@@ -44,14 +65,14 @@ const App = (props: CustomAppProps) => {
         </Head>
         <CacheProvider value={emotionCache}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MuiThemeProvider theme={theme}>
-              <SessionProvider session={pageProps.session}>
+            <SessionProvider session={pageProps.session}>
+              <MuiWrapper>
                 <CssBaseline />
                 <SnackbarProvider>
                   {getLayout(<Component {...pageProps} />)}
                 </SnackbarProvider>
-              </SessionProvider>
-            </MuiThemeProvider>
+              </MuiWrapper>
+            </SessionProvider>
           </LocalizationProvider>
         </CacheProvider>
         <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />

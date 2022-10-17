@@ -2,9 +2,37 @@ import { PaletteMode } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 
 const getTheme = (theme: string | undefined) => {
+  const resolvedMode = ((theme === 'system' ? 'dark' : theme) ||
+    'dark') as PaletteMode;
+  const isDark = resolvedMode == 'dark';
+
   return createTheme({
     palette: {
-      mode: ((theme === 'system' ? 'dark' : theme) || 'dark') as PaletteMode,
+      mode: resolvedMode,
+      ...(isDark
+        ? {
+            primary: {
+              main: '#45acc0',
+            },
+            background: {
+              default: 'black',
+              paper: 'var(--color-background-dark)',
+            },
+          }
+        : {}),
+    },
+    components: {
+      ...(isDark
+        ? {
+            MuiInputLabel: {
+              styleOverrides: {
+                root: {
+                  color: 'rgb(156 163 175)',
+                },
+              },
+            },
+          }
+        : {}),
     },
     typography: {
       fontFamily: [
@@ -23,7 +51,4 @@ const getTheme = (theme: string | undefined) => {
   });
 };
 
-// Create a theme instance.
-const theme = getTheme('light');
-
-export { theme, getTheme };
+export { getTheme };
