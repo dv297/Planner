@@ -28,7 +28,7 @@ const Button = (props: ButtonProps) => {
         'w-min whitespace-nowrap',
         {
           'opacity-25 hover:bg-accent-blue-500 cursor-not-allowed': isDisabled,
-          'bg-transparent text-blue-600 shadow-none hover:bg-accent-blue-50 focus:!ring-sky-200':
+          'bg-transparent text-blue-600 dark:text-accent-blue-300 shadow-none hover:bg-accent-blue-50 dark:hover:bg-slate-800 focus:!ring-sky-200':
             variant === 'text',
         }
       )}

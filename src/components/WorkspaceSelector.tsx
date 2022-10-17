@@ -68,7 +68,7 @@ const WorkspaceSelector = () => {
 
   return (
     <Menu as="div" className="relative inline-block text-left w-full">
-      <Menu.Button className="w-full text-gray-600 text-xs font-bold flex flex-row items-center">
+      <Menu.Button className="w-full text-gray-600 dark:text-gray-300 text-xs font-bold flex flex-row items-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="h-9 w-auto mr-2 rounded-md bg-white border-blue-300 border-solid border-2"

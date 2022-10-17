@@ -35,6 +35,7 @@ export const GetSprintsResponseSchema = z.object({
 export const CreateSprintUrlInputSchema = z.object({
   workspaceTag: z.array(z.string()),
 });
+GetSprintsResponseSchema;
 
 export const CreateSprintBodyInputSchema = z.object({
   name: z.string(),

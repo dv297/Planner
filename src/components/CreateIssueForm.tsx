@@ -23,7 +23,7 @@ const CreateIssueForm = (props: CreateIssueFormProps) => {
         return (
           <div className="flex flex-col w-full">
             <div>
-              <FormTextInput label="Title" name={keys.title} />
+              <FormTextInput label="Title" name={keys.title} id="title" />
             </div>
             <div className="mt-6">
               <label className="font-medium">Description</label>

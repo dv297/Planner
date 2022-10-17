@@ -4,11 +4,17 @@
 
 body {
   font-family: system-ui, sans-serif;
-  font-size: 75%;
 }
 
 @layer base {
   :root {
+    --color-background: #fff;
+    --color-background-light: #fff;
+    --color-background-dark: #10172a;
+
+    --color-text-light: #000;
+    --color-text-dark: #fff;
+
     --color-accent-blue-900: #0f4880;
     --color-accent-blue-700: #1053a3;
     --color-accent-blue-500: #1d79c0;
@@ -27,17 +33,41 @@ body {
     --color-sidebar-feature: #fff;
   }
 
+  .theme-background {
+    background-color: var(--color-background-light);
+    color: var(--color-text-light);
+  }
+
+  .dark {
+    --color-background: var(--color-background-dark);
+    background-color: var(--color-background-dark);
+  }
+
+  .dark .theme-background {
+    background-color: var(--color-background-dark);
+    color: var(--color-text-dark);
+  }
+
   .bg-sidebar {
+    @apply theme-background;
     background-color: var(--color-sidebar);
   }
 
   .sidebar-feature {
-    background-color: var(--color-sidebar-feature);
+    @apply theme-background;
     color: var(--color-sidebar-text);
+  }
+
+  .dark .sidebar-feature {
+    color: var(--color-text-dark);
   }
 
   .sidebar-element {
     color: var(--color-sidebar-text);
+  }
+
+  .dark .sidebar-element {
+    color: var(--color-text-dark);
   }
 
   .sidebar-element:hover,
@@ -57,5 +87,12 @@ body {
 
   .bg-primary {
     background-color: var(--color-primary);
+  }
+
+  [data-color-mode*='dark'] .wmde-markdown,
+  [data-color-mode*='dark'] .wmde-markdown-var,
+  .wmde-markdown[data-color-mode*='dark'],
+  body[data-color-mode*='dark'] {
+    background-color: var(--color-background-dark);
   }
 }

@@ -30,7 +30,7 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
         <title>Planner</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="relative bg-white">
+      <div className="relative">
         <nav>
           <Popover className="relative bg-white shadow">
             <div className="mx-auto max-w-7xl px-4 sm:px-6">

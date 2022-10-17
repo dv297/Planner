@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useQuery } from '@tanstack/react-query';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import Alert from '@src/components/common/Alert';
 import Button from '@src/components/common/Button';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import EmptyPlaceholder from '@src/components/EmptyPlaceholder';
@@ -57,6 +57,9 @@ const Board = () => {
   ) {
     return (
       <ConstrainDashboardContainer>
+        <div className="flex flex-row items-center">
+          <h1 className="text-lg font-bold flex flex-grow">Board</h1>
+        </div>
         <EmptyPlaceholder
           description={
             <div>
@@ -80,6 +83,9 @@ const Board = () => {
   ) {
     return (
       <ConstrainDashboardContainer>
+        <div className="flex flex-row items-center">
+          <h1 className="text-lg font-bold flex flex-grow">Sprints</h1>
+        </div>
         <EmptyPlaceholder
           description={
             <div>
@@ -107,14 +113,8 @@ const Board = () => {
 
   return (
     <div className="px-4 flex flex-col h-full">
-      <div className="flex-shrink bg-blue-100 py-4 rounded-lg mb-4 flex flex-row items-center text-lg text-blue-500">
-        <div className="w-12 px-6 flex items-center justify-center">
-          <InfoOutlinedIcon />
-        </div>
-        <p className="leading-6 pr-4">
-          Tip: You can drag and drop issues into the column statuses to update
-          the status for that issue.
-        </p>
+      <div className="mb-4">
+        <Alert message="Tip: You can drag and drop issues into the column statuses to update the status for that issue." />
       </div>
       <div className="h-full">
         <KanbanBoard issues={sprintIssues.issues} />

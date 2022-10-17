@@ -2,6 +2,7 @@ import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import clsx from 'clsx';
 import { toPng } from 'html-to-image';
 
 import IssueCreationModal from '@src/components/IssueCreationModal';
@@ -24,7 +25,12 @@ const ProjectMapControls = () => {
   return (
     <div className="project-map-controls">
       <div className="absolute top-4 left-4 z-10">
-        <div className="bg-gray-200 px-2 py-2 rounded-lg border border-solid border-gray-300 shadow-md divide-x-2 divide-solid divide-stone-300">
+        <div
+          className={clsx(
+            'px-2 py-2 rounded-lg border border-solid border-gray-300 dark:border-gray-700 shadow-md divide-x-2 divide-solid divide-stone-300',
+            'bg-gray-200 dark:bg-gray-700'
+          )}
+        >
           <button
             onClick={projectMapContext.refresh}
             className="py-1 px-2"

@@ -1,4 +1,4 @@
-import { FieldValues } from 'react-hook-form';
+import { DefaultValues, FieldValues, Resolver } from 'react-hook-form';
 
 import Button from '@src/components/common/Button';
 import Form from '@src/components/common/Form';
@@ -12,7 +12,7 @@ function getComponentForInputType(input: Input<any>) {
   switch (input.type) {
     case 'text': {
       return (
-        <div className="mt-6" key={key}>
+        <div key={key}>
           <FormTextInput
             id={key}
             label={input.label}
@@ -60,20 +60,18 @@ interface Input<FormStructure> {
 interface FormBuilderProps<TFieldValues extends FieldValues = FieldValues> {
   onSubmit: (output: any) => Promise<void>;
   onCancel?: () => void;
-  initialData: TFieldValues;
+  initialData: DefaultValues<TFieldValues>;
   inputs: Input<TFieldValues>[];
+  resolver?: Resolver<TFieldValues>;
 }
 
 function FormBuilder<FormStructure extends Record<string, any>>(
   props: FormBuilderProps<FormStructure>
 ) {
-  const { onSubmit, onCancel, initialData, inputs } = props;
+  const { onSubmit, onCancel, initialData, inputs, resolver } = props;
 
   return (
-    <Form
-      defaultValues={initialData as Record<string, any>}
-      onSubmit={onSubmit}
-    >
+    <Form defaultValues={initialData} onSubmit={onSubmit} resolver={resolver}>
       {() => {
         return (
           <div className="flex flex-col w-full">

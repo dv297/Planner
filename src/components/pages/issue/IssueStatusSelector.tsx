@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
-import { InputLabel } from '@material-ui/core';
-import { FormControl, MenuItem, Select } from '@mui/material';
-import { SelectChangeEvent } from '@mui/material/Select/Select';
 
+import Dropdown, {
+  GenericSelectorOption,
+} from '@src/components/common/Forms/Dropdown';
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import IssueStatusType, {
   convertToIssueStatusType,
@@ -13,17 +13,30 @@ interface IssueStatusSelectorProps {
   initialValue: IssueStatusType;
 }
 
+const options = [
+  { id: IssueStatusType.PLANNING, label: 'Planning' },
+  { id: IssueStatusType.NOT_STARTED, label: 'Not Started' },
+  { id: IssueStatusType.IN_PROGRESS, label: 'In Progress' },
+  {
+    id: IssueStatusType.READY_FOR_REVIEW,
+    label: 'Ready for Review',
+  },
+  { id: IssueStatusType.COMPLETE, label: 'Complete' },
+  { id: IssueStatusType.CLOSED, label: 'Closed' },
+];
+
 const IssueStatusSelector = (props: IssueStatusSelectorProps) => {
   const { onChange, initialValue } = props;
   const [value, setValue] = useState(initialValue);
   const { displaySnackbar } = useSnackbar();
 
   const handleChange = useCallback(
-    async (event: SelectChangeEvent) => {
+    async (item: GenericSelectorOption<{ id: string }>) => {
       try {
-        const updatedValue = event.target.value;
-        await onChange(updatedValue);
-        setValue(convertToIssueStatusType(updatedValue));
+        if (item.id) {
+          await onChange(item.id);
+          setValue(convertToIssueStatusType(item.id));
+        }
       } catch (err) {
         console.error(err);
         displaySnackbar({
@@ -37,26 +50,14 @@ const IssueStatusSelector = (props: IssueStatusSelectorProps) => {
   );
 
   return (
-    <FormControl fullWidth>
-      <InputLabel id="input-status-selector-label">Status</InputLabel>
-      <Select
-        labelId="input-status-selector-label"
-        id="input-status-selector"
-        value={value}
-        label="Status"
-        onChange={handleChange}
-        size="small"
-      >
-        <MenuItem value={IssueStatusType.PLANNING}>Planning</MenuItem>
-        <MenuItem value={IssueStatusType.NOT_STARTED}>Not Started</MenuItem>
-        <MenuItem value={IssueStatusType.IN_PROGRESS}>In Progress</MenuItem>
-        <MenuItem value={IssueStatusType.READY_FOR_REVIEW}>
-          Ready for Review
-        </MenuItem>
-        <MenuItem value={IssueStatusType.COMPLETE}>Complete</MenuItem>
-        <MenuItem value={IssueStatusType.CLOSED}>Closed</MenuItem>
-      </Select>
-    </FormControl>
+    <Dropdown
+      id="sprint-status"
+      label="Status"
+      options={options}
+      initialOptionId={value}
+      onChange={(item) => handleChange(item)}
+      displayKey="label"
+    />
   );
 };
 

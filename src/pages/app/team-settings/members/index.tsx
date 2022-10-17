@@ -36,7 +36,7 @@ const Page = () => {
               <span className="ml-2">Add Members</span>
             </Button>
           </div>
-          <div>
+          <div className="mt-4">
             <MembersList members={data.members} />
           </div>
         </div>

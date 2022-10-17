@@ -6,7 +6,6 @@ import ReactFlow, {
   Background,
   Controls,
   Edge,
-  MiniMap,
   Node,
   NodeChange,
   useEdgesState,
@@ -97,7 +96,6 @@ const IssuesMap = (props: IssueMapProp) => {
       fitView
     >
       <Background />
-      <MiniMap />
       <Controls />
       <MapPersistenceManager
         projectMapPositionId={projectMapPositionId}

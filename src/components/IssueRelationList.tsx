@@ -12,9 +12,7 @@ const IssueRelationList = (props: IssueRelationListProps) => {
   const { relationshipLabel, issues } = props;
   return (
     <div>
-      <span className="font-bold text-slate-800 text-lg">
-        {relationshipLabel}
-      </span>
+      <span className="font-bold text-lg">{relationshipLabel}</span>
       <div className="mt-4">
         <IssuesList issues={issues} />
       </div>

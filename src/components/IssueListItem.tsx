@@ -44,19 +44,19 @@ const IssueListItem = (props: IssueListItemProps) => {
       ref={allowDrag ? drag : undefined}
       style={style}
     >
-      <span className="col-span-12 sm:col-span-2 text-gray-900">
+      <span className="col-span-12 sm:col-span-2 text-gray-900 dark:text-white">
         <Link href={`/app/issue/${issueTag}`}>
           <span className="cursor-pointer hover:text-primary">{issueTag}</span>
         </Link>
       </span>
-      <span className="col-span-12 sm:col-span-6 text-gray-600">
+      <span className="col-span-12 sm:col-span-6 text-gray-600 dark:text-white">
         <Link href={`/app/issue/${issueTag}`}>
           <span
             className={clsx(
               {
                 'line-through': issue.issueStatus === 'CLOSED',
               },
-              'cursor-pointer hover:text-primary'
+              'cursor-pointer hover:text-primary dark:hover:text-accent-blue-300'
             )}
           >
             {issue.title}

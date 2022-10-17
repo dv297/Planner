@@ -1,4 +1,5 @@
 import { CircularProgress } from '@mui/material';
+import clsx from 'clsx';
 
 import TextDisplay from '@src/components/common/EditableDisplays/TextDisplay';
 import useEditableDisplay from '@src/components/common/EditableDisplays/useEditableDisplay';
@@ -6,13 +7,16 @@ import Form from '@src/components/common/Form';
 import FormTextInput from '@src/components/common/FormTextInput';
 
 export interface EditableTextDisplayProps {
+  id: string;
+  label: string;
   onBlurSubmission: (data: string) => Promise<void>;
   initialValue: string;
   textDisplayClassName?: string;
 }
 
 const EditableTextDisplay = (props: EditableTextDisplayProps) => {
-  const { onBlurSubmission, initialValue, textDisplayClassName } = props;
+  const { onBlurSubmission, initialValue, textDisplayClassName, label, id } =
+    props;
   const {
     textValue,
     handleBlurSubmission,
@@ -34,7 +38,12 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
         <>
           <div
             onClick={openEditor}
-            className="w-full rounded-lg cursor-pointer border-2 border-white hover:border-solid hover:border-gray-100"
+            className={clsx(
+              'w-full rounded-lg cursor-pointer border-2 border-theme-background hover:border-solid',
+              {
+                'hover:border-gray-100 hover:dark:border-gray-700': !isEditing,
+              }
+            )}
           >
             {!isEditing ? (
               <div className="px-4 py-1">
@@ -46,16 +55,21 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
             ) : (
               <div className="flex flex-row relative">
                 <div className="flex flex-col w-full">
-                  <FormTextInput name={keys.text} inputRef={inputRef} />
+                  <FormTextInput
+                    name={keys.text}
+                    inputRef={inputRef}
+                    label={label}
+                    id={id}
+                  />
                 </div>
                 {isLoading ? (
-                  <div className="absolute right-4 h-full flex items-center">
+                  <div className="absolute -top-3.5 right-4 h-full flex items-center">
                     <CircularProgress size={20} />
                   </div>
                 ) : (
                   <div>
                     <button
-                      className="absolute right-4 h-full"
+                      className="absolute -top-3.5 right-4 h-full"
                       onClick={handleCancelClick}
                       ref={cancelButtonRef}
                     >

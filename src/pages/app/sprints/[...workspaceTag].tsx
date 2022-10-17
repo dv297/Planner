@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { useQuery } from '@tanstack/react-query';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
+import Alert from '@src/components/common/Alert';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import EmptyPlaceholder from '@src/components/EmptyPlaceholder';
 import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCreationModalTrigger';
@@ -36,9 +36,7 @@ const Page = () => {
   return (
     <>
       <div className="flex flex-row items-center">
-        <h1 className="text-lg font-bold text-slate-800 flex flex-grow">
-          Sprints
-        </h1>
+        <h1 className="text-lg font-bold flex flex-grow">Sprints</h1>
       </div>
 
       {sprints?.length === 0 ? (
@@ -66,15 +64,7 @@ const Page = () => {
             <SprintCreationModalTrigger />
           </div>
           <div className="mt-8">
-            <div className="bg-blue-100 py-4 rounded-lg mb-2 flex flex-row items-center text-lg text-blue-500">
-              <div className="w-12 px-6 flex items-center justify-center">
-                <InfoOutlinedIcon />
-              </div>
-              <p className="leading-6 pr-4">
-                Tip: You can drag and drop issues into expanded sprint to move
-                that issue to that sprint.
-              </p>
-            </div>
+            <Alert message="Tip: You can drag and drop issues into expanded sprint to move that issue to that sprint." />
             <SprintsList sprints={sprints} activeSprintId={activeSprintId} />
           </div>
         </div>

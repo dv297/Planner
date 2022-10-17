@@ -16,6 +16,11 @@ import DashboardBodyLayout from '@src/components/DashboardBodyLayout';
 import ProfileIconButton from '@src/components/ProfileIconButton';
 import Sidebar, { NavigationElement } from '@src/components/Sidebar';
 import TeamSelector from '@src/components/TeamSelector';
+import {
+  MuiWrapper,
+  ThemeSwitcher,
+} from '@src/components/ThemeSwitcherContext';
+import ThemeSwitcherProvider from '@src/components/ThemeSwitcherContext';
 import WorkspaceSelector from '@src/components/WorkspaceSelector';
 import FeatureFlags from '@src/FeatureFlags';
 
@@ -75,28 +80,42 @@ const AppDefaultLayout = (props: AppDefaultLayoutProps) => {
   ];
 
   return (
-    <AppContextProvider>
-      <Head>
-        <title>Planner</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-      <div>
-        <Sidebar
-          header={<WorkspaceSelector />}
-          footer={FeatureFlags.allowMultipleTeams ? <TeamSelector /> : null}
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
-          navigation={navigation}
-        />
-        <DashboardBodyLayout
-          setSidebarOpen={setSidebarOpen}
-          isLoading={isLoading}
-          topRightNav={<ProfileIconButton />}
-        >
-          {props.children}
-        </DashboardBodyLayout>
-      </div>
-    </AppContextProvider>
+    <ThemeSwitcherProvider>
+      <MuiWrapper>
+        <AppContextProvider>
+          <Head>
+            <title>Planner</title>
+            <meta
+              name="viewport"
+              content="initial-scale=1.0, width=device-width"
+            />
+          </Head>
+          <div>
+            <Sidebar
+              header={<WorkspaceSelector />}
+              footer={FeatureFlags.allowMultipleTeams ? <TeamSelector /> : null}
+              sidebarOpen={sidebarOpen}
+              setSidebarOpen={setSidebarOpen}
+              navigation={navigation}
+            />
+            <DashboardBodyLayout
+              setSidebarOpen={setSidebarOpen}
+              isLoading={isLoading}
+              topRightNav={
+                <div className="flex flex-row items-center">
+                  <div className="h-6 w-6 mr-2">
+                    <ThemeSwitcher />
+                  </div>
+                  <ProfileIconButton />
+                </div>
+              }
+            >
+              {props.children}
+            </DashboardBodyLayout>
+          </div>
+        </AppContextProvider>
+      </MuiWrapper>
+    </ThemeSwitcherProvider>
   );
 };
 

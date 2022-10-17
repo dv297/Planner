@@ -9,7 +9,7 @@ const TextDisplay = (props: TextDisplayProps) => {
   return (
     <span
       className={clsx(
-        'text-lg font-medium flex flex-row items-center w-full',
+        'text-lg font-medium flex flex-row items-center w-full dark:text-white',
         props.textDisplayClassName
       )}
     >

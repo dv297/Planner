@@ -30,9 +30,11 @@ const IssuesList = (props: IssuesListProps) => {
       )}
       <div className="w-full rounded-md text-left border-solid border-gray-300 border text-sm sm:text-md">
         <div className="divide-y divide-gray-300">
-          <div className="flex flex-row items-center bg-gray-50 divide-gray-200 px-4 py-2 grid-cols-12 grid">
-            <span className="col-span-2 font-bold text-gray-900">Task</span>
-            <span className="col-span-5 font-bold text-gray-900 invisible sm:visible">
+          <div className="flex flex-row items-center bg-gray-50 dark:bg-slate-700 divide-gray-200 px-4 py-2 grid-cols-12 grid">
+            <span className="col-span-2 font-bold text-gray-900 dark:text-gray-50">
+              Task
+            </span>
+            <span className="col-span-5 font-bold text-gray-900 dark:text-gray-50 invisible sm:visible">
               Description
             </span>
             <span className="col-span-5 text-right">
