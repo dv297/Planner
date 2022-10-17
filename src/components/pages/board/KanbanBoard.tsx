@@ -40,7 +40,7 @@ const KanbanCell = (props: KanbanCellProps) => {
 
   return (
     <div
-      className="bg-white rounded-md py-3 px-2 flex flex-col text-sm shadow-sm border-solid border"
+      className="bg-white dark:bg-slate-700 rounded-md py-3 px-2 flex flex-col text-sm shadow-sm dark:shadow-none border-solid border dark:border-0"
       ref={drag}
       style={style}
     >
@@ -96,7 +96,7 @@ const KanbanColumn = (props: KanbanColumnProps) => {
   const [{ canDrop }, columnDrop] = useDrop(dragAndDropConfigArg, [issues]);
 
   return (
-    <div className="relative h-full bg-gray-50">
+    <div className="relative h-full bg-gray-50 dark:bg-gray-800">
       <DragTargetOverlay
         label={`Update status to ${title}`}
         isOpen={canDrop}
@@ -105,7 +105,9 @@ const KanbanColumn = (props: KanbanColumnProps) => {
       >
         <div className="flex flex-col py-4 px-2 h-full">
           <div className="flex-shrink h-16">
-            <span className="font-bold text-lg text-gray-700">{title}</span>
+            <span className="font-bold text-lg text-gray-700 dark:text-gray-50">
+              {title}
+            </span>
           </div>
           <div className="flex flex-col gap-y-8 grow">
             {issues.map((issue) => {

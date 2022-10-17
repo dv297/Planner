@@ -33,9 +33,7 @@ const Page = () => {
   return (
     <>
       <div className="flex flex-row items-center">
-        <h1 className="text-lg font-bold text-slate-800 flex flex-grow">
-          Edit Sprints
-        </h1>
+        <h1 className="text-lg font-bold flex flex-grow">Edit Sprints</h1>
       </div>
 
       <div className="flex flex-col w-full">

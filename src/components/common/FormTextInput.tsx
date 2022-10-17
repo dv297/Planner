@@ -35,6 +35,7 @@ const FormTextInput = (props: FormTextInputProps) => {
               required={required}
               inputRef={inputRef}
               label={label}
+              name={props.name}
             />
           </>
         )}

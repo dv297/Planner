@@ -7,6 +7,7 @@ interface TextInputProps {
   onBlur?: FocusEventHandler<HTMLInputElement>;
   label: string;
   id: string;
+  name: string;
   required?: boolean;
   error?: boolean;
   helperText?: string;
@@ -27,7 +28,7 @@ const TextInput = (props: TextInputProps) => {
 
   return (
     <div
-      className="relative mt-5 mb-12"
+      className="relative mt-5 mb-3"
       onFocus={() => setIsFocussed(true)}
       onBlur={() => setIsFocussed(false)}
     >
@@ -59,12 +60,13 @@ const TextInput = (props: TextInputProps) => {
           onChange={props.onChange}
           onBlur={props.onBlur}
           ref={props.inputRef}
+          name={props.name}
           {...(props.error ? inputErrorAccessibilityProperties : {})}
         />
         {props.helperText && (
           <span
             id={errorDescriptionId}
-            className="absolute left-4 -bottom-5 text-red-600"
+            className="absolute left-4 -bottom-6 text-red-600"
           >
             {props.helperText}
           </span>
