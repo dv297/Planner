@@ -45,4 +45,27 @@ describe('Issue', () => {
       'Daniel Vu'
     );
   });
+
+  it('allows you to change the sprint', () => {
+    const sprintName = 'New Sprint for Issue 2';
+    cy.createSprint({ sprintName });
+    cy.findAllByText(/Assignee/i).should('exist');
+
+    cy.findByRole('button', { name: /sprint toggle menu/i })
+      .should('have.text', 'Select...')
+      .click();
+    cy.findByText(sprintName).click();
+
+    cy.findByRole('button', { name: /sprint toggle menu/i }).should(
+      'have.text',
+      sprintName
+    );
+
+    cy.visit('/app/issue/TASK-2');
+
+    cy.findByRole('button', { name: /sprint toggle menu/i }).should(
+      'have.text',
+      sprintName
+    );
+  });
 });

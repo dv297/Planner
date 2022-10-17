@@ -13,6 +13,9 @@
 import '@testing-library/cypress/add-commands';
 import '@4tw/cypress-drag-drop';
 
+// Based on the seed data
+const DEFAULT_TEAM_ID = 'cl8se61t00085ou5xqqubzky2';
+
 before(() => {
   cy.exec('node scripts/seed-database.js');
 });
@@ -36,11 +39,27 @@ Cypress.Commands.add('login', () => {
   );
 });
 
+Cypress.Commands.add('createSprint', ({ sprintName = 'Test Sprint' } = {}) => {
+  cy.request({
+    method: 'POST',
+    url: '/api/sprints/TASK',
+    headers: {
+      'team-id': DEFAULT_TEAM_ID,
+    },
+    body: {
+      name: sprintName,
+      beginDate: null,
+      endDate: null,
+    },
+  });
+});
+
 declare global {
   namespace Cypress {
     interface Chainable {
       login(): Chainable<Element>;
       databaseReset(): Chainable<Element>;
+      createSprint({ sprintName }: { sprintName: string }): Chainable<Element>;
     }
   }
 }
