@@ -74,6 +74,7 @@ function Dropdown<TValue extends GenericSelectorOption<TValue>>(
         <button
           id={id}
           aria-label="toggle menu"
+          role="button"
           className={clsx(
             'w-full h-10 border border-gray-300 dark:border-gray-700 text-lg px-4 py-1 rounded-lg flex flex-row justify-start items-center'
           )}

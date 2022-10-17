@@ -15,18 +15,25 @@ import '@4tw/cypress-drag-drop';
 
 before(() => {
   cy.exec('node scripts/seed-database.js');
-  cy.visit('/');
-
-  cy.login();
 });
 
 Cypress.Commands.add('login', () => {
-  cy.findByText(/Sign in/i).click();
-  cy.findByLabelText(/Username/i).type('dvv297@gmail.com');
-  cy.findByText(/Sign in with Credentials/i).click();
-  cy.findByText(/We have set up some resources to help you get started./i, {
-    timeout: 10000,
-  }).should('exist');
+  cy.session(
+    'name',
+    () => {
+      cy.visit('/');
+
+      cy.findByText(/Sign in/i).click();
+      cy.findByLabelText(/Username/i).type('dvv297@gmail.com');
+      cy.findByText(/Sign in with Credentials/i).click();
+      cy.findByText(/We have set up some resources to help you get started./i, {
+        timeout: 10000,
+      }).should('exist');
+    },
+    {
+      cacheAcrossSpecs: true,
+    }
+  );
 });
 
 declare global {

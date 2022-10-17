@@ -1,22 +1,48 @@
-import AppPage from '../page/AppPage';
-
-describe('Projects', () => {
+describe('Issue', () => {
   beforeEach(() => {
-    cy.visit('/app/dashboard');
+    cy.login();
+    cy.visit('/app/issue/TASK-2');
   });
 
-  it('starts with a starter project', () => {
-    AppPage.sidebar().projects().click();
-    cy.findByText(/TASK-1/i).should('exist');
-    cy.findByText(/My First Planner Project/i).should('exist');
-    cy.findByText(/My First Planner Project/i).click();
-
-    cy.findByText(/TASK-2/i).should('exist');
-    cy.findByText(/Setup Github repository/i).should('exist');
-    cy.findByText(/Setup Github repository/i).click();
-
+  it('allows you to change the status', () => {
     cy.findAllByText(/Status/i).should('exist');
+
+    cy.findByRole('button', { name: /status toggle menu/i })
+      .should('have.text', 'Planning')
+      .click();
+    cy.findByText('In Progress').click();
+
+    cy.findByRole('button', { name: /status toggle menu/i }).should(
+      'have.text',
+      'In Progress'
+    );
+
+    cy.visit('/app/issue/TASK-2');
+
+    cy.findByRole('button', { name: /status toggle menu/i }).should(
+      'have.text',
+      'In Progress'
+    );
+  });
+
+  it('allows you to change the assignee', () => {
     cy.findAllByText(/Assignee/i).should('exist');
-    cy.findAllByText(/Sprint/i).should('exist');
+
+    cy.findByRole('button', { name: /assignee toggle menu/i })
+      .should('have.text', 'Select...')
+      .click();
+    cy.findByText('Daniel Vu').click();
+
+    cy.findByRole('button', { name: /assignee toggle menu/i }).should(
+      'have.text',
+      'Daniel Vu'
+    );
+
+    cy.visit('/app/issue/TASK-2');
+
+    cy.findByRole('button', { name: /assignee toggle menu/i }).should(
+      'have.text',
+      'Daniel Vu'
+    );
   });
 });

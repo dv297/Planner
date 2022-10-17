@@ -2,6 +2,7 @@ import AppPage from '../page/AppPage';
 
 describe('Projects', () => {
   beforeEach(() => {
+    cy.login();
     cy.visit('/app/dashboard');
   });
 
