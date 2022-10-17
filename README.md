@@ -1,5 +1,4 @@
 <img alt="Logo" height="90.5" src="./public/images/logo/logo-no-background.svg" width="500"/>
-
 ---
 
 <p>
@@ -15,6 +14,15 @@
 </p>
 
 > A Jira-like clone for learning Next.JS, Tailwind, and Next-Auth
+
+### ✨ Screenshots
+
+<img height="500" src="screenshots/Sizzy-MacBook Air localhost 17Oct 17.16.png" width="921"/>
+
+<img height="500" src="screenshots/Sizzy-MacBook Air localhost 17Oct 17.10.png" width="921"/>
+
+<img height="500" src="screenshots/Sizzy-MacBook Air localhost 17Oct 17.10.png" width="921"/>
+
 
 ### ✨ [Demo](https://planner-nine.vercel.app/)
 

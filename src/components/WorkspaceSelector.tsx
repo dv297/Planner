@@ -2,6 +2,7 @@ import { Fragment, ReactNode } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/solid';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 import { useAppContext } from '@src/components/AppContext';
@@ -93,7 +94,12 @@ const WorkspaceSelector = () => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items
+          className={clsx(
+            'z-50 absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
+            'bg-white dark:bg-gray-800 dark:text-white'
+          )}
+        >
           {workspaces.map((workspace) => {
             if (workspace.id === selectedWorkspace.id) {
               return null;
@@ -104,13 +110,17 @@ const WorkspaceSelector = () => {
                 onClick={() => onWorkspaceSelection(workspace)}
                 key={workspace.id}
               >
-                <span className="flex-grow text-left">{workspace.name}</span>
+                <span className="flex-grow text-left dark:text-white">
+                  {workspace.name}
+                </span>
               </WorkspaceMenuItem>
             );
           })}
           <WorkspaceMenuItem onClick={onAddWorkSpaceClick}>
-            <PlusIcon className="h-5 w-5 mr-2" />
-            <span className="flex-grow text-left">Add a workspace</span>
+            <PlusIcon className="h-5 w-5 mr-2 dark:text-white" />
+            <span className="flex-grow text-left dark:text-white">
+              Add a workspace
+            </span>
           </WorkspaceMenuItem>
         </Menu.Items>
       </Transition>
