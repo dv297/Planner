@@ -59,7 +59,7 @@ export default function HomePage() {
         <motion.div
           className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left"
           style={{ x: -10 }}
-          initial={{ opacity: 0.4 }}
+          initial={{ opacity: 0.1 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
         >
@@ -178,7 +178,7 @@ export default function HomePage() {
             </p>
           </h1>
         </div>
-        <div>
+        <div className="p-4">
           <p className="mx-auto mt-6 max-w-md text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
             Planner is a passion project, built to help solve the problems I
             faced when planning projects for the companies I have worked for.

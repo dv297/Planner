@@ -1,5 +1,4 @@
-<img alt="Logo" height="90.5" src="./public/images/logo/logo-no-background.svg" width="500"/>
----
+## <img alt="Logo" height="90.5" src="./public/images/logo/logo-no-background.svg" width="500"/>
 
 <p>
   <a href="https://www.npmjs.com/package/planner" target="_blank">
