@@ -22,10 +22,6 @@ import '@src/styles/global.css';
 const queryClient = new QueryClient();
 const clientSideEmotionCache = createEmotionCache();
 
-interface CustomAppProps extends AppProps {
-  emotionCache: EmotionCache;
-}
-
 type ComponentWithLayout = NextComponentType<NextPageContext, any> & {
   getLayout: undefined | (() => NextComponentType<NextPageContext, any>);
 };
@@ -50,8 +46,9 @@ const MuiWrapper = (props: MuiWrapperProps) => {
   );
 };
 
-const App = (props: CustomAppProps) => {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+const App = (props: AppProps<{ emotionCache: EmotionCache; session: any }>) => {
+  const { Component, pageProps } = props;
+  const { emotionCache = clientSideEmotionCache, session } = pageProps;
 
   const componentWithLayout = Component as ComponentWithLayout;
   const getLayout =
@@ -65,7 +62,7 @@ const App = (props: CustomAppProps) => {
         </Head>
         <CacheProvider value={emotionCache}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <SessionProvider session={pageProps.session}>
+            <SessionProvider session={session}>
               <MuiWrapper>
                 <CssBaseline />
                 <SnackbarProvider>

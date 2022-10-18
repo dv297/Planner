@@ -64,6 +64,7 @@
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "downshift": "^6.1.12",
+    "framer-motion": "^6.5.1",
     "html-to-image": "^1.10.8",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",

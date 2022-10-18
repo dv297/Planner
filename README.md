@@ -23,7 +23,6 @@
 
 <img height="500" src="screenshots/Sizzy-MacBook Air localhost 17Oct 17.10.png" width="921"/>
 
-
 ### ✨ [Demo](https://planner-nine.vercel.app/)
 
 ### ✨ [Blog Outlining Thoughts During Development](https://planner-nine.vercel.app/blog)

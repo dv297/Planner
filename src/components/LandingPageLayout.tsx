@@ -5,6 +5,7 @@ import { Fragment, ReactNode } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import clsx from 'clsx';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,8 +14,8 @@ import { getSession, signIn } from 'next-auth/react';
 
 const resources = [
   { name: 'Home', href: '/' },
-  { name: 'Features', href: '/features' },
   { name: 'Blog', href: '/blog' },
+  { name: 'Github', href: 'https://github.com/dv297/planner' },
 ];
 
 interface LandingPageLayoutProps {
@@ -42,7 +43,7 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
                       <Image
                         className="w-auto"
                         src="/images/logo/logo-no-background.svg"
-                        alt=""
+                        alt="Planner"
                         height="24"
                         width="150"
                       />
@@ -50,7 +51,11 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
                   </Link>
                 </div>
                 <div className="-my-2 -mr-2 md:hidden">
-                  <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                  <Popover.Button
+                    className={clsx(
+                      'inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'
+                    )}
+                  >
                     <span className="sr-only">Open menu</span>
                     <div className="h-6 w-6" aria-hidden="true">
                       <MenuIcon />
@@ -59,10 +64,10 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
                 </div>
                 <div className="hidden space-x-10 md:flex">
                   {resources.map((resource, index) => (
-                    <Link key={index} href={resource.href}>
-                      <span className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
+                    <Link key={index} href={resource.href} passHref>
+                      <a className="text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
                         {resource.name}
-                      </span>
+                      </a>
                     </Link>
                   ))}
                 </div>
@@ -103,11 +108,13 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
                 <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="px-5 pt-5 pb-6">
                     <div className="flex items-center justify-between">
-                      <div>
-                        <img
-                          className="h-8 w-auto"
-                          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                          alt="Your Company"
+                      <div className="h-full flex items-center">
+                        <Image
+                          className="w-auto"
+                          src="/images/logo/logo-no-background.svg"
+                          alt="Planner"
+                          height="24"
+                          width="150"
                         />
                       </div>
                       <div className="-mr-2">
@@ -145,7 +152,10 @@ const LandingPageLayout = (props: LandingPageLayoutProps) => {
                             });
                           }
                         }}
-                        className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 cursor-pointer"
+                        className={clsx(
+                          'flex w-full items-center justify-center rounded-md border border-transparent px-4 py-2 text-base font-medium text-white shadow-sm cursor-pointer',
+                          'bg-accent-blue-500 hover:bg-accent-blue-700'
+                        )}
                       >
                         Sign in
                       </button>
