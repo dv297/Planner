@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 import Head from 'next/head';
 
-import AppDefaultLayout from '@src/components/AppDefaultLayout';
 import FullScreenLoader from '@src/components/common/FullScreenLoader';
 import ProjectMap from '@src/components/ProjectMap/ProjectMap';
 import {
   ProjectMapContextProvider,
   useProjectMapContext,
 } from '@src/components/ProjectMap/ProjectMapContext';
+import { ProjectMapSelectedIssueContextProvider } from '@src/components/ProjectMap/ProjectMapSelectedIssueContext';
 import ProjectMapPageLayout from '@src/components/ProjectMapPageLayout';
 
 const Page = () => {
@@ -32,12 +32,16 @@ const Page = () => {
 
 Page.getLayout = function getLayout(page: ReactNode) {
   return (
-    <ProjectMapPageLayout>
-      <Head>
-        <title>Planner - Project Map</title>
-      </Head>
-      <ProjectMapContextProvider>{page}</ProjectMapContextProvider>
-    </ProjectMapPageLayout>
+    <ProjectMapSelectedIssueContextProvider>
+      <ProjectMapContextProvider>
+        <ProjectMapPageLayout>
+          <Head>
+            <title>Planner - Project Map</title>
+          </Head>
+          {page}
+        </ProjectMapPageLayout>
+      </ProjectMapContextProvider>
+    </ProjectMapSelectedIssueContextProvider>
   );
 };
 

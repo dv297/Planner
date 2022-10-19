@@ -11,13 +11,10 @@ import EditableTextDisplay from '@src/components/common/EditableDisplays/Editabl
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import IssueRelationList from '@src/components/IssueRelationList';
-import IssueAssigneeSelector from '@src/components/pages/issue/IssueAssigneeSelector';
-import IssueStatusSelector from '@src/components/pages/issue/IssueStatusSelector';
-import SprintSelector from '@src/components/pages/issue/SprintSelector';
+import IssueEditableFields from '@src/components/pages/issue/IssueEditableFields';
 import IssueRelationService from '@src/services/IssueRelationService';
 import IssueService from '@src/services/IssueService';
 import QueryKeys from '@src/services/QueryKeys';
-import { convertToIssueStatusType } from '@src/types/IssueStatusType';
 import { parseIssueTagFromIssue } from '@src/utils/parseIssueTagFromIssue';
 
 const ProjectPage = () => {
@@ -49,7 +46,7 @@ const ProjectPage = () => {
 
   const queryClient = useQueryClient();
 
-  if (!issue) {
+  if (!issue || !tag) {
     return null;
   }
 
@@ -120,25 +117,7 @@ const ProjectPage = () => {
             </div>
           </main>
           <aside className="relative w-full mt-8 lg:mt-0 lg:w-72 flex-shrink-0 overflow-y-auto lg:border-l border-gray-200 md:flex md:flex-col lg:px-4 pb-96 lg:pb-0">
-            <div>
-              <IssueStatusSelector
-                onChange={getUpdaterFunction(tag, 'issueStatus')}
-                initialValue={convertToIssueStatusType(issue.issueStatus)}
-              />
-            </div>
-            <div className="mt-8">
-              <IssueAssigneeSelector
-                issueTag={tag}
-                initialAssignee={issue.assignee}
-              />
-            </div>
-            <div className="mt-8">
-              <SprintSelector
-                issueTag={tag}
-                initialValue={issue.sprint}
-                key={issue.sprintId}
-              />
-            </div>
+            <IssueEditableFields tag={tag} issue={issue} />
           </aside>
         </div>
       </div>

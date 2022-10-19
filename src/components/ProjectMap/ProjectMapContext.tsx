@@ -47,16 +47,24 @@ const ProjectMapContextProvider = (props: ProjectMapContextProps) => {
     data: project,
     isLoading: isLoadingPositions,
     refetch: refetchPositions,
-  } = useQuery([QueryKeys.PROJECT], () =>
-    ProjectMapPositionService.getProjectMapPosition(tag)
+  } = useQuery(
+    [QueryKeys.PROJECT],
+    () => ProjectMapPositionService.getProjectMapPosition(tag),
+    {
+      enabled: !!tag,
+    }
   );
 
   const {
     data: edgeSet,
     isLoading: isLoadingEdgeSet,
     refetch: refetchEdges,
-  } = useQuery([QueryKeys.EDGE_SET], () =>
-    ProjectMapEdgesSetService.getProjectMapEdgesSet(tag)
+  } = useQuery(
+    [QueryKeys.EDGE_SET],
+    () => ProjectMapEdgesSetService.getProjectMapEdgesSet(tag),
+    {
+      enabled: !!tag,
+    }
   );
 
   const isLoading = isLoadingEdgeSet || isLoadingPositions;

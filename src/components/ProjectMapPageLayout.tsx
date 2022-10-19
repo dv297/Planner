@@ -12,6 +12,7 @@ import { AppContextProvider } from '@src/components/AppContext';
 import FullScreenLoader from '@src/components/common/FullScreenLoader';
 import DashboardBodyLayout from '@src/components/DashboardBodyLayout';
 import ProfileIconButton from '@src/components/ProfileIconButton';
+import ProjectMapDetailedIssueView from '@src/components/ProjectMap/ProjectMapDetailedIssueView';
 import {
   MuiWrapper,
   ThemeSwitcher,
@@ -144,10 +145,12 @@ const ProjectMapPageLayout = (props: ProjectMapPageLayoutProps) => {
                       </Link>
                     </div>
                   </div>
-                  <nav
-                    className="flex-1 px-2 py-4 space-y-1"
+                  <aside
+                    className="flex-1 px-6 py-4 space-y-1"
                     data-testid="app-sidebar"
-                  ></nav>
+                  >
+                    <ProjectMapDetailedIssueView />
+                  </aside>
                 </div>
               </div>
             </div>
