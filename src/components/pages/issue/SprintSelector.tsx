@@ -1,9 +1,12 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 
 import { useAppContext } from '@src/components/AppContext';
 import Dropdown from '@src/components/common/Forms/Dropdown';
+import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
+import SprintCreationModalTrigger from '@src/components/pages/sprints/SprintCreationModalTrigger';
+import { useProjectMapContext } from '@src/components/ProjectMap/ProjectMapContext';
 import { SprintSchema, SprintsListSchema } from '@src/schemas/SprintSchema';
 import IssueService from '@src/services/IssueService';
 import QueryKeys from '@src/services/QueryKeys';
@@ -37,6 +40,29 @@ const SprintSelector = (props: SprintSelectorProps) => {
     }
   );
 
+  const snackbar = useSnackbar();
+  const queryClient = useQueryClient();
+  const projectMapContext = useProjectMapContext();
+
+  const getUpdaterFunction =
+    (tag: string | undefined, propertyName: string) =>
+    async (textValue: string | null) => {
+      try {
+        await IssueService.updateIssue(tag, propertyName, textValue);
+        queryClient.invalidateQueries();
+
+        if (projectMapContext?.refresh) {
+          projectMapContext.refresh();
+        }
+      } catch (err) {
+        snackbar.displaySnackbar({
+          message:
+            'There was an error saving your change. Make a change and try again',
+          severity: SnackbarSeverity.ERROR,
+        });
+      }
+    };
+
   let dropdownOptions: z.infer<typeof SprintsListSchema> = [
     {
       id: UNASSIGNED,
@@ -56,20 +82,25 @@ const SprintSelector = (props: SprintSelectorProps) => {
   }
 
   return (
-    <Dropdown
-      id="sprint-selector"
-      label="Sprint"
-      onChange={(item) => {
-        const mutation = getUpdaterFunction(issueTag, 'sprintId');
-        return mutation((item.id !== UNASSIGNED ? item.id : null) ?? null);
-      }}
-      onOpen={() => {
-        setHasBeenOpened(true);
-      }}
-      initialOptionId={initialValue?.id}
-      displayKey="name"
-      options={dropdownOptions}
-    />
+    <div>
+      <Dropdown
+        id="sprint-selector"
+        label="Sprint"
+        onChange={(item) =>
+          getUpdaterFunction(
+            issueTag,
+            'sprintId'
+          )((item.id !== UNASSIGNED ? item.id : null) ?? null)
+        }
+        onOpen={() => {
+          setHasBeenOpened(true);
+        }}
+        initialOptionId={initialValue?.id}
+        displayKey="name"
+        options={dropdownOptions}
+      />
+      <SprintCreationModalTrigger variant="small" />
+    </div>
   );
 };
 

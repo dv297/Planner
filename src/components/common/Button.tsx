@@ -1,12 +1,13 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import clsx from 'clsx';
 
-interface ButtonProps {
+export interface ButtonProps {
   children: ReactNode;
   variant?: 'contained' | 'text';
   onClick?: MouseEventHandler<HTMLButtonElement>;
   isDisabled?: boolean;
   type?: 'button' | 'submit' | 'reset' | undefined;
+  icon?: ReactNode;
 }
 
 const Button = (props: ButtonProps) => {
@@ -16,6 +17,7 @@ const Button = (props: ButtonProps) => {
     onClick = () => {},
     isDisabled,
     type = 'button',
+    icon,
   } = props;
 
   return (
@@ -30,11 +32,13 @@ const Button = (props: ButtonProps) => {
           'opacity-25 hover:bg-accent-blue-500 cursor-not-allowed': isDisabled,
           'bg-transparent text-blue-600 dark:text-accent-blue-300 shadow-none hover:bg-accent-blue-50 dark:hover:bg-slate-800 focus:!ring-sky-200':
             variant === 'text',
+          '!pl-1 !pr-4 ': variant === 'text' && !!icon,
         }
       )}
       onClick={onClick}
       disabled={isDisabled}
     >
+      {icon && <div className="mr-2">{icon}</div>}
       {children}
     </button>
   );

@@ -44,9 +44,9 @@ const IssuesList = (props: IssuesListProps) => {
                   onClick={() => {
                     setIsIssueCreationModalOpen(true);
                   }}
+                  icon={<AddIcon />}
                 >
-                  <AddIcon />
-                  <span className="ml-2">Create a task</span>
+                  Create a task
                 </Button>
               )}
             </span>

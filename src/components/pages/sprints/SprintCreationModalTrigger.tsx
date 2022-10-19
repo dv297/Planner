@@ -2,26 +2,37 @@ import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import dynamic from 'next/dynamic';
 
-import Button from '@src/components/common/Button';
+import Button, { ButtonProps } from '@src/components/common/Button';
 const SprintCreationModal = dynamic(
   () => import('@src/components/pages/sprints/SprintCreationModal')
 );
 
-const SprintCreationModalTrigger = () => {
+interface SprintCreationModalTriggerProps {
+  variant?: 'normal' | 'small';
+}
+
+const SprintCreationModalTrigger = (props: SprintCreationModalTriggerProps) => {
+  const { variant = 'normal' } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const buttonProps: Partial<ButtonProps> =
+    variant === 'small'
+      ? {
+          variant: 'text',
+        }
+      : {};
 
   return (
     <>
       <SprintCreationModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       <Button
+        {...buttonProps}
         onClick={() => {
           setIsModalOpen(true);
         }}
+        icon={<AddIcon />}
       >
-        <div className="mr-2">
-          <AddIcon />
-        </div>
-        <span>Add a Sprint</span>
+        Create a Sprint
       </Button>
     </>
   );

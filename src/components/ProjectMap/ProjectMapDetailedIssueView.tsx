@@ -25,7 +25,7 @@ const ProjectMapDetailedIssueView = () => {
 
   return (
     <>
-      <h1>{selectedIssue.title}</h1>
+      <h1 className="text-lg font-bold mb-6">{selectedIssue.title}</h1>
       <div>
         <IssueEditableFields
           key={selectedIssue.id}

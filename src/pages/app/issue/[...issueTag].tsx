@@ -116,7 +116,7 @@ const ProjectPage = () => {
               ) : null}
             </div>
           </main>
-          <aside className="relative w-full mt-8 lg:mt-0 lg:w-72 flex-shrink-0 overflow-y-auto lg:border-l border-gray-200 md:flex md:flex-col lg:px-4 pb-96 lg:pb-0">
+          <aside className="relative w-full mt-8 lg:mt-0 lg:w-72 flex-shrink-0 overflow-y-auto lg:border-l border-gray-200 md:flex md:flex-col lg:pl-8 pb-96 lg:pb-0">
             <IssueEditableFields tag={tag} issue={issue} />
           </aside>
         </div>

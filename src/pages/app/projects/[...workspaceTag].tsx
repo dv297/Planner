@@ -50,11 +50,9 @@ const Page = () => {
               onClick={() => {
                 router.push(`/app/project/create`);
               }}
+              icon={<AddIcon />}
             >
-              <div className="mr-2">
-                <AddIcon />
-              </div>
-              <span>Create a Project</span>
+              Create a Project
             </Button>
           }
         />
@@ -71,11 +69,9 @@ const Page = () => {
             router.push(`/app/project/create`);
           }}
           variant="text"
+          icon={<AddIcon />}
         >
-          <div className="mr-2">
-            <AddIcon />
-          </div>
-          <span>Create a Project</span>
+          Create a Project
         </Button>
       </div>
       <div className="flex flex-col mt-4 border-solid border-gray-300 border rounded-md">

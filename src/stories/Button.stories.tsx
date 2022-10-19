@@ -39,14 +39,8 @@ Text.args = {
 export const TextWithIcon = Template.bind({});
 TextWithIcon.args = {
   variant: 'text',
-  children: (
-    <>
-      <div className="mr-2">
-        <PlusIcon height={16} />
-      </div>
-      Add Item
-    </>
-  ),
+  children: 'Add Item',
+  icon: <PlusIcon height={16} />,
 };
 
 export const Disabled: ComponentStory<typeof Button> = (props) => (

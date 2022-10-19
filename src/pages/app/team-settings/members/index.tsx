@@ -31,9 +31,9 @@ const Page = () => {
               onClick={() => {
                 setIsAddMembersModalOpen(true);
               }}
+              icon={<AddIcon />}
             >
-              <AddIcon />
-              <span className="ml-2">Add Members</span>
+              Add Members
             </Button>
           </div>
           <div className="mt-4">
