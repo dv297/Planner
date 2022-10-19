@@ -8,6 +8,7 @@ import {
   ProjectMapContextProvider,
   useProjectMapContext,
 } from '@src/components/ProjectMap/ProjectMapContext';
+import ProjectMapPageLayout from '@src/components/ProjectMapPageLayout';
 
 const Page = () => {
   const { isLoading, project, edgeSet } = useProjectMapContext();
@@ -31,12 +32,12 @@ const Page = () => {
 
 Page.getLayout = function getLayout(page: ReactNode) {
   return (
-    <AppDefaultLayout>
+    <ProjectMapPageLayout>
       <Head>
         <title>Planner - Project Map</title>
       </Head>
       <ProjectMapContextProvider>{page}</ProjectMapContextProvider>
-    </AppDefaultLayout>
+    </ProjectMapPageLayout>
   );
 };
 

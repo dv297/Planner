@@ -3,21 +3,33 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { MenuAlt2Icon } from '@heroicons/react/outline';
 import LinearProgress from '@mui/material/LinearProgress';
+import clsx from 'clsx';
 
 interface DashboardBodyLayoutProps {
   children: ReactNode;
   setSidebarOpen: (updatedState: boolean) => void;
   isLoading: boolean;
   topRightNav?: ReactNode;
+  sidebarWidth?: 'normal' | 'large';
 }
 
 const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
-  const { setSidebarOpen, isLoading, topRightNav } = props;
+  const {
+    setSidebarOpen,
+    isLoading,
+    topRightNav,
+    sidebarWidth = 'normal',
+  } = props;
 
   return (
     <div className="theme-background">
       <DndProvider backend={HTML5Backend}>
-        <div className="md:pl-56 flex flex-col h-screen">
+        <div
+          className={clsx('flex flex-col h-screen', {
+            'md:pl-56': sidebarWidth === 'normal',
+            'md:pl-72': sidebarWidth === 'large',
+          })}
+        >
           <div className="sticky bg-theme-background top-0 shadow md:shadow-none dark:shadow-none dark:border-b dark:border-gray-700 dark:md:border-b-0 md:relative z-10 flex-shrink-0 flex h-16">
             <button
               type="button"
