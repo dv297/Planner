@@ -9,8 +9,8 @@ describe('Sprints', () => {
   it('allows you to add a sprint', () => {
     AppPage.sidebar().sprints().click();
 
-    cy.findByText(/Add a Sprint/i).should('exist');
-    cy.findByText(/Add a Sprint/i).click();
+    cy.findByText(/Create a Sprint/i).should('exist');
+    cy.findByText(/Create a Sprint/i).click();
 
     AppPage.addSprintForm().nameForm().type('Test Sprint');
     cy.findByText(/Submit/i).click();

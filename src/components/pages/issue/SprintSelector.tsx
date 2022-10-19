@@ -17,12 +17,6 @@ interface SprintSelectorProps {
   initialValue: z.infer<typeof SprintSchema> | null;
 }
 
-const getUpdaterFunction =
-  (tag: string | undefined, propertyName: string) =>
-  async (textValue: string | null) => {
-    await IssueService.updateIssue(tag, propertyName, textValue);
-  };
-
 const UNASSIGNED = 'UNASSIGNED';
 
 const SprintSelector = (props: SprintSelectorProps) => {
