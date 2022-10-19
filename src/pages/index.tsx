@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { motion, useTransform, useViewportScroll } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { getSession, signIn } from 'next-auth/react';
@@ -30,7 +30,7 @@ const ActionItemButton = (props: { title: string }) => {
 };
 
 const useScrollAnimation = (yCoordinates: [number, number]) => {
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
 
   const leftXDisplacement = useTransform(scrollY, yCoordinates, [
     '-5px',
