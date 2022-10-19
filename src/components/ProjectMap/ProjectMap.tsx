@@ -10,7 +10,7 @@ import ReactFlow, {
   NodeChange,
   useEdgesState,
   useNodesState,
-} from 'react-flow-renderer';
+} from 'reactflow';
 import { z } from 'zod';
 
 import type { IssueNodeData } from '@src/components/ProjectMap/IssueNode';
@@ -22,6 +22,8 @@ import { ProjectMapEdgesSetSchema } from '@src/schemas/ProjectMapEdgesSetSchemas
 import { ProjectMapPositionSchema } from '@src/schemas/ProjectMapPositionSchemas';
 import { Position } from '@src/styles/ProjectMapPositionDataEntry';
 import IssueStatusType from '@src/types/IssueStatusType';
+
+import 'reactflow/dist/style.css';
 
 const nodeTypes = {
   issue: IssueNode,

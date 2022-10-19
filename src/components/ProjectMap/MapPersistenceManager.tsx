@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { Edge, Node, useEdges, useNodes } from 'react-flow-renderer';
+import { Edge, Node, useEdges, useNodes } from 'reactflow';
 import debounce from 'lodash.debounce';
 import { z } from 'zod';
 
