@@ -1,13 +1,10 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { z } from 'zod';
 
-import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import IssueAssigneeSelector from '@src/components/pages/issue/IssueAssigneeSelector';
 import IssueStatusSelector from '@src/components/pages/issue/IssueStatusSelector';
 import SprintSelector from '@src/components/pages/issue/SprintSelector';
-import { useProjectMapContext } from '@src/components/ProjectMap/ProjectMapContext';
+import useIssueUpdaterFunction from '@src/hooks/useIssueUpdaterFunction';
 import { IssueSchema } from '@src/schemas/IssueSchema';
-import IssueService from '@src/services/IssueService';
 import { convertToIssueStatusType } from '@src/types/IssueStatusType';
 
 interface IssueEditableFieldsProps {
@@ -18,34 +15,16 @@ interface IssueEditableFieldsProps {
 const IssueEditableFields = (props: IssueEditableFieldsProps) => {
   const { issue, tag } = props;
 
-  const snackbar = useSnackbar();
-  const queryClient = useQueryClient();
-  const projectMapContext = useProjectMapContext();
-
-  const getUpdaterFunction =
-    (tag: string | undefined, propertyName: string) =>
-    async (textValue: string) => {
-      try {
-        await IssueService.updateIssue(tag, propertyName, textValue);
-        queryClient.invalidateQueries();
-
-        if (projectMapContext?.refresh) {
-          projectMapContext.refresh();
-        }
-      } catch (err) {
-        snackbar.displaySnackbar({
-          message:
-            'There was an error saving your change. Make a change and try again',
-          severity: SnackbarSeverity.ERROR,
-        });
-      }
-    };
+  const updateIssueStatus = useIssueUpdaterFunction({
+    tag,
+    propertyName: 'issueStatus',
+  });
 
   return (
     <div>
       <div>
         <IssueStatusSelector
-          onChange={getUpdaterFunction(tag, 'issueStatus')}
+          onChange={updateIssueStatus}
           initialValue={convertToIssueStatusType(issue.issueStatus)}
         />
       </div>

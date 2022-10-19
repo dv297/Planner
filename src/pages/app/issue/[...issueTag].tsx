@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import clsx from 'clsx';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -80,8 +81,8 @@ const ProjectPage = () => {
           </Breadcrumbs>
         </div>
 
-        <div className="relative z-0 flex flex-col flex-1 h-full lg:flex-row">
-          <main className="relative lg:flex-1 z-0 focus:outline-none lg:mr-6">
+        <div className="relative z-0 flex flex-col flex-1 h-full lg:flex-row lg:min-h-screen">
+          <main className="relative lg:flex-1 z-0 focus:outline-none lg:mr-6 lg:h-128">
             <EditableTextDisplay
               onBlurSubmission={getUpdaterFunction(tag, 'title')}
               initialValue={issue.title}
@@ -116,7 +117,12 @@ const ProjectPage = () => {
               ) : null}
             </div>
           </main>
-          <aside className="relative w-full mt-8 lg:mt-0 lg:w-72 flex-shrink-0 overflow-y-auto lg:border-l border-gray-200 md:flex md:flex-col lg:pl-8 pb-96 lg:pb-0">
+          <aside
+            className={clsx(
+              'relative w-full mt-8 flex-shrink-0 overflow-y-auto md:flex md:flex-col pb-96',
+              'lg:mt-0 lg:w-72 lg:pl-8 lg:pb-0 lg:border-gray-200 dark:lg:border-gray-700 lg:border-l lg:h-128'
+            )}
+          >
             <IssueEditableFields tag={tag} issue={issue} />
           </aside>
         </div>

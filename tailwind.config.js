@@ -17,6 +17,9 @@ module.exports = {
         },
         'theme-background': 'var(--color-background)',
       },
+      spacing: {
+        128: '32rem',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
