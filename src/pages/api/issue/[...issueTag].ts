@@ -19,7 +19,6 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
       message: 'Header `team-id` not provided',
     });
   }
-
   const { issueTag } = GetSingleIssueInputSchema.parse(req.query);
   const tag = issueTag[0];
 

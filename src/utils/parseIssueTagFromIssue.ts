@@ -1,9 +1,10 @@
-import { z } from 'zod';
+interface ParseableIssue {
+  workspace: {
+    tag: string;
+  };
+  workspaceIssueCount: number;
+}
 
-import { IssueSchema, KeyIssueSchema } from '@src/schemas/IssueSchema';
-
-export const parseIssueTagFromIssue = (
-  issue: z.infer<typeof KeyIssueSchema | typeof IssueSchema>
-) => {
+export const parseIssueTagFromIssue = (issue: ParseableIssue) => {
   return `${issue.workspace.tag}-${issue.workspaceIssueCount}`;
 };

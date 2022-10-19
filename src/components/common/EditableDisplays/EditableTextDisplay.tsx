@@ -38,15 +38,13 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
         <>
           <div
             onClick={openEditor}
-            className={clsx(
-              'w-full rounded-lg cursor-pointer border-2 border-theme-background hover:border-solid',
-              {
-                'hover:border-gray-100 hover:dark:border-gray-700': !isEditing,
-              }
-            )}
+            className={clsx('w-full cursor-pointer', {
+              'hover:border-b-2 hover:border-accent-blue-300 hover:dark:border-accent-blue-500':
+                !isEditing,
+            })}
           >
             {!isEditing ? (
-              <div className="px-4 py-1">
+              <div className="py-3">
                 <TextDisplay
                   value={textValue}
                   textDisplayClassName={textDisplayClassName}
@@ -60,23 +58,20 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
                     inputRef={inputRef}
                     label={label}
                     id={id}
+                    endAdornment={
+                      isLoading ? (
+                        <CircularProgress size={20} />
+                      ) : (
+                        <button
+                          onClick={handleCancelClick}
+                          ref={cancelButtonRef}
+                        >
+                          Cancel
+                        </button>
+                      )
+                    }
                   />
                 </div>
-                {isLoading ? (
-                  <div className="absolute -top-3.5 right-4 h-full flex items-center">
-                    <CircularProgress size={20} />
-                  </div>
-                ) : (
-                  <div>
-                    <button
-                      className="absolute -top-3.5 right-4 h-full"
-                      onClick={handleCancelClick}
-                      ref={cancelButtonRef}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                )}
               </div>
             )}
           </div>

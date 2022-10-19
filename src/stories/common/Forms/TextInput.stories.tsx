@@ -60,3 +60,16 @@ WithErrorMessage.args = {
   error: true,
   helperText: 'Value must match the pattern',
 };
+
+export const WithEndAdornment = Template.bind({});
+WithEndAdornment.args = {
+  endAdornment: (
+    <button
+      onClick={() => {
+        console.log('Clicked');
+      }}
+    >
+      Cancel
+    </button>
+  ),
+};

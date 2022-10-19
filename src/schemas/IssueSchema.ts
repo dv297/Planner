@@ -13,12 +13,25 @@ export const UpdateSingleIssueInputSchema = z.object({
   data: z.any(),
 });
 
+const ProjectSchemaForIssue = z.object({
+  id: z.string(),
+  workspaceId: z.string(),
+  keyIssue: z.object({
+    id: z.string(),
+    workspaceIssueCount: z.number(),
+    workspace: z.object({
+      tag: z.string(),
+    }),
+  }),
+});
+
 export const IssueSchema = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string(),
   issueStatus: z.string(),
   projectId: z.string(),
+  project: ProjectSchemaForIssue,
   workspaceId: z.string(),
   workspace: WorkspaceSchema,
   workspaceIssueCount: z.number(),

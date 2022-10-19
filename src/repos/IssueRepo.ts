@@ -13,6 +13,21 @@ export const issueFieldInclusion: Prisma.IssueInclude = {
       workspace: true,
     },
   },
+  project: {
+    include: {
+      keyIssue: {
+        select: {
+          id: true,
+          workspaceIssueCount: true,
+          workspace: {
+            select: {
+              tag: true,
+            },
+          },
+        },
+      },
+    },
+  },
 };
 
 function getIssueById(issueId: string) {

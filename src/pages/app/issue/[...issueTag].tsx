@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import AppDefaultLayout from '@src/components/AppDefaultLayout';
@@ -51,6 +53,8 @@ const ProjectPage = () => {
     return null;
   }
 
+  const keyIssueTag = parseIssueTagFromIssue(issue.project.keyIssue);
+
   const getUpdaterFunction =
     (tag: string | undefined, propertyName: string) =>
     async (textValue: string) => {
@@ -72,8 +76,15 @@ const ProjectPage = () => {
         <title>Planner - {parseIssueTagFromIssue(issue)}</title>
       </Head>
       <div className="h-full" key={issue.id}>
+        <div className="mb-6">
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link href={`/app/project/${keyIssueTag}`}>{keyIssueTag}</Link>
+            <span>{issueTag}</span>
+          </Breadcrumbs>
+        </div>
+
         <div className="relative z-0 flex flex-col flex-1 h-full lg:flex-row">
-          <main className="relative lg:flex-1 z-0 overflow-y-auto focus:outline-none">
+          <main className="relative lg:flex-1 z-0 focus:outline-none lg:mr-6">
             <EditableTextDisplay
               onBlurSubmission={getUpdaterFunction(tag, 'title')}
               initialValue={issue.title}
@@ -88,7 +99,7 @@ const ProjectPage = () => {
                 initialValue={issue.description}
               />
             </div>
-            <div className="mt-8 px-6">
+            <div className="mt-8">
               {issueRelation?.BLOCKED_BY?.length ? (
                 <div className="mt-4">
                   <IssueRelationList

@@ -1,4 +1,5 @@
 import { CircularProgress } from '@mui/material';
+import clsx from 'clsx';
 
 import MarkdownPreview from '@src/components/common/EditableDisplays/MarkdownPreview';
 import useEditableDisplay from '@src/components/common/EditableDisplays/useEditableDisplay';
@@ -33,10 +34,13 @@ const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
           <>
             <div
               onClick={openEditor}
-              className="w-full rounded-lg cursor-pointer border-2 border-theme-background hover:border-solid hover:border-gray-100 dark:hover:border-gray-700"
+              className={clsx(
+                'w-full cursor-pointer border-b-2 border-theme-background',
+                'hover:border-solid hover:border-accent-blue-300 dark:hover:border-accent-blue-500'
+              )}
             >
               {!isEditing ? (
-                <div className="px-4 pt-2 pb-8">
+                <div className="pt-2 pb-4">
                   <MarkdownPreview value={textValue} />
                 </div>
               ) : (

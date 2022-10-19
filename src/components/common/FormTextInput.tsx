@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ReactNode } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import TextInput from '@src/components/common/Forms/TextInput';
@@ -9,10 +10,11 @@ interface FormTextInputProps {
   id: string;
   required?: boolean;
   inputRef?: React.Ref<any>;
+  endAdornment?: ReactNode;
 }
 
 const FormTextInput = (props: FormTextInputProps) => {
-  const { label, name, id, required, inputRef } = props;
+  const { label, name, id, required, inputRef, endAdornment } = props;
   const { control } = useFormContext(); // retrieve all hook methods
 
   return (
@@ -36,6 +38,7 @@ const FormTextInput = (props: FormTextInputProps) => {
               inputRef={inputRef}
               label={label}
               name={props.name}
+              endAdornment={endAdornment}
             />
           </>
         )}

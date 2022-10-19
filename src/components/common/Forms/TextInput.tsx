@@ -1,4 +1,10 @@
-import { ChangeEventHandler, FocusEventHandler, Ref, useState } from 'react';
+import {
+  ChangeEventHandler,
+  FocusEventHandler,
+  ReactNode,
+  Ref,
+  useState,
+} from 'react';
 import clsx from 'clsx';
 
 interface TextInputProps {
@@ -12,6 +18,7 @@ interface TextInputProps {
   error?: boolean;
   helperText?: string;
   inputRef?: Ref<any | undefined>;
+  endAdornment?: ReactNode;
 }
 
 const TextInput = (props: TextInputProps) => {
@@ -46,23 +53,31 @@ const TextInput = (props: TextInputProps) => {
         >
           {props.label} {props.required && '(Required)'}
         </label>
-        <input
-          id={props.id}
-          type="text"
-          className={clsx(
-            'w-full bg-transparent h-10 border border-gray-300 dark:border-gray-700 text-lg px-4 py-1 rounded-lg',
-            'focus:outline focus:outline-accent-blue-500 dark:outline-accent-blue-300',
-            {
-              'outline !outline-red-500': props.error,
-            }
+        <div className="relative">
+          <input
+            id={props.id}
+            type="text"
+            className={clsx(
+              'w-full bg-transparent h-10 border border-gray-300 dark:border-gray-700 text-lg pl-4 py-1 rounded-lg',
+              'focus:outline focus:outline-accent-blue-500 dark:outline-accent-blue-300',
+              {
+                'outline !outline-red-500': props.error,
+                'pr-20': !!props.endAdornment,
+              }
+            )}
+            value={props.value ?? ''}
+            onChange={props.onChange}
+            onBlur={props.onBlur}
+            ref={props.inputRef}
+            name={props.name}
+            {...(props.error ? inputErrorAccessibilityProperties : {})}
+          />
+          {props.endAdornment && (
+            <div className="absolute h-full top-0 bottom-0 my-auto right-4 flex items-center">
+              {props.endAdornment}
+            </div>
           )}
-          value={props.value ?? ''}
-          onChange={props.onChange}
-          onBlur={props.onBlur}
-          ref={props.inputRef}
-          name={props.name}
-          {...(props.error ? inputErrorAccessibilityProperties : {})}
-        />
+        </div>
         {props.helperText && (
           <span
             id={errorDescriptionId}
