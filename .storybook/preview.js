@@ -3,10 +3,11 @@ import '../src/styles/global.css';
 import * as NextImage from 'next/image';
 import { ThemeProvider } from 'next-themes';
 
-import { muiTheme } from 'storybook-addon-material-ui';
+import { ThemeProvider as MuiThemeProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import ThemeSwitcherProvider from '../src/components/ThemeSwitcherContext';
+import { getTheme } from '../src/lib/createTheme';
 
 const OriginalNextImage = NextImage.default;
 
@@ -39,7 +40,7 @@ export const parameters = {
 };
 
 export const decorators = [
-  (Story, { globals }) => {
+  (Story) => {
     return (
       <main>
         <h1 className="mb-8">Storybook</h1>
@@ -47,7 +48,13 @@ export const decorators = [
       </main>
     );
   },
-  muiTheme(),
+  (Story, { globals }) => {
+    return (
+      <MuiThemeProvider theme={getTheme(globals.theme ?? 'light')}>
+        <Story />
+      </MuiThemeProvider>
+    );
+  },
   (Story) => {
     return (
       <LocalizationProvider dateAdapter={AdapterDateFns}>

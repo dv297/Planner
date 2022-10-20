@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import { MoonIcon, SunIcon } from '@heroicons/react/outline';
-import { MuiThemeProvider } from '@material-ui/core';
+import { ThemeProvider as MuiThemeProvider } from '@mui/material';
 import { useTheme } from 'next-themes';
 
 import { getTheme } from '@src/lib/createTheme';

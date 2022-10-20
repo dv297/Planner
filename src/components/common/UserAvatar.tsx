@@ -1,4 +1,4 @@
-import { Avatar } from '@material-ui/core';
+import { Avatar } from '@mui/material';
 
 function stringToColor(string: string) {
   let hash = 0;
