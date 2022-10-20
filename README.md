@@ -24,6 +24,8 @@
 
 ### ✨ [Demo](https://planner-nine.vercel.app/)
 
+### ✨ [Storybook](https://dv297.github.io/Planner/?path=/story/example-introduction--page)
+
 ### ✨ [Blog Outlining Thoughts During Development](https://planner-nine.vercel.app/blog)
 
 ## Install
