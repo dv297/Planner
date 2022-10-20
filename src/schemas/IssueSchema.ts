@@ -72,3 +72,37 @@ export const GetIssuesForSprintResponseDataSchema = z.object({
 export const GetIssuesForSprintResponseSchema = z.object({
   data: GetIssuesForSprintResponseDataSchema,
 });
+
+const dateSchema = z.preprocess((arg: any) => {
+  if (typeof arg === 'string' || arg instanceof Date) {
+    return new Date(arg);
+  }
+}, z.date());
+
+export const IssueAuditEntryType = z
+  .literal('comment')
+  .or(z.literal('change'))
+  .nullish();
+
+export const IssueAuditEntrySchema = z.object({
+  id: z.string(),
+  oldValue: z.string(),
+  newValue: z.string(),
+  updatedAt: dateSchema,
+  createdAt: dateSchema,
+  type: z.string(),
+  wasEdited: z.boolean(),
+  issueId: z.string(),
+  userId: z.string(),
+  user: z.object({
+    id: z.string(),
+    name: z.string(),
+    image: z.string(),
+  }),
+});
+
+export const IssueAuditEntryListSchema = z.array(IssueAuditEntrySchema);
+
+export const GetIssueAuditEntriesResponseSchema = z.object({
+  data: IssueAuditEntryListSchema,
+});

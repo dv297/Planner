@@ -12,6 +12,7 @@ import EditableTextDisplay from '@src/components/common/EditableDisplays/Editabl
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
 import ConstrainDashboardContainer from '@src/components/ConstrainDashboardContainer';
 import IssueRelationList from '@src/components/IssueRelationList';
+import IssueAuditEntryTabs from '@src/components/pages/issue/IssueAuditEntryTabs';
 import IssueEditableFields from '@src/components/pages/issue/IssueEditableFields';
 import IssueRelationService from '@src/services/IssueRelationService';
 import IssueService from '@src/services/IssueService';
@@ -81,8 +82,8 @@ const ProjectPage = () => {
           </Breadcrumbs>
         </div>
 
-        <div className="relative z-0 flex flex-col flex-1 h-full lg:flex-row lg:min-h-screen">
-          <main className="relative lg:flex-1 z-0 focus:outline-none lg:mr-6 lg:h-128">
+        <div className="relative z-0 flex flex-col flex-1 lg:flex-row lg:min-h-1/2-vh">
+          <main className="relative lg:flex-1 z-0 focus:outline-none lg:mr-6">
             <EditableTextDisplay
               onBlurSubmission={getUpdaterFunction(tag, 'title')}
               initialValue={issue.title}
@@ -120,11 +121,14 @@ const ProjectPage = () => {
           <aside
             className={clsx(
               'relative w-full mt-8 flex-shrink-0 overflow-y-auto md:flex md:flex-col pb-96',
-              'lg:mt-0 lg:w-72 lg:pl-8 lg:pb-0 lg:border-gray-200 dark:lg:border-gray-700 lg:border-l lg:h-128'
+              'lg:mt-0 lg:w-72 lg:pl-8 lg:pb-0 lg:border-gray-200 dark:lg:border-gray-700 lg:border-l lg:min-h-96'
             )}
           >
             <IssueEditableFields tag={tag} issue={issue} />
           </aside>
+        </div>
+        <div className="mt-8">
+          <IssueAuditEntryTabs issueTag={tag} />
         </div>
       </div>
     </>

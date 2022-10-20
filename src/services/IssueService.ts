@@ -3,6 +3,7 @@ import { z } from 'zod';
 import handleTeamSpecificFetch from '@src/lib/handleTeamSpecificFetch';
 import {
   CreateIssueInputSchema,
+  GetIssueAuditEntriesResponseSchema,
   GetSingleIssueResponseSchema,
 } from '@src/schemas/IssueSchema';
 
@@ -51,6 +52,30 @@ const IssueService = {
     });
 
     return null;
+  },
+  getIssueAuditEntries: async (
+    issueTag: string | undefined,
+    options?: { filter: 'comment' | 'change' | undefined }
+  ) => {
+    if (!issueTag) {
+      return;
+    }
+
+    const result = await handleTeamSpecificFetch(
+      `/api/issue/audit/${issueTag}${
+        options?.filter ? `?filter=${options.filter}` : ''
+      }`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+
+    const data = await result.json();
+
+    const response = GetIssueAuditEntriesResponseSchema.parse(data);
+
+    return response.data;
   },
 };
 

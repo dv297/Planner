@@ -2,7 +2,7 @@
 -- Data for Name: User; Type: TABLE DATA; Schema: public; Owner: root
 --
 
-INSERT INTO public."User" VALUES ('cl8se5yul0009ou5xk071sk7e', 'Daniel Vu', 'dvv297@gmail.com', NULL, 'https://lh3.googleusercontent.com/a-/ACNPEu8SwRy4kBodUWtNkGlAgtdeHud52jG7E0xNVlv7Lg=s96-c', '2022-10-03 06:29:10.7', '2022-10-03 06:29:14.458');
+INSERT INTO public."User" VALUES ('cl8se5yul0009ou5xk071sk7e', 'Daniel Vu', 'dvv297@gmail.com', NULL, 'https://planner-user-image-upload.s3.us-east-1.amazonaws.com/next-s3-uploads/2d72d68d-4738-4308-bffd-88b70e9404a8/profile.jpeg', '2022-10-03 06:29:10.7', '2022-10-03 06:29:14.458');
 
 
 --

@@ -13,18 +13,19 @@ datasource db {
 }
 
 model User {
-  id             String           @id @default(cuid())
-  name           String?
-  email          String?          @unique
-  emailVerified  DateTime?
-  image          String?
-  accounts       Account[]
-  sessions       Session[]
-  createdAt      DateTime?        @default(now())
-  updatedAt      DateTime?        @default(now()) @updatedAt
-  TeamUsers      TeamUsers[]
-  UserPreference UserPreference[]
-  Issue          Issue[]
+  id              String            @id @default(cuid())
+  name            String?
+  email           String?           @unique
+  emailVerified   DateTime?
+  image           String?
+  accounts        Account[]
+  sessions        Session[]
+  createdAt       DateTime?         @default(now())
+  updatedAt       DateTime?         @default(now()) @updatedAt
+  TeamUsers       TeamUsers[]
+  UserPreference  UserPreference[]
+  Issue           Issue[]
+  IssueAuditEntry IssueAuditEntry[]
 }
 
 model Team {
@@ -89,19 +90,20 @@ model KeyIssue {
 }
 
 model Issue {
-  id                  String      @id @unique @default(cuid())
+  id                  String            @id @unique @default(cuid())
   title               String?
   description         String?
-  project             Project     @relation(fields: [projectId], references: [id])
-  workspace           Workspace   @relation(fields: [workspaceId], references: [id])
-  issueStatus         IssueStatus @default(PLANNING)
+  project             Project           @relation(fields: [projectId], references: [id])
+  workspace           Workspace         @relation(fields: [workspaceId], references: [id])
+  issueStatus         IssueStatus       @default(PLANNING)
   workspaceId         String
   projectId           String
-  workspaceIssueCount Int?        @default(-1)
-  assignee            User?       @relation(fields: [assigneeId], references: [id])
+  workspaceIssueCount Int?              @default(-1)
+  assignee            User?             @relation(fields: [assigneeId], references: [id])
   assigneeId          String?
-  sprint              Sprint?     @relation(fields: [sprintId], references: [id])
+  sprint              Sprint?           @relation(fields: [sprintId], references: [id])
   sprintId            String?
+  IssueAuditEntry     IssueAuditEntry[]
 }
 
 model Account {
@@ -207,6 +209,20 @@ model ActiveSprint {
   @@id([workspaceId])
 }
 
+model IssueAuditEntry {
+  id        String              @id @unique @default(cuid())
+  issue     Issue               @relation(fields: [issueId], references: [id])
+  user      User                @relation(fields: [userId], references: [id])
+  oldValue  String?
+  newValue  String?
+  updatedAt DateTime            @default(now()) @updatedAt
+  createdAt DateTime            @default(now())
+  type      IssueAuditEntryType
+  wasEdited Boolean?            @default(false)
+  issueId   String
+  userId    String
+}
+
 enum IssueRelationType {
   DEPENDS_ON
   RELATES_TO
@@ -224,4 +240,9 @@ enum IssueStatus {
 enum Role {
   ADMIN
   MEMBER
+}
+
+enum IssueAuditEntryType {
+  COMMENT
+  CHANGE
 }

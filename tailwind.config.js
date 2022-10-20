@@ -20,6 +20,9 @@ module.exports = {
       spacing: {
         128: '32rem',
       },
+      minHeight: {
+        '1/2-vh': 'calc(100vh / 2)',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
