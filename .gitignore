@@ -7,3 +7,4 @@ tsconfig.tsbuildinfo
 cypress/videos/
 cypress/screenshots/
 server-logs.txt
+docs-build/

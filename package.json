@@ -31,7 +31,7 @@
     "start": "next start",
     "check": "npm run format && npm run lint && npm run build && npm run e2e:headless",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -o docs-build"
   },
   "keywords": [],
   "author": "",
