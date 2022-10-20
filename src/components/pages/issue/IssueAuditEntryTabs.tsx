@@ -38,6 +38,14 @@ const AuditEntryList = (props: AuditEntryListProps) => {
     return null;
   }
 
+  if (issueAuditEntryResponse.length === 0) {
+    return (
+      <div className="w-full h-32 flex">
+        <p>No changes or comments made yet.</p>
+      </div>
+    );
+  }
+
   // return <div>AuditEntryList</div>;
   return (
     <div>
