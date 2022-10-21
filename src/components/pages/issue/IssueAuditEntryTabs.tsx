@@ -149,7 +149,13 @@ const IssueAuditEntryTabs = (props: IssueAuditEntryTabsProps) => {
         {({ keys }) => {
           return (
             <div>
-              <SimpleMarkdownField name={keys.comment} />
+              <label className="sr-only" htmlFor="issue-comment-input">
+                Add a comment
+              </label>
+              <SimpleMarkdownField
+                name={keys.comment}
+                id="issue-comment-input"
+              />
               <FormSubmitButton
                 label="Submit"
                 isDisabled={mutation.isLoading}

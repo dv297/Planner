@@ -91,4 +91,19 @@ describe('Issue', () => {
         .should('contain.text', 'to "New Sprint for Issue 2"');
     });
   });
+
+  it('allows you to add a comment', () => {
+    cy.findByLabelText('Add a comment').type('This is a sample comment');
+    cy.findByLabelText('Add a comment').should(
+      'have.text',
+      'This is a sample comment'
+    );
+    cy.findByTestId('issue-audit-section').within(() => {
+      cy.findByText('Submit').click();
+
+      cy.findByLabelText('Add a comment').should('have.text', '');
+      cy.findByText(/Commented/i).should('exist');
+      cy.findByText('This is a sample comment').should('exist');
+    });
+  });
 });

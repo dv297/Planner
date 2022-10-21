@@ -29,7 +29,7 @@ const Template: ComponentStory<typeof SimpleMarkdownField> = () => {
           <div>
             <div className="grid grid-rows-1 grid-cols-4 gap-x-4">
               <div className="col-span-3">
-                <SimpleMarkdownField name={keys.markdown} />
+                <SimpleMarkdownField name={keys.markdown} id="markdown-input" />
               </div>
               <div className="col-span-1">
                 <pre className="w-full">

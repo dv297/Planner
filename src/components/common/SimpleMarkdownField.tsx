@@ -9,10 +9,11 @@ const FormMarkdownEditor = dynamic(
 
 export interface SimpleMarkdownFieldProps {
   name: string;
+  id: string;
 }
 
 const SimpleMarkdownField = (props: SimpleMarkdownFieldProps) => {
-  const { name } = props;
+  const { name, id } = props;
   const [isAdvancedEditorOpen, setIsAdvancedEditorOpen] = useState(false);
   const { control } = useFormContext();
 
@@ -29,6 +30,7 @@ const SimpleMarkdownField = (props: SimpleMarkdownFieldProps) => {
             )}
             value={value}
             onChange={onChange}
+            id={id}
           />
         );
       }}
