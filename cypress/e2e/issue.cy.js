@@ -23,6 +23,13 @@ describe('Issue', () => {
       'have.text',
       'In Progress'
     );
+
+    cy.findByTestId('issue-audit-section').within(() => {
+      cy.findByText(/Changed "Issue Status" value/i)
+        .should('exist')
+        .should('contain.text', 'from "PLANNING"')
+        .should('contain.text', 'to "IN PROGRESS"');
+    });
   });
 
   it('allows you to change the assignee', () => {
@@ -46,6 +53,13 @@ describe('Issue', () => {
       'have.text',
       'Daniel Vu'
     );
+
+    cy.findByTestId('issue-audit-section').within(() => {
+      cy.findByText(/Changed "Assignee" value/i)
+        .should('exist')
+        .should('contain.text', 'from ""')
+        .should('contain.text', 'to "Daniel Vu"');
+    });
   });
 
   it('allows you to change the sprint', () => {
@@ -69,5 +83,12 @@ describe('Issue', () => {
       'have.text',
       sprintName
     );
+
+    cy.findByTestId('issue-audit-section').within(() => {
+      cy.findByText(/Changed "Sprint" value/i)
+        .should('exist')
+        .should('contain.text', 'from ""')
+        .should('contain.text', 'to "New Sprint for Issue 2"');
+    });
   });
 });

@@ -132,7 +132,7 @@ const IssueAuditEntryTabs = (props: IssueAuditEntryTabsProps) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative" data-testid="issue-audit-section">
       <Form
         defaultValues={{ comment: '' }}
         onSubmit={async (data, helpers) => {
