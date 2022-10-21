@@ -181,15 +181,21 @@ const IssueAuditEntryRepo = {
     oldValue: string;
     newValue: string;
   }) {
+    const propertyChange = await getPropertyChange(propertyName, {
+      oldValue,
+      newValue,
+    });
+
+    if (propertyChange.oldValue === propertyChange.newValue) {
+      return;
+    }
+
     await prisma.issueAuditEntry.create({
       data: {
         type: 'CHANGE',
         userId: user.id,
         issueId: issueId,
-        ...(await getPropertyChange(propertyName, {
-          oldValue,
-          newValue,
-        })),
+        ...propertyChange,
       },
     });
   },
