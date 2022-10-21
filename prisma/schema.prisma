@@ -210,17 +210,18 @@ model ActiveSprint {
 }
 
 model IssueAuditEntry {
-  id        String              @id @unique @default(cuid())
-  issue     Issue               @relation(fields: [issueId], references: [id])
-  user      User                @relation(fields: [userId], references: [id])
-  oldValue  String?
-  newValue  String?
-  updatedAt DateTime            @default(now()) @updatedAt
-  createdAt DateTime            @default(now())
-  type      IssueAuditEntryType
-  wasEdited Boolean?            @default(false)
-  issueId   String
-  userId    String
+  id           String              @id @unique @default(cuid())
+  issue        Issue               @relation(fields: [issueId], references: [id])
+  user         User                @relation(fields: [userId], references: [id])
+  propertyName String?
+  oldValue     String?
+  newValue     String?
+  updatedAt    DateTime            @default(now()) @updatedAt
+  createdAt    DateTime            @default(now())
+  type         IssueAuditEntryType
+  wasEdited    Boolean?            @default(false)
+  issueId      String
+  userId       String
 }
 
 enum IssueRelationType {

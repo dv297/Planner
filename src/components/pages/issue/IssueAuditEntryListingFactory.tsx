@@ -61,6 +61,7 @@ const HistoryListing = (props: IssueAuditEntryListingProps) => {
   const { issueAuditEntry } = props;
   const { user } = issueAuditEntry;
 
+  console.log(issueAuditEntry.propertyName);
   return (
     <>
       <div className="relative">
@@ -85,7 +86,11 @@ const HistoryListing = (props: IssueAuditEntryListingProps) => {
         </div>
         <div className="mt-2 text-sm text-gray-700 dark:text-gray-100">
           <p>
-            Changed value from <i>&quot;{issueAuditEntry.oldValue}&quot;</i> to{' '}
+            Changed{' '}
+            {issueAuditEntry.propertyName
+              ? `"${issueAuditEntry.propertyName}"`
+              : ''}{' '}
+            value from <i>&quot;{issueAuditEntry.oldValue}&quot;</i> to{' '}
             <i>&quot;{issueAuditEntry.newValue}&quot;</i>
           </p>
         </div>

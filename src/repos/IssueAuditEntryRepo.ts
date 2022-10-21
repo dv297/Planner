@@ -19,16 +19,9 @@ interface IssueAuditEntryOptions {
 }
 
 interface PropertyChange {
+  propertyName: string;
   oldValue: string;
   newValue: string;
-}
-
-function getStatusChangeValues(properties: PropertyChange): PropertyChange {
-  const convertCasing = (s: string) => s.split('_').join(' ');
-  return {
-    oldValue: convertCasing(properties.oldValue),
-    newValue: convertCasing(properties.newValue),
-  };
 }
 
 function getGenericSanitizedPropertyChange(properties: PropertyChange) {
@@ -37,8 +30,18 @@ function getGenericSanitizedPropertyChange(properties: PropertyChange) {
     s === 'null' || s === 'undefined' || !s ? '' : s;
 
   return {
+    ...properties,
     oldValue: sanitize(properties.oldValue),
     newValue: sanitize(properties.newValue),
+  };
+}
+
+function getStatusChangeValues(properties: PropertyChange): PropertyChange {
+  const convertCasing = (s: string) => s.split('_').join(' ');
+  return {
+    propertyName: 'Issue Status',
+    oldValue: convertCasing(properties.oldValue),
+    newValue: convertCasing(properties.newValue),
   };
 }
 
@@ -64,6 +67,7 @@ async function getSprintChangeValues(
     sanitize(properties.newValue),
   ]);
   return {
+    propertyName: 'Sprint',
     oldValue,
     newValue,
   };
@@ -91,6 +95,7 @@ async function getAssigneeChangeValues(
     sanitize(properties.newValue),
   ]);
   return {
+    propertyName: 'Assignee',
     oldValue,
     newValue,
   };
@@ -182,6 +187,7 @@ const IssueAuditEntryRepo = {
     newValue: string;
   }) {
     const propertyChange = await getPropertyChange(propertyName, {
+      propertyName,
       oldValue,
       newValue,
     });
