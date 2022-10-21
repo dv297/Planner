@@ -71,6 +71,27 @@ const IssueRepo = {
       issue,
     };
   },
+  async searchIssues(queryString: string) {
+    return prisma.issue.findMany({
+      where: {
+        title: {
+          contains: queryString,
+          mode: 'insensitive',
+        },
+      },
+      select: {
+        id: true,
+        title: true,
+        workspaceIssueCount: true,
+        workspace: {
+          select: {
+            tag: true,
+          },
+        },
+      },
+      take: 5,
+    });
+  },
   async updateIssueByProperty(
     user: User,
     issueTag: string,
