@@ -86,7 +86,7 @@ export const IssueAuditEntryType = z
 
 export const IssueAuditEntrySchema = z.object({
   id: z.string(),
-  oldValue: z.string(),
+  oldValue: z.string().nullable(),
   newValue: z.string(),
   updatedAt: dateSchema,
   createdAt: dateSchema,
@@ -105,4 +105,10 @@ export const IssueAuditEntryListSchema = z.array(IssueAuditEntrySchema);
 
 export const GetIssueAuditEntriesResponseSchema = z.object({
   data: IssueAuditEntryListSchema,
+});
+
+export const IssueAuditEntryCreateBodySchema = z.object({
+  type: z.literal('COMMENT').or(z.literal('CHANGE')),
+  oldValue: z.string().nullable(),
+  newValue: z.string(),
 });

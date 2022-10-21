@@ -1,6 +1,9 @@
 import { IssueAuditEntryType, Prisma } from '@prisma/client';
+import { User } from 'next-auth';
+import { z } from 'zod';
 
 import prisma from '@src/lib/prisma';
+import { IssueAuditEntryCreateBodySchema } from '@src/schemas/IssueSchema';
 
 const includeFields: Prisma.IssueAuditEntryInclude = {
   user: true,
@@ -43,6 +46,21 @@ const IssueAuditEntryRepo = {
     });
 
     return issueAuditEntries;
+  },
+  async createIssueAuditEntry(
+    user: User,
+    issueId: string,
+    createOptions: z.infer<typeof IssueAuditEntryCreateBodySchema>
+  ) {
+    const issueAuditEntry = await prisma.issueAuditEntry.create({
+      data: {
+        ...createOptions,
+        issueId,
+        userId: user.id,
+      },
+    });
+
+    return issueAuditEntry;
   },
 };
 

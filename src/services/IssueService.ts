@@ -5,6 +5,7 @@ import {
   CreateIssueInputSchema,
   GetIssueAuditEntriesResponseSchema,
   GetSingleIssueResponseSchema,
+  IssueAuditEntryCreateBodySchema,
 } from '@src/schemas/IssueSchema';
 
 const IssueService = {
@@ -76,6 +77,27 @@ const IssueService = {
     const response = GetIssueAuditEntriesResponseSchema.parse(data);
 
     return response.data;
+  },
+  async createIssueAuditEntry(
+    issueTag: string | undefined,
+    createInput: z.infer<typeof IssueAuditEntryCreateBodySchema>
+  ) {
+    if (!issueTag) {
+      return;
+    }
+
+    const result = await handleTeamSpecificFetch(
+      `/api/issue/audit/${issueTag}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(createInput),
+      }
+    );
+
+    if (!result.ok) {
+      throw new Error('Issue occurred');
+    }
   },
 };
 

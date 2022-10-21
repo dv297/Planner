@@ -20,10 +20,11 @@ interface FormMarkdownEditorProps {
     event: FocusEvent<HTMLFormElement | HTMLDivElement> | null
   ) => void;
   shouldAutoFocus?: boolean;
+  height?: number;
 }
 
 const FormMarkdownEditor = (props: FormMarkdownEditorProps) => {
-  const { name, onBlur, shouldAutoFocus } = props;
+  const { name, onBlur, shouldAutoFocus, height = 200 } = props;
   const { control } = useFormContext(); // retrieve all hook methods
   const { theme } = useTheme();
 
@@ -44,6 +45,7 @@ const FormMarkdownEditor = (props: FormMarkdownEditorProps) => {
               }}
             >
               <MDEditor
+                height={height}
                 value={value}
                 onChange={onChange}
                 autoFocus={shouldAutoFocus}

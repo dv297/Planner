@@ -1,7 +1,11 @@
 import { ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 import { z } from 'zod';
 
 import { IssueAuditEntrySchema } from '@src/schemas/IssueSchema';
+const MarkdownPreview = dynamic(
+  () => import('@src/components/common/EditableDisplays/MarkdownPreview')
+);
 
 const formatDate = (dateString: Date) => {
   return new Date(dateString).toLocaleDateString('en-us', {
@@ -41,7 +45,7 @@ const CommentListing = (props: IssueAuditEntryListingProps) => {
           </p>
         </div>
         <div className="mt-2 text-sm text-gray-700">
-          <p>{issueAuditEntry.newValue}</p>
+          <MarkdownPreview value={issueAuditEntry.newValue} />
         </div>
       </div>
     </>

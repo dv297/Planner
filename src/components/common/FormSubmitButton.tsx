@@ -2,13 +2,14 @@ import Button from '@src/components/common/Button';
 
 interface FormSubmitButtonProps {
   label: string;
+  isDisabled?: boolean;
 }
 
 const FormSubmitButton = (props: FormSubmitButtonProps) => {
-  const { label } = props;
+  const { label, isDisabled } = props;
 
   return (
-    <Button type="submit" variant="contained">
+    <Button type="submit" variant="contained" isDisabled={isDisabled}>
       {label}
     </Button>
   );

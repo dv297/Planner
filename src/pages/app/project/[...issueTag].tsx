@@ -74,6 +74,7 @@ const ProjectPage = () => {
           label="Description"
           onBlurSubmission={getUpdaterFunction(tag, 'description')}
           initialValue={project.keyIssue.description}
+          editorHeight={300}
         />
       </div>
 

@@ -7,6 +7,7 @@ import UserRepo from '@src/repos/UserRepo';
 import {
   GetIssueAuditEntriesResponseSchema,
   GetSingleIssueInputSchema,
+  IssueAuditEntryCreateBodySchema,
   IssueAuditEntryType,
   UpdateSingleIssueInputSchema,
 } from '@src/schemas/IssueSchema';
@@ -49,7 +50,7 @@ const get = async (req: NextApiRequest, res: NextApiResponse) => {
   return res.json(response);
 };
 
-const update = async (req: NextApiRequest, res: NextApiResponse) => {
+const create = async (req: NextApiRequest, res: NextApiResponse) => {
   const teamId = extractSingle(req.headers['team-id']);
 
   if (!teamId) {
@@ -59,24 +60,27 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const { issueTag } = GetSingleIssueInputSchema.parse(req.query);
-  const { propertyName, data } = UpdateSingleIssueInputSchema.parse(req.body);
-  const tag = issueTag[0];
+  const createOptions = IssueAuditEntryCreateBodySchema.parse(req.body);
+  const tag = extractSingle(issueTag);
 
   const currentUser = await UserRepo.getCurrentUser({ req, res });
 
-  if (!currentUser) {
+  if (!currentUser || !tag) {
     return;
   }
 
-  const result = await IssueRepo.updateIssueByProperty(
-    currentUser,
-    tag,
-    propertyName,
-    teamId,
-    data
-  );
+  const issueResponse = await IssueRepo.getIssueByTag(currentUser, tag, teamId);
 
-  const response = { data: result };
+  if (!issueResponse?.issue) {
+    return res.status(404).json({ message: 'Issue not found' });
+  }
+
+  const issueAuditEntries = await IssueAuditEntryRepo.createIssueAuditEntry(
+    currentUser,
+    issueResponse.issue.id,
+    createOptions
+  );
+  const response = { data: issueAuditEntries };
 
   return res.json(response);
 };
@@ -84,7 +88,7 @@ const update = async (req: NextApiRequest, res: NextApiResponse) => {
 async function handle(req: NextApiRequest, res: NextApiResponse) {
   return routeMatcher(req, res, {
     GET: get,
-    PUT: update,
+    POST: create,
   });
 }
 

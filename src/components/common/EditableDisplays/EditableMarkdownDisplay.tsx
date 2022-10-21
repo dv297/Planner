@@ -10,10 +10,11 @@ export interface EditableMarkdownDisplayProps {
   onBlurSubmission: (data: string) => Promise<void>;
   initialValue: string;
   label: string;
+  editorHeight?: number;
 }
 
 const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
-  const { onBlurSubmission, initialValue } = props;
+  const { onBlurSubmission, initialValue, editorHeight = 200 } = props;
   const {
     textValue,
     handleBlurSubmission,
@@ -50,6 +51,7 @@ const EditableMarkdownDisplay = (props: EditableMarkdownDisplayProps) => {
                       name={keys.text}
                       onBlur={handleBlurSubmission}
                       shouldAutoFocus
+                      height={editorHeight}
                     />
                   </div>
                   {isLoading ? (

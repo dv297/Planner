@@ -8,6 +8,10 @@ import {
   useForm,
 } from 'react-hook-form';
 
+interface OnSubmitHelpers {
+  clearFormData: () => void;
+}
+
 interface FormProps<TFieldValues extends FieldValues = FieldValues> {
   children: ({
     keys,
@@ -17,7 +21,7 @@ interface FormProps<TFieldValues extends FieldValues = FieldValues> {
     formState: FormState<TFieldValues>;
   }) => ReactNode;
   defaultValues: DefaultValues<TFieldValues>;
-  onSubmit?: (data: TFieldValues) => void;
+  onSubmit?: (data: TFieldValues, helpers: OnSubmitHelpers) => void;
   resolver?: Resolver<TFieldValues>;
   onBlur?: (data: TFieldValues, event: FocusEvent<HTMLFormElement>) => void;
 }
@@ -34,9 +38,15 @@ function Form<FormStructure extends Record<string, any>>(
     resolver,
   });
 
-  const submissionHandler = methods.handleSubmit(
-    onSubmit as (data: Record<string, any>) => void
-  );
+  const helpers: OnSubmitHelpers = {
+    clearFormData: () => {
+      methods.reset();
+    },
+  };
+
+  const submissionHandler = methods.handleSubmit((data) => {
+    return onSubmit?.(data as FormStructure, helpers);
+  });
 
   const { formState } = methods;
 
