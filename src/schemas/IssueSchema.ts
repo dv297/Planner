@@ -87,7 +87,7 @@ export const IssueAuditEntryType = z
 export const IssueAuditEntrySchema = z.object({
   id: z.string(),
   oldValue: z.string().nullable(),
-  newValue: z.string(),
+  newValue: z.string().nullable(),
   updatedAt: dateSchema,
   createdAt: dateSchema,
   type: z.string(),

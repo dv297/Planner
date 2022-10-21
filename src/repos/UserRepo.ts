@@ -6,6 +6,13 @@ import prisma from '@src/lib/prisma';
 import { authOptions } from '@src/pages/api/auth/[...nextauth]';
 
 const UserRepo = {
+  async getUserById(userId: string) {
+    return prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+  },
   getCurrentUser: async ({
     req,
     res,

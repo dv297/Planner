@@ -14,6 +14,13 @@ export interface CreateSprintInput {
 }
 
 const SprintRepo = {
+  async getSprintById(sprintId: string) {
+    return prisma.sprint.findUnique({
+      where: {
+        id: sprintId,
+      },
+    });
+  },
   async getSprints(user: User, workspaceTag: string, teamId: string) {
     const workspace = await UserRepo.getWorkspaceByTag(
       user,

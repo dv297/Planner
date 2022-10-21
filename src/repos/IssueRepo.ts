@@ -2,6 +2,7 @@ import { Prisma } from '@prisma/client';
 import { User } from 'next-auth';
 
 import prisma from '@src/lib/prisma';
+import IssueAuditEntryRepo from '@src/repos/IssueAuditEntryRepo';
 import WorkspaceRepo from '@src/repos/WorkspaceRepo';
 import { IssueRelationSchemaResponseData } from '@src/schemas/IssueRelationSchema';
 
@@ -90,6 +91,19 @@ const IssueRepo = {
       data: {
         [propertyName]: data,
       },
+    });
+
+    IssueAuditEntryRepo.createSanitizedIssueAuditChangeEntry({
+      user,
+      issueId: issue.id,
+      propertyName,
+      oldValue: `${
+        issueResponse.issue[propertyName as keyof typeof issueResponse.issue]
+      }`,
+      newValue: `${issue[propertyName as keyof typeof issue]}`,
+    }).catch((err) => {
+      console.error(`Error creating issue audit entry for issue ${issue.id}`);
+      console.error(err);
     });
 
     return issue;

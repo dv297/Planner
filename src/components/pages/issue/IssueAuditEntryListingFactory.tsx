@@ -41,14 +41,16 @@ const CommentListing = (props: IssueAuditEntryListingProps) => {
       <div className="min-w-0 flex-1">
         <div>
           <div className="text-sm">
-            <span className="font-medium text-gray-500">{user.name}</span>
+            <span className="font-medium text-gray-500 dark:text-gray-400">
+              {user.name}
+            </span>
           </div>
-          <p className="mt-0.5 text-sm text-gray-500">
+          <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
             Commented {formatDate(issueAuditEntry.createdAt)}
           </p>
         </div>
         <div className="mt-2 text-sm text-gray-700">
-          <MarkdownPreview value={issueAuditEntry.newValue} />
+          <MarkdownPreview value={issueAuditEntry.newValue ?? ''} />
         </div>
       </div>
     </>
@@ -73,16 +75,18 @@ const HistoryListing = (props: IssueAuditEntryListingProps) => {
       <div className="min-w-0 flex-1">
         <div>
           <div className="text-sm">
-            <span className="font-medium text-gray-500">{user.name}</span>
+            <span className="font-medium text-gray-500 dark:text-gray-400">
+              {user.name}
+            </span>
           </div>
-          <p className="mt-0.5 text-sm text-gray-500">
+          <p className="mt-0.5 text-sm text-gray-500 dark:text-gray-400">
             Change made at {formatDate(issueAuditEntry.createdAt)}
           </p>
         </div>
-        <div className="mt-2 text-sm text-gray-700">
+        <div className="mt-2 text-sm text-gray-700 dark:text-gray-100">
           <p>
-            Changed value from <i>{issueAuditEntry.oldValue}</i> to{' '}
-            <i>{issueAuditEntry.newValue}</i>
+            Changed value from <i>&quot;{issueAuditEntry.oldValue}&quot;</i> to{' '}
+            <i>&quot;{issueAuditEntry.newValue}&quot;</i>
           </p>
         </div>
       </div>
