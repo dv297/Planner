@@ -44,7 +44,7 @@ const ProjectPage = () => {
     };
 
   return (
-    <div>
+    <div className="pb-24">
       <Head>
         <title>Planner - {parseIssueTagFromIssue(project.keyIssue)}</title>
       </Head>

@@ -120,7 +120,7 @@ const ProjectPage = () => {
           </main>
           <aside
             className={clsx(
-              'relative w-full mt-8 flex-shrink-0 overflow-y-auto md:flex md:flex-col pb-96',
+              'relative w-full mt-8 flex-shrink-0 overflow-y-auto md:flex md:flex-col lg:pb-32',
               'lg:mt-0 lg:w-72 lg:pl-8 lg:pb-0 lg:border-gray-200 dark:lg:border-gray-700 lg:border-l lg:min-h-96'
             )}
           >
