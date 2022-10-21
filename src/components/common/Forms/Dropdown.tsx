@@ -108,6 +108,7 @@ function Dropdown<TValue extends GenericSelectorOption<TValue>>(
           leaveTo="opacity-0"
         >
           <ul
+            data-testid={`${id}-dropdown-options`}
             {...getMenuProps({}, { suppressRefError: true })}
             className={clsx(
               'absolute z-10 mt-2 max-h-60 w-full overflow-auto rounded-md py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm',

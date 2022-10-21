@@ -31,7 +31,9 @@ describe('Issue', () => {
     cy.findByRole('button', { name: /assignee toggle menu/i })
       .should('have.text', 'Select...')
       .click();
-    cy.findByText('Daniel Vu').click();
+    cy.findByTestId('issue-assignee-dropdown-options').within(() => {
+      cy.findByText(/Daniel Vu/i).click();
+    });
 
     cy.findByRole('button', { name: /assignee toggle menu/i }).should(
       'have.text',
