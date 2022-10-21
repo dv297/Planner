@@ -11,6 +11,7 @@ module.exports = withBundleAnalyzer(
       reactStrictMode: true,
       images: {
         domains: [
+          'planner-user-image-upload.s3.us-east-1.amazonaws.com',
           'tailwindui.com',
           'avatars.githubusercontent.com',
           'cdn.sanity.io',

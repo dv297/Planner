@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { z } from 'zod';
 
 import { IssueAuditEntrySchema } from '@src/schemas/IssueSchema';
@@ -29,10 +30,12 @@ const CommentListing = (props: IssueAuditEntryListingProps) => {
   return (
     <>
       <div className="relative">
-        <img
+        <Image
           className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-1 ring-white"
           src={user.image}
           alt="User image"
+          height={40}
+          width={40}
         />
       </div>
       <div className="min-w-0 flex-1">
@@ -59,10 +62,12 @@ const HistoryListing = (props: IssueAuditEntryListingProps) => {
   return (
     <>
       <div className="relative">
-        <img
+        <Image
           className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ring-1 ring-white"
           src={user.image}
           alt="User image"
+          height={40}
+          width={40}
         />
       </div>
       <div className="min-w-0 flex-1">

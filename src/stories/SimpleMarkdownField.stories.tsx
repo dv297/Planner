@@ -3,9 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Form from '@src/components/common/Form';
 import FormSubmitButton from '@src/components/common/FormSubmitButton';
-import SimpleMarkdownField, {
-  SimpleMarkdownFieldProps,
-} from '@src/components/common/SimpleMarkdownField';
+import SimpleMarkdownField from '@src/components/common/SimpleMarkdownField';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -16,9 +14,7 @@ export default {
 } as ComponentMeta<typeof SimpleMarkdownField>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof SimpleMarkdownField> = (
-  args: Partial<SimpleMarkdownFieldProps>
-) => {
+const Template: ComponentStory<typeof SimpleMarkdownField> = () => {
   const [formSubmission, setFormSubmission] = useState('');
 
   return (

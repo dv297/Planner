@@ -9,7 +9,6 @@ import {
   GetSingleIssueInputSchema,
   IssueAuditEntryCreateBodySchema,
   IssueAuditEntryType,
-  UpdateSingleIssueInputSchema,
 } from '@src/schemas/IssueSchema';
 import extractSingle from '@src/utils/extractSingle';
 import routeMatcher from '@src/utils/routeMatcher';
