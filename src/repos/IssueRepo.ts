@@ -71,12 +71,19 @@ const IssueRepo = {
       issue,
     };
   },
-  async searchIssues(queryString: string) {
+  async searchIssues(user: User, queryString: string) {
+    const workspaces = await WorkspaceRepo.getWorkspacesForUser(user);
+
     return prisma.issue.findMany({
       where: {
-        title: {
-          contains: queryString,
-          mode: 'insensitive',
+        AND: {
+          title: {
+            contains: queryString,
+            mode: 'insensitive',
+          },
+          workspaceId: {
+            in: workspaces.map((teamWorkspace) => teamWorkspace.id),
+          },
         },
       },
       select: {

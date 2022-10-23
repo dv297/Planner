@@ -36,6 +36,27 @@ const WorkspaceRepo = {
 
     return workspace;
   },
+  async getWorkspacesForUser(user: User) {
+    const workspaces = await prisma.workspace.findMany({
+      where: {
+        TeamWorkspace: {
+          some: {
+            team: {
+              TeamUsers: {
+                some: {
+                  userId: {
+                    equals: user.id,
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    });
+
+    return workspaces;
+  },
 };
 
 export default WorkspaceRepo;

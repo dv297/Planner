@@ -8,6 +8,7 @@ enum QueryKeys {
   ISSUE_RELATION = 'issue-relation',
   EDGE_SET = 'edget-set',
   PERSONAL_INFORMATION = 'personal-information',
+  SEARCH = 'search',
   SPRINTS = 'sprints',
   TEAMS = 'teams',
   BACKLOG_ISSUES = 'backlog-issues',

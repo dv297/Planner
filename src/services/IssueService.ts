@@ -6,6 +6,7 @@ import {
   GetIssueAuditEntriesResponseSchema,
   GetSingleIssueResponseSchema,
   IssueAuditEntryCreateBodySchema,
+  SearchIssueResponseSchema,
 } from '@src/schemas/IssueSchema';
 
 const IssueService = {
@@ -98,6 +99,28 @@ const IssueService = {
     if (!result.ok) {
       throw new Error('Issue occurred');
     }
+  },
+  async searchIssues(query: string) {
+    const params = new URLSearchParams();
+    params.set('query', query);
+
+    const result = await handleTeamSpecificFetch(
+      '/api/issue/search?' + params.toString(),
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
+
+    if (!result.ok) {
+      throw new Error('Issue performing search');
+    }
+
+    const data = await result.json();
+
+    const response = SearchIssueResponseSchema.parse(data);
+
+    return response.data;
   },
 };
 

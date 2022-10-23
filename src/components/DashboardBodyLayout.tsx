@@ -5,6 +5,8 @@ import { MenuAlt2Icon } from '@heroicons/react/outline';
 import LinearProgress from '@mui/material/LinearProgress';
 import clsx from 'clsx';
 
+import SearchBar from '@src/components/pages/search/SearchBar';
+
 interface DashboardBodyLayoutProps {
   children: ReactNode;
   setSidebarOpen: (updatedState: boolean) => void;
@@ -41,7 +43,7 @@ const DashboardBodyLayout = (props: DashboardBodyLayoutProps) => {
             </button>
             <div className="flex-1 px-4 flex justify-between">
               <div className="flex-1 flex">
-                {/* Search could be included here in the future */}
+                <SearchBar />
               </div>
               <div className="ml-4 flex items-center md:ml-6">
                 {topRightNav}

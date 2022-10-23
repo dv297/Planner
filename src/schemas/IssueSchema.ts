@@ -114,3 +114,22 @@ export const IssueAuditEntryCreateBodySchema = z.object({
   oldValue: z.string().nullable(),
   newValue: z.string(),
 });
+
+export const SearchIssuesInputSchema = z.object({
+  query: z.string(),
+});
+
+export const SearchIssueOutputSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  workspace: z.object({
+    tag: z.string(),
+  }),
+  workspaceIssueCount: z.number(),
+});
+
+export const SearchIssueOutputListSchema = z.array(SearchIssueOutputSchema);
+
+export const SearchIssueResponseSchema = z.object({
+  data: SearchIssueOutputListSchema,
+});
