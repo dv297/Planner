@@ -15,7 +15,7 @@ const InitialSetup = () => {
   const { machineState } = useOnboardingMachine();
 
   return (
-    <div className="py-8 px-9">
+    <>
       {machineState.matches('initial') && <InitialSetupPathSelectorPage />}
       {machineState.matches('selfUser') && (
         <InitialSetupSelfUserAcknowledgement />
@@ -24,7 +24,7 @@ const InitialSetup = () => {
         <InitialSetupEstablishIndividualSettings />
       )}
       {machineState.matches('success') && <InitialSetupSuccess />}
-    </div>
+    </>
   );
 };
 

@@ -1,31 +1,17 @@
 import { ReactNode } from 'react';
+import { Avatar } from '@mui/material';
 
 import Form from '@src/components/common/Form';
 import FormImageUploader from '@src/components/common/FormImageUploader';
 import FormSubmitButton from '@src/components/common/FormSubmitButton';
 import FormTextInput from '@src/components/common/FormTextInput';
+import { stringAvatar } from '@src/components/common/UserAvatar';
 
 interface FormRowProps {
   label: string;
   htmlFor: string;
   children: ReactNode;
 }
-
-const FormRow = (props: FormRowProps) => {
-  const { label, htmlFor, children } = props;
-
-  return (
-    <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
-      <label
-        htmlFor={htmlFor}
-        className="block text-sm font-medium sm:mt-px sm:pt-2"
-      >
-        {label}
-      </label>
-      <div className="mt-1 sm:mt-0 sm:col-span-2">{children}</div>
-    </div>
-  );
-};
 
 export interface PersonalInformationFormData {
   name: string;
@@ -47,23 +33,36 @@ const PersonalInformationForm = (props: PersonalInformationFormProps) => {
         defaultValues={{
           name: initialData.name,
           email: initialData.email,
-          image: initialData.image,
+          image: '',
         }}
         onSubmit={onSubmit}
       >
         {({ keys }) => (
-          <div className="pt-8 space-y-6 sm:pt-10 sm:space-y-5">
-            <div>
-              <h3 className="text-lg leading-6 font-medium">
-                Personal Information
-              </h3>
-            </div>
-            <div className="space-y-6 sm:space-y-5">
-              <FormTextInput name={keys.name} id="name" label="Name" />
-              <FormTextInput name={keys.email} id="email" label="Email" />
-              <FormRow label="Image" htmlFor="image">
-                <FormImageUploader name={keys.image} id="image" />
-              </FormRow>
+          <div>
+            <div className="grid grid-cols-1 md:grid-cols-2 pt-8 space-y-6 sm:pt-10 space-x-8">
+              <div>
+                <div>
+                  <h3 className="text-lg leading-6 font-medium">
+                    Personal Information
+                  </h3>
+                </div>
+                <FormTextInput name={keys.name} id="name" label="Name" />
+                <FormTextInput name={keys.email} id="email" label="Email" />
+              </div>
+              <div className="flex items-center justify-center">
+                <FormImageUploader
+                  name={keys.image}
+                  id="image"
+                  placeholder={
+                    <div className="w-full h-full flex justify-center items-center mb-2">
+                      <Avatar
+                        {...stringAvatar(initialData.name)}
+                        sx={{ width: 56, height: 56 }}
+                      />
+                    </div>
+                  }
+                />
+              </div>
             </div>
             <FormSubmitButton label="Submit" />
           </div>

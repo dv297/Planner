@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import Resizer from 'react-image-file-resizer';
 import { useS3Upload } from 'next-s3-upload';
@@ -7,10 +8,11 @@ import Button from '@src/components/common/Button';
 interface FormImageUploaderProps {
   name: string;
   id: string;
+  placeholder?: ReactNode;
 }
 
 const FormImageUploader = (props: FormImageUploaderProps) => {
-  const { name, id } = props;
+  const { name, id, placeholder } = props;
 
   const { control } = useFormContext();
   const { FileInput, openFileDialog, uploadToS3 } = useS3Upload();
@@ -43,17 +45,19 @@ const FormImageUploader = (props: FormImageUploaderProps) => {
                   }}
                   id={id}
                 />
-                <Button variant="text" onClick={openFileDialog}>
-                  Upload file
-                </Button>
-                {value && (
+                {value ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={value}
                     alt="Uploaded image"
-                    className="max-h-32 max-w-32"
+                    className="max-h-32 max-w-32 rounded-full mb-4"
                   />
+                ) : (
+                  placeholder
                 )}
+                <Button variant="text" onClick={openFileDialog}>
+                  Upload file
+                </Button>
               </>
             );
           }}

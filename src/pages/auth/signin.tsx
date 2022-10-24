@@ -76,7 +76,7 @@ const Signin = (props: SigninProps) => {
                     id="usernameInput"
                     name="username"
                     type="text"
-                    className="mt-2 h-8 outline outline-gray-300 rounded-md w-full pl-2 text-lg"
+                    className="mt-2 h-8 outline outline-gray-300 rounded-md w-full pl-2 text-lg bg-white"
                   />
                 </label>
                 <button

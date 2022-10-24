@@ -8,9 +8,9 @@ const InitialSetupSuccess = () => {
   const router = useRouter();
 
   return (
-    <>
-      <p className="text-lg text-slate-800 mt-8">You are all set up!</p>
-      <p className="text-lg text-slate-800 mt-8">
+    <div className="max-w-lg mx-auto px-8">
+      <p className="text-lg mt-8">You are all set up!</p>
+      <p className="text-lg mt-8">
         Click below to be taken to the main application.
         {router.query.inviteToken}
       </p>
@@ -31,7 +31,7 @@ const InitialSetupSuccess = () => {
           Next
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 

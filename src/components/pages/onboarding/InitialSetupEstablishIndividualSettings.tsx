@@ -1,3 +1,4 @@
+import { CircularProgress } from '@mui/material';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { SnackbarSeverity, useSnackbar } from '@src/components/common/Snackbar';
@@ -33,7 +34,11 @@ const InitialSetupEstablishIndividualSettings = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="absolute inset-0 flex items-center justify-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   if (!data) {
@@ -41,8 +46,8 @@ const InitialSetupEstablishIndividualSettings = () => {
   }
 
   return (
-    <>
-      <p className="text-lg leading-8 text-slate-800">
+    <div className="max-w-2xl mx-auto py-12 px-8">
+      <p className="text-lg leading-8 border-b border-gray-300 dark:border-gray-700 pb-8">
         We gather this information so we know how you want to be addressed. This
         information is only used within this site and is not given to any
         third-parties.
@@ -59,7 +64,7 @@ const InitialSetupEstablishIndividualSettings = () => {
           });
         }}
       />
-    </>
+    </div>
   );
 };
 
