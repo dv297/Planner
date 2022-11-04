@@ -18,7 +18,7 @@
 
 <img height="500" src="screenshots/Sizzy-MacBook Air localhost 17Oct 17.16.png" width="921"/>
 
-<img height="500" src="screenshots/Sizzy-MacBook Air localhost 17Oct 17.10.png" width="921"/>
+<img height="500" src="screenshots/Sizzy-MacBook Air localhost 17Oct 17.14.png" width="921"/>
 
 <img height="500" src="screenshots/Sizzy-MacBook Air localhost 17Oct 17.10.png" width="921"/>
 
