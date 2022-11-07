@@ -2,6 +2,7 @@ import '../src/styles/global.css';
 
 import * as NextImage from 'next/image';
 import { ThemeProvider } from 'next-themes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { ThemeProvider as MuiThemeProvider } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
@@ -10,6 +11,7 @@ import ThemeSwitcherProvider from '../src/components/ThemeSwitcherContext';
 import { getTheme } from '../src/lib/createTheme';
 
 const OriginalNextImage = NextImage.default;
+const queryClient = new QueryClient();
 
 Object.defineProperty(NextImage, 'default', {
   configurable: true,
@@ -68,5 +70,10 @@ export const decorators = [
         <Story />
       </ThemeSwitcherProvider>
     </ThemeProvider>
+  ),
+  (Story, { globals }) => (
+    <QueryClientProvider client={queryClient}>
+      <Story />
+    </QueryClientProvider>
   ),
 ];
