@@ -27,16 +27,19 @@ const Template: ComponentStory<typeof EditableTextDisplay> = (
       });
     }}
     label="Title"
-    initialValue="Sample title"
+    initialValue={args.initialValue}
     {...args}
   />
 );
 
 export const Primary = Template.bind({});
-Primary.args = {};
+Primary.args = {
+  initialValue: 'Sample title',
+};
 
 export const Fails = Template.bind({});
 Fails.args = {
+  initialValue: 'Sample title',
   onBlurSubmission() {
     return new Promise((_, reject) => {
       setTimeout(() => {
@@ -48,5 +51,11 @@ Fails.args = {
 
 export const StyledTextDisplay = Template.bind({});
 StyledTextDisplay.args = {
+  initialValue: 'Sample title',
   textDisplayClassName: 'font-bolder text-4xl text-blue-500',
+};
+
+export const Empty = Template.bind({});
+Empty.args = {
+  initialValue: undefined,
 };

@@ -9,7 +9,7 @@ const ReactMarkdownPreview = dynamic(
 );
 
 interface MarkDownDisplayWrapperProps {
-  value: string;
+  value: string | undefined;
 }
 
 const MarkdownPreview = (props: MarkDownDisplayWrapperProps) => {

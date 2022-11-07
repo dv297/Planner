@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import IssueAssigneeSelector from '@src/components/pages/issue/IssueAssigneeSelector';
+import IssueMapNote from '@src/components/pages/issue/IssueMapNote';
 import IssueStatusSelector from '@src/components/pages/issue/IssueStatusSelector';
 import SprintSelector from '@src/components/pages/issue/SprintSelector';
 import useIssueUpdaterFunction from '@src/hooks/useIssueUpdaterFunction';
@@ -40,6 +41,9 @@ const IssueEditableFields = (props: IssueEditableFieldsProps) => {
           initialValue={issue.sprint}
           key={issue.sprintId}
         />
+      </div>
+      <div className="mt-8">
+        <IssueMapNote issueTag={tag} initialValue={issue.mapNote} />
       </div>
     </div>
   );

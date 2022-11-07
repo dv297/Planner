@@ -5,7 +5,6 @@ export default function useDebouncedSetState(value: string, delay = 500) {
 
   useEffect(() => {
     const handler = setTimeout(() => {
-      console.log('setting value to ' + value);
       setDebouncedValue(value);
     }, delay);
 

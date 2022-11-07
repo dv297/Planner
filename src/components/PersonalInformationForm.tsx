@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import { Avatar } from '@mui/material';
 
 import Form from '@src/components/common/Form';
@@ -6,12 +5,6 @@ import FormImageUploader from '@src/components/common/FormImageUploader';
 import FormSubmitButton from '@src/components/common/FormSubmitButton';
 import FormTextInput from '@src/components/common/FormTextInput';
 import { stringAvatar } from '@src/components/common/UserAvatar';
-
-interface FormRowProps {
-  label: string;
-  htmlFor: string;
-  children: ReactNode;
-}
 
 export interface PersonalInformationFormData {
   name: string;

@@ -10,7 +10,7 @@ export interface EditableTextDisplayProps {
   id: string;
   label: string;
   onBlurSubmission: (data: string) => Promise<void>;
-  initialValue: string;
+  initialValue: string | undefined;
   textDisplayClassName?: string;
 }
 
@@ -44,11 +44,14 @@ const EditableTextDisplay = (props: EditableTextDisplayProps) => {
             })}
           >
             {!isEditing ? (
-              <div className="py-3">
-                <TextDisplay
-                  value={textValue}
-                  textDisplayClassName={textDisplayClassName}
-                />
+              <div>
+                <label className="text-sm">{label}</label>
+                <div className="py-3">
+                  <TextDisplay
+                    value={textValue}
+                    textDisplayClassName={textDisplayClassName}
+                  />
+                </div>
               </div>
             ) : (
               <div className="flex flex-row relative">

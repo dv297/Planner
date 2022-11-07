@@ -8,7 +8,7 @@ import FormMarkdownEditor from '@src/components/common/FormMarkdownEditor';
 
 export interface EditableMarkdownDisplayProps {
   onBlurSubmission: (data: string) => Promise<void>;
-  initialValue: string;
+  initialValue: string | undefined;
   label: string;
   editorHeight?: number;
 }

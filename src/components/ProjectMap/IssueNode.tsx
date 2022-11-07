@@ -29,7 +29,7 @@ const IssueNode = (props: IssueNodeProps) => {
     <>
       <div
         className={clsx(
-          'px-8 py-4 flex flex-col border border-solid border-gray-300 dark:border-gray-700 rounded-lg',
+          'max-w-sm px-8 py-4 flex flex-col border border-solid border-gray-300 dark:border-gray-700 rounded-lg',
           'bg-white text-black dark:bg-slate-600 dark:text-gray-200',
           {
             'ring-4 ring-accent-blue-500': selected,
@@ -37,6 +37,11 @@ const IssueNode = (props: IssueNodeProps) => {
         )}
       >
         <span className="text-lg font-bold">{issue.title}</span>
+        {issue.mapNote && (
+          <span className="mt-2 mb-2 block text-lg flex flex-row items-center break-normal">
+            {issue.mapNote}
+          </span>
+        )}
         {issue.assignee && (
           <span
             className="mt-2 mb-2 block text-lg flex flex-row items-center"

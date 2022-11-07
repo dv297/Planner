@@ -39,6 +39,7 @@ export const IssueSchema = z.object({
   assignee: z.nullable(TeamMemberUserSchema),
   sprintId: z.nullable(z.string()),
   sprint: z.nullable(SprintSchema),
+  mapNote: z.string().nullish(),
 });
 
 export const GetSingleIssueResponseSchema = z.object({

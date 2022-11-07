@@ -61,7 +61,6 @@ const HistoryListing = (props: IssueAuditEntryListingProps) => {
   const { issueAuditEntry } = props;
   const { user } = issueAuditEntry;
 
-  console.log(issueAuditEntry.propertyName);
   return (
     <>
       <div className="relative">

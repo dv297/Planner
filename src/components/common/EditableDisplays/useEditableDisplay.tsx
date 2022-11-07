@@ -12,7 +12,7 @@ interface EditableTextDisplayDataStructure {
 }
 
 interface UseEditableDisplayInput {
-  initialValue: string;
+  initialValue: string | undefined;
   onBlurSubmission: (data: string) => Promise<void>;
 }
 

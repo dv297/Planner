@@ -1,7 +1,7 @@
 import { clsx } from 'clsx';
 
 interface TextDisplayProps {
-  value: string;
+  value: string | undefined;
   textDisplayClassName?: string;
 }
 
