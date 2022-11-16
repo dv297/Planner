@@ -14,10 +14,10 @@ const authHandler: NextApiHandler = (req, res) =>
 export default authHandler;
 
 const providers: Provider[] = [
-  GitHubProvider({
-    clientId: process.env.GITHUB_ID,
-    clientSecret: process.env.GITHUB_SECRET,
-  }),
+  // GitHubProvider({
+  //   clientId: process.env.GITHUB_ID,
+  //   clientSecret: process.env.GITHUB_SECRET,
+  // }),
   GoogleProvider({
     clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
     clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
